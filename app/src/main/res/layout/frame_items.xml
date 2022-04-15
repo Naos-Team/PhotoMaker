@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:background="@drawable/frame_bg"
+    android:layout_marginTop="4dp">
+
+    <ImageView
+        android:layout_margin="15dp"
+        android:id="@+id/ivThumb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:id="@+id/cbSelect"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/fdone"
+            android:visibility="visible"
+            android:scaleType="fitXY"/>
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/clickableView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/tvThemeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivThumb"
+        android:layout_gravity="bottom"
+        android:background="#40000000"
+        android:gravity="center"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:visibility="gone" />
+</RelativeLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:background="@color/mainbgcolor"
+    tools:context=".activities.swap.SwapperActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp">
+
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/btnback"
+            app:tint="@color/toptextcolor" />
+
+
+        <ImageView
+            android:id="@+id/done"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/pdone"
+            app:tint="@color/toptextcolor" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Swap Images"
+            android:textColor="@color/toptextcolor"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+
+    <com.kessi.photovideomaker.activities.swap.gridsupport.AbsDynamicGridView
+        android:id="@+id/dynamicGrid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/banner_container"
+        android:layout_below="@+id/header"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:horizontalSpacing="@dimen/_15sdp"
+        android:numColumns="2"
+        android:verticalSpacing="@dimen/_15sdp" />
+
+    <include layout="@layout/ad_banner_lay"/>
+</RelativeLayout>

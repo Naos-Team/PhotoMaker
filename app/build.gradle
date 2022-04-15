@@ -1,0 +1,60 @@
+plugins {
+    id 'com.android.application'
+    id 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.kessi.photovideomaker"
+        minSdk 24
+        targetSdk 31
+        versionCode 3
+        versionName "1.2"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "arm64-v8a", "armeabi-v7a"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation project(':imageeditlibrary')
+
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.arthenica:ffmpeg-kit-min-gpl:4.5.1'
+
+    // Admob
+    implementation 'com.google.android.gms:play-services-ads:20.5.0'
+    //    Applovin/MAX ads
+    implementation 'com.applovin:applovin-sdk:11.0.0'
+    implementation 'com.applovin.mediation:facebook-adapter:+'
+
+    //onesignal
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+
+    implementation files('libs/commons-io-2.4.jar')
+    implementation 'com.airbnb.android:lottie:3.4.4'
+}

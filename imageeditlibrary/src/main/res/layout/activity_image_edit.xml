@@ -1,0 +1,152 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:keepScreenOn="true"
+    android:background="@color/mainbgcolor"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentTop="true">
+
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="match_parent"
+                app:tint="@color/toptextcolor"
+                android:src="@drawable/mback" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Edit Image"
+            android:textStyle="bold"
+            android:textColor="@color/toptextcolor"
+            android:textSize="@dimen/_14sdp" />
+
+        <ViewFlipper
+            android:id="@+id/banner_flipper"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:flipInterval="1000"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/save_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/save"
+                android:textStyle="bold"
+                android:textColor="@color/toptextcolor"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/apply"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/apply"
+                android:textStyle="bold"
+                android:textColor="@color/toptextcolor"
+                android:textSize="@dimen/_12sdp" />
+        </ViewFlipper>
+    </FrameLayout>
+
+    <com.xinlan.imageeditlibrary.editimage.view.CustomViewPager
+        android:id="@+id/bottom_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_banner_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bottom_bg_color"
+        android:overScrollMode="never" />
+
+    <FrameLayout
+        android:id="@+id/work_space"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_gallery"
+        android:layout_below="@id/banner">
+
+        <com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouch
+            android:id="@+id/main_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+        <com.xinlan.imageeditlibrary.editimage.view.StickerView
+            android:id="@+id/sticker_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <com.xinlan.imageeditlibrary.editimage.view.CropImageView
+            android:id="@+id/crop_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <com.xinlan.imageeditlibrary.editimage.view.RotateImageView
+            android:id="@+id/rotate_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <com.xinlan.imageeditlibrary.editimage.view.TextStickerView
+            android:id="@+id/text_sticker_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <com.xinlan.imageeditlibrary.editimage.view.CustomPaintView
+            android:id="@+id/custom_paint_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/redo_uodo_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_gallery"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="10dp">
+        <ImageView
+            android:id="@+id/uodo_btn"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/undo_pressed" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp">
+            <ImageView
+                android:id="@+id/redo_btn"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/redo_pressed" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
