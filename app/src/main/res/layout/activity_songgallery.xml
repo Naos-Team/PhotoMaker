@@ -55,7 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="155dp"
             android:layout_margin="10dp"
-            android:background="@color/wavebgcolor">
+            android:background="@color/wavebgcolor"
+            android:paddingStart="10dp">
 
             <ImageView
                 android:id="@+id/bkgnd"
@@ -66,7 +67,8 @@
             <vcarry.view.WaveformView
                 android:id="@+id/waveform"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:paddingStart="10dp" />
 
             <vcarry.view.MarkerView
                 android:id="@+id/startmarker"
