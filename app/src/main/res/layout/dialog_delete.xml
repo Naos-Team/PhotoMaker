@@ -38,33 +38,43 @@
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/img_btn_yes"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/yesd" />
+                    android:layout_height="70dp"
+                    android:background="@drawable/bg_yes_button_for_dialog"
+                    android:text="Yes"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorwhite"
+                    android:textSize="18sp" />
             </RelativeLayout>
 
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/img_btn_no"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/nod" />
+                    android:layout_height="70dp"
+                    android:background="@drawable/bg_no_button_for_dialog"
+                    android:text="No"
+                    android:textAllCaps="false"
+                    android:textColor="@color/toptextcolor"
+                    android:textSize="18sp" />
             </RelativeLayout>
 
         </LinearLayout>

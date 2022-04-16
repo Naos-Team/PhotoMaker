@@ -24,6 +24,7 @@ import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -123,7 +124,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     FrameLayout scaleCard;
     public static File logFile = new File(FileUtils.TEMP_DIRECTORY, "video.txt");
 
-    ImageView img_btn_yes, img_btn_no;
+    Button img_btn_yes, img_btn_no;
     LinearLayout maindailog;
 
 
@@ -1189,15 +1190,15 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     void popuplayout_dialog() {
 
         RelativeLayout.LayoutParams params4 = new RelativeLayout.LayoutParams(
-                getResources().getDisplayMetrics().widthPixels * 270 / 1080,
-                getResources().getDisplayMetrics().heightPixels * 106 / 1920);
+                getResources().getDisplayMetrics().widthPixels * 300 / 1080,
+                getResources().getDisplayMetrics().heightPixels * 130 / 1920);
         params4.addRule(RelativeLayout.CENTER_IN_PARENT);
         img_btn_yes.setLayoutParams(params4);
         img_btn_no.setLayoutParams(params4);
 
         RelativeLayout.LayoutParams params5 = new RelativeLayout.LayoutParams(
                 getResources().getDisplayMetrics().widthPixels * 840 / 1080,
-                getResources().getDisplayMetrics().heightPixels * 415 / 1920);
+                getResources().getDisplayMetrics().heightPixels * 500 / 1920);
         params5.addRule(RelativeLayout.CENTER_IN_PARENT);
         maindailog.setLayoutParams(params5);
     }

@@ -11,27 +11,29 @@
     <color name="opacitywhite">#80ffffff</color>
 
 
-    <color name="mainbgcolor">#F8F3F0</color>
-    <color name="toptextcolor">#FF7E5B</color>
-    <color name="bottom_bg_color">#FCE1D3</color>
-
+    <color name="mainbgcolor">#E0EDE8</color>
+    <color name="toptextcolor">#388A72</color>
+    <color name="bottom_bg_color">#6BC7A9</color>
 
     <color name="stickerline">#FF7E5B</color>
+
+    <color name="music_selected">#205848</color>
 
     <color name="colorwhite">#FFFFFF</color>
 
 
-    <color name="wavebgcolor">@color/bottom_bg_color</color>
+    <color name="wavebgcolor">@color/mainbgcolor</color>
 
     <color name="app_color">#6BC7A9</color>
 
     <color name="grid_line">#00000000</color>
-    <color name="waveform_selected">#6BC7A9</color>
+    <color name="waveform_selected">#388A72</color>
+<!--    388A72-->
     <color name="waveform_unselected">#585254</color>
-    <color name="waveform_unselected_bkgnd_overlay">#FCE1D3</color>
+    <color name="waveform_unselected_bkgnd_overlay">@color/grid_line</color>
     <color name="selection_border">#ffff99</color>
     <color name="playback_indicator">#ffffff</color>
-    <color name="timecode">#ffffff</color>
+    <color name="timecode">@color/music_selected</color>
     <color name="timecode_shadow">#ffffff</color>
     <color name="text_music">#1D0A00</color>
 

@@ -54,7 +54,7 @@ import java.util.List;
 
 public class AdManager {
     public static int adCounter = 1;
-    public static int adDisplayCounter = 4;
+    public static int adDisplayCounter = 0;
 
     public static boolean isloadFbMAXAd = true;
 
@@ -129,7 +129,7 @@ public class AdManager {
     }
 
     public static void showInterAd(final Activity context, final Intent intent, final int requestCode) {
-        if (adCounter == adDisplayCounter && mInterstitialAd != null) {
+        if (adCounter == adDisplayCounter && mInterstitialAd != null && false) {
             adCounter = 1;
             mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                 @Override
@@ -471,7 +471,7 @@ public class AdManager {
     public static void showMaxInterstitial(final Activity context, final Intent intent, final int requestCode) {
         maxIntent = intent;
         maxRequstCode = requestCode;
-        if (adCounter == adDisplayCounter && maxInterstitialAd != null && maxInterstitialAd.isReady()) {
+        if (adCounter == adDisplayCounter && maxInterstitialAd != null && maxInterstitialAd.isReady() &&false) {
             adCounter = 1;
             maxInterstitialAd.showAd();
         } else {
