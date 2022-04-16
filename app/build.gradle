@@ -54,6 +54,7 @@ dependencies {
 
     //onesignal
     implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
     implementation files('libs/commons-io-2.4.jar')
     implementation 'com.airbnb.android:lottie:3.4.4'

@@ -48,7 +48,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     String[] permissionsList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (file.isDirectory()) {
             File[] listFile = file.listFiles();
             Arrays.sort(listFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < listFile.length; i++) {
 
                 if (listFile[i].getAbsolutePath().contains(".mp4")) {
                     videoPath.add(listFile[i].getAbsolutePath());
@@ -224,69 +224,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         }
-    }
-
-
-    @Override
-    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.btnStart:
-//                KSUtil.Bounce(this, btnStart);
-//                new Handler().postDelayed(() -> {
-//                    if (!checkPermissions(MainActivity.this, permissionsList)) {
-//                        ActivityCompat.requestPermissions(MainActivity.this, permissionsList, 21);
-//                    } else {
-//                        KSUtil.fromAlbum = false;
-//                        Intent mIntent = new Intent(MainActivity.this, ImagePickerActivity.class);
-//                        mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
-//                        mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
-//                        startActivity(mIntent);
-//                        Animatee.animateSlideUp(MainActivity.this);
-//                    }
-//                },200);
-//
-//                break;
-//
-//            case R.id.btnAllVideo:
-//                KSUtil.Bounce(this, btnAllVideo);
-//                if (!checkPermissions(this, permissionsList)) {
-//                    ActivityCompat.requestPermissions(this, permissionsList, 22);
-//                } else {
-//                    KSUtil.fromAlbum = true;
-//                    AdManager.adCounter = AdManager.adDisplayCounter;
-//                    if (!AdManager.isloadFbMAXAd) {
-//                        AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), 0);
-//                    } else {
-//                        AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), 0);
-//                    }
-//                    Animatee.animateSlideUp(MainActivity.this);
-//                }
-//                break;
-//
-//            case R.id.rateIV:
-//                KSUtil.Bounce(this, rateIV);
-//                rateUs();
-//                break;
-//
-//            case R.id.shareIV:
-//                KSUtil.Bounce(this, shareIV);
-//                shareApp();
-//                break;
-//
-//            case R.id.privacyIV:
-//                KSUtil.Bounce(this, privacyIV);
-//                startActivityes(new Intent(MainActivity.this, PrivacyActivity.class), 0);
-//                Animatee.animateSlideUp(MainActivity.this);
-//                break;
-//
-//            case R.id.moreIV:
-//                KSUtil.Bounce(this, moreIV);
-//                moreApp();
-//                break;
-//
-//            default:
-//                break;
-//        }
     }
 
 
