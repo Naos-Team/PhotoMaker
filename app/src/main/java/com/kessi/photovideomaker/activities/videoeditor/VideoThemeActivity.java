@@ -77,13 +77,13 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     public static KessiApplication application;
     ArrayList<ImageData> arrayList;
     private static final String PREFS_NAME = "preferenceName";
-    LinearLayout cvframeview;
+ //   LinearLayout cvframeview;
     LinearLayout cvthemview;
     Float[] duration = new Float[]{1.0f, 1.5f,
             2.0f, 2.5f, 3.0f, 3.5f,
             4.0f, 4.5f, 5.0f};
     Boolean[] check = new Boolean[]{true, true, true ,true ,true, true, true, true};
-    int old_duration_position = 0;
+    int old_duration_position = -1;
     public static View flLoader;
 
     int frame;
@@ -91,6 +91,8 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     RequestManager glide;
     public static Handler handler = new Handler();
     int seekProgress = 0;
+    private TextView txt_Seekbar_picktime;
+    private SeekBar seekBar_picktime;
 
     ImageView idanimation, ibAddMusic, ibAddDuration; //idviewFrame;
 
@@ -106,7 +108,6 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     LockRunnable lockRunnable = new LockRunnable();
     MediaPlayer mPlayer;
 
-    RecyclerView rvFrame;
     RecyclerView rvThemes;
     public static float seconds = 3.0f;
     SeekBar seekBar;
@@ -187,6 +188,29 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     void bindView() {
         flLoader = findViewById(R.id.flLoader);
 
+        txt_Seekbar_picktime = findViewById(R.id.txt_Seekbar_picktime);
+        seekBar_picktime = findViewById(R.id.seekBar_picktime);
+        seekBar_picktime.setProgress(0);
+        seekBar_picktime.setMax(150);
+        seekBar_picktime.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                txt_Seekbar_picktime.setText((float) progress/10 + "s");
+                seconds = (float) progress/10;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                change_Choice(-1);
+                setDuration();
+            }
+        });
+
 
         flLoader.setOnClickListener(new OnClickListener() {
             @Override
@@ -204,6 +228,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
                 getResources().getDisplayMetrics().widthPixels * 18 / 1080,
                 getResources().getDisplayMetrics().widthPixels * 18 / 1080, true));
         seekBar.setThumb(d);
+
 
         tvEndTime = findViewById(R.id.tvEndTime);
         tvTime = findViewById(R.id.tvTime);
@@ -227,7 +252,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         rvThemes = findViewById(R.id.rvThemes);
         laySeconds = findViewById(R.id.laySeconds);
 
-        rvFrame = findViewById(R.id.rvFrame);
+        //rvFrame = findViewById(R.id.rvFrame);
 
         ibAddDuration = findViewById(R.id.ibAddDuration);
         ibAddMusic = findViewById(R.id.ibAddMusic);
@@ -353,7 +378,6 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         application = KessiApplication.getInstance();
         arrayList = application.getSelectedImages();
 
-
         total = (int) (((float) (arrayList.size() - 1)) * seconds);
         seekBar.setMax((arrayList.size() - 1) * 30);
 
@@ -475,12 +499,12 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         rvThemes.setItemAnimator(new DefaultItemAnimator());
         rvThemes.setAdapter(themeAdapter);
         frameAdapter = new FrameAdapter(VideoThemeActivity.this);
-        rvFrame.setLayoutManager(gridLayoutManagerFrame);
-        rvFrame.setItemAnimator(new DefaultItemAnimator());
-        rvFrame.setAdapter(frameAdapter);
+//        rvFrame.setLayoutManager(gridLayoutManagerFrame);
+//        rvFrame.setItemAnimator(new DefaultItemAnimator());
+//        rvFrame.setAdapter(frameAdapter);
 
         cvthemview = findViewById(R.id.cvthemview);
-        cvframeview = findViewById(R.id.cvframeview);
+        //cvframeview = findViewById(R.id.cvframeview);
         idanimation = findViewById(R.id.idanimation);
         //idviewFrame = findViewById(R.id.idviewFrame);
 
@@ -490,7 +514,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
             unpress();
             idanimation.setImageResource(R.drawable.theme_unpresed);
             cvthemview.setVisibility(View.VISIBLE);
-            cvframeview.setVisibility(View.GONE);
+//            cvframeview.setVisibility(View.GONE);
             laySeconds.setVisibility(View.GONE);
 
             startActivityes(null,0);
@@ -570,7 +594,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
                 KSUtil.Bounce(this, ibAddDuration);
                 unpress();
                 ibAddDuration.setImageResource(R.drawable.timer_unpresed);
-                cvframeview.setVisibility(View.GONE);
+//                cvframeview.setVisibility(View.GONE);
                 cvthemview.setVisibility(View.GONE);
                 if (laySeconds.getVisibility() == View.GONE) {
                     laySeconds.setVisibility(View.VISIBLE);
@@ -963,6 +987,13 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     public void change_Choice(int position){
         TextView tx;
         switch (old_duration_position){
+            case -1:
+                old_duration_position = position;
+                if(position != -1){
+                    txt_Seekbar_picktime.setText("0s");
+                    seekBar_picktime.setProgress(0);
+                }
+                return;
             case 0:
                 tx = findViewById(R.id.txtsec1);
                 break;
