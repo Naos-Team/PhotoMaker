@@ -81,6 +81,8 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     Float[] duration = new Float[]{1.0f, 1.5f,
             2.0f, 2.5f, 3.0f, 3.5f,
             4.0f, 4.5f, 5.0f};
+    Boolean[] check = new Boolean[]{true, true, true ,true ,true, true, true, true};
+    int old_duration_position = 0;
     public static View flLoader;
 
     int frame;
@@ -89,7 +91,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     public static Handler handler = new Handler();
     int seekProgress = 0;
 
-    ImageView idanimation, ibAddMusic, ibAddDuration, idviewFrame;
+    ImageView idanimation, ibAddMusic, ibAddDuration; //idviewFrame;
 
 
     LayoutInflater inflater;
@@ -214,11 +216,11 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         ivPlayPause.setLayoutParams(paramsd);
 
 
-        ivPlayPause1 = findViewById(R.id.ivPlayPause1);
+        //ivPlayPause1 = findViewById(R.id.ivPlayPause1);
         LinearLayout.LayoutParams paramsp = new LinearLayout.LayoutParams(
                 getResources().getDisplayMetrics().widthPixels * 60 / 1080,
                 getResources().getDisplayMetrics().heightPixels * 60 / 1920);
-        ivPlayPause1.setLayoutParams(paramsp);
+//        ivPlayPause1.setLayoutParams(paramsp);
 
         toolbar = findViewById(R.id.toolbar_preview);
         rvThemes = findViewById(R.id.rvThemes);
@@ -479,6 +481,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         cvthemview = findViewById(R.id.cvthemview);
         cvframeview = findViewById(R.id.cvframeview);
         idanimation = findViewById(R.id.idanimation);
+        //idviewFrame = findViewById(R.id.idviewFrame);
 
 
         idanimation.setOnClickListener(v -> {
@@ -599,7 +602,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
     void unpress(){
         ibAddDuration.setImageResource(R.drawable.timer_presed);
-        //.setImageResource(R.drawable.frame_presed);
+        //idviewFrame.setImageResource(R.drawable.frame_presed);
         idanimation.setImageResource(R.drawable.theme_presed);
     }
 
@@ -956,49 +959,102 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         super.onResume();
     }
 
+    public void change_Choice(int position){
+        TextView tx;
+        switch (old_duration_position){
+            case 0:
+                tx = findViewById(R.id.txtsec1);
+                break;
+            case 1:
+                tx = findViewById(R.id.txtsec15);
+                break;
+            case 2:
+                tx = findViewById(R.id.txtsec2);
+                break;
+            case 3:
+                tx = findViewById(R.id.txtsec25);
+                break;
+            case 4:
+                tx = findViewById(R.id.txtsec3);
+                break;
+            case 5:
+                tx = findViewById(R.id.txtsec35);
+                break;
+            case 6:
+                tx = findViewById(R.id.txtsec4);
+                break;
+            case 7:
+                tx = findViewById(R.id.txtsec45);
+                break;
+            default:
+                tx = findViewById(R.id.txtsec5);
+                break;
+        }
+        tx.setBackgroundResource(R.drawable.bg_duration_item);
+        old_duration_position = position;
+    }
 
     public void sec1() {
+
         seconds = duration[0].floatValue();
+        change_Choice(0);
+        txtsec1.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec15() {
         seconds = duration[1].floatValue();
+        change_Choice(1);
+        txtsec15.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec2() {
         seconds = duration[2].floatValue();
+        change_Choice(2);
+        txtsec2.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec25() {
         seconds = duration[3].floatValue();
+        change_Choice(3);
+        txtsec25.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec3() {
         seconds = duration[4].floatValue();
+        change_Choice(4);
+        txtsec3.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec35() {
         seconds = duration[5].floatValue();
+        change_Choice(5);
+        txtsec35.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec4() {
         seconds = duration[6].floatValue();
+        change_Choice(6);
+        txtsec4.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec45() {
         seconds = duration[7].floatValue();
+        change_Choice(7);
+        txtsec45.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec5() {
         seconds = duration[8].floatValue();
+        change_Choice(8);
+        txtsec5.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
@@ -1031,7 +1087,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
             public void onAnimationStart(Animation animation) {
                 ivPlayPause.setVisibility(View.VISIBLE);
-                ivPlayPause1.setImageResource(R.drawable.pause2);
+ //               ivPlayPause1.setImageResource(R.drawable.pause2);
 
             }
 
@@ -1040,7 +1096,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
             public void onAnimationEnd(Animation animation) {
                 ivPlayPause.setVisibility(View.GONE);
-                ivPlayPause1.setImageResource(R.drawable.pause2);
+                //ivPlayPause1.setImageResource(R.drawable.pause2);
             }
         }
 
@@ -1050,7 +1106,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
             public void onAnimationStart(Animation animation) {
                 ivPlayPause.setVisibility(View.VISIBLE);
-                ivPlayPause1.setImageResource(R.drawable.small_play);
+ //               ivPlayPause1.setImageResource(R.drawable.small_play);
             }
 
             public void onAnimationRepeat(Animation animation) {

@@ -128,25 +128,18 @@
         android:layout_height="0dp"
         android:layout_gravity="bottom"
         android:layout_weight="1.1"
-        android:orientation="horizontal"
         android:gravity="center"
+        android:orientation="horizontal"
         android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="6dp"
             android:paddingLeft="12dp"
+            android:paddingTop="6dp"
             android:paddingRight="4dp"
-            android:paddingTop="6dp">
-
-            <ImageView
-                android:id="@+id/ivPlayPause1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/small_play" />
+            android:paddingBottom="6dp">
 
             <TextView
                 android:id="@+id/tvTime"
@@ -239,9 +232,9 @@
 
 
                 <HorizontalScrollView
-                    android:scrollbars="none"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:scrollbars="none">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -254,11 +247,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:padding="5dp"
+                            android:background="@drawable/bg_duration_item_selected"
                             android:gravity="center"
-                            android:background="@drawable/frame_bg"
+                            android:padding="5dp"
                             android:text="1.0 s"
-                            android:textColor="@color/mainbgcolor"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp" />
 
                         <TextView
@@ -266,11 +259,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:background="@drawable/bg_duration_item"
+                            android:gravity="center"
                             android:padding="5dp"
                             android:text="1.5 s"
-                            android:gravity="center"
-                            android:background="@drawable/frame_bg"
-                            android:textColor="@color/mainbgcolor"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp" />
 
 
@@ -279,11 +272,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:background="@drawable/bg_duration_item"
+                            android:gravity="center"
                             android:padding="5dp"
                             android:text="2.0 s"
-                            android:gravity="center"
-                            android:background="@drawable/frame_bg"
-                            android:textColor="@color/mainbgcolor"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp" />
 
 
@@ -292,13 +285,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:background="@drawable/bg_duration_item"
+                            android:gravity="center"
                             android:padding="5dp"
                             android:text="2.5 s"
-                            android:gravity="center"
-                            android:background="@drawable/frame_bg"
-                            android:textColor="@color/mainbgcolor"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp" />
-
 
 
                         <TextView
@@ -306,11 +298,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:background="@drawable/bg_duration_item"
+                            android:gravity="center"
                             android:padding="5dp"
                             android:text="3.0 s"
-                            android:gravity="center"
-                            android:background="@drawable/frame_bg"
-                            android:textColor="@color/mainbgcolor"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp" />
 
 
@@ -319,11 +311,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:background="@drawable/bg_duration_item"
+                            android:gravity="center"
                             android:padding="5dp"
                             android:text="3.5 s"
-                            android:gravity="center"
-                            android:background="@drawable/frame_bg"
-                            android:textColor="@color/mainbgcolor"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp" />
 
 
@@ -332,11 +324,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:background="@drawable/bg_duration_item"
+                            android:gravity="center"
                             android:padding="5dp"
                             android:text="4.0 s"
-                            android:gravity="center"
-                            android:background="@drawable/frame_bg"
-                            android:textColor="@color/mainbgcolor"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp" />
 
 
@@ -345,11 +337,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:background="@drawable/bg_duration_item"
+                            android:gravity="center"
                             android:padding="5dp"
                             android:text="4.5 s"
-                            android:gravity="center"
-                            android:background="@drawable/frame_bg"
-                            android:textColor="@color/mainbgcolor"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp" />
 
 
@@ -358,11 +350,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:background="@drawable/bg_duration_item"
+                            android:gravity="center"
                             android:padding="5dp"
                             android:text="5.0 s"
-                            android:gravity="center"
-                            android:background="@drawable/frame_bg"
-                            android:textColor="@color/mainbgcolor"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp" />
 
                     </LinearLayout>

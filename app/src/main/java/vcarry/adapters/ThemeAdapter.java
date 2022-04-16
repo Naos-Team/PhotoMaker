@@ -58,9 +58,9 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
     public Holder onCreateViewHolder(ViewGroup paramViewGroup, int paramInt) {
         View view =this.inflater.inflate(R.layout.theme_items, paramViewGroup, false);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((activity.getResources()
-                .getDisplayMetrics().widthPixels* 200 / 1080 ),
+                .getDisplayMetrics().widthPixels* 190 / 1080 ),
                 (activity.getResources()
-                        .getDisplayMetrics().widthPixels * 200 / 1080));
+                        .getDisplayMetrics().widthPixels * 190 / 1080));
         params.setMargins(10,10,10,10);
 
         view.setLayoutParams(params);

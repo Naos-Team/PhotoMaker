@@ -23,9 +23,10 @@
 
     <color name="wavebgcolor">@color/bottom_bg_color</color>
 
+    <color name="app_color">#6BC7A9</color>
 
     <color name="grid_line">#00000000</color>
-    <color name="waveform_selected">#FF5501</color>
+    <color name="waveform_selected">#6BC7A9</color>
     <color name="waveform_unselected">#585254</color>
     <color name="waveform_unselected_bkgnd_overlay">#FCE1D3</color>
     <color name="selection_border">#ffff99</color>
