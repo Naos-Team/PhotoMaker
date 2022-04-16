@@ -8,64 +8,107 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.navigation.NavigationView;
 import com.kessi.photovideomaker.KessiApplication;
 import com.kessi.photovideomaker.R;
 import com.kessi.photovideomaker.activities.kessiimagepicker.activity.ImagePickerActivity;
 import com.kessi.photovideomaker.activities.myalbum.MyAlbumActivity;
+import com.kessi.photovideomaker.activities.myalbum.MyVideoAdapter;
 import com.kessi.photovideomaker.activities.swap.SwapperActivity;
 import com.kessi.photovideomaker.util.AdManager;
 import com.kessi.photovideomaker.util.Animatee;
 import com.kessi.photovideomaker.util.KSUtil;
 import com.kessi.photovideomaker.util.Render;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import org.apache.commons.io.comparator.LastModifiedFileComparator;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     String[] permissionsList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-    ImageView mainBg, icon, btnStart, btnAllVideo, rateIV, shareIV, privacyIV, moreIV;
-    LinearLayout btnLay;
-
-
+//    ImageView mainBg, icon, btnStart, btnAllVideo, rateIV, shareIV, privacyIV, moreIV;
+    LinearLayout btnLay, btnStart, btnMore;
+    DrawerLayout drawer;
+    NavigationView navigationView;
+    ImageView iv_hamburger;
+    int FLAG_VIDEO = 21;
+    ArrayList<String> videoPath;
+    RecyclerView rv;
+    MyVideoAdapter videoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mainBg = findViewById(R.id.mainBg);
-        Glide.with(this)
-                .load(R.drawable.f_bg)
-                .into(mainBg);
-        icon = findViewById(R.id.icon);
-        Glide.with(this)
-                .load(R.drawable.sp_logo)
-                .into(icon);
-        btnLay = findViewById(R.id.btnLay);
+//        Glide.with(this)
+//                .load(R.drawable.f_bg)
+//                .into(mainBg);
+//        icon = findViewById(R.id.icon);
+//        Glide.with(this)
+//                .load(R.drawable.sp_logo)
+//                .into(icon);
 
             // Set Animation
-        Render render = new Render(MainActivity.this);
-        render.setAnimation(KSUtil.Bubble(icon));
-        render.start();
 
+        videoPath = new ArrayList<>();
+
+//        Render render = new Render(MainActivity.this);
+//        render.setAnimation(KSUtil.Bubble(icon));
+//        render.start();
 
         init();
 
+        videoLoader();
+
+    }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        drawer.closeDrawer(GravityCompat.START);
+        switch (item.getItemId()){
+            case R.id.nav_more_app:
+                moreApp();
+                break;
+            case R.id.nav_privacy:
+                startActivityes(new Intent(MainActivity.this, PrivacyActivity.class), 0);
+                break;
+            case R.id.nav_rate:
+                rateUs();
+                break;
+            case R.id.nav_share:
+                shareApp();
+                break;
+        }
+        return true;
     }
 
     void init() {
@@ -74,46 +117,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         KessiApplication.VIDEO_HEIGHT = displaymetrics.widthPixels;
         KessiApplication.VIDEO_WIDTH = displaymetrics.widthPixels;
 
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
-        btnStart = findViewById(R.id.btnStart);
-        btnStart.setOnClickListener(this);
+        iv_hamburger = findViewById(R.id.iv_hamburger);
+        iv_hamburger.setOnClickListener(view -> drawer.openDrawer(GravityCompat.START));
 
-        btnAllVideo = findViewById(R.id.btnAllVideo);
-        btnAllVideo.setOnClickListener(this);
-
-        rateIV = findViewById(R.id.rateIV);
-        rateIV.setOnClickListener(this);
-
-        shareIV = findViewById(R.id.shareIV);
-        shareIV.setOnClickListener(this);
-
-        privacyIV = findViewById(R.id.privacyIV);
-        privacyIV.setOnClickListener(this);
-
-        moreIV = findViewById(R.id.moreIV);
-        moreIV.setOnClickListener(this);
-
-        FrameLayout nativeContainer = findViewById(R.id.nativeContainer);
-        FrameLayout nativeContainerMAX = findViewById(R.id.nativeContainerMAX);
-        if (!AdManager.isloadFbMAXAd) {
-            //admob
-            AdManager.initAd(MainActivity.this);
-            AdManager.loadInterAd(MainActivity.this);
-            AdManager.loadNativeAd(MainActivity.this, nativeContainer);
-        } else {
-            //MAX + Fb banner Ads
-            AdManager.initMAX(MainActivity.this);
-            AdManager.maxInterstital(MainActivity.this);
-            AdManager.loadNativeMAX(MainActivity.this, nativeContainerMAX);
-        }
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnStart:
-                KSUtil.Bounce(this, btnStart);
+        btnStart = findViewById(R.id.btn_start);
+        btnStart.setOnClickListener((view1 -> {
+            KSUtil.Bounce(this, btnStart);
                 new Handler().postDelayed(() -> {
                     if (!checkPermissions(MainActivity.this, permissionsList)) {
                         ActivityCompat.requestPermissions(MainActivity.this, permissionsList, 21);
@@ -125,50 +141,152 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(mIntent);
                         Animatee.animateSlideUp(MainActivity.this);
                     }
-                },200);
+                },100);
+        }));
 
-                break;
-
-            case R.id.btnAllVideo:
-                KSUtil.Bounce(this, btnAllVideo);
-                if (!checkPermissions(this, permissionsList)) {
-                    ActivityCompat.requestPermissions(this, permissionsList, 22);
+        btnMore = findViewById(R.id.btn_more);
+        btnMore.setOnClickListener((v) -> {
+            if (!checkPermissions(this, permissionsList)) {
+                ActivityCompat.requestPermissions(this, permissionsList, 22);
+            } else {
+                KSUtil.fromAlbum = true;
+                AdManager.adCounter = AdManager.adDisplayCounter;
+                if (!AdManager.isloadFbMAXAd) {
+                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), 0);
                 } else {
-                    KSUtil.fromAlbum = true;
-                    AdManager.adCounter = AdManager.adDisplayCounter;
-                    if (!AdManager.isloadFbMAXAd) {
-                        AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), 0);
-                    } else {
-                        AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), 0);
-                    }
-                    Animatee.animateSlideUp(MainActivity.this);
+                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), 0);
                 }
-                break;
+            }
+        });
 
-            case R.id.rateIV:
-                KSUtil.Bounce(this, rateIV);
-                rateUs();
-                break;
+//        btnStart = findViewById(R.id.btnStart);
+//        btnStart.setOnClickListener(this);
+//
+//        btnAllVideo = findViewById(R.id.btnAllVideo);
+//        btnAllVideo.setOnClickListener(this);
+//
+//        rateIV = findViewById(R.id.rateIV);
+//        rateIV.setOnClickListener(this);
+//
+//        shareIV = findViewById(R.id.shareIV);
+//        shareIV.setOnClickListener(this);
+//
+//        privacyIV = findViewById(R.id.privacyIV);
+//        privacyIV.setOnClickListener(this);
+//
+//        moreIV = findViewById(R.id.moreIV);
+//        moreIV.setOnClickListener(this);
 
-            case R.id.shareIV:
-                KSUtil.Bounce(this, shareIV);
-                shareApp();
-                break;
+//        FrameLayout nativeContainer = findViewById(R.id.nativeContainer);
+//        FrameLayout nativeContainerMAX = findViewById(R.id.nativeContainerMAX);
+//        if (!AdManager.isloadFbMAXAd) {
+//            //admob
+//            AdManager.initAd(MainActivity.this);
+//            AdManager.loadInterAd(MainActivity.this);
+//            AdManager.loadNativeAd(MainActivity.this, nativeContainer);
+//        } else {
+//            //MAX + Fb banner Ads
+//            AdManager.initMAX(MainActivity.this);
+//            AdManager.maxInterstital(MainActivity.this);
+//            AdManager.loadNativeMAX(MainActivity.this, nativeContainerMAX);
+//        }
+    }
 
-            case R.id.privacyIV:
-                KSUtil.Bounce(this, privacyIV);
-                startActivityes(new Intent(MainActivity.this, PrivacyActivity.class), 0);
-                Animatee.animateSlideUp(MainActivity.this);
-                break;
+    public void videoLoader() {
+        getFromStorage();
+        rv = (RecyclerView) findViewById(R.id.rv);
+        videoAdapter = new MyVideoAdapter(videoPath, this, (v, position) -> {
 
-            case R.id.moreIV:
-                KSUtil.Bounce(this, moreIV);
-                moreApp();
-                break;
+            Intent intent = new Intent(this, VideoPlayerActivity.class);
+            intent.putExtra("video_path", videoPath.get(position));
+            startActivityes(intent, FLAG_VIDEO);
+        });
 
-            default:
-                break;
+        rv.setLayoutManager(new GridLayoutManager(this, 2));
+        rv.setItemAnimator(new DefaultItemAnimator());
+        rv.setAdapter(videoAdapter);
+
+    }
+
+    public void getFromStorage() {
+        String folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                + "/" + getResources().getString(R.string.app_name);
+        File file = new File(folder);
+        videoPath = new ArrayList<String>();
+        if (file.isDirectory()) {
+            File[] listFile = file.listFiles();
+            Arrays.sort(listFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+            for (int i = 0; i < 4; i++) {
+
+                if (listFile[i].getAbsolutePath().contains(".mp4")) {
+                    videoPath.add(listFile[i].getAbsolutePath());
+                }
+
+            }
         }
+    }
+
+
+    @Override
+    public void onClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.btnStart:
+//                KSUtil.Bounce(this, btnStart);
+//                new Handler().postDelayed(() -> {
+//                    if (!checkPermissions(MainActivity.this, permissionsList)) {
+//                        ActivityCompat.requestPermissions(MainActivity.this, permissionsList, 21);
+//                    } else {
+//                        KSUtil.fromAlbum = false;
+//                        Intent mIntent = new Intent(MainActivity.this, ImagePickerActivity.class);
+//                        mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
+//                        mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
+//                        startActivity(mIntent);
+//                        Animatee.animateSlideUp(MainActivity.this);
+//                    }
+//                },200);
+//
+//                break;
+//
+//            case R.id.btnAllVideo:
+//                KSUtil.Bounce(this, btnAllVideo);
+//                if (!checkPermissions(this, permissionsList)) {
+//                    ActivityCompat.requestPermissions(this, permissionsList, 22);
+//                } else {
+//                    KSUtil.fromAlbum = true;
+//                    AdManager.adCounter = AdManager.adDisplayCounter;
+//                    if (!AdManager.isloadFbMAXAd) {
+//                        AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), 0);
+//                    } else {
+//                        AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), 0);
+//                    }
+//                    Animatee.animateSlideUp(MainActivity.this);
+//                }
+//                break;
+//
+//            case R.id.rateIV:
+//                KSUtil.Bounce(this, rateIV);
+//                rateUs();
+//                break;
+//
+//            case R.id.shareIV:
+//                KSUtil.Bounce(this, shareIV);
+//                shareApp();
+//                break;
+//
+//            case R.id.privacyIV:
+//                KSUtil.Bounce(this, privacyIV);
+//                startActivityes(new Intent(MainActivity.this, PrivacyActivity.class), 0);
+//                Animatee.animateSlideUp(MainActivity.this);
+//                break;
+//
+//            case R.id.moreIV:
+//                KSUtil.Bounce(this, moreIV);
+//                moreApp();
+//                break;
+//
+//            default:
+//                break;
+//        }
     }
 
 

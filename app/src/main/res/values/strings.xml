@@ -41,5 +41,7 @@
     <string name="max_banner">7bc2fba563bf4279</string>
     <string name="max_interstitial">437d517d2069c261</string>
     <string name="max_native">36ba6697923c37a7</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
 
 </resources>

@@ -26,4 +26,5 @@
         <item name="android:width">15dp</item>
         <item name="android:height">15dp</item>
     </style>
+
 </resources>

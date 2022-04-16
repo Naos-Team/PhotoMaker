@@ -13,7 +13,7 @@
     <color name="materialcolorpicker__dialogcolor">#009688</color>
     <color name="hint_foreground_material_light">#00000000</color>
     <color name="hint_foreground_material_dark">#00000000</color>
-
+    <color name="nav_color">#DF702D</color>
     <color name="mainbgcolor">#F8F3F0</color>
     <color name="toptextcolor">#FF7E5B</color>
     <color name="bottom_bg_color">#FCE1D3</color>
