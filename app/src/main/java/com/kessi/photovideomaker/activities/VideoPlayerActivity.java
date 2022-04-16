@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -344,7 +345,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements
 
     PopupWindow popupWindow;
     LinearLayout alertLay;
-    ImageView yes, no;
+    Button yes, no;
 
     public void delete() {
 
@@ -379,8 +380,8 @@ public class VideoPlayerActivity extends AppCompatActivity implements
         alertLay.setLayoutParams(paramsDialog);
 
         LinearLayout.LayoutParams paramsCamera = new LinearLayout.LayoutParams(
-                getResources().getDisplayMetrics().widthPixels * 270 / 1080,
-                getResources().getDisplayMetrics().heightPixels * 106 / 1920);
+                getResources().getDisplayMetrics().widthPixels * 300 / 1080,
+                getResources().getDisplayMetrics().heightPixels * 130 / 1920);
         yes.setLayoutParams(paramsCamera);
         no.setLayoutParams(paramsCamera);
     }

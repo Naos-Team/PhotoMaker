@@ -54,7 +54,7 @@ import java.util.List;
 
 public class AdManager {
     public static int adCounter = 1;
-    public static int adDisplayCounter = 1000;
+    public static int adDisplayCounter = 4;
 
     public static boolean isloadFbMAXAd = true;
 
@@ -471,7 +471,7 @@ public class AdManager {
     public static void showMaxInterstitial(final Activity context, final Intent intent, final int requestCode) {
         maxIntent = intent;
         maxRequstCode = requestCode;
-        if (adCounter == adDisplayCounter && maxInterstitialAd != null && maxInterstitialAd.isReady() && false) {
+        if (adCounter == adDisplayCounter && maxInterstitialAd != null && maxInterstitialAd.isReady() &&false) {
             adCounter = 1;
             maxInterstitialAd.showAd();
         } else {

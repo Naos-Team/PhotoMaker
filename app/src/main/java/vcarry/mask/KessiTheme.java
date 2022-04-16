@@ -34,146 +34,146 @@ public enum KessiTheme {
             return R.raw.song_2;
         }
     },
-    MixTOURNADO("MixTOURNADO") {
-        public ArrayList<EFFECT> getTheme() {
-            ArrayList<EFFECT> list = new ArrayList();
-            list.add(EFFECT.TOURNADO);
-            list.add(EFFECT.TOURNADO_REV);
-            list.add(EFFECT.RUB_RL);
-            list.add(EFFECT.RUB_LR);
-
-            return list;
-        }
-
-        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return new ArrayList();
-        }
-
-        public int getThemeDrawable() {
-            return R.drawable.tourando;
-        }
-
-        public int getThemeMusic() {
-            return R.raw.song_3;
-        }
-
-    },
-    MixWIPER("MixWIPER") {
-        public ArrayList<EFFECT> getTheme() {
-            ArrayList<EFFECT> list = new ArrayList();
-            list.add(EFFECT.WIPER_LEFT_CORNER);
-            list.add(EFFECT.WIPER_RIGHT_CORNER);
-            return list;
-        }
-
-        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return new ArrayList();
-        }
-
-        public int getThemeDrawable() {
-            return R.drawable.lcwiper;
-        }
-
-        public int getThemeMusic() {
-            return R.raw.song_3;
-        }
-
-    },
-    SKEW("SKEW") {
-        public ArrayList<EFFECT> getTheme() {
-            ArrayList<EFFECT> list = new ArrayList();
-            list.add(EFFECT.SKEW_LEFT_MEARGE);
-            list.add(EFFECT.SKEW_RIGHT_SPLIT);
-            list.add(EFFECT.SKEW_LEFT_SPLIT);
-            list.add(EFFECT.SKEW_RIGHT_MEARGE);
-
-            return list;
-        }
-
-        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return new ArrayList();
-        }
-
-        public int getThemeDrawable() {
-            return R.drawable.skew;
-        }
-
-        public int getThemeMusic() {
-            return R.raw.song_1;
-        }
-    },
-    NewShine("NewShine") {
-        public ArrayList<EFFECT> getTheme() {
-            ArrayList<EFFECT> mEffects = new ArrayList();
-            mEffects.add(EFFECT.CIRCLE_OUT);
-            mEffects.add(EFFECT.CIRCLE_IN);
-            mEffects.add(EFFECT.CIRCLE_LEFT_TOP);
-            mEffects.add(EFFECT.CIRCLE_RIGHT_TOP);
-            mEffects.add(EFFECT.CIRCLE_LEFT_BOTTOM);
-            mEffects.add(EFFECT.CIRCLE_RIGHT_BOTTOM);
-            return mEffects;
-        }
-
-        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return null;
-        }
-
-        public int getThemeDrawable() {
-            return R.drawable.circle_out;
-        }
-
-        public int getThemeMusic() {
-            return R.raw.song_2;
-        }
-    },
-    MixSquare("MixSquare") {
-        public ArrayList<EFFECT> getTheme() {
-            ArrayList<EFFECT> mEffects = new ArrayList();
-
-            mEffects.add(EFFECT.SQUARE_OUT);
-            mEffects.add(EFFECT.SQUARE_IN);
-            mEffects.add(EFFECT.SQUARE_R_OUT);
-
-            return mEffects;
-        }
-
-        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return null;
-        }
-
-        public int getThemeDrawable() {
-            return R.drawable.squareout;
-        }
-
-        public int getThemeMusic() {
-            return R.raw.song_2;
-        }
-    },
-    MixDOOR("MixDOOR") {
-        public ArrayList<EFFECT> getTheme() {
-            ArrayList<EFFECT> list = new ArrayList();
-            list.add(EFFECT.OPEN_DOOR);
-            list.add(EFFECT.LR_DOOR);
-            list.add(EFFECT.RL_DOOR);
-            list.add(EFFECT.TB_DOOR);
-            list.add(EFFECT.BT_DOOR);
-
-            return list;
-        }
-
-        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return new ArrayList();
-        }
-
-        public int getThemeDrawable() {
-            return R.drawable.opendoor;
-        }
-
-        public int getThemeMusic() {
-            return R.raw.song_3;
-        }
-
-    },
+//    MixTOURNADO("MixTOURNADO") {
+//        public ArrayList<EFFECT> getTheme() {
+//            ArrayList<EFFECT> list = new ArrayList();
+//            list.add(EFFECT.TOURNADO);
+//            list.add(EFFECT.TOURNADO_REV);
+//            list.add(EFFECT.RUB_RL);
+//            list.add(EFFECT.RUB_LR);
+//
+//            return list;
+//        }
+//
+//        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+//            return new ArrayList();
+//        }
+//
+//        public int getThemeDrawable() {
+//            return R.drawable.tourando;
+//        }
+//
+//        public int getThemeMusic() {
+//            return R.raw.song_3;
+//        }
+//
+//    },
+//    MixWIPER("MixWIPER") {
+//        public ArrayList<EFFECT> getTheme() {
+//            ArrayList<EFFECT> list = new ArrayList();
+//            list.add(EFFECT.WIPER_LEFT_CORNER);
+//            list.add(EFFECT.WIPER_RIGHT_CORNER);
+//            return list;
+//        }
+//
+//        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+//            return new ArrayList();
+//        }
+//
+//        public int getThemeDrawable() {
+//            return R.drawable.lcwiper;
+//        }
+//
+//        public int getThemeMusic() {
+//            return R.raw.song_3;
+//        }
+//
+//    },
+//    SKEW("SKEW") {
+//        public ArrayList<EFFECT> getTheme() {
+//            ArrayList<EFFECT> list = new ArrayList();
+//            list.add(EFFECT.SKEW_LEFT_MEARGE);
+//            list.add(EFFECT.SKEW_RIGHT_SPLIT);
+//            list.add(EFFECT.SKEW_LEFT_SPLIT);
+//            list.add(EFFECT.SKEW_RIGHT_MEARGE);
+//
+//            return list;
+//        }
+//
+//        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+//            return new ArrayList();
+//        }
+//
+//        public int getThemeDrawable() {
+//            return R.drawable.skew;
+//        }
+//
+//        public int getThemeMusic() {
+//            return R.raw.song_1;
+//        }
+//    },
+//    NewShine("NewShine") {
+//        public ArrayList<EFFECT> getTheme() {
+//            ArrayList<EFFECT> mEffects = new ArrayList();
+//            mEffects.add(EFFECT.CIRCLE_OUT);
+//            mEffects.add(EFFECT.CIRCLE_IN);
+//            mEffects.add(EFFECT.CIRCLE_LEFT_TOP);
+//            mEffects.add(EFFECT.CIRCLE_RIGHT_TOP);
+//            mEffects.add(EFFECT.CIRCLE_LEFT_BOTTOM);
+//            mEffects.add(EFFECT.CIRCLE_RIGHT_BOTTOM);
+//            return mEffects;
+//        }
+//
+//        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+//            return null;
+//        }
+//
+//        public int getThemeDrawable() {
+//            return R.drawable.circle_out;
+//        }
+//
+//        public int getThemeMusic() {
+//            return R.raw.song_2;
+//        }
+//    },
+//    MixSquare("MixSquare") {
+//        public ArrayList<EFFECT> getTheme() {
+//            ArrayList<EFFECT> mEffects = new ArrayList();
+//
+//            mEffects.add(EFFECT.SQUARE_OUT);
+//            mEffects.add(EFFECT.SQUARE_IN);
+//            mEffects.add(EFFECT.SQUARE_R_OUT);
+//
+//            return mEffects;
+//        }
+//
+//        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+//            return null;
+//        }
+//
+//        public int getThemeDrawable() {
+//            return R.drawable.squareout;
+//        }
+//
+//        public int getThemeMusic() {
+//            return R.raw.song_2;
+//        }
+//    },
+//    MixDOOR("MixDOOR") {
+//        public ArrayList<EFFECT> getTheme() {
+//            ArrayList<EFFECT> list = new ArrayList();
+//            list.add(EFFECT.OPEN_DOOR);
+//            list.add(EFFECT.LR_DOOR);
+//            list.add(EFFECT.RL_DOOR);
+//            list.add(EFFECT.TB_DOOR);
+//            list.add(EFFECT.BT_DOOR);
+//
+//            return list;
+//        }
+//
+//        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+//            return new ArrayList();
+//        }
+//
+//        public int getThemeDrawable() {
+//            return R.drawable.opendoor;
+//        }
+//
+//        public int getThemeMusic() {
+//            return R.raw.song_3;
+//        }
+//
+//    },
     RECT_RANDOM("RECT_RANDOM") {
         public ArrayList<EFFECT> getTheme() {
             ArrayList<EFFECT> list = new ArrayList();

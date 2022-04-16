@@ -31,19 +31,19 @@
         android:layout_height="match_parent"
         android:clickable="true" />
 
-    <TextView
-        android:id="@+id/tvThemeNew"
-        android:layout_width="@dimen/_18sdp"
-        android:layout_height="@dimen/_12sdp"
-        android:rotation="-50"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:layout_gravity="bottom"
-        android:text="New"
-        android:background="@drawable/lbg"
-        android:gravity="center"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_6sdp" />
+<!--    <TextView-->
+<!--        android:id="@+id/tvThemeNew"-->
+<!--        android:layout_width="@dimen/_18sdp"-->
+<!--        android:layout_height="@dimen/_12sdp"-->
+<!--        android:rotation="-50"-->
+<!--        android:layout_marginTop="@dimen/_4sdp"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:text="New"-->
+<!--        android:background="@drawable/lbg"-->
+<!--        android:gravity="center"-->
+<!--        android:maxLines="1"-->
+<!--        android:singleLine="true"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="@dimen/_6sdp" />-->
 </RelativeLayout>

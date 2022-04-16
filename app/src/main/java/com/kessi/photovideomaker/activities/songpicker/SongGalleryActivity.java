@@ -844,7 +844,7 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
     }
 
     void resetPositions() {
-        mStartPos = mPVMWSWaveformView.secondsToPixels(0.0d);
+        mStartPos = mPVMWSWaveformView.secondsToPixels(3.0d);
         mEndPos = mPVMWSWaveformView.secondsToPixels((double) mMaxPos);
     }
 
@@ -1205,7 +1205,7 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
 
             if (mSelectedChoice == pos){
                 holder.iv.setImageResource(R.drawable.music_press);
-                holder.musicName.setTextColor(getColor(R.color.toptextcolor));
+                holder.musicName.setTextColor(getColor(R.color.music_selected));
             }else {
                 holder.iv.setImageResource(R.drawable.smusic_ic);
                 holder.musicName.setTextColor(getColor(R.color.text_music));
