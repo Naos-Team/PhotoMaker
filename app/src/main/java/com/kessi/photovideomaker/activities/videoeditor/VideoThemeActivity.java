@@ -149,6 +149,12 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         intent.putExtra(ServiceAnim.EXTRA_SELECTED_THEME, application.getCurrentTheme());
         startService(intent);
 
+        Drawable dr = getResources().getDrawable(R.drawable.shipbar_round);
+        Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
+        Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap,
+                getResources().getDisplayMetrics().widthPixels * 18 / 1080,
+                getResources().getDisplayMetrics().widthPixels * 18 / 1080, true));
+        seekBar_picktime.setThumb(d);
 
         init();
         addListner();

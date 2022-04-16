@@ -236,7 +236,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:background="@drawable/bg_duration_item_selected"
+                            android:background="@drawable/bg_duration_item"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="1.0 s"
