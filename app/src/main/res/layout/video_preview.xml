@@ -236,7 +236,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:background="@drawable/bg_duration_item_selected"
+                            android:background="@drawable/bg_duration_item"
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="1.0 s"
@@ -365,7 +365,7 @@
                         android:gravity="center"
                         android:paddingStart="8dp"
                         android:paddingLeft="10dp"
-                        android:text="0s"
+                        android:text="1.0s"
                         android:textColor="@color/toptextcolor" />
 
                     <SeekBar

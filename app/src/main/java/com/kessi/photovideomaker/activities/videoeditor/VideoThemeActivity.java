@@ -13,6 +13,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -34,6 +35,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
@@ -149,6 +151,12 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         intent.putExtra(ServiceAnim.EXTRA_SELECTED_THEME, application.getCurrentTheme());
         startService(intent);
 
+        Drawable dr = getResources().getDrawable(R.drawable.shipbar_round);
+        Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
+        Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap,
+                getResources().getDisplayMetrics().widthPixels * 18 / 1080,
+                getResources().getDisplayMetrics().widthPixels * 18 / 1080, true));
+        seekBar_picktime.setThumb(d);
 
         init();
         addListner();
@@ -190,8 +198,11 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
         txt_Seekbar_picktime = findViewById(R.id.txt_Seekbar_picktime);
         seekBar_picktime = findViewById(R.id.seekBar_picktime);
-        seekBar_picktime.setProgress(0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            seekBar_picktime.setMin(10);
+        }
         seekBar_picktime.setMax(150);
+        seekBar_picktime.setProgress(10);
         seekBar_picktime.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -596,12 +607,13 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
                 ibAddDuration.setImageResource(R.drawable.timer_unpresed);
 //                cvframeview.setVisibility(View.GONE);
                 cvthemview.setVisibility(View.GONE);
-                if (laySeconds.getVisibility() == View.GONE) {
-                    laySeconds.setVisibility(View.VISIBLE);
-
-                } else {
-                    laySeconds.setVisibility(View.GONE);
-                }
+//                if (laySeconds.getVisibility() == View.GONE) {
+//                    laySeconds.setVisibility(View.VISIBLE);
+//
+//                } else {
+//                    laySeconds.setVisibility(View.GONE);
+//                }
+                laySeconds.setVisibility(View.VISIBLE);
 
                 startActivityes(null,0);
                 return;
@@ -986,13 +998,13 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
     public void change_Choice(int position){
         TextView tx;
+        if(position != -1 ){
+            seekBar_picktime.setProgress(Math.round(duration[position]*10));
+            txt_Seekbar_picktime.setText(duration[position] + "s");
+        }
         switch (old_duration_position){
             case -1:
                 old_duration_position = position;
-                if(position != -1){
-                    txt_Seekbar_picktime.setText("0s");
-                    seekBar_picktime.setProgress(0);
-                }
                 return;
             case 0:
                 tx = findViewById(R.id.txtsec1);
@@ -1028,64 +1040,64 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
     public void sec1() {
 
-        seconds = duration[0].floatValue();
         change_Choice(0);
+        seconds = duration[0].floatValue();
         txtsec1.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec15() {
-        seconds = duration[1].floatValue();
         change_Choice(1);
+        seconds = duration[1].floatValue();
         txtsec15.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec2() {
-        seconds = duration[2].floatValue();
         change_Choice(2);
+        seconds = duration[2].floatValue();
         txtsec2.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec25() {
-        seconds = duration[3].floatValue();
         change_Choice(3);
+        seconds = duration[3].floatValue();
         txtsec25.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec3() {
-        seconds = duration[4].floatValue();
         change_Choice(4);
+        seconds = duration[4].floatValue();
         txtsec3.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec35() {
-        seconds = duration[5].floatValue();
         change_Choice(5);
+        seconds = duration[5].floatValue();
         txtsec35.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec4() {
-        seconds = duration[6].floatValue();
         change_Choice(6);
+        seconds = duration[6].floatValue();
         txtsec4.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec45() {
-        seconds = duration[7].floatValue();
         change_Choice(7);
+        seconds = duration[7].floatValue();
         txtsec45.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
 
     public void sec5() {
-        seconds = duration[8].floatValue();
         change_Choice(8);
+        seconds = duration[8].floatValue();
         txtsec5.setBackgroundResource(R.drawable.bg_duration_item_selected);
         setDuration();
     }
