@@ -6,7 +6,7 @@
     android:background="@color/mainbgcolor"
     android:keepScreenOn="true"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="9.8">
 
     <LinearLayout
         android:id="@+id/toolbar_preview"
@@ -404,12 +404,12 @@
         android:id="@+id/lleditArea"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.9">
+        android:layout_weight="0.7">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bottom_bg_color"
+            android:background="#b5e3d4"
             android:orientation="horizontal">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -434,9 +434,9 @@
 
                     <ImageView
                         android:id="@+id/idanimation"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="1dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="10dp"
                         android:src="@drawable/theme_unpresed" />
 
 
@@ -459,10 +459,10 @@
 
                     <ImageView
                         android:id="@+id/ibAddMusic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_weight="1.0"
-                        android:padding="1dp"
+                        android:padding="10dp"
                         android:src="@drawable/music_presed" />
 
 
@@ -484,10 +484,10 @@
 
                     <ImageView
                         android:id="@+id/ibAddDuration"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_weight="1.0"
-                        android:padding="1dp"
+                        android:padding="10dp"
                         android:src="@drawable/timer_presed" />
 
 

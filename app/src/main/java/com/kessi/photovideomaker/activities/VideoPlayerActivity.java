@@ -1,5 +1,6 @@
 package com.kessi.photovideomaker.activities;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -54,7 +55,8 @@ public class VideoPlayerActivity extends AppCompatActivity implements
     ImageView btnPlayVideo;
     boolean isPlay = false;
 
-    ImageView btnShare, btnDelete;
+    LinearLayout btnShare, btnRate;
+    ImageView btnDelete;
     RelativeLayout main, top;
 
     @Override
@@ -88,6 +90,14 @@ public class VideoPlayerActivity extends AppCompatActivity implements
             KSUtil.Bounce(this, btnShare);
             videoView.pause();
             share();
+            startActivityes(null, 0);
+        });
+
+        btnRate = findViewById(R.id.btnRate);
+        btnRate.setOnClickListener(v -> {
+            KSUtil.Bounce(this, btnRate);
+            videoView.pause();
+            rateUs();
             startActivityes(null, 0);
         });
 
@@ -316,6 +326,23 @@ public class VideoPlayerActivity extends AppCompatActivity implements
         startActivity(Intent.createChooser(share, "Share via"));
     }
 
+     void rateUs() {
+        Uri uri = Uri.parse("market://details?id="
+                + getApplicationContext().getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY
+                | Intent.FLAG_ACTIVITY_NEW_DOCUMENT
+                | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id="
+                            + getApplicationContext().getPackageName())));
+        }
+    }
+
     PopupWindow popupWindow;
     LinearLayout alertLay;
     Button yes, no;
@@ -379,4 +406,6 @@ public class VideoPlayerActivity extends AppCompatActivity implements
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
+
 }

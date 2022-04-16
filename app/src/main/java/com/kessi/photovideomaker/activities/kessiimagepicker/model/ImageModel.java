@@ -5,12 +5,23 @@ public class ImageModel {
     String name;
     String pathFile;
     String pathFolder;
+    long count;
 
-    public ImageModel(String name, String pathFile, String pathFolder) {
+    public ImageModel(String name, String pathFile, String pathFolder, long count) {
         this.name = name;
         this.pathFile = pathFile;
         this.pathFolder = pathFolder;
+        this.count = count;
     }
+
+    public long getCount() {
+        return count;
+    }
+
+    public void setCount(long count) {
+        this.count = count;
+    }
+
 
     public String getPathFile() {
         return this.pathFile;

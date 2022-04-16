@@ -15,10 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/icon"
+        android:background="#388A72"
         android:lines="1"
-        android:background="#d42c95"
-        android:textStyle="bold"
+        android:padding="5dp"
         android:textColor="#fff"
-        android:padding="5dp" />
+        android:textStyle="bold" />
 
 </RelativeLayout>

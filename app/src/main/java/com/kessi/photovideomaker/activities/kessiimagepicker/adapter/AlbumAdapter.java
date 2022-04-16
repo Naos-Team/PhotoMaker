@@ -55,7 +55,7 @@ public class AlbumAdapter extends ArrayAdapter<ImageModel> {
             row = ((Activity) this.context).getLayoutInflater().inflate(this.layoutResourceId, parent, false);
             holder = new RecordHolder();
             holder.txtTitle = (TextView) row.findViewById(R.id.name_album);
-            holder.txtPath = (TextView) row.findViewById(R.id.path_album);
+            holder.txtPath = (TextView) row.findViewById(R.id.count);
             holder.imageItem = (ImageView) row.findViewById(R.id.icon_album);
 //            holder.iconNext = (ImageView) row.findViewById(R.id.iconNext);
 //            holder.layoutRoot = (LinearLayout) row.findViewById(R.id.layoutRoot);
@@ -70,7 +70,7 @@ public class AlbumAdapter extends ArrayAdapter<ImageModel> {
         }
         ImageModel item = (ImageModel) this.data.get(position);
         holder.txtTitle.setText(item.getName());
-        holder.txtPath.setText(item.getPathFolder());
+        holder.txtPath.setText(String.valueOf(item.getCount()));
 //        holder.imageItem.setBackground();
         Glide.with(this.context).load(new File(item.getPathFile())).asBitmap().placeholder(R.drawable.piclist_icon_default).into(holder.imageItem);
 
