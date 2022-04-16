@@ -365,7 +365,7 @@
                         android:gravity="center"
                         android:paddingStart="8dp"
                         android:paddingLeft="10dp"
-                        android:text="0s"
+                        android:text="1.0s"
                         android:textColor="@color/toptextcolor" />
 
                     <SeekBar
