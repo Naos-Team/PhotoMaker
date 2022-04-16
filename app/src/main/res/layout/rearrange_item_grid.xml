@@ -29,20 +29,22 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="@dimen/_8sdp">
 
 
                 <ImageView
+                    android:layout_gravity="center_vertical"
                     android:id="@+id/edit"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_6sdp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/reedit" />
 
 
                 <ImageView
+                    android:layout_gravity="center_vertical"
                     android:id="@+id/delete"
+                    android:layout_marginLeft="8dp"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:src="@drawable/reclose" />

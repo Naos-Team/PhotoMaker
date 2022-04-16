@@ -7,7 +7,7 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/top_bg">
+        android:background="#388A72">
 
 
         <LinearLayout
@@ -15,21 +15,22 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp">
+
             <ImageView
                 android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/mback"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/mback" />
         </LinearLayout>
 
 
         <TextView
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="Select Image"
             android:textColor="#fff"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <GridView

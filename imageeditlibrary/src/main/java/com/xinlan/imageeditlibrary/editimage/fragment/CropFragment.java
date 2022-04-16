@@ -57,7 +57,7 @@ public class CropFragment extends BaseEditFragment {
 	}
 	private List<TextView> textViewList = new ArrayList<TextView>();
 
-	public static int SELECTED_COLOR = Color.parseColor("#FF7E5B");
+	public static int SELECTED_COLOR = Color.parseColor("#FFFFFF");
 	public static int UNSELECTED_COLOR = Color.parseColor("#1D0A00");
 	private CropRationClick mCropRationClick = new CropRationClick();
 	public TextView selctedTextView;

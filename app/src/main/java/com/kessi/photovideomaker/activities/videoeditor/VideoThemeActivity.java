@@ -34,6 +34,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -98,7 +99,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     ImageView ivPlayPause1;
     ImageView ivPreview, backimg_preview, done_preview;
     ArrayList<ImageData> lastData = new ArrayList();
-    LinearLayout llEdit;
+    ConstraintLayout llEdit;
     LockRunnable lockRunnable = new LockRunnable();
     MediaPlayer mPlayer;
 
@@ -153,7 +154,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
                 getResources().getDisplayMetrics().widthPixels * 120 / 1080,
                 getResources().getDisplayMetrics().heightPixels * 120 / 1920);
         idanimation.setLayoutParams(paramsbtn);
-        idviewFrame.setLayoutParams(paramsbtn);
+        //idviewFrame.setLayoutParams(paramsbtn);
         ibAddMusic.setLayoutParams(paramsbtn);
         ibAddDuration.setLayoutParams(paramsbtn);
 
@@ -478,7 +479,6 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         cvthemview = findViewById(R.id.cvthemview);
         cvframeview = findViewById(R.id.cvframeview);
         idanimation = findViewById(R.id.idanimation);
-        idviewFrame = findViewById(R.id.idviewFrame);
 
 
         idanimation.setOnClickListener(v -> {
@@ -492,16 +492,16 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
             startActivityes(null,0);
         });
 
-        idviewFrame.setOnClickListener(v -> {
-            KSUtil.Bounce(VideoThemeActivity.this, idviewFrame);
-            unpress();
-            idviewFrame.setImageResource(R.drawable.frame_unpresed);
-            cvframeview.setVisibility(View.VISIBLE);
-            cvthemview.setVisibility(View.GONE);
-            laySeconds.setVisibility(View.GONE);
-
-            startActivityes(null,0);
-        });
+//        idviewFrame.setOnClickListener(v -> {
+//            KSUtil.Bounce(VideoThemeActivity.this, idviewFrame);
+//            unpress();
+//            idviewFrame.setImageResource(R.drawable.frame_unpresed);
+//            cvframeview.setVisibility(View.VISIBLE);
+//            cvthemview.setVisibility(View.GONE);
+//            laySeconds.setVisibility(View.GONE);
+//
+//            startActivityes(null,0);
+//        });
     }
 
 
@@ -599,7 +599,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
     void unpress(){
         ibAddDuration.setImageResource(R.drawable.timer_presed);
-        idviewFrame.setImageResource(R.drawable.frame_presed);
+        //.setImageResource(R.drawable.frame_presed);
         idanimation.setImageResource(R.drawable.theme_presed);
     }
 

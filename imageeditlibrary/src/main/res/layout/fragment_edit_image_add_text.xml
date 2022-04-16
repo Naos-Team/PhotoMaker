@@ -27,7 +27,7 @@
         android:layout_weight="1"
         android:hint="@string/input_hint"
         android:paddingLeft="8dp"
-        android:textColor="@color/toptextcolor"
+        android:textColor="@color/materialcolorpicker__black"
         android:textColorHint="@color/toptextcolor"
         android:backgroundTint="@color/toptextcolor"/>
 
@@ -41,11 +41,13 @@
         android:textColor="@color/white"
         android:visibility="gone" />
 
+
     <ImageView
         android:id="@+id/text_color"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_gravity="center_vertical"
-        android:background="#ffffff" />
+        android:scaleType="centerCrop"
+        android:background="@drawable/bg_corner" />
 
 </LinearLayout>

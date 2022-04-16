@@ -1,74 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="10dp"
-    android:padding="5.0dip">
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/layoutRoot"
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_marginTop="10dp"
+        android:id="@+id/icon_album"
+        android:padding="0.7dp"
+        app:riv_corner_radius_bottom_left="40dp"
+        app:riv_corner_radius_bottom_right="40dp"
+        app:riv_corner_radius_top_left="40dp"
+        app:riv_corner_radius_top_right="40dp"
+        android:src="#6BC7A9"
+        android:background="@drawable/border_album"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/name_album"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginTop="5dp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="Name album"
+        android:textColor="#286F5A"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_marginTop="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:gravity="center">
+        android:layout_marginBottom="10dp"
+        android:gravity="center|left"
+        android:layout_marginLeft="5dp"
+        android:textColor="#286F5A"
+        android:textSize="12dp" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_65sdp"
-            android:layout_weight="0.3"
-            android:gravity="center">
+</LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/icon_album"
-            android:layout_width="@dimen/_65sdp"
-            android:layout_height="@dimen/_65sdp"
-            android:scaleType="centerCrop" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_weight="0.7"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+    <!--<ImageView-->
+    <!--android:id="@+id/iconNext"-->
+    <!--android:layout_width="20.0dip"-->
+    <!--android:layout_height="20.0dip"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:src="@drawable/piclist_icon_next" />-->
 
-            <TextView
-                android:id="@+id/name_album"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:gravity="center|left"
-                android:singleLine="true"
-                android:text="Name album"
-                android:textStyle="bold"
-                android:textColor="@color/toptextcolor"
-                android:textSize="@dimen/_12sdp" />
-
-            <TextView
-                android:id="@+id/path_album"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:gravity="center|left"
-                android:text="sdcard/photo/0/new"
-                android:textColor="@color/toptextcolor"
-                android:textSize="@dimen/_10sdp" />
-        </LinearLayout>
-
-        <!--<ImageView-->
-            <!--android:id="@+id/iconNext"-->
-            <!--android:layout_width="20.0dip"-->
-            <!--android:layout_height="20.0dip"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:src="@drawable/piclist_icon_next" />-->
-
-        <!--<Button-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="1.0px"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:background="#ffe4e4e4" />-->
-    </LinearLayout>
-</RelativeLayout>
+    <!--<Button-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="1.0px"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:background="#ffe4e4e4" />-->

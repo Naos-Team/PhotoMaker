@@ -11,9 +11,9 @@
     <color name="opacitywhite">#80ffffff</color>
 
 
-    <color name="mainbgcolor">#F8F3F0</color>
-    <color name="toptextcolor">#FF7E5B</color>
-    <color name="bottom_bg_color">#FCE1D3</color>
+    <color name="mainbgcolor">#E0EDE8</color>
+    <color name="toptextcolor">#388A72</color>
+    <color name="bottom_bg_color">#6BC7A9</color>
 
 
     <color name="stickerline">#FF7E5B</color>

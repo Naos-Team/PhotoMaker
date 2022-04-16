@@ -14,7 +14,7 @@
     <color name="hint_foreground_material_light">#00000000</color>
     <color name="hint_foreground_material_dark">#00000000</color>
 
-    <color name="mainbgcolor">#F8F3F0</color>
-    <color name="toptextcolor">#FF7E5B</color>
-    <color name="bottom_bg_color">#FCE1D3</color>
+    <color name="mainbgcolor">#E0EDE8</color>
+    <color name="toptextcolor">#388A72</color>
+    <color name="bottom_bg_color">#6BC7A9</color>
 </resources>
