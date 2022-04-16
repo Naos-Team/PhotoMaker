@@ -43,26 +43,36 @@
                 android:layout_weight="0.5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:gravity="center">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/no"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/nod" />
+                    android:layout_height="70dp"
+                    android:background="@drawable/bg_no_button_for_dialog"
+                    android:text="No"
+                    android:textAllCaps="false"
+                    android:textColor="@color/toptextcolor"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_weight="0.5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:gravity="center">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/yes"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/yesd" />
+                    android:layout_height="70dp"
+                    android:background="@drawable/bg_yes_button_for_dialog"
+                    android:text="Yes"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorwhite"
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>

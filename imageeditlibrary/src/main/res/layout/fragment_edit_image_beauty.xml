@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/smooth"
-                android:textColor="@color/toptextcolor"
+                android:textColor="@color/materialcolorpicker__black"
                 android:textSize="@dimen/_11sdp" />
 
             <SeekBar
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/white_skin"
-                android:textColor="@color/toptextcolor"
+                android:textColor="@color/materialcolorpicker__black"
                 android:textSize="@dimen/_11sdp" />
 
             <SeekBar

@@ -37,13 +37,12 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
         private View clickableView;
         private ImageView ivThumb;
         private View mainView;
-        private TextView tvThemeNew;
+        //private TextView tvThemeNew;
 
         public Holder(View v) {
             super(v);
             this.cbSelect = (ImageView) v.findViewById(R.id.cbSelect);
             this.ivThumb = (ImageView) v.findViewById(R.id.ivThumb);
-            this.tvThemeNew = (TextView) v.findViewById(R.id.tvThemeNew);
             this.clickableView = v.findViewById(R.id.clickableView);
             this.mainView = v;
         }
@@ -58,11 +57,10 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
     public Holder onCreateViewHolder(ViewGroup paramViewGroup, int paramInt) {
         View view =this.inflater.inflate(R.layout.theme_items, paramViewGroup, false);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((activity.getResources()
-                .getDisplayMetrics().widthPixels* 190 / 1080 ),
-                (activity.getResources()
-                        .getDisplayMetrics().widthPixels * 190 / 1080));
-        params.setMargins(10,10,10,10);
-
+                .getDisplayMetrics().widthPixels* 225 / 1080 ), ViewGroup.LayoutParams.MATCH_PARENT);//,
+//                (activity.getResources()
+//                        .getDisplayMetrics().widthPixels * 190 / 1080));
+        params.setMargins(10,54,10,70);
         view.setLayoutParams(params);
         return new Holder(view);
     }
@@ -70,12 +68,12 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
     public void onBindViewHolder(Holder holder, @SuppressLint("RecyclerView") final int pos) {
         KessiTheme PVMWSThemes = (KessiTheme) this.list.get(pos);
         Glide.with(this.application).load(Integer.valueOf(PVMWSThemes.getThemeDrawable())).into(holder.ivThumb);
-
-        if (pos<7){
-            holder.tvThemeNew.setVisibility(View.VISIBLE);
-        }else {
-            holder.tvThemeNew.setVisibility(View.GONE);
-        }
+//
+//        if (pos<7){
+//            holder.tvThemeNew.setVisibility(View.VISIBLE);
+//        }else {
+//            holder.tvThemeNew.setVisibility(View.GONE);
+//        }
 
         holder.cbSelect.setVisibility(View.GONE);
         if (position == pos){

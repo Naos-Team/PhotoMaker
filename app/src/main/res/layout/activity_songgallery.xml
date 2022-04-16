@@ -68,7 +68,7 @@
                 android:id="@+id/waveform"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="10dp" />
+                android:paddingStart="20dp" />
 
             <vcarry.view.MarkerView
                 android:id="@+id/startmarker"
@@ -204,7 +204,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMusicList"
-            android:background="@color/bottom_bg_color"
+            android:background="#b5e3d4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.0" />

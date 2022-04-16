@@ -48,6 +48,7 @@ import com.kessi.photovideomaker.util.KSUtil;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -106,7 +107,7 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
                         boolean check = ImagePickerActivity.this.checkFile(file);
                         if (!ImagePickerActivity.this.Check(file.getParent(), ImagePickerActivity.this.pathList) && check) {
                             ImagePickerActivity.this.pathList.add(file.getParent());
-                            ImagePickerActivity.this.dataAlbum.add(new ImageModel(file.getParentFile().getName(), pathFile, file.getParent()));
+                            ImagePickerActivity.this.dataAlbum.add(new ImageModel(file.getParentFile().getName(), pathFile, file.getParent(), Arrays.stream(file.getParentFile().listFiles()).count()));
                         }
                     }
                 }
@@ -141,7 +142,7 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
                     if (fileTmp.exists()) {
                         boolean check = ImagePickerActivity.this.checkFile(fileTmp);
                         if (!fileTmp.isDirectory() && check) {
-                            ImagePickerActivity.this.dataListPhoto.add(new ImageModel(fileTmp.getName(), fileTmp.getAbsolutePath(), fileTmp.getAbsolutePath()));
+                            ImagePickerActivity.this.dataListPhoto.add(new ImageModel(fileTmp.getName(), fileTmp.getAbsolutePath(), fileTmp.getAbsolutePath(), 0));
                             publishProgress(new Void[0]);
                         }
                     }
@@ -710,6 +711,7 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
         dataListPhoto.clear();
         showListAlbum(((ImageModel) this.dataAlbum.get(position)).getPathFolder());
     }
+
 
 
 }

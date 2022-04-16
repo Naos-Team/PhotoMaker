@@ -1,5 +1,6 @@
 package com.kessi.photovideomaker.activities;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,7 +55,8 @@ public class VideoPlayerActivity extends AppCompatActivity implements
     ImageView btnPlayVideo;
     boolean isPlay = false;
 
-    ImageView btnShare, btnDelete;
+    LinearLayout btnShare, btnRate;
+    ImageView btnDelete;
     RelativeLayout main, top;
 
     @Override
@@ -87,6 +90,14 @@ public class VideoPlayerActivity extends AppCompatActivity implements
             KSUtil.Bounce(this, btnShare);
             videoView.pause();
             share();
+            startActivityes(null, 0);
+        });
+
+        btnRate = findViewById(R.id.btnRate);
+        btnRate.setOnClickListener(v -> {
+            KSUtil.Bounce(this, btnRate);
+            videoView.pause();
+            rateUs();
             startActivityes(null, 0);
         });
 
@@ -315,9 +326,26 @@ public class VideoPlayerActivity extends AppCompatActivity implements
         startActivity(Intent.createChooser(share, "Share via"));
     }
 
+     void rateUs() {
+        Uri uri = Uri.parse("market://details?id="
+                + getApplicationContext().getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY
+                | Intent.FLAG_ACTIVITY_NEW_DOCUMENT
+                | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id="
+                            + getApplicationContext().getPackageName())));
+        }
+    }
+
     PopupWindow popupWindow;
     LinearLayout alertLay;
-    ImageView yes, no;
+    Button yes, no;
 
     public void delete() {
 
@@ -352,8 +380,8 @@ public class VideoPlayerActivity extends AppCompatActivity implements
         alertLay.setLayoutParams(paramsDialog);
 
         LinearLayout.LayoutParams paramsCamera = new LinearLayout.LayoutParams(
-                getResources().getDisplayMetrics().widthPixels * 270 / 1080,
-                getResources().getDisplayMetrics().heightPixels * 106 / 1920);
+                getResources().getDisplayMetrics().widthPixels * 300 / 1080,
+                getResources().getDisplayMetrics().heightPixels * 130 / 1920);
         yes.setLayoutParams(paramsCamera);
         no.setLayoutParams(paramsCamera);
     }
@@ -378,4 +406,6 @@ public class VideoPlayerActivity extends AppCompatActivity implements
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
+
 }

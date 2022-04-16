@@ -7,13 +7,12 @@
 
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="@dimen/_23sdp"
-        android:layout_height="@dimen/_23sdp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="@dimen/_14sdp"
-        android:layout_marginTop="@dimen/_14sdp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="@dimen/_14sdp"
-        android:layout_marginBottom="@dimen/_14sdp"
-        android:src="@drawable/smusic_ic" />
+        android:src="@drawable/music_press" />
 
     <LinearLayout
         android:layout_width="match_parent"

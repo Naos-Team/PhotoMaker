@@ -21,8 +21,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/_10sdp"
             android:padding="@dimen/_5sdp"
-            android:src="@drawable/btnback"
-            app:tint="@color/toptextcolor" />
+            android:src="@drawable/btnback" />
 
 
         <TextView
@@ -30,26 +29,18 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Share"
-            android:textColor="@color/toptextcolor"
+            android:text="Your result"
+            android:textColor="#388A72"
             android:textSize="@dimen/_14sdp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/btnShare"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:padding="@dimen/_3sdp"
-            android:src="@drawable/vshare" />
 
         <ImageView
             android:id="@+id/btnDelete"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
             android:layout_marginRight="@dimen/_5sdp"
-            android:layout_toLeftOf="@+id/btnShare"
             android:padding="@dimen/_3sdp"
             android:src="@drawable/vdelete" />
     </RelativeLayout>
@@ -124,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00:00"
-                android:textColor="@color/toptextcolor"
+                android:textColor="#388A72"
                 android:textSize="@dimen/_10sdp" />
 
         </LinearLayout>
@@ -158,32 +149,157 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="00:15"
-                android:textColor="@color/toptextcolor"
+                android:textColor="#388A72"
                 android:textSize="@dimen/_10sdp" />
         </LinearLayout>
-
-
     </LinearLayout>
 
 
-    <FrameLayout
-        android:id="@+id/nativeContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/footer"
-        android:layout_marginTop="@dimen/_20sdp">
+        android:layout_alignParentBottom="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="25dp"
+                android:textColor="#286F5A"
+                android:text="Wow, awesome slideshow!"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="#286F5A"
+                android:text="Are you satisfied? Let us know"/>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:id="@+id/btnShare"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/star"
+
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/star"
+                    android:layout_marginLeft="30dp"
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/star"
+                    android:layout_marginLeft="30dp"
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/star"
+                    android:layout_marginLeft="30dp"
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/star"
+                    android:layout_marginLeft="30dp"
+                    />
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="#286F5A"
+                android:text="Share"/>
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:id="@+id/btnRate"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/facebook"
+
+                    />
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/twitter"
+                    android:layout_marginLeft="35dp"
+                    />
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/instagram"
+                    android:layout_marginLeft="35dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
 
         <FrameLayout
-            android:id="@+id/nativeContainerMAX"
+            android:visibility="visible"
+            android:id="@+id/nativeContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/_10sdp"
-            android:background="@color/toptextcolor"/>
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <FrameLayout
+                android:id="@+id/nativeContainerMAX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/toptextcolor"
+                android:paddingBottom="@dimen/_10sdp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 </RelativeLayout>
+
+

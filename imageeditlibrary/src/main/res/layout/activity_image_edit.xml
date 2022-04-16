@@ -11,16 +11,17 @@
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:background="#97d7c2">
 
 
-            <ImageView
-                android:id="@+id/back_btn"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="match_parent"
-                app:tint="@color/toptextcolor"
-                android:src="@drawable/mback" />
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="37dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:src="@drawable/mback"
+            app:tint="#205848" />
 
         <TextView
             android:id="@+id/title"
@@ -29,9 +30,9 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="Edit Image"
-            android:textStyle="bold"
-            android:textColor="@color/toptextcolor"
-            android:textSize="@dimen/_14sdp" />
+            android:textColor="#205848"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold" />
 
         <ViewFlipper
             android:id="@+id/banner_flipper"
@@ -48,9 +49,9 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/save"
-                android:textStyle="bold"
-                android:textColor="@color/toptextcolor"
-                android:textSize="@dimen/_12sdp" />
+                android:textColor="#205848"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/apply"
@@ -58,9 +59,9 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/apply"
-                android:textStyle="bold"
-                android:textColor="@color/toptextcolor"
-                android:textSize="@dimen/_12sdp" />
+                android:textColor="#205848"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
         </ViewFlipper>
     </FrameLayout>
 
@@ -69,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_banner_height"
         android:layout_alignParentBottom="true"
-        android:background="@color/bottom_bg_color"
+        android:background="#97d7c2"
         android:overScrollMode="never" />
 
     <FrameLayout

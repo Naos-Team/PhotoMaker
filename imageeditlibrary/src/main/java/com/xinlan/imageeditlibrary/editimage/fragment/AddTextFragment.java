@@ -95,8 +95,8 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
         mTextStickerView.setTextColor(mColorPicker.getColor());
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                getActivity().getResources().getDisplayMetrics().widthPixels * 100 / 1080,
-                getActivity().getResources().getDisplayMetrics().heightPixels * 100 / 1920);
+                getActivity().getResources().getDisplayMetrics().widthPixels * 80 / 1080,
+                getActivity().getResources().getDisplayMetrics().heightPixels * 80 / 1920);
         params.gravity = Gravity.CENTER_VERTICAL;
         params.rightMargin = 10;
         mTextColorSelector.setLayoutParams(params);
