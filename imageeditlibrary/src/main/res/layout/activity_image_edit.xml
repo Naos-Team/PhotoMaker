@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:layout_alignParentTop="true"
-        android:background="@color/toptextcolor">
+        android:background="#97d7c2">
 
 
         <ImageView
@@ -20,7 +20,8 @@
             android:layout_width="37dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:src="@drawable/mback" />
+            android:src="@drawable/mback"
+            app:tint="#205848" />
 
         <TextView
             android:id="@+id/title"
@@ -29,7 +30,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="Edit Image"
-            android:textColor="@color/white"
+            android:textColor="#205848"
             android:textSize="@dimen/_14sdp"
             android:textStyle="bold" />
 
@@ -48,7 +49,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/save"
-                android:textColor="@color/white"
+                android:textColor="#205848"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
@@ -58,7 +59,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/apply"
-                android:textColor="@color/toptextcolor"
+                android:textColor="#205848"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
         </ViewFlipper>
@@ -69,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_banner_height"
         android:layout_alignParentBottom="true"
-        android:background="@color/bottom_bg_color"
+        android:background="#97d7c2"
         android:overScrollMode="never" />
 
     <FrameLayout
