@@ -147,10 +147,10 @@ public class FrameAdapter extends RecyclerView.Adapter<FrameAdapter.Holder> {
     public Holder onCreateViewHolder(ViewGroup parent, int pos) {
         View item = this.inflater.inflate(R.layout.frame_items, parent, false);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((activity.getResources()
-                .getDisplayMetrics().widthPixels* 200 / 1080 ),
-                (activity.getResources()
-                        .getDisplayMetrics().widthPixels * 200 / 1080));
-        params.setMargins(10,10,10,10);
+                .getDisplayMetrics().widthPixels* 225 / 1080 ), ViewGroup.LayoutParams.MATCH_PARENT);//,
+//                (activity.getResources()
+//                        .getDisplayMetrics().widthPixels * 190 / 1080));
+        params.setMargins(10,54,10,70);
 
         item.setLayoutParams(params);
         return new Holder(item);

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6">
+        android:layout_weight="7">
 
         <ImageView
             android:id="@+id/iv_intro"
@@ -21,24 +23,42 @@
             android:background="@drawable/shape_intro_image" />
 
     </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_intro"
+        android:layout_width="250dp"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:layout_marginTop="-25dp"
+        android:layout_marginHorizontal="50dp"
+        android:text="ssdfdsfsdfsdfsdfsdfsdsdfsdf"
+        android:autoSizeStepGranularity="2dp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="30sp"
+        android:autoSizeMaxTextSize="200dp"
+        android:textColor="#222222"
+        android:textStyle="bold"/>
+
     <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/btn_start"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="-40dp"
-        android:orientation="vertical">
+        android:layout_weight="1"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/shape_open_gallery"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center">
+
         <TextView
-            android:id="@+id/tv_intro"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            android:text="sdfjs dkljflsk djflkds jflkfsdl kfjlksd"
-            android:textSize="45dp"
-            android:autoSizeStepGranularity="2dp"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMinTextSize="20sp"
-            android:autoSizeMaxTextSize="100dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open your gallery"
+            android:textColor="#ffffff"
+            android:textSize="17dp" />
     </LinearLayout>
 </LinearLayout>
