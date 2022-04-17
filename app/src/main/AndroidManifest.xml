@@ -7,12 +7,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
+        android:name=".KessiApplication"
         android:allowBackup="true"
         android:extractNativeLibs="true"
         android:hardwareAccelerated="true"
-        android:name=".KessiApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -21,7 +20,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.PhotoVideoMaker">
-
+        <activity
+            android:name=".activities.intro.IntroActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true"
@@ -32,40 +33,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"
             android:screenOrientation="nosensor" />
-
-        <activity android:name=".activities.PrivacyActivity"
-            android:screenOrientation="nosensor"/>
-
-        <activity android:name=".activities.myalbum.MyAlbumActivity"
-            android:screenOrientation="nosensor"/>
-
-        <activity android:name=".activities.videoeditor.VideoThemeActivity"
-            android:screenOrientation="nosensor"/>
-
-        <activity android:name=".activities.VideoPlayerActivity"
-            android:screenOrientation="nosensor"/>
-
-        <activity android:name=".activities.kessiimagepicker.activity.ImagePickerActivity"
-            android:screenOrientation="nosensor"/>
-
-        <activity android:name=".activities.songpicker.SongGalleryActivity"
-            android:screenOrientation="nosensor"/>
-
-        <activity android:name=".activities.swap.SwapperActivity"
-            android:screenOrientation="nosensor"/>
-
-        <activity android:name=".activities.process.VideoMakerActivity"
-            android:screenOrientation="nosensor"/>
-
+        <activity
+            android:name=".activities.PrivacyActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.myalbum.MyAlbumActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.videoeditor.VideoThemeActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.VideoPlayerActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.kessiimagepicker.activity.ImagePickerActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.songpicker.SongGalleryActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.swap.SwapperActivity"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".activities.process.VideoMakerActivity"
+            android:screenOrientation="nosensor" />
         <activity
             android:name="com.xinlan.imageeditlibrary.editimage.EditImageActivity"
             android:screenOrientation="nosensor"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
 
         <service android:name="vcarry.service.ServiceAnim" />
 
@@ -82,11 +81,9 @@
         <meta-data
             android:name="applovin.sdk.key"
             android:value="ttcHNDEIHmybFKMPCCg6GE0-SHHtx5Il000TufyXlDWyi71Mc4-zW-CBl96Uxs99RV8X0GbwqTWubcNU6UEfi6" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id" />
-
     </application>
 
 </manifest>
