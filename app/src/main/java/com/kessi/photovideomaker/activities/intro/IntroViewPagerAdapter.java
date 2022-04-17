@@ -1,16 +1,24 @@
 package com.kessi.photovideomaker.activities.intro;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.kessi.photovideomaker.R;
+import com.kessi.photovideomaker.activities.MainActivity;
+import com.kessi.photovideomaker.activities.kessiimagepicker.activity.ImagePickerActivity;
+import com.kessi.photovideomaker.util.Animatee;
+import com.kessi.photovideomaker.util.KSUtil;
 
 import java.util.ArrayList;
 
@@ -18,10 +26,12 @@ public class IntroViewPagerAdapter extends PagerAdapter {
 
     Context mContext;
     ArrayList<IntroItem> mList;
+    StartButtonListener listener;
 
-    public IntroViewPagerAdapter(Context mContext, ArrayList<IntroItem> mList) {
+    public IntroViewPagerAdapter(Context mContext, ArrayList<IntroItem> mList, StartButtonListener listener) {
         this.mContext = mContext;
         this.mList = mList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -32,15 +42,25 @@ public class IntroViewPagerAdapter extends PagerAdapter {
 
         ImageView iv_intro = layoutScreen.findViewById(R.id.iv_intro);
         TextView tv_intro = layoutScreen.findViewById(R.id.tv_intro);
+        LinearLayout btn_start = layoutScreen.findViewById(R.id.btn_start);
 
         tv_intro.setText(mList.get(position).getTitle());
         iv_intro.setImageResource(mList.get(position).getImage());
+
+        if(position == 2){
+            btn_start.setVisibility(View.VISIBLE);
+            btn_start.setOnClickListener((v) -> {
+                listener.onClick();
+            });
+        }
 
         container.addView(layoutScreen);
 
         return layoutScreen;
 
     }
+
+
 
     @Override
     public int getCount() {

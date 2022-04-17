@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="20dp">
+                    android:layout_marginVertical="10dp">
 
                     <ImageView
                         android:id="@+id/iv_hamburger"
@@ -36,7 +36,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:src="@drawable/ic_hamburger"
-                        android:tint="#EF4813" />
+                        android:tint="@color/toptextcolor" />
 
                 </RelativeLayout>
 
@@ -70,7 +70,7 @@
                         android:layout_margin="10dp"
                         android:background="@drawable/shape_open_gallery"
                         android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
                         android:gravity="center">
 
                         <TextView
@@ -130,102 +130,8 @@
                         android:layout_marginTop="10dp" />
                 </LinearLayout>
 
-                <!--            <LinearLayout-->
-                <!--                android:id="@+id/btnLay"-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="0dp"-->
-                <!--                android:layout_weight="0.42"-->
-                <!--                android:orientation="vertical"-->
-                <!--                android:weightSum="0.42">-->
-
-                <!--                <LinearLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="0dp"-->
-                <!--                    android:layout_gravity="center"-->
-                <!--                    android:layout_weight="0.24"-->
-                <!--                    android:orientation="horizontal"-->
-                <!--                    android:weightSum="1">-->
-
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="0dp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_weight="0.03" />-->
-
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="0dp"-->
-                <!--                        android:layout_height="match_parent"-->
-                <!--                        android:layout_weight="0.47"-->
-                <!--                        android:gravity="center">-->
-
-                <!--                        <ImageView-->
-                <!--                            android:id="@+id/btnStart"-->
-                <!--                            android:layout_width="@dimen/_130sdp"-->
-                <!--                            android:layout_height="@dimen/_85sdp"-->
-                <!--                            android:src="@drawable/slide_press" />-->
-
-                <!--                    </LinearLayout>-->
-
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="0dp"-->
-                <!--                        android:layout_height="match_parent"-->
-                <!--                        android:layout_weight="0.47"-->
-                <!--                        android:gravity="center">-->
-
-                <!--                        <ImageView-->
-                <!--                            android:id="@+id/btnAllVideo"-->
-                <!--                            android:layout_width="@dimen/_130sdp"-->
-                <!--                            android:layout_height="@dimen/_85sdp"-->
-                <!--                            android:src="@drawable/creation_press" />-->
-
-                <!--                    </LinearLayout>-->
-
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="0dp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_weight="0.03" />-->
-                <!--                </LinearLayout>-->
-
-                <!--                <LinearLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="0dp"-->
-                <!--                    android:layout_weight="0.18"-->
-                <!--                    android:gravity="center">-->
-
-                <!--                    <ImageView-->
-                <!--                        android:id="@+id/rateIV"-->
-                <!--                        android:layout_width="@dimen/_43sdp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:src="@drawable/rate_us" />-->
-
-                <!--                    <ImageView-->
-                <!--                        android:id="@+id/shareIV"-->
-                <!--                        android:layout_width="@dimen/_43sdp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginLeft="@dimen/_15sdp"-->
-                <!--                        android:src="@drawable/share_app" />-->
-
-                <!--                    <ImageView-->
-                <!--                        android:id="@+id/privacyIV"-->
-                <!--                        android:layout_width="@dimen/_43sdp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginLeft="@dimen/_15sdp"-->
-                <!--                        android:src="@drawable/privacy" />-->
-
-                <!--                    <ImageView-->
-                <!--                        android:id="@+id/moreIV"-->
-                <!--                        android:layout_width="@dimen/_43sdp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginLeft="@dimen/_15sdp"-->
-                <!--                        android:src="@drawable/more_app" />-->
-                <!--                </LinearLayout>-->
-                <!--            </LinearLayout>-->
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-
-<!--        <FrameLayout-->
-<!--            android:id="@+id/nativeContainer"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content" />-->
 
 
     </RelativeLayout>
@@ -236,9 +142,9 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:itemTextColor="@color/nav_text"
+        app:itemTextColor="@color/toptextcolor"
         app:itemBackground="@drawable/nav_item_padding"
-        app:itemIconTint="@color/nav_text"
+        app:itemIconTint="@color/toptextcolor"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         app:itemShapeAppearance="@style/CardView"
