@@ -79,7 +79,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     public static KessiApplication application;
     ArrayList<ImageData> arrayList;
     private static final String PREFS_NAME = "preferenceName";
- //   LinearLayout cvframeview;
+    LinearLayout cvframeview;
     LinearLayout cvthemview;
     Float[] duration = new Float[]{1.0f, 1.5f,
             2.0f, 2.5f, 3.0f, 3.5f,
@@ -96,7 +96,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     private TextView txt_Seekbar_picktime;
     private SeekBar seekBar_picktime;
 
-    ImageView idanimation, ibAddMusic, ibAddDuration; //idviewFrame;
+    ImageView idanimation, ibAddMusic, ibAddDuration, idviewFrame;
 
 
     LayoutInflater inflater;
@@ -110,7 +110,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     LockRunnable lockRunnable = new LockRunnable();
     MediaPlayer mPlayer;
 
-    RecyclerView rvThemes;
+    RecyclerView rvThemes, rvFrame;
     public static float seconds = 3.0f;
     SeekBar seekBar;
     ThemeAdapter themeAdapter;
@@ -166,7 +166,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
                 getResources().getDisplayMetrics().widthPixels * 120 / 1080,
                 getResources().getDisplayMetrics().heightPixels * 120 / 1920);
         idanimation.setLayoutParams(paramsbtn);
-        //idviewFrame.setLayoutParams(paramsbtn);
+        idviewFrame.setLayoutParams(paramsbtn);
         ibAddMusic.setLayoutParams(paramsbtn);
         ibAddDuration.setLayoutParams(paramsbtn);
 
@@ -263,7 +263,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         rvThemes = findViewById(R.id.rvThemes);
         laySeconds = findViewById(R.id.laySeconds);
 
-        //rvFrame = findViewById(R.id.rvFrame);
+        rvFrame = findViewById(R.id.rvFrame);
 
         ibAddDuration = findViewById(R.id.ibAddDuration);
         ibAddMusic = findViewById(R.id.ibAddMusic);
@@ -510,14 +510,14 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         rvThemes.setItemAnimator(new DefaultItemAnimator());
         rvThemes.setAdapter(themeAdapter);
         frameAdapter = new FrameAdapter(VideoThemeActivity.this);
-//        rvFrame.setLayoutManager(gridLayoutManagerFrame);
-//        rvFrame.setItemAnimator(new DefaultItemAnimator());
-//        rvFrame.setAdapter(frameAdapter);
+        rvFrame.setLayoutManager(gridLayoutManagerFrame);
+        rvFrame.setItemAnimator(new DefaultItemAnimator());
+        rvFrame.setAdapter(frameAdapter);
 
         cvthemview = findViewById(R.id.cvthemview);
-        //cvframeview = findViewById(R.id.cvframeview);
+        cvframeview = findViewById(R.id.cvframeview);
         idanimation = findViewById(R.id.idanimation);
-        //idviewFrame = findViewById(R.id.idviewFrame);
+        idviewFrame = findViewById(R.id.idviewFrame);
 
 
         idanimation.setOnClickListener(v -> {
@@ -525,22 +525,22 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
             unpress();
             idanimation.setImageResource(R.drawable.theme_unpresed);
             cvthemview.setVisibility(View.VISIBLE);
-//            cvframeview.setVisibility(View.GONE);
+            cvframeview.setVisibility(View.GONE);
             laySeconds.setVisibility(View.GONE);
 
             startActivityes(null,0);
         });
 
-//        idviewFrame.setOnClickListener(v -> {
-//            KSUtil.Bounce(VideoThemeActivity.this, idviewFrame);
-//            unpress();
-//            idviewFrame.setImageResource(R.drawable.frame_unpresed);
-//            cvframeview.setVisibility(View.VISIBLE);
-//            cvthemview.setVisibility(View.GONE);
-//            laySeconds.setVisibility(View.GONE);
-//
-//            startActivityes(null,0);
-//        });
+        idviewFrame.setOnClickListener(v -> {
+            KSUtil.Bounce(VideoThemeActivity.this, idviewFrame);
+            unpress();
+            idviewFrame.setImageResource(R.drawable.frame_unpresed);
+            cvframeview.setVisibility(View.VISIBLE);
+            cvthemview.setVisibility(View.GONE);
+            laySeconds.setVisibility(View.GONE);
+
+            startActivityes(null,0);
+        });
     }
 
 
@@ -605,7 +605,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
                 KSUtil.Bounce(this, ibAddDuration);
                 unpress();
                 ibAddDuration.setImageResource(R.drawable.timer_unpresed);
-//                cvframeview.setVisibility(View.GONE);
+                cvframeview.setVisibility(View.GONE);
                 cvthemview.setVisibility(View.GONE);
 //                if (laySeconds.getVisibility() == View.GONE) {
 //                    laySeconds.setVisibility(View.VISIBLE);
@@ -639,7 +639,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
     void unpress(){
         ibAddDuration.setImageResource(R.drawable.timer_presed);
-        //idviewFrame.setImageResource(R.drawable.frame_presed);
+        idviewFrame.setImageResource(R.drawable.frame_presed);
         idanimation.setImageResource(R.drawable.theme_presed);
     }
 

@@ -194,9 +194,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void videoLoader() {
         getFromStorage();
-
         rv = (RecyclerView) findViewById(R.id.rv);
-
         videoAdapter = new MyVideoAdapter(videoPath, this, (v, position) -> {
 
             Intent intent = new Intent(this, VideoPlayerActivity.class);
@@ -216,14 +214,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         File file = new File(folder);
         videoPath = new ArrayList<String>();
         if (file.isDirectory()) {
-            File[] listFile = file.listFiles();
-            Arrays.sort(listFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
-            for (int i = 0; i < listFile.length; i++) {
+            if (file.listFiles()!=null){
+                File[] listFile = file.listFiles();
+                Arrays.sort(listFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+                for (int i = 0; i < listFile.length; i++) {
 
-                if (listFile[i].getAbsolutePath().contains(".mp4") && videoPath.size() < 4) {
-                    videoPath.add(listFile[i].getAbsolutePath());
+                    if (listFile[i].getAbsolutePath().contains(".mp4")) {
+                        videoPath.add(listFile[i].getAbsolutePath());
+                    }
+
                 }
-
             }
         }
     }
