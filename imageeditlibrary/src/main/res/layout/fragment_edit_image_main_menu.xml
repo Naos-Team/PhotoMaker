@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/btn_paint"
             android:layout_width="40dp"
-            android:padding="16dp"
+            android:padding="16.5dp"
             android:layout_height="40dp"
             android:src="@drawable/draw"/>
 
@@ -22,7 +22,7 @@
             android:id="@+id/btn_stickers"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="16.5dp"
+            android:padding="17dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:src="@drawable/lsticker"
@@ -32,7 +32,7 @@
             android:id="@+id/btn_filter"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="14.5dp"
+            android:padding="15dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:src="@drawable/filter"/>
@@ -40,7 +40,7 @@
         <ImageView
             android:id="@+id/btn_crop"
             android:layout_width="40dp"
-            android:padding="17dp"
+            android:padding="17.5dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:gravity="center"
@@ -52,14 +52,14 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:padding="17dp"
+            android:padding="17.5dp"
             android:src="@drawable/rotate" />
 
         <ImageView
             android:id="@+id/btn_text"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="16dp"
+            android:padding="16.5dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:src="@drawable/text"/>
@@ -68,7 +68,7 @@
             android:id="@+id/btn_beauty"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="17.5dp"
+            android:padding="18dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:src="@drawable/beauty"/>
