@@ -8,7 +8,57 @@ import java.util.ArrayList;
 import vcarry.mask.KessiMaskBitmap3D.EFFECT;
 
 public enum KessiTheme {
+    Ramdom1("Ramdom1"){
+        public ArrayList<EFFECT> getTheme() {
+            return KessiMaskBitmap3D.random(1);
+        }
 
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return null;
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.facebook;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
+    Ramdom2("Ramdom2"){
+        public ArrayList<EFFECT> getTheme() {
+            return KessiMaskBitmap3D.random(2);
+        }
+
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return null;
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.instagram;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
+    Ramdom3("Ramdom3"){
+        public ArrayList<EFFECT> getTheme() {
+            return KessiMaskBitmap3D.random(3);
+        }
+
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return null;
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.twitter;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
     Shine("Shine") {
         public ArrayList<EFFECT> getTheme() {
             ArrayList<EFFECT> mEffects = new ArrayList();

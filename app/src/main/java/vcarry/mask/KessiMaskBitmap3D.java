@@ -2,34 +2,24 @@ package vcarry.mask;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
-import android.graphics.BitmapShader;
 import android.graphics.Camera;
 import android.graphics.Canvas;
-import android.graphics.ComposeShader;
-import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 
-import androidx.core.content.ContextCompat;
 import androidx.core.internal.view.SupportMenu;
-import androidx.core.view.ViewCompat;
-import androidx.recyclerview.widget.ItemTouchHelper;
 
-
-import com.kessi.photovideomaker.KessiApplication;
-import com.kessi.photovideomaker.R;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 public class KessiMaskBitmap3D {
@@ -1150,7 +1140,25 @@ public class KessiMaskBitmap3D {
     private static float scaleY = 1.0f;
 
 
-
-
+    public static ArrayList<EFFECT> random(int position){
+        ArrayList<EFFECT> list =  new ArrayList(Arrays.asList(EFFECT.values()));
+        int start = 0, end = list.size();
+        switch (position){
+            case 1:
+                end = ((int)list.size())/2;
+                break;
+            case 2:
+                start = ((int)list.size())/2 + 1;
+                break;
+            default:
+                break;
+        }
+        ArrayList<EFFECT> temp = new ArrayList<>();
+        for(int i = start; i < end; ++i){
+            temp.add(list.get(i));
+        }
+        Collections.shuffle(temp);
+        return temp;
+    }
 
 }
