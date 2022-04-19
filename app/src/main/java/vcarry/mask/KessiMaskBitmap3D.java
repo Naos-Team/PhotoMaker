@@ -46,6 +46,17 @@ public class KessiMaskBitmap3D {
     private static float rotateDegree;
 
     public enum EFFECT {
+
+        NONE("NONE") {
+            public Bitmap getMask(int w, int h, int factor) {
+                Paint paint = new Paint();
+                paint.setColor(-16777216);
+                paint.setAntiAlias(true);
+                paint.setStyle(Style.FILL_AND_STROKE);
+                Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+                return mask;
+            }
+        },
         CIRCLE_LEFT_TOP("CIRCLE LEFT TOP") {
             public Bitmap getMask(int w, int h, int factor) {
                 Paint paint = new Paint();
@@ -1143,17 +1154,26 @@ public class KessiMaskBitmap3D {
     public static ArrayList<EFFECT> random(int position){
         ArrayList<EFFECT> list =  new ArrayList(Arrays.asList(EFFECT.values()));
         int start = 0, end = list.size();
+        ArrayList<EFFECT> temp = new ArrayList<>();
         switch (position){
             case 1:
                 end = ((int)list.size())/2;
+//                for(int i = start; i < end; ++i){
+//                    if(list.get(i).name.contains("DOOR"))
+//                        temp.add(list.get(i));
+//                }
                 break;
             case 2:
                 start = ((int)list.size())/2 + 1;
+//                for(int i = start; i < end; ++i){
+//                    if(list.get(i).name.contains("OUT"))
+//                        temp.add(list.get(i));
+//                }
                 break;
             default:
+//                temp.addAll(list);
                 break;
         }
-        ArrayList<EFFECT> temp = new ArrayList<>();
         for(int i = start; i < end; ++i){
             temp.add(list.get(i));
         }
