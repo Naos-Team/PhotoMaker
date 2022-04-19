@@ -15,11 +15,11 @@ public enum KessiTheme {
         }
 
         public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return null;
+            return new ArrayList();
         }
 
         public int getThemeDrawable() {
-            return R.drawable.facebook;
+            return R.drawable.random_side;
         }
 
         public int getThemeMusic() {
@@ -32,11 +32,11 @@ public enum KessiTheme {
         }
 
         public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return null;
+            return new ArrayList();
         }
 
         public int getThemeDrawable() {
-            return R.drawable.instagram;
+            return R.drawable.random_zoom;
         }
 
         public int getThemeMusic() {
@@ -49,11 +49,11 @@ public enum KessiTheme {
         }
 
         public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return null;
+            return new ArrayList();
         }
 
         public int getThemeDrawable() {
-            return R.drawable.twitter;
+            return R.drawable.random_all;
         }
 
         public int getThemeMusic() {
@@ -68,11 +68,11 @@ public enum KessiTheme {
         }
 
         public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return null;
+            return new ArrayList();
         }
 
         public int getThemeDrawable() {
-            return R.drawable.none;
+            return R.drawable.t_no;
         }
 
         public int getThemeMusic() {
@@ -87,11 +87,11 @@ public enum KessiTheme {
         }
 
         public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return null;
+            return new ArrayList();
         }
 
         public int getThemeDrawable() {
-            return R.drawable.love;
+            return R.drawable.t_love;
         }
 
         public int getThemeMusic() {
