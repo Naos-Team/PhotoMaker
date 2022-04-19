@@ -59,27 +59,27 @@ public class SplashActivity extends AppCompatActivity {
 
         int count = 0;
 
-//        if (file.isDirectory()) {
-//            File[] listFile = file.listFiles();
-//            Arrays.sort(listFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
-//            for (int i = 0; i < listFile.length; i++) {
-//
-//                if (listFile[i].getAbsolutePath().contains(".mp4")) {
-//                    count++;
-//                }
-//
-//            }
-//
-//            if(count > 0){
-//                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-//            }else{
-//                startActivity(new Intent(SplashActivity.this, IntroActivity.class));
-//            }
-//
-//
-//        }else{
-//            startActivity(new Intent(SplashActivity.this, IntroActivity.class));
-//        }
-        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        if (file.isDirectory()) {
+            File[] listFile = file.listFiles();
+            Arrays.sort(listFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+            for (int i = 0; i < listFile.length; i++) {
+
+                if (listFile[i].getAbsolutePath().contains(".mp4")) {
+                    count++;
+                }
+
+            }
+
+            if(count > 0){
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            }else{
+                startActivity(new Intent(SplashActivity.this, IntroActivity.class));
+            }
+
+
+        }else{
+            startActivity(new Intent(SplashActivity.this, IntroActivity.class));
+        }
+//        startActivity(new Intent(SplashActivity.this, MainActivity.class));
     }
 }
