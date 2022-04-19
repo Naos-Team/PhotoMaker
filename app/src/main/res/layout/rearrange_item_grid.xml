@@ -9,9 +9,9 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="@dimen/_135sdp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/_140sdp"
-        app:cardCornerRadius="@dimen/_7sdp">
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,7 +30,10 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:orientation="horizontal"
-                android:padding="@dimen/_8sdp">
+                android:paddingLeft="@dimen/_8sdp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginRight="8dp">
 
 
                 <ImageView
