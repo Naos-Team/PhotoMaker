@@ -30,21 +30,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        icon = findViewById(R.id.icon);
-        bgIV = findViewById(R.id.bgIV);
-        Glide.with(this)
-                .load(R.drawable.sp_logo)
-                .into(icon);
-
-        Glide.with(this)
-                .load(R.drawable.splash_bg)
-                .into(bgIV);
-
-        Render render = new Render(SplashActivity.this);
-        render.setAnimation(KSUtil.Bubble(icon));
-        render.start();
-
-
         new Handler().postDelayed(() -> {
             openMainActivity();
 //            Animatee.animateSplit(SplashActivity.this);
