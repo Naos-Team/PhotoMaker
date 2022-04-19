@@ -35,8 +35,8 @@
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_hamburger"
-                        android:tint="@color/toptextcolor" />
+                        android:src="@drawable/ic_home"
+                        app:tint="@color/toptextcolor" />
 
                 </RelativeLayout>
 

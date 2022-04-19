@@ -48,23 +48,23 @@ public class IntroActivity extends AppCompatActivity {
         rl_bottom = findViewById(R.id.rl_bottom);
         btn_skip = findViewById(R.id.btn_skip);
 
-        ArrayList<IntroItem> arrayList = new ArrayList<>();
-        arrayList.add(new IntroItem("Make amazing slides anytime", R.drawable.intro_1));
-        arrayList.add(new IntroItem("Many awesome effects and musics", R.drawable.intro_2));
-        arrayList.add(new IntroItem("All is set Let's start", R.drawable.intro_3));
+//        ArrayList<IntroItem> arrayList = new ArrayList<>();
+//        arrayList.add(new IntroItem("Make amazing slides anytime", R.drawable.intro_1));
+//        arrayList.add(new IntroItem("Many awesome effects and musics", R.drawable.intro_2));
+//        arrayList.add(new IntroItem("All is set Let's start", R.drawable.intro_3));
 
-        adapter = new IntroViewPagerAdapter(this, arrayList, () ->{
-
-            if (!checkPermissions(IntroActivity.this, permissionsList)) {
-                ActivityCompat.requestPermissions(IntroActivity.this, permissionsList, 21);
-            } else {
-                KSUtil.fromAlbum = false;
-                Intent mIntent = new Intent(IntroActivity.this, ImagePickerActivity.class);
-                mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
-                mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
-                startActivity(mIntent);
-            }
-        });
+//        adapter = new IntroViewPagerAdapter(this, arrayList, () ->{
+//
+//            if (!checkPermissions(IntroActivity.this, permissionsList)) {
+//                ActivityCompat.requestPermissions(IntroActivity.this, permissionsList, 21);
+//            } else {
+//                KSUtil.fromAlbum = false;
+//                Intent mIntent = new Intent(IntroActivity.this, ImagePickerActivity.class);
+//                mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
+//                mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
+//                startActivity(mIntent);
+//            }
+//        });
 
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
