@@ -151,7 +151,7 @@ public class FrameAdapter extends RecyclerView.Adapter<FrameAdapter.Holder> {
                 //ViewGroup.LayoutParams.MATCH_PARENT);//,
                 (activity.getResources()
                         .getDisplayMetrics().widthPixels * 225 / 1080));
-        params.setMargins(10,54,10,70);
+        params.setMargins(20,54,20,70);
 
         item.setLayoutParams(params);
         return new Holder(item);
