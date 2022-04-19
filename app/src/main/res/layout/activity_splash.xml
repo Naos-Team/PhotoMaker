@@ -30,7 +30,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Naos Slide"
+                android:text="Naos SLide"
                 android:gravity="center"
                 android:autoSizeMaxTextSize="100dp"
                 android:autoSizeMinTextSize="20dp"

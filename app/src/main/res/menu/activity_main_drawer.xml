@@ -3,26 +3,26 @@
     <group>
         <item
             android:id="@+id/nav_privacy"
-
+            android:icon="@drawable/ic_privacy"
             android:title="Privacy" />
-<!--        android:icon="@drawable/ic_privacy"-->
+
 
         <item
             android:id="@+id/nav_share"
-
+            android:icon="@drawable/ic_share"
             android:title="Share" />
 
 <!--        android:icon="@drawable/ic_share"-->
         <item
             android:id="@+id/nav_rate"
-
+            android:icon="@drawable/ic_rate"
             android:title="Rate" />
 
 <!--        android:icon="@drawable/ic_rate"-->
 
         <item
             android:id="@+id/nav_more_app"
-
+            android:icon="@drawable/ic_more_app"
             android:title="More App" />
 <!--        android:icon="@drawable/ic_other"-->
     </group>
