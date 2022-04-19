@@ -140,7 +140,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_creater);
         application = KessiApplication.getInstance();
-        application.selectedTheme = KessiTheme.Shine;
+        application.selectedTheme = KessiTheme.Ramdom1;
         Utils.framePostion = -1;
         application.videoImages.clear();
         bindView();

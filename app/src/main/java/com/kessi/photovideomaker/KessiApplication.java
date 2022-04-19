@@ -42,7 +42,7 @@ public class KessiApplication extends Application{
     private String selectedFolderId = "";
     public final ArrayList<ImageData> selectedImages = new ArrayList();
     public final ArrayList<ImageData> selectedImagesstart = new ArrayList();
-    public KessiTheme selectedTheme = KessiTheme.Shine;
+    public KessiTheme selectedTheme = KessiTheme.Ramdom1;
     public ArrayList<String> videoImages = new ArrayList();
     public static String[] startframelist, endframelist;
 
@@ -98,7 +98,7 @@ public class KessiApplication extends Application{
 
 
     public String getCurrentTheme() {
-        return getSharedPreferences("theme", 0).getString("current_theme", KessiTheme.Shine.toString());
+        return getSharedPreferences("theme", 0).getString("current_theme", KessiTheme.Ramdom1.toString());
     }
 
     @SuppressLint("Range")

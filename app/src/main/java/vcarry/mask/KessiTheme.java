@@ -8,25 +8,7 @@ import java.util.ArrayList;
 import vcarry.mask.KessiMaskBitmap3D.EFFECT;
 
 public enum KessiTheme {
-    None("None"){
-        public ArrayList<EFFECT> getTheme() {
-            ArrayList<EFFECT> mEffects = new ArrayList();
-            mEffects.add(EFFECT.NONE);
-            return mEffects;
-        }
 
-        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return null;
-        }
-
-        public int getThemeDrawable() {
-            return R.drawable.none;
-        }
-
-        public int getThemeMusic() {
-            return R.raw.song_2;
-        }
-    },
     Ramdom1("Ramdom1"){
         public ArrayList<EFFECT> getTheme() {
             return KessiMaskBitmap3D.random(1);
@@ -78,16 +60,10 @@ public enum KessiTheme {
             return R.raw.song_2;
         }
     },
-    Shine("Shine") {
+    None("None"){
         public ArrayList<EFFECT> getTheme() {
             ArrayList<EFFECT> mEffects = new ArrayList();
-            mEffects.add(EFFECT.CROSS_IN);
-            mEffects.add(EFFECT.CROSS_OUT);
-            mEffects.add(EFFECT.LOVE_DOOR);
-            mEffects.add(EFFECT.WIND_MILL);
-            mEffects.add(EFFECT.LEAF);
-            mEffects.add(EFFECT.ECLIPSE_IN);
-            mEffects.add(EFFECT.HORIZONTAL_RECT);
+            mEffects.add(EFFECT.NONE);
             return mEffects;
         }
 
@@ -96,13 +72,57 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.circlebomb;
+            return R.drawable.none;
         }
 
         public int getThemeMusic() {
             return R.raw.song_2;
         }
     },
+    LOVE("LOVE"){
+        public ArrayList<EFFECT> getTheme() {
+            ArrayList<EFFECT> mEffects = new ArrayList();
+            mEffects.add(EFFECT.LOVE_DOOR);
+            return mEffects;
+        }
+
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return null;
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.love;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
+//    Shine("Shine") {
+//        public ArrayList<EFFECT> getTheme() {
+//            ArrayList<EFFECT> mEffects = new ArrayList();
+//            mEffects.add(EFFECT.CROSS_IN);
+//            mEffects.add(EFFECT.CROSS_OUT);
+//            mEffects.add(EFFECT.LOVE_DOOR);
+//            mEffects.add(EFFECT.WIND_MILL);
+//            mEffects.add(EFFECT.LEAF);
+//            mEffects.add(EFFECT.ECLIPSE_IN);
+//            mEffects.add(EFFECT.HORIZONTAL_RECT);
+//            return mEffects;
+//        }
+//
+//        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+//            return null;
+//        }
+//
+//        public int getThemeDrawable() {
+//            return R.drawable.circlebomb;
+//        }
+//
+//        public int getThemeMusic() {
+//            return R.raw.song_2;
+//        }
+//    },
     MixTOURNADO("MixTOURNADO") {
         public ArrayList<EFFECT> getTheme() {
             ArrayList<EFFECT> list = new ArrayList();

@@ -1157,26 +1157,26 @@ public class KessiMaskBitmap3D {
         ArrayList<EFFECT> temp = new ArrayList<>();
         switch (position){
             case 1:
-                end = ((int)list.size())/2;
-//                for(int i = start; i < end; ++i){
-//                    if(list.get(i).name.contains("DOOR"))
-//                        temp.add(list.get(i));
-//                }
+//                end = ((int)list.size())/2;
+                for(int i = start; i < end; ++i){
+                    if(list.get(i).name.contains("LEFT") || list.get(i).name.contains("RIGHT"))
+                        temp.add(list.get(i));
+                }
                 break;
             case 2:
-                start = ((int)list.size())/2 + 1;
-//                for(int i = start; i < end; ++i){
-//                    if(list.get(i).name.contains("OUT"))
-//                        temp.add(list.get(i));
-//                }
+//                start = ((int)list.size())/2 + 1;
+                for(int i = start; i < end; ++i){
+                    if(list.get(i).name.contains("OUT") || list.get(i).name.contains("IN") || list.get(i).name.contains("in") )
+                        temp.add(list.get(i));
+                }
                 break;
             default:
-//                temp.addAll(list);
+                temp.addAll(list);
                 break;
         }
-        for(int i = start; i < end; ++i){
-            temp.add(list.get(i));
-        }
+//        for(int i = start; i < end; ++i){
+//            temp.add(list.get(i));
+//        }
         Collections.shuffle(temp);
         return temp;
     }
