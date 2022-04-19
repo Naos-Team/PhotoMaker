@@ -476,7 +476,7 @@
                         android:layout_height="30dp"
                         android:layout_weight="1.0"
                         android:padding="11dp"
-                        android:src="@drawable/f_2" />
+                        android:src="@drawable/frame_presed" />
 
 
                 </RelativeLayout>
