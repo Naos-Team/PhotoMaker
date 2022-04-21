@@ -1,12 +1,16 @@
 package com.kessi.photovideomaker.activities;
 
+import static android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION;
+
 import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -19,7 +23,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -68,26 +75,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Glide.with(this)
-//                .load(R.drawable.f_bg)
-//                .into(mainBg);
-//        icon = findViewById(R.id.icon);
-//        Glide.with(this)
-//                .load(R.drawable.sp_logo)
-//                .into(icon);
-
-            // Set Animation
-
         videoPath = new ArrayList<>();
-
-//        Render render = new Render(MainActivity.this);
-//        render.setAnimation(KSUtil.Bubble(icon));
-//        render.start();
 
         init();
 
         videoLoader();
 
+    }
+
+    private void checkAndroid11AccessPermission(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                openAccessFileDialog();
+            }
+        }
+    }
+
+    private void openAccessFileDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Message");
+        builder.setMessage("Please give permission to this app to access all file!");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                Intent i = new Intent();
+                i.setAction(ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivityForResult(i, 11);
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
 
@@ -131,21 +160,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btnStart.setOnClickListener((view1 -> {
             KSUtil.Bounce(this, btnStart);
                 new Handler().postDelayed(() -> {
-                    if (!checkPermissions(MainActivity.this, permissionsList)) {
-                        ActivityCompat.requestPermissions(MainActivity.this, permissionsList, 21);
-                    } else {
-                        KSUtil.fromAlbum = false;
-                        Intent mIntent = new Intent(MainActivity.this, ImagePickerActivity.class);
-                        mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
-                        mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
-                        startActivity(mIntent);
-                        Animatee.animateSlideUp(MainActivity.this);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+                        openAccessFileDialog();
+                    }else{
+                        if (!checkPermissions(MainActivity.this, permissionsList)) {
+                            ActivityCompat.requestPermissions(MainActivity.this, permissionsList, 21);
+
+                        } else {
+                            KSUtil.fromAlbum = false;
+                            Intent mIntent = new Intent(MainActivity.this, ImagePickerActivity.class);
+                            mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
+                            mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
+                            startActivity(mIntent);
+                            Animatee.animateSlideUp(MainActivity.this);
+                        }
                     }
+
+
                 },100);
         }));
 
         btnMore = findViewById(R.id.btn_more);
         btnMore.setOnClickListener((v) -> {
+
             if (!checkPermissions(this, permissionsList)) {
                 ActivityCompat.requestPermissions(this, permissionsList, 22);
             } else {
@@ -219,7 +257,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Arrays.sort(listFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
                 for (int i = 0; i < listFile.length; i++) {
 
-                    if (listFile[i].getAbsolutePath().contains(".mp4")) {
+                    if (listFile[i].getAbsolutePath().contains(".mp4") && videoPath.size() < 6) {
                         videoPath.add(listFile[i].getAbsolutePath());
                     }
 
@@ -310,4 +348,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 11){
+            if (checkPermissions(this, permissionsList)){
+                KSUtil.fromAlbum = false;
+                Intent mIntent = new Intent(MainActivity.this, ImagePickerActivity.class);
+                mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
+                mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
+                Animatee.animateSlideUp(MainActivity.this);
+                startActivity(mIntent);
+            }
+        }
+    }
 }
