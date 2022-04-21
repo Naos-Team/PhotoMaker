@@ -9,12 +9,15 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.utils.ListUtil;
@@ -27,6 +30,7 @@ import java.util.List;
 public class TextStickerView extends View {
     public static final float TEXT_SIZE_DEFAULT = 80;
     public static final int PADDING = 32;
+
     //public static final int PADDING = 0;
 
     public static final int TEXT_TOP_PADDING = 10;
@@ -58,6 +62,18 @@ public class TextStickerView extends View {
     private static final int DELETE_MODE = 5;//
 
     private EditText mEditText;//
+
+    public Typeface getTf() {
+        return tf;
+    }
+
+    public void setTf(Typeface tf) {
+        this.tf = tf;
+        requestLayout();
+        //mCurrentMode = IDLE_MODE;
+    }
+
+    private Typeface tf ;
 
     public int layout_x = 0;
     public int layout_y = 0;
@@ -96,7 +112,10 @@ public class TextStickerView extends View {
         this.mEditText = textView;
     }
 
+
+
     private void initView(Context context) {
+        tf = ResourcesCompat.getFont(getContext(),R.font.font);
         debugPaint.setColor(Color.parseColor("#66ff0000"));
 
         mDeleteBitmap = BitmapFactory.decodeResource(context.getResources(),
@@ -122,9 +141,13 @@ public class TextStickerView extends View {
         mHelpPaint.setStrokeWidth(4);
     }
 
+    public void setTypeface(Typeface typeface){
+        mEditText.setTypeface(typeface);
+        invalidate();
+    }
+
     public void setText(String text) {
         this.mText = text;
-        invalidate();
     }
 
     public void setTextColor(int newColor) {
@@ -196,10 +219,10 @@ public class TextStickerView extends View {
     }
 
     private void drawText(Canvas canvas) {
-        drawText(canvas, layout_x, layout_y, mScale, mRotateAngle);
+        drawText(canvas, layout_x, layout_y, mScale, mRotateAngle, tf);
     }
 
-    public void drawText(Canvas canvas, int _x, int _y, float scale, float rotate) {
+    public void drawText(Canvas canvas, int _x, int _y, float scale, float rotate, Typeface font) {
         if (ListUtil.isEmpty(mTextContents))
             return;
 
@@ -212,10 +235,12 @@ public class TextStickerView extends View {
         Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
         int charMinHeight = Math.abs(fontMetrics.top) + Math.abs(fontMetrics.bottom);//
         text_height = charMinHeight;
+
         //System.out.println("top = "+fontMetrics.top +"   bottom = "+fontMetrics.bottom);
         for (int i = 0; i < mTextContents.size(); i++) {
             String text = mTextContents.get(i);
             mPaint.getTextBounds(text, 0, text.length(), tempRect);
+            mPaint.setTypeface(tf);
             //System.out.println(i + " ---> " + tempRect.height());
             //text_height = Math.max(charMinHeight, tempRect.height());
             if (tempRect.height() <= 0) {//

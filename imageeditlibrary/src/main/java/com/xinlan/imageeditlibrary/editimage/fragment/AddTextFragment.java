@@ -1,10 +1,13 @@
 package com.xinlan.imageeditlibrary.editimage.fragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,18 +16,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.EditImageActivity;
 import com.xinlan.imageeditlibrary.editimage.ModuleConfig;
 import com.xinlan.imageeditlibrary.editimage.task.StickerTask;
 import com.xinlan.imageeditlibrary.editimage.ui.ColorPicker;
+import com.xinlan.imageeditlibrary.editimage.ui.FontPicker;
+import com.xinlan.imageeditlibrary.editimage.ui.pickTypeListener;
 import com.xinlan.imageeditlibrary.editimage.view.TextStickerView;
 
 
@@ -32,16 +42,17 @@ import com.xinlan.imageeditlibrary.editimage.view.TextStickerView;
 public class AddTextFragment extends BaseEditFragment implements TextWatcher {
     public static final int INDEX = ModuleConfig.INDEX_ADDTEXT;
     public static final String TAG = AddTextFragment.class.getName();
-
     private View mainView;
     private View backToMenu;//
+    private Typeface font;
 
     private EditText mInputText;//
-    private ImageView mTextColorSelector;//
+    private ImageView mTextColorSelector, imv_font;
     private TextStickerView mTextStickerView;//
     private CheckBox mAutoNewLineCheck;
 
     private ColorPicker mColorPicker;
+    private FontPicker fontPicker;
 
     private int mTextColor = Color.WHITE;
     private InputMethodManager imm;
@@ -56,6 +67,7 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -69,11 +81,14 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //mTextStickerView = (TextStickerView) mainView.findViewById(R.id.text_sticker_panel);
+        mInputText = (EditText) mainView.findViewById(R.id.text_input);
+        mTextStickerView = (TextStickerView) getActivity().findViewById(R.id.text_sticker_panel);
 
-        mTextStickerView = (TextStickerView)getActivity().findViewById(R.id.text_sticker_panel);
+        imv_font = (ImageView) mainView.findViewById(R.id.imv_font);
 
         backToMenu = mainView.findViewById(R.id.back_to_main);
-        mInputText = (EditText) mainView.findViewById(R.id.text_input);
+
         mTextColorSelector = (ImageView) mainView.findViewById(R.id.text_color);
         mAutoNewLineCheck = (CheckBox) mainView.findViewById(R.id.check_auto_newline);
 
@@ -88,9 +103,12 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
         mColorPicker = new ColorPicker(getActivity(), 255, 0, 0);
         mTextColorSelector.setOnClickListener(new SelectColorBtnClick());
         mInputText.addTextChangedListener(this);
-        mTextStickerView.setEditText(mInputText);
+        if (mInputText!=null){
+            mTextStickerView.setEditText(mInputText);
+        }
 
-        //
+
+
         mTextColorSelector.setBackgroundColor(mColorPicker.getColor());
         mTextStickerView.setTextColor(mColorPicker.getColor());
 
@@ -100,6 +118,25 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
         params.gravity = Gravity.CENTER_VERTICAL;
         params.rightMargin = 10;
         mTextColorSelector.setLayoutParams(params);
+
+        imv_font.setOnClickListener( new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FontPicker fontPicker = new FontPicker(getContext(),
+                        new pickTypeListener() {
+                            @Override
+                            public void onChoice(Typeface t) {
+                                font = t;
+                                mInputText.setTypeface(font);
+                                mTextStickerView.setTf(font);
+                            }
+                        });
+                fontPicker.show();
+
+//                String text = mInputText.getText().toString();
+                //mTextStickerView.setText(text);
+            }
+        });
     }
 
     @Override
@@ -119,7 +156,6 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
 
     }
 
-
     private final class SelectColorBtnClick implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -130,6 +166,7 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
                 public void onClick(View v) {
                     changeTextColor(mColorPicker.getColor());
                     mColorPicker.dismiss();
+
                 }
             });
         }
@@ -152,6 +189,7 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
     public boolean isInputMethodShow() {
         return imm.isActive();
     }
+
 
 
     private final class BackToMenuClick implements OnClickListener {
@@ -211,7 +249,7 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
             canvas.scale(scale_x, scale_y);
             //System.out.println("scale = " + scale_x + "       " + scale_y + "     " + dx + "    " + dy);
             mTextStickerView.drawText(canvas, mTextStickerView.layout_x,
-                    mTextStickerView.layout_y, mTextStickerView.mScale, mTextStickerView.mRotateAngle);
+                    mTextStickerView.layout_y, mTextStickerView.mScale, mTextStickerView.mRotateAngle, font);
             canvas.restore();
         }
 
@@ -232,4 +270,6 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
             mSaveTask.cancel(true);
         }
     }
+
+
 }// end class
