@@ -145,7 +145,7 @@ public class ServiceAnim extends IntentService {
 //
 //            temp2.recycle();
             secondBitmap.recycle();
-//            System.gc();
+            System.gc();
             KessiMaskBitmap3D.reintRect();
 
             KessiMaskBitmap3D.EFFECT effect = (KessiMaskBitmap3D.EFFECT) this.application.selectedTheme.getTheme().get(i % this.application.selectedTheme.getTheme().size());
