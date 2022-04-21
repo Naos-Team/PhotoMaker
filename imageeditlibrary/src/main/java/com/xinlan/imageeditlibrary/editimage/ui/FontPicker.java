@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.fonts.Font;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -17,9 +18,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.xinlan.imageeditlibrary.R;
+import com.xinlan.imageeditlibrary.editimage.adapter.FontAdapter;
 import com.xinlan.imageeditlibrary.editimage.fragment.AddTextFragment;
+import com.xinlan.imageeditlibrary.editimage.model.FontItem;
 import com.xinlan.imageeditlibrary.editimage.view.TextStickerView;
 
 import java.lang.reflect.Type;
@@ -31,18 +36,10 @@ public class FontPicker extends Dialog {
     public Context context;
     public Dialog d;
 
-    public Typeface getTypeface() {
-        return typeface;
-    }
-
-    public void setTypeface(Typeface typeface) {
-        this.typeface = typeface;
-    }
-
     public Typeface typeface = ResourcesCompat.getFont(getContext(),R.font.font);
-    private ListView lv_fonts;
-    private ArrayAdapter<String> adapter;
-    private ArrayList<String> arrayList;
+    private RecyclerView rv_fonts;
+    private FontAdapter fontAdapter;
+    private ArrayList<FontItem> arrayList;
     private TextStickerView textSticker;
     private EditText editText;
     private pickTypeListener listener;
@@ -60,62 +57,41 @@ public class FontPicker extends Dialog {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.fonts_view);
-        lv_fonts = findViewById(R.id.lv_fonts);
-        arrayList = new ArrayList<String>();
+        rv_fonts = findViewById(R.id.rv_fonts);
+        arrayList = new ArrayList<FontItem>();
 
-        arrayList.add("Back To School");
-        arrayList.add("California");
-        arrayList.add("Family");
-        arrayList.add("Default");
-        arrayList.add("Gold Leaf Bold");
-        arrayList.add("Halimun");
-        arrayList.add("Mangabey");
-        arrayList.add("Remachine Script");
-        arrayList.add("Simple Mono Logue");
-        arrayList.add("The Heart");
-        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, arrayList);
-        lv_fonts.setAdapter(adapter);
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
-        lv_fonts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String tf = (String) lv_fonts.getAdapter().getItem(position);
-                if (tf ==  "Back To School"){
-                    typeface = ResourcesCompat.getFont(getContext(),R.font.backtoschool);
-                }
-                if (tf ==  "California"){
-                    typeface = ResourcesCompat.getFont(getContext(),R.font.california);
-                }
-                if (tf ==  "Family"){
-                    typeface = ResourcesCompat.getFont(getContext(),R.font.family);
-                }
-                if (tf ==  "Default"){
-                    typeface = ResourcesCompat.getFont(getContext(),R.font.font);
-                }
-                if (tf ==  "Gold Leaf Bold"){
-                    typeface = ResourcesCompat.getFont(getContext(),R.font.goldleafbold);
-                }
-                if (tf ==  "Halimun"){
-                    typeface = ResourcesCompat.getFont(getContext(),R.font.halimun);
-                }
-                if (tf ==  "Mangabey"){
-                    typeface = ResourcesCompat.getFont(getContext(),R.font.mangabey);
-                }
-                if (tf ==  "Remachine Script"){
-                    typeface = ResourcesCompat.getFont(getContext(),R.font.remachinescript);
-                }
-                if (tf ==  "Simple Mono Logue"){
-                    typeface = ResourcesCompat.getFont(getContext(),R.font.simplemonologue);
-                }
-                if (tf ==  "The Heart"){
-                    typeface = ResourcesCompat.getFont(getContext(),R.font.theheart);
-                }
-                //editText.setTypeface(typeface);
-                listener.onChoice(typeface);
-                dismiss();
 
-            }
-        });
+        arrayList.add(new FontItem("Default", ResourcesCompat.getFont(getContext(),R.font.font)));
+        arrayList.add(new FontItem("Back To School", ResourcesCompat.getFont(getContext(),R.font.backtoschool)));
+        arrayList.add(new FontItem("California", ResourcesCompat.getFont(getContext(),R.font.california)));
+        arrayList.add(new FontItem("Family", ResourcesCompat.getFont(getContext(),R.font.family)));
+        arrayList.add(new FontItem("Gold Leaf Bold", ResourcesCompat.getFont(getContext(),R.font.goldleafbold)));
+        arrayList.add(new FontItem("Halimun", ResourcesCompat.getFont(getContext(),R.font.halimun)));
+        arrayList.add(new FontItem("Mangabey", ResourcesCompat.getFont(getContext(),R.font.mangabey)));
+        arrayList.add(new FontItem("Remachine Script", ResourcesCompat.getFont(getContext(),R.font.remachinescript)));
+        arrayList.add(new FontItem("Simple Mono Logue", ResourcesCompat.getFont(getContext(),R.font.simplemonologue)));
+        arrayList.add(new FontItem("Aloevera", ResourcesCompat.getFont(getContext(),R.font.aloevera)));
+        arrayList.add(new FontItem("Amsterdam", ResourcesCompat.getFont(getContext(),R.font.amsterdam)));
+        arrayList.add(new FontItem("Bite Chocolate", ResourcesCompat.getFont(getContext(),R.font.bitechocolate)));
+        arrayList.add(new FontItem("Brussels", ResourcesCompat.getFont(getContext(),R.font.brussels)));
+        arrayList.add(new FontItem("Cassandra", ResourcesCompat.getFont(getContext(),R.font.cassandra)));
+        arrayList.add(new FontItem("Candy Cane", ResourcesCompat.getFont(getContext(),R.font.candycane)));
+        arrayList.add(new FontItem("Dance Today", ResourcesCompat.getFont(getContext(),R.font.dancetoday)));
+        arrayList.add(new FontItem("First Snow", ResourcesCompat.getFont(getContext(),R.font.firstsnow)));
+        arrayList.add(new FontItem("Girl As Free", ResourcesCompat.getFont(getContext(),R.font.girlasfree)));
+        arrayList.add(new FontItem("Melanie", ResourcesCompat.getFont(getContext(),R.font.melanie)));
+        arrayList.add(new FontItem("Romance", ResourcesCompat.getFont(getContext(),R.font.romance)));
+        arrayList.add(new FontItem("Street", ResourcesCompat.getFont(getContext(),R.font.street)));
+        arrayList.add(new FontItem("The Heart", ResourcesCompat.getFont(getContext(),R.font.theheart)));
+
+        fontAdapter = new FontAdapter(arrayList, listener);
+        rv_fonts.setAdapter(fontAdapter);
+        rv_fonts.setLayoutManager(layoutManager);
+
+
     }
 
 }
