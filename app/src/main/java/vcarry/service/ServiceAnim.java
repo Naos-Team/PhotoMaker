@@ -7,10 +7,12 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
@@ -110,6 +112,8 @@ public class ServiceAnim extends IntentService {
         int i = 0;
         int img_size = 0;
 
+        //Bitmap bg = Bitmap.createBitmap(KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, Bitmap.Config.ARGB_8888);
+        //Bitmap bg = Bitmap.createBitmap(new int[]{0,0,0}, KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, Bitmap.Config.ARGB_8888);
 
         while (i < arrayList.size() - 1 && isSameTheme() && !KessiApplication.isBreak) {
             Bitmap newFirstBmp;
@@ -121,7 +125,7 @@ public class ServiceAnim extends IntentService {
                 firstBitmap = ScalingUtilities.checkBitmap(arrayList.get(i), application);
                 temp = ScalingUtilities.scaleCenterCrop(firstBitmap, KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT);
                 newFirstBmp = ScalingUtilities.ConvetrSameSize(firstBitmap, temp, KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, Utils.DEFAULT_FONT_SCALE, 0.0f);
-                temp.recycle();
+             //   temp.recycle();
                 firstBitmap.recycle();
                 System.gc();
             } else {
@@ -138,10 +142,10 @@ public class ServiceAnim extends IntentService {
             Bitmap secondBitmap = ScalingUtilities.checkBitmap(arrayList.get(i + 1), application);
             Bitmap temp2 = ScalingUtilities.scaleCenterCrop(secondBitmap, KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT);
             newSecondBmp2 = ScalingUtilities.ConvetrSameSize(secondBitmap, temp2, KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, Utils.DEFAULT_FONT_SCALE, 0.0f);
-
-            temp2.recycle();
+//
+//            temp2.recycle();
             secondBitmap.recycle();
-            System.gc();
+//            System.gc();
             KessiMaskBitmap3D.reintRect();
 
             KessiMaskBitmap3D.EFFECT effect = (KessiMaskBitmap3D.EFFECT) this.application.selectedTheme.getTheme().get(i % this.application.selectedTheme.getTheme().size());
