@@ -23,6 +23,8 @@ import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 
+import com.kessi.photovideomaker.KessiApplication;
+
 import java.io.IOException;
 
 public class ScalingUtilities {
@@ -125,9 +127,10 @@ public class ScalingUtilities {
 
     public static Bitmap ConvetrSameSize(Bitmap originalImage, Bitmap bgBitmap, int mDisplayWidth, int mDisplayHeight, float x, float y) {
         Bitmap bitmap = originalImage;
-        Bitmap cs = bgBitmap.copy(bgBitmap.getConfig(), true);
+        //Bitmap cs = bgBitmap.copy(bgBitmap.getConfig(), true);
+        Bitmap cs = Bitmap.createBitmap(KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, Config.RGB_565);
 //        new Canvas(FastBlur.doBlur(cs, 25, true)).drawBitmap(newscaleBitmap(bitmap, mDisplayWidth, mDisplayHeight, x, y), 0.0f, 0.0f, new Paint());
-        cs = FastBlur.doBlur(cs, 10, true);
+       // cs = FastBlur.doBlur(cs,  1, true);
         new Canvas(cs).drawBitmap(newscaleBitmap(bitmap, mDisplayWidth, mDisplayHeight, x, y), 0.0f, 0.0f, new Paint());
         return cs;
     }
