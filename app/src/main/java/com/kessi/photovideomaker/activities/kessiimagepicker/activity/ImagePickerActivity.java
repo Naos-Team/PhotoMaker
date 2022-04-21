@@ -266,6 +266,7 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
         } else {
             requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, READ_STORAGE_CODE);
         }
+
         updateTxtTotalImage();
 
 

@@ -1,8 +1,11 @@
 package com.kessi.photovideomaker.activities.intro;
 
+import static android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION;
 import static com.kessi.photovideomaker.activities.MainActivity.checkPermissions;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -10,8 +13,13 @@ import androidx.viewpager.widget.ViewPager;
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -63,18 +71,24 @@ public class IntroActivity extends AppCompatActivity {
 
         adapter = new IntroViewPagerAdapter(this, arrayList, () ->{
             new Handler().postDelayed(() -> {
-                if (!checkPermissions(IntroActivity.this, permissionsList)) {
-                    ActivityCompat.requestPermissions(this, permissionsList, 21);
-                } else {
-                    KSUtil.fromAlbum = false;
-                    Intent mIntent = new Intent(IntroActivity.this, ImagePickerActivity.class);
-                    mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
-                    mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
-                    startActivity(mIntent);
 
-                    finish();
-                    Animatee.animateSlideUp(IntroActivity.this);
+                if (!checkPermissions(IntroActivity.this, permissionsList)) {
+                    ActivityCompat.requestPermissions(IntroActivity.this, permissionsList, 21);
+
+                } else {
+
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+                        openAccessFileDialog();
+                    }else{
+                        KSUtil.fromAlbum = false;
+                        Intent mIntent = new Intent(IntroActivity.this, ImagePickerActivity.class);
+                        mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
+                        mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
+                        startActivity(mIntent);
+                    }
                 }
+
             },100);
         });
 
@@ -142,16 +156,80 @@ public class IntroActivity extends AppCompatActivity {
         tabIndicator.setupWithViewPager(viewPager);
     }
 
+    private void openAccessFileDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Message");
+        builder.setMessage("Please give permission to this app to access all file!");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                Intent i = new Intent();
+                i.setAction(ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivityForResult(i, 11);
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    public static boolean checkPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 21){
             if (checkPermissions(this, permissionsList)){
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+                    openAccessFileDialog();
+                }else{
+                    KSUtil.fromAlbum = false;
+                    Intent mIntent = new Intent(IntroActivity.this, ImagePickerActivity.class);
+                    mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
+                    mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
+                    startActivity(mIntent);
+                }
+
+
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 11){
+            if (!checkPermissions(IntroActivity.this, permissionsList)) {
+                ActivityCompat.requestPermissions(IntroActivity.this, permissionsList, 21);
+            } else {
                 KSUtil.fromAlbum = false;
                 Intent mIntent = new Intent(IntroActivity.this, ImagePickerActivity.class);
                 mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
                 mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
                 startActivity(mIntent);
+                Animatee.animateSlideUp(IntroActivity.this);
             }
         }
     }
