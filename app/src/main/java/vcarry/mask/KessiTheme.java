@@ -9,28 +9,28 @@ import vcarry.mask.KessiMaskBitmap3D.EFFECT;
 
 public enum KessiTheme {
 
-    Test("Test"){
-        public ArrayList<EFFECT> getTheme() {
-            KessiMaskBitmap3D.Random_num();
-            ArrayList<EFFECT> mEffects = new ArrayList();
-            //mEffects.add(EFFECT.TEST);
-            mEffects.add(EFFECT.RANDOM_CIRCLE_IN);
-            mEffects.add(EFFECT.RANDOM_CIRCLE_OUT);
-            return mEffects;
-        }
-
-        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return new ArrayList();
-        }
-
-        public int getThemeDrawable() {
-            return R.drawable.facebook;
-        }
-
-        public int getThemeMusic() {
-            return R.raw.song_2;
-        }
-    },
+//    Test("Test"){
+//        public ArrayList<EFFECT> getTheme() {
+//            KessiMaskBitmap3D.Random_num();
+//            ArrayList<EFFECT> mEffects = new ArrayList();
+//            //mEffects.add(EFFECT.TEST);
+//            mEffects.add(EFFECT.RANDOM_CIRCLE_IN);
+//            mEffects.add(EFFECT.RANDOM_CIRCLE_OUT);
+//            return mEffects;
+//        }
+//
+//        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+//            return new ArrayList();
+//        }
+//
+//        public int getThemeDrawable() {
+//            return R.drawable.facebook;
+//        }
+//
+//        public int getThemeMusic() {
+//            return R.raw.song_2;
+//        }
+//    },
     Ramdom1("Ramdom1"){
         public ArrayList<EFFECT> getTheme() {
             return KessiMaskBitmap3D.random(1);
