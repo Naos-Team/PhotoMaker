@@ -11,11 +11,11 @@ public enum KessiTheme {
 
     Test("Test"){
         public ArrayList<EFFECT> getTheme() {
+            KessiMaskBitmap3D.Random_num();
             ArrayList<EFFECT> mEffects = new ArrayList();
-//            mEffects.add(EFFECT.FAN_TOP_LEFT);
-//            mEffects.add(EFFECT.FAN_TOP_RIGHT);
-            mEffects.add(EFFECT.HORIZONTAL_RECT);
-            mEffects.add(EFFECT.ECLIPSE_IN);
+            //mEffects.add(EFFECT.TEST);
+            mEffects.add(EFFECT.RANDOM_CIRCLE_IN);
+            mEffects.add(EFFECT.RANDOM_CIRCLE_OUT);
             return mEffects;
         }
 
@@ -101,6 +101,27 @@ public enum KessiTheme {
             return R.raw.song_2;
         }
     },
+    RANDOM_ROUND("RANDOM_ROUND"){
+        public ArrayList<EFFECT> getTheme() {
+            KessiMaskBitmap3D.Random_num();
+            ArrayList<EFFECT> mEffects = new ArrayList();
+            mEffects.add(EFFECT.RANDOM_CIRCLE_IN);
+            mEffects.add(EFFECT.RANDOM_CIRCLE_OUT);
+            return mEffects;
+        }
+
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return new ArrayList();
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.beauty;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
     EYE("EYE"){
         public ArrayList<EFFECT> getTheme() {
             ArrayList<EFFECT> mEffects = new ArrayList();
@@ -154,6 +175,44 @@ public enum KessiTheme {
 
         public int getThemeDrawable() {
             return R.drawable.bg_no_button_for_dialog;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
+    ECLIPSE("ECLIPSE"){
+        public ArrayList<EFFECT> getTheme() {
+            ArrayList<EFFECT> mEffects = new ArrayList();
+            mEffects.add(EFFECT.ECLIPSE_IN);
+            return mEffects;
+        }
+
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return new ArrayList();
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.f_9;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
+    HORIZONTAL_RECT("HORIZONTAL_RECT"){
+        public ArrayList<EFFECT> getTheme() {
+            ArrayList<EFFECT> mEffects = new ArrayList();
+            mEffects.add(EFFECT.HORIZONTAL_RECT);
+            return mEffects;
+        }
+
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return new ArrayList();
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.small_play;
         }
 
         public int getThemeMusic() {
