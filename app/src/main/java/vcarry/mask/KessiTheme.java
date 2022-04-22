@@ -9,6 +9,28 @@ import vcarry.mask.KessiMaskBitmap3D.EFFECT;
 
 public enum KessiTheme {
 
+    Test("Test"){
+        public ArrayList<EFFECT> getTheme() {
+            ArrayList<EFFECT> mEffects = new ArrayList();
+//            mEffects.add(EFFECT.FAN_TOP_LEFT);
+//            mEffects.add(EFFECT.FAN_TOP_RIGHT);
+            mEffects.add(EFFECT.HORIZONTAL_RECT);
+            mEffects.add(EFFECT.ECLIPSE_IN);
+            return mEffects;
+        }
+
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return new ArrayList();
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.facebook;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
     Ramdom1("Ramdom1"){
         public ArrayList<EFFECT> getTheme() {
             return KessiMaskBitmap3D.random(1);
@@ -73,6 +95,65 @@ public enum KessiTheme {
 
         public int getThemeDrawable() {
             return R.drawable.t_no;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
+    EYE("EYE"){
+        public ArrayList<EFFECT> getTheme() {
+            ArrayList<EFFECT> mEffects = new ArrayList();
+            mEffects.add(EFFECT.LEAF);
+            return mEffects;
+        }
+
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return new ArrayList();
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.ic_launcher_app;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
+    FAN("FAN"){
+        public ArrayList<EFFECT> getTheme() {
+            ArrayList<EFFECT> mEffects = new ArrayList();
+            mEffects.add(EFFECT.FAN_TOP_RIGHT);
+            mEffects.add(EFFECT.FAN_TOP_LEFT);
+            return mEffects;
+        }
+
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return new ArrayList();
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.ic_launcher_app;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
+    CROSS("CROSS"){
+        public ArrayList<EFFECT> getTheme() {
+            ArrayList<EFFECT> mEffects = new ArrayList();
+            mEffects.add(EFFECT.CROSS_OUT);
+            mEffects.add(EFFECT.CROSS_IN);
+            return mEffects;
+        }
+
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return new ArrayList();
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.bg_no_button_for_dialog;
         }
 
         public int getThemeMusic() {
