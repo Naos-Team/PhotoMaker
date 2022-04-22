@@ -87,7 +87,13 @@ public class FontPicker extends Dialog {
         arrayList.add(new FontItem("Street", ResourcesCompat.getFont(getContext(),R.font.street)));
         arrayList.add(new FontItem("The Heart", ResourcesCompat.getFont(getContext(),R.font.theheart)));
 
-        fontAdapter = new FontAdapter(arrayList, listener);
+        fontAdapter = new FontAdapter(arrayList, new pickTypeListener() {
+            @Override
+            public void onChoice(Typeface t) {
+                listener.onChoice(t);
+                dismiss();
+            }
+        });
         rv_fonts.setAdapter(fontAdapter);
         rv_fonts.setLayoutManager(layoutManager);
 
