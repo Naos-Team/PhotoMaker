@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Camera;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.CornerPathEffect;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -54,6 +56,68 @@ public class KessiMaskBitmap3D {
                 paint.setAntiAlias(true);
                 paint.setStyle(Style.FILL_AND_STROKE);
                 Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+                return mask;
+            }
+        },
+        BURN("BURN") {
+            public Bitmap getMask(int w, int h, int factor) {
+
+                float r = KessiMaskBitmap3D.getRad(w, h);
+
+                Paint paint = new Paint();
+                paint.setColor(-16777216);
+                paint.setAntiAlias(true);
+                paint.setStyle(Style.FILL_AND_STROKE);
+                Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+                float fx = (float) ((w / KessiMaskBitmap3D.ANIMATED_FRAME_CAL) * factor);
+                float fy = (float) ((h / KessiMaskBitmap3D.ANIMATED_FRAME_CAL) * factor);
+                Canvas canvas = new Canvas(mask);
+
+                RectF oval = new RectF();
+                oval.set((((float) w) / 2.0f) - r,((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 3*(((float) h) / 2.0f));
+                float angle = (((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor);
+
+
+                canvas.drawArc(oval, 270, angle, false, paint);
+                drawText(canvas);
+                return mask;
+            }
+        },
+        FAN_TOP_RIGHT("FAN_TOP_RIGHT") {
+            public Bitmap getMask(int w, int h, int factor) {
+                float r = KessiMaskBitmap3D.getRad(w, h);
+
+                Paint paint = new Paint();
+                paint.setColor(-16777216);
+                paint.setAntiAlias(true);
+                paint.setStyle(Style.FILL_AND_STROKE);
+                Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+                Canvas canvas = new Canvas(mask);
+                RectF oval = new RectF();
+                oval.set((((float) w) / 2.0f) - r,((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 3*(((float) h) / 2.0f));
+                float angle = (((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor);
+
+                canvas.drawArc(oval, 270, -angle, false, paint);
+                drawText(canvas);
+                return mask;
+            }
+        },
+        FAN_TOP_LEFT("FAN_TOP_LEFT") {
+            public Bitmap getMask(int w, int h, int factor) {
+                float r = KessiMaskBitmap3D.getRad(w, h);
+
+                Paint paint = new Paint();
+                paint.setColor(-16777216);
+                paint.setAntiAlias(true);
+                paint.setStyle(Style.FILL_AND_STROKE);
+                Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+                Canvas canvas = new Canvas(mask);
+                RectF oval = new RectF();
+                oval.set((((float) w) / 2.0f) - r,((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 3*(((float) h) / 2.0f));
+                float angle = (((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor);
+
+                canvas.drawArc(oval, 270, angle, false, paint);
+                drawText(canvas);
                 return mask;
             }
         },
@@ -717,7 +781,7 @@ public class KessiMaskBitmap3D {
                 paint.setColor(-16777216);
                 paint.setAntiAlias(true);
                 paint.setStyle(Style.FILL_AND_STROKE);
-                canvas.drawCircle(0.0f, (float) h, (((float) Math.sqrt((double) ((w * w) + (h * h)))) / ((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor), paint);
+                //canvas.drawCircle(0.0f, (float) h, (((float) Math.sqrt((double) ((w * w) + (h * h)))) / ((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor), paint);
                 float wf = (float) (w / KessiMaskBitmap3D.ANIMATED_FRAME_CAL);
                 float hf = (float) (h / KessiMaskBitmap3D.ANIMATED_FRAME_CAL);
                 for (int i = 0; i < KessiMaskBitmap3D.randRect.length; i++) {
@@ -732,6 +796,21 @@ public class KessiMaskBitmap3D {
                         }
                     }
                 }
+                float fx = (float) ((w / KessiMaskBitmap3D.ANIMATED_FRAME_CAL) * factor);
+                float fy = (float) ((h / KessiMaskBitmap3D.ANIMATED_FRAME_CAL) * factor);
+                Path path = new Path();
+
+
+                //btm to top
+                path.lineTo(0.0f, ((float) (w)) + fx);
+                path.lineTo((float) w, ((float) (w)) + fx);
+                path.lineTo((float) w, ((float) (w)) - fx);
+                path.lineTo(0.0f, ((float) (w)) - fx);
+
+
+                path.close();
+                canvas.drawPath(path, paint);
+                drawText(canvas);
                 drawText(canvas);
                 return mask;
             }
@@ -745,7 +824,7 @@ public class KessiMaskBitmap3D {
                 paint.setColor(-16777216);
                 paint.setAntiAlias(true);
                 paint.setStyle(Style.FILL_AND_STROKE);
-                canvas.drawCircle(((float) w) / 2.0f, ((float) h) / 2.0f, (KessiMaskBitmap3D.getRad(w * 2, h * 2) / ((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor), paint);
+                //canvas.drawCircle(((float) w) / 2.0f, ((float) h) / 2.0f, (KessiMaskBitmap3D.getRad(w * 2, h * 2) / ((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor), paint);
                 float wf = (float) (w / KessiMaskBitmap3D.ANIMATED_FRAME_CAL);
                 float hf = (float) (h / KessiMaskBitmap3D.ANIMATED_FRAME_CAL);
                 for (int i = 0; i < KessiMaskBitmap3D.randRect.length; i++) {
@@ -760,6 +839,21 @@ public class KessiMaskBitmap3D {
                         }
                     }
                 }
+                float fx = (float) ((w / KessiMaskBitmap3D.ANIMATED_FRAME_CAL) * factor);
+                float fy = (float) ((h / KessiMaskBitmap3D.ANIMATED_FRAME_CAL) * factor);
+                Path path = new Path();
+
+
+                //btm to top
+                path.lineTo(0.0f, ((float) (w)) + fx);
+                path.lineTo((float) w, ((float) (w)) + fx);
+                path.lineTo((float) w, ((float) (w)) - fx);
+                path.lineTo(0.0f, ((float) (w)) - fx);
+
+
+                path.close();
+                canvas.drawPath(path, paint);
+                drawText(canvas);
                 drawText(canvas);
                 return mask;
             }
