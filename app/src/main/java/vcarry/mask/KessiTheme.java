@@ -19,7 +19,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.random_side;
+            return R.drawable.random1   ;
         }
 
         public int getThemeMusic() {
@@ -139,7 +139,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.tourando;
+            return R.drawable.t_31;
         }
 
         public int getThemeMusic() {
@@ -160,7 +160,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.lcwiper;
+            return R.drawable.t_30;
         }
 
         public int getThemeMusic() {
@@ -184,7 +184,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.skew;
+            return R.drawable.t_29;
         }
 
         public int getThemeMusic() {
@@ -208,7 +208,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.circle_out;
+            return R.drawable.t_28;
         }
 
         public int getThemeMusic() {
@@ -231,7 +231,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.squareout;
+            return R.drawable.t_27;
         }
 
         public int getThemeMusic() {
@@ -255,7 +255,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.opendoor;
+            return R.drawable.t_20;
         }
 
         public int getThemeMusic() {
@@ -275,7 +275,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.rectrandom;
+            return R.drawable.t_25;
         }
 
         public int getThemeMusic() {
@@ -294,7 +294,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.bubble;
+            return R.drawable.t_24;
         }
 
         public int getThemeMusic() {
@@ -313,7 +313,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.windmill;
+            return R.drawable.t_26;
         }
 
         public int getThemeMusic() {
@@ -332,7 +332,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.circlebomb;
+            return R.drawable.t_08;
         }
 
         public int getThemeMusic() {
@@ -370,7 +370,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.fourtriangle;
+            return R.drawable.t_11;
         }
 
         public int getThemeMusic() {
@@ -390,7 +390,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.lcwiper;
+            return R.drawable.t_14;
         }
 
         public int getThemeMusic() {
@@ -409,7 +409,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.rcwiper;
+            return R.drawable.t_15;
         }
 
         public int getThemeMusic() {
@@ -428,7 +428,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.tourando;
+            return R.drawable.t_18;
         }
 
         public int getThemeMusic() {
@@ -447,7 +447,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.revtorando;
+            return R.drawable.t_19;
         }
 
         public int getThemeMusic() {
@@ -466,7 +466,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.rlrub;
+            return R.drawable.t_17;
         }
 
         public int getThemeMusic() {
@@ -485,7 +485,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.lrrub;
+            return R.drawable.t_16;
         }
 
         public int getThemeMusic() {
@@ -504,7 +504,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.circle_in;
+            return R.drawable.t_06;
         }
 
         public int getThemeMusic() {
@@ -523,7 +523,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.squareout;
+            return R.drawable.t_22;
         }
 
         public int getThemeMusic() {
@@ -542,7 +542,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.squarein;
+            return R.drawable.t_23;
         }
 
         public int getThemeMusic() {
@@ -562,7 +562,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.opendoor;
+            return R.drawable.t_20;
         }
 
         public int getThemeMusic() {
@@ -582,7 +582,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.rldoor;
+            return R.drawable.t_05;
         }
 
         public int getThemeMusic() {
@@ -601,7 +601,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.btdoor;
+            return R.drawable.t_02;
         }
 
         public int getThemeMusic() {
@@ -620,7 +620,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.tbdoor;
+            return R.drawable.t_03;
         }
 
         public int getThemeMusic() {
@@ -639,7 +639,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.lrdoor;
+            return R.drawable.t_04;
         }
 
         public int getThemeMusic() {
@@ -658,7 +658,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.vrect;
+            return R.drawable.t_12;
         }
 
         public int getThemeMusic() {
@@ -677,7 +677,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.hrect;
+            return R.drawable.t_13;
         }
 
         public int getThemeMusic() {
@@ -696,7 +696,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.zip;
+            return R.drawable.t_21;
         }
 
         public int getThemeMusic() {
@@ -716,7 +716,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.diamond;
+            return R.drawable.t_10;
         }
 
         public int getThemeMusic() {
@@ -735,7 +735,7 @@ public enum KessiTheme {
         }
 
         public int getThemeDrawable() {
-            return R.drawable.boom;
+            return R.drawable.t_01;
         }
 
         public int getThemeMusic() {
