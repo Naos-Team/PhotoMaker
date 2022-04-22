@@ -201,7 +201,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             seekBar_picktime.setMin(10);
         }
-        seekBar_picktime.setMax(150);
+        seekBar_picktime.setMax(100);
         seekBar_picktime.setProgress(10);
         seekBar_picktime.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             @Override

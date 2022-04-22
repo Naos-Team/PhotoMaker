@@ -404,7 +404,7 @@
                         android:gravity="center"
                         android:paddingLeft="10dp"
                         android:paddingEnd="8dp"
-                        android:text="15s"
+                        android:text="10.0s"
                         android:textColor="@color/toptextcolor" />
                 </LinearLayout>
 
