@@ -5,9 +5,9 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center">
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_gravity="center"
-            android:id="@+id/lv_fonts"
+            android:id="@+id/rv_fonts"
             android:layout_width="350dp"
             android:layout_height="350dp"/>
 </LinearLayout>
