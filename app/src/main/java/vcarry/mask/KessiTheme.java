@@ -31,6 +31,25 @@ public enum KessiTheme {
 //            return R.raw.song_2;
 //        }
 //    },
+    None("None"){
+        public ArrayList<EFFECT> getTheme() {
+            ArrayList<EFFECT> mEffects = new ArrayList();
+            mEffects.add(EFFECT.NONE);
+            return mEffects;
+        }
+
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return new ArrayList();
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.t_no;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
     Ramdom1("Ramdom1"){
         public ArrayList<EFFECT> getTheme() {
             return KessiMaskBitmap3D.random(1);
@@ -76,25 +95,6 @@ public enum KessiTheme {
 
         public int getThemeDrawable() {
             return R.drawable.random_all;
-        }
-
-        public int getThemeMusic() {
-            return R.raw.song_2;
-        }
-    },
-    None("None"){
-        public ArrayList<EFFECT> getTheme() {
-            ArrayList<EFFECT> mEffects = new ArrayList();
-            mEffects.add(EFFECT.NONE);
-            return mEffects;
-        }
-
-        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
-            return new ArrayList();
-        }
-
-        public int getThemeDrawable() {
-            return R.drawable.t_no;
         }
 
         public int getThemeMusic() {
