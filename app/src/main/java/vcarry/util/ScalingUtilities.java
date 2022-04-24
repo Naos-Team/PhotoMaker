@@ -23,6 +23,8 @@ import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 
+import com.kessi.photovideomaker.KessiApplication;
+
 import java.io.IOException;
 
 public class ScalingUtilities {
@@ -103,6 +105,19 @@ public class ScalingUtilities {
         return cs;
     }
 
+    public static Bitmap Paint_Image(Bitmap bitmap, Bitmap bgBitmap, int left_per, int top_per, int height_per, int width_ratio, int height_ratio){// ratio width/height
+
+        Bitmap cs = bgBitmap.copy(bgBitmap.getConfig(), true);
+        int height = bgBitmap.getHeight()*height_per/1000;
+        Canvas canvas = new Canvas(cs);
+
+        bitmap = scaleCenterCrop(bitmap, height * width_ratio/height_ratio, height);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(bitmap, height * width_ratio/height_ratio, height, true),
+                bgBitmap.getHeight()*left_per/1000 , bgBitmap.getHeight()*top_per/1000, new Paint());
+
+        return cs;
+    }
+
     public static Bitmap ConvetrSameSizeTransBg(Bitmap originalImage, int mDisplayWidth, int mDisplayHeight) {
         Bitmap bitmap = originalImage;
         Bitmap cs = Bitmap.createBitmap(mDisplayWidth, mDisplayHeight, Config.ARGB_8888);
@@ -125,9 +140,10 @@ public class ScalingUtilities {
 
     public static Bitmap ConvetrSameSize(Bitmap originalImage, Bitmap bgBitmap, int mDisplayWidth, int mDisplayHeight, float x, float y) {
         Bitmap bitmap = originalImage;
-        Bitmap cs = bgBitmap.copy(bgBitmap.getConfig(), true);
+        //Bitmap cs = bgBitmap.copy(bgBitmap.getConfig(), true);
+        Bitmap cs = Bitmap.createBitmap(KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, Config.RGB_565);
 //        new Canvas(FastBlur.doBlur(cs, 25, true)).drawBitmap(newscaleBitmap(bitmap, mDisplayWidth, mDisplayHeight, x, y), 0.0f, 0.0f, new Paint());
-        cs = FastBlur.doBlur(cs, 10, true);
+       // cs = FastBlur.doBlur(cs,  1, true);
         new Canvas(cs).drawBitmap(newscaleBitmap(bitmap, mDisplayWidth, mDisplayHeight, x, y), 0.0f, 0.0f, new Paint());
         return cs;
     }

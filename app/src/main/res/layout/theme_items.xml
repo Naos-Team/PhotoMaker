@@ -8,7 +8,9 @@
         android:id="@+id/ivThumb"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="27dp"
         android:clickable="true"
+        android:layout_centerInParent="true"
         android:scaleType="fitCenter"
         android:background="@drawable/frame_bg"/>
 
@@ -22,8 +24,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
-            android:src="@drawable/fdone"
-            android:visibility="visible" />
+            android:src="@drawable/f_done"
+            android:visibility="visible"
+            android:background="@drawable/done_bg"/>
     </LinearLayout>
 
 
@@ -31,7 +34,7 @@
         android:id="@+id/clickableView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true" />
+        android:layout_centerInParent="true"/>
 
 <!--    <TextView-->
 <!--        android:id="@+id/tvThemeNew"-->

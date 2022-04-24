@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Camera;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.CornerPathEffect;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -12,6 +14,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.os.Handler;
 
 import androidx.core.internal.view.SupportMenu;
 
@@ -40,10 +43,11 @@ public class KessiMaskBitmap3D {
     private static Matrix matrix = new Matrix();
     static final Paint paint = new Paint();
     private static int partNumber = 8;
-    static int[][] randRect = ((int[][]) Array.newInstance(Integer.TYPE, new int[]{20, 20}));
+    static int[][] randRect = ((int[][]) Array.newInstance(Integer.TYPE, new int[]{30, 30}));
     static Random random = new Random();
     public static EFFECT rollMode;
     private static float rotateDegree;
+    private static int num_ran = 1;
 
     public enum EFFECT {
 
@@ -54,6 +58,101 @@ public class KessiMaskBitmap3D {
                 paint.setAntiAlias(true);
                 paint.setStyle(Style.FILL_AND_STROKE);
                 Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+                return mask;
+            }
+        },
+        TEST("TEST") {
+            public Bitmap getMask(int w, int h, int factor) {
+
+                float r = KessiMaskBitmap3D.getRad(w * 2 , h *2 );
+                float f = (r / ((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor);
+
+                Paint paint = new Paint();
+                paint.setColor(-16777216);
+                paint.setAntiAlias(true);
+                paint.setStyle(Style.FILL_AND_STROKE);
+                Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+                float fx = (float) ((w / KessiMaskBitmap3D.ANIMATED_FRAME_CAL) * factor);
+                float fy = (float) ((h / KessiMaskBitmap3D.ANIMATED_FRAME_CAL) * factor);
+                Canvas canvas = new Canvas(mask);
+
+                canvas.drawCircle(((float) w) *3/ 4.0f, ((float) h) *3 / 4.0f,
+                        (KessiMaskBitmap3D.getRad(w * 2, h * 2) / ((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor), paint);
+                drawText(canvas);
+                return mask;
+            }
+        },
+        RANDOM_CIRCLE_OUT("RANDOM_CIRCLE_OUT"){
+            public Bitmap getMask(int w, int h, int factor) {
+
+                Paint paint = new Paint();
+                paint.setColor(-16777216);
+                paint.setAntiAlias(true);
+                paint.setStyle(Style.FILL_AND_STROKE);
+                Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+                Canvas canvas = new Canvas(mask);
+                canvas.drawCircle(((float) w) *num_ran/ 5f, ((float) h) *num_ran/ 5f,
+                        (KessiMaskBitmap3D.getRad(w * 2, h * 2) / ((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor), paint);
+                drawText(canvas);
+                return mask;
+            }
+        },
+        RANDOM_CIRCLE_IN("RANDOM_CIRCLE_IN"){
+            public Bitmap getMask(int w, int h, int factor) {
+
+                Paint paint = new Paint();
+                paint.setColor(-16777216);
+                paint.setAntiAlias(true);
+                paint.setStyle(Style.FILL_AND_STROKE);
+                Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+                Canvas canvas = new Canvas(mask);
+                float r = KessiMaskBitmap3D.getRad(w * 2, h * 2);
+                float f = (r / ((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor);
+                paint.setColor(-16777216);
+                canvas.drawColor(-16777216);
+                paint.setColor(0);
+                paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT));
+                canvas.drawCircle(((float) w) *num_ran/ 5f, ((float) h) *num_ran / 5f,
+                        r - f, paint);
+                drawText(canvas);
+                return mask;
+            }
+        },
+        FAN_TOP_RIGHT("FAN_TOP_RIGHT") {
+            public Bitmap getMask(int w, int h, int factor) {
+                float r = KessiMaskBitmap3D.getRad(w, h);
+
+                Paint paint = new Paint();
+                paint.setColor(-16777216);
+                paint.setAntiAlias(true);
+                paint.setStyle(Style.FILL_AND_STROKE);
+                Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+                Canvas canvas = new Canvas(mask);
+                RectF oval = new RectF();
+                oval.set((((float) w) / 2.0f) - r,((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 3*(((float) h) / 2.0f));
+                float angle = (((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor);
+
+                canvas.drawArc(oval, 270, -angle, false, paint);
+                drawText(canvas);
+                return mask;
+            }
+        },
+        FAN_TOP_LEFT("FAN_TOP_LEFT") {
+            public Bitmap getMask(int w, int h, int factor) {
+                float r = KessiMaskBitmap3D.getRad(w, h);
+
+                Paint paint = new Paint();
+                paint.setColor(-16777216);
+                paint.setAntiAlias(true);
+                paint.setStyle(Style.FILL_AND_STROKE);
+                Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+                Canvas canvas = new Canvas(mask);
+                RectF oval = new RectF();
+                oval.set((((float) w) / 2.0f) - r,((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 3*(((float) h) / 2.0f));
+                float angle = (((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor);
+
+                canvas.drawArc(oval, 270, angle, false, paint);
+                drawText(canvas);
                 return mask;
             }
         },
@@ -717,7 +816,7 @@ public class KessiMaskBitmap3D {
                 paint.setColor(-16777216);
                 paint.setAntiAlias(true);
                 paint.setStyle(Style.FILL_AND_STROKE);
-                canvas.drawCircle(0.0f, (float) h, (((float) Math.sqrt((double) ((w * w) + (h * h)))) / ((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor), paint);
+                //canvas.drawCircle(0.0f, (float) h, (((float) Math.sqrt((double) ((w * w) + (h * h)))) / ((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor), paint);
                 float wf = (float) (w / KessiMaskBitmap3D.ANIMATED_FRAME_CAL);
                 float hf = (float) (h / KessiMaskBitmap3D.ANIMATED_FRAME_CAL);
                 for (int i = 0; i < KessiMaskBitmap3D.randRect.length; i++) {
@@ -728,10 +827,25 @@ public class KessiMaskBitmap3D {
                     KessiMaskBitmap3D.randRect[i][rand] = 1;
                     for (int j = 0; j < KessiMaskBitmap3D.randRect[i].length; j++) {
                         if (KessiMaskBitmap3D.randRect[i][j] == 1) {
-                            canvas.drawRoundRect(new RectF(((float) i) * wf, ((float) j) * hf, (((float) i) + 1.0f) * wf, (((float) j) + 1.0f) * hf), 0.0f, 0.0f, paint);
+                            RectF Round_Rect =  new  RectF(((float) i) * wf, ((float) j) * hf, (((float) i) + 1.0f) * wf, (((float) j) + 1.0f) * hf);
+                            canvas.drawRoundRect(Round_Rect, 0.0f, 0.0f, paint);
                         }
                     }
                 }
+                float fx = (float) ((w / KessiMaskBitmap3D.ANIMATED_FRAME_CAL) * factor);
+                float fy = (float) ((h / KessiMaskBitmap3D.ANIMATED_FRAME_CAL) * factor);
+                Path path = new Path();
+
+
+                //btm to top
+                path.lineTo(0.0f, ((float) (w)) + fx);
+                path.lineTo((float) w, ((float) (w)) + fx);
+                path.lineTo((float) w, ((float) (w)) - fx);
+                path.lineTo(0.0f, ((float) (w)) - fx);
+
+
+                path.close();
+                canvas.drawPath(path, paint);
                 drawText(canvas);
                 return mask;
             }
@@ -745,7 +859,7 @@ public class KessiMaskBitmap3D {
                 paint.setColor(-16777216);
                 paint.setAntiAlias(true);
                 paint.setStyle(Style.FILL_AND_STROKE);
-                canvas.drawCircle(((float) w) / 2.0f, ((float) h) / 2.0f, (KessiMaskBitmap3D.getRad(w * 2, h * 2) / ((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor), paint);
+                //canvas.drawCircle(((float) w) / 2.0f, ((float) h) / 2.0f, (KessiMaskBitmap3D.getRad(w * 2, h * 2) / ((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor), paint);
                 float wf = (float) (w / KessiMaskBitmap3D.ANIMATED_FRAME_CAL);
                 float hf = (float) (h / KessiMaskBitmap3D.ANIMATED_FRAME_CAL);
                 for (int i = 0; i < KessiMaskBitmap3D.randRect.length; i++) {
@@ -756,10 +870,25 @@ public class KessiMaskBitmap3D {
                     KessiMaskBitmap3D.randRect[i][rand] = 1;
                     for (int j = 0; j < KessiMaskBitmap3D.randRect[i].length; j++) {
                         if (KessiMaskBitmap3D.randRect[i][j] == 1) {
-                            canvas.drawCircle(i * wf, j * wf, 30, paint);
+                            canvas.drawCircle(i * wf, j * hf, 50, paint);
                         }
                     }
                 }
+//                float fx = (float) ((w / KessiMaskBitmap3D.ANIMATED_FRAME_CAL) * factor);
+//                float fy = (float) ((h / KessiMaskBitmap3D.ANIMATED_FRAME_CAL) * factor);
+//                Path path = new Path();
+//
+//
+//                //btm to top
+//                path.lineTo(0.0f, ((float) (w)) + fx);
+//                path.lineTo((float) w, ((float) (w)) + fx);
+//                path.lineTo((float) w, ((float) (w)) - fx);
+//                path.lineTo(0.0f, ((float) (w)) - fx);
+//
+//
+//                path.close();
+//                canvas.drawPath(path, paint);
+                drawText(canvas);
                 drawText(canvas);
                 return mask;
             }
@@ -1181,4 +1310,8 @@ public class KessiMaskBitmap3D {
         return temp;
     }
 
+    public static void Random_num(){
+        Random random = new Random();
+        num_ran = random.nextInt(5) +1;
+    }
 }
