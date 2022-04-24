@@ -108,6 +108,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                quitSplash();
             }
         });
 
@@ -147,14 +148,7 @@ public class SplashActivity extends AppCompatActivity {
                 openMainActivity();
             }else{
 
-                Toast.makeText(this, "Please allow the permissions to continue", Toast.LENGTH_SHORT).show();
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
-                    }
-                }, 1500);
+                quitSplash();
             }
         }
     }
@@ -166,14 +160,18 @@ public class SplashActivity extends AppCompatActivity {
         if(requestCode == 11 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Environment.isExternalStorageManager()){
            openMainActivity();
         }else{
-            Toast.makeText(this, "Please allow the permissions to continue", Toast.LENGTH_SHORT).show();
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    finish();
-                }
-            }, 1500);
+            quitSplash();
         }
+    }
+
+    private void quitSplash(){
+        Toast.makeText(this, "Please allow the permissions to continue", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        }, 1500);
     }
 }

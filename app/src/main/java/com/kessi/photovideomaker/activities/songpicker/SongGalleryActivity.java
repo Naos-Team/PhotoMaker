@@ -3,18 +3,25 @@ package com.kessi.photovideomaker.activities.songpicker;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.Media;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -27,23 +34,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.webkit.URLUtil;
 import android.widget.AbsoluteLayout.LayoutParams;
+import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.downloader.Error;
+import com.downloader.OnDownloadListener;
+import com.downloader.PRDownloader;
+import com.downloader.PRDownloaderConfig;
+import com.kessi.photovideomaker.AppDatabase;
 import com.kessi.photovideomaker.KessiApplication;
 import com.kessi.photovideomaker.R;
+import com.kessi.photovideomaker.activities.songpicker.roomdb.OnlineSongItem;
+import com.kessi.photovideomaker.activities.songpicker.roomdb.SongDao;
+import com.kessi.photovideomaker.activities.videoeditor.VideoThemeActivity;
 import com.kessi.photovideomaker.util.AdManager;
 import com.kessi.photovideomaker.util.KSUtil;
 
@@ -52,7 +73,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import vcarry.data.MusicData;
 import vcarry.util.FileUtils;
@@ -65,6 +88,7 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
     boolean isFromItemClick = false;
     boolean isPlaying = false;
     MusicAdapter mAdapter;
+    AdapterOnlineMusic adapterOnlineMusic;
     String mArtist;
     boolean mCanSeekAccurately;
     float mDensity;
@@ -90,7 +114,7 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
     int mMarkerTopOffset;
     int mMaxPos;
     ArrayList<MusicData> mPVMWSMusicData;
-    RecyclerView mMusicList;
+    RecyclerView mMusicList, rv_online_music;
     int mOffset;
     int mOffsetGoal;
     ImageView mPlayButton;
@@ -120,16 +144,22 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
     ImageView backimg_music, done_music;
     ImageButton mZoomInButton;
     MusicData selectedPVMWSMusicData;
+    AppDatabase appDatabase;
+    SongDao songDao;
+    RelativeLayout btn_your_music, btn_online_music;
+    private ArrayList<OnlineSongItem> arraylist_online = new ArrayList<>();
 
     ImageButton mZoomOutButton;
     private static final String PREFS_NAME = "preferenceName";
     public static boolean flagsong = false;
 
-
-
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
+        appDatabase = AppDatabase.getInstance(this);
+        songDao = appDatabase.songDao();
+
+        PRDownloader.initialize(getApplicationContext());
 
         mRecordingFilename = null;
         mRecordingUri = null;
@@ -155,9 +185,143 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         mDensity = metrics.density;
         loadGui();
         init();
+        new LoadOnlineSongAsync().execute();
 
         mHandler.postDelayed(mTimerRunnable, 100);
 
+    }
+
+    private class LoadOnlineSongAsync extends AsyncTask<Void, String, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            try{
+                ArrayList<OnlineSongItem> song_list = new ArrayList<>();
+                song_list.add(new OnlineSongItem(1, "Nothing-Like-You---Luke-Combs", "https://bestradiofree.com/country_music_radio/uploads/13516_Nothing-Like-You---Luke-Combs.mp3"));
+                song_list.add(new OnlineSongItem(2, "Blessings - Florida Georgia Line", "https://bestradiofree.com/country_music_radio/uploads/Blessings - Florida Georgia Line.mp3"));
+                song_list.add(new OnlineSongItem(3, "Finish Your Sentences - Carly Pearce. Michael Ray", "https://bestradiofree.com/country_music_radio/uploads/Finish Your Sentences - Carly Pearce. Michael Ray.mp3"));
+                song_list.add(new OnlineSongItem(4, "Anything She Says (feat_ Seaforth) - Mitchell Tenpenny. Seaforth", "https://bestradiofree.com/country_music_radio/uploads/Anything She Says (feat_ Seaforth) - Mitchell Tenpenny. Seaforth.mp3"));
+
+                song_list.forEach(item -> {
+                    if(!songDao.isSongExist(item.getId())){
+                        songDao.insertSong(item);
+                    }
+                });
+
+                arraylist_online = new ArrayList<>(songDao.getAll());
+
+                return true;
+
+            }catch (Exception e){
+                Log.e("SD", e.getMessage());
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+
+            adapterOnlineMusic = new AdapterOnlineMusic(arraylist_online, new OnDownloadSongListener() {
+                @Override
+                public void onDownload(OnlineSongItem item, ProgressBar progressBar, ImageView btn_download, ImageView btn_downloaded) {
+
+                    final Dialog dialog = new Dialog(SongGalleryActivity.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
+
+                    dialog.setContentView(R.layout.dialog_alert);
+
+                    TextView maintext = dialog.findViewById(R.id.maintext);
+                    if(item.isDownload){
+                        maintext.setText("You already have this song. Do you want to download again?");
+                    }else{
+                        maintext.setText("The song will download to your phone. Are your sure?");
+                    }
+                    Button img_btn_yes = dialog.findViewById(R.id.yes);
+                    Button img_btn_no = dialog.findViewById(R.id.no);
+
+                    img_btn_no.setOnClickListener(v ->{
+                        dialog.dismiss();
+                    });
+
+                    img_btn_yes.setOnClickListener(v->{
+                        dialog.dismiss();
+                        startDownload(item, progressBar, btn_download, btn_downloaded);
+                    });
+
+                    dialog.show();
+                }
+
+
+            });
+
+            rv_online_music.setLayoutManager(new LinearLayoutManager(SongGalleryActivity.this));
+            rv_online_music.setAdapter(adapterOnlineMusic);
+            adapterOnlineMusic.notifyDataSetChanged();
+
+        }
+    }
+
+    private void startDownload(OnlineSongItem item, ProgressBar progressBar, ImageView btn_download, ImageView btn_downloaded){
+        progressBar.setVisibility(View.VISIBLE);
+        btn_download.setVisibility(View.GONE);
+        btn_downloaded.setVisibility(View.GONE);
+        String url = item.getUrl();
+        String dirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+        int downloadId = PRDownloader.download(url, dirPath, fileName(url))
+                .build()
+                .start(new OnDownloadListener() {
+                    @Override
+                    public void onDownloadComplete() {
+
+                        progressBar.setVisibility(View.GONE);
+                        btn_download.setVisibility(View.GONE);
+                        btn_downloaded.setVisibility(View.VISIBLE);
+
+                        if(!item.isDownload){
+                            item.setDownload(true);
+                            int index = 0;
+                            while (index < arraylist_online.size()){
+                                if(arraylist_online.get(index).getId() == item.getId()){
+                                    arraylist_online.get(index).isDownload = true;
+                                    break;
+                                }else{
+                                    index++;
+                                }
+                            }
+                            adapterOnlineMusic.notifyDataSetChanged();
+                            AsyncTask.execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    songDao.updateSong(item);
+                                }
+                            });
+                        }
+
+                        new LoadMusics().execute();
+
+                        Toast.makeText(SongGalleryActivity.this, "Download success!", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onError(Error error) {
+                        progressBar.setVisibility(View.GONE);
+                        if(item.isDownload){
+                            btn_download.setVisibility(View.GONE);
+                            btn_downloaded.setVisibility(View.VISIBLE);
+                        }else{
+                            btn_download.setVisibility(View.VISIBLE);
+                            btn_downloaded.setVisibility(View.GONE);
+                        }
+                        Toast.makeText(SongGalleryActivity.this, "Download failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private String fileName(String url){
+        return URLUtil.guessFileName(url, url, getContentResolver().getType(Uri.parse(url)));
     }
 
     public void setTV(){
@@ -199,10 +363,26 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         }
     }
 
-
-
     void bindView() {
         mMusicList = (RecyclerView) findViewById(R.id.rvMusicList);
+        rv_online_music = findViewById(R.id.rv_online_music);
+        btn_online_music = findViewById(R.id.btn_online_music);
+        btn_your_music = findViewById(R.id.btn_your_music);
+        btn_your_music.setOnClickListener((v)->{
+            KSUtil.Bounce(this, btn_your_music);
+            btn_your_music.setBackgroundResource(R.drawable.shape_selected_button);
+            btn_online_music.setBackgroundResource(R.drawable.shape_open_gallery);
+            rv_online_music.setVisibility(View.GONE);
+            mMusicList.setVisibility(View.VISIBLE);
+        });
+        btn_online_music.setOnClickListener((v -> {
+            KSUtil.Bounce(this, btn_online_music);
+            btn_online_music.setBackgroundResource(R.drawable.shape_selected_button);
+            btn_your_music.setBackgroundResource(R.drawable.shape_open_gallery);
+            rv_online_music.setVisibility(View.VISIBLE);
+            mMusicList.setVisibility(View.GONE);
+
+        }));
 
     }
 
@@ -217,7 +397,9 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         mMusicList.setAdapter(mAdapter);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     ArrayList<MusicData> getMusicFiles() {
+        //TODO: fix dont read mp3 file
         ArrayList<MusicData> mPVMWSMusicData = new ArrayList();
         Cursor mCursor = getContentResolver().query(Media.EXTERNAL_CONTENT_URI, new String[]{"_id", "title", "_data", "_display_name", "duration"}, "is_music != 0", null, "title ASC");
         int trackId = mCursor.getColumnIndex("_id");
@@ -1052,6 +1234,7 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
                         e2 = null;
                     } else {
                         errorMessage = getResources().getText(R.string.write_error);
+                        Log.e("Err", e2.getMessage());
                     }
                     final CharSequence finalErrorMessage = errorMessage;
                     final Exception finalException = e2;
@@ -1065,6 +1248,7 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         }.start();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     void afterSavingRingtone(CharSequence title, String outPath, File outFile, int duration) {
         if (outFile.length() <= 512) {
             outFile.delete();
@@ -1083,12 +1267,33 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         values.put("duration", Integer.valueOf(duration));
         values.put("is_music", Boolean.valueOf(true));
         Log.e("audio", "duaration is " + duration);
-        setResult(-1, new Intent().setData(getContentResolver().insert(Media.getContentUriForPath(outPath), values)));
+
+        try{
+            Uri uri = Media.getContentUriForPath(outPath);
+            ContentResolver cs = getContentResolver();
+
+            Cursor c = getContentResolver().query(uri, null, null, null);
+            if (c.getCount() >= 1) {
+                // already inserted, update this row or do sth else
+                setResult(-1, new Intent().setData(uri));
+            } else {
+                // row does not exist, you can insert or do sth else
+                Uri uriData = cs.insert(uri, values);
+                setResult(-1, new Intent().setData(uriData));
+            }
+
+
+
+        }catch (Exception e){
+            Log.e("Err", e.getMessage());
+        }
+
         selectedPVMWSMusicData.track_data = outPath;
 
         selectedPVMWSMusicData.track_duration = (long) (duration * 1000);
         KessiApplication.getInstance().setMusicData(selectedPVMWSMusicData);
         loaderLay.setVisibility(View.GONE);
+
         finish();
 
 
@@ -1181,12 +1386,13 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         ArrayList<MusicData> PVMWSMusicData;
 
         public class Holder extends RecyclerView.ViewHolder {
-            public TextView musicName;
-            public ImageView iv;
+            public TextView musicName, tv_time;
+            ImageView iv;
             public Holder(View v) {
                 super(v);
-                musicName = (TextView) v.findViewById(R.id.musicName);
                 iv = v.findViewById(R.id.iv);
+                tv_time = v.findViewById(R.id.tv_time);
+                musicName = (TextView) v.findViewById(R.id.musicName);
             }
         }
 
@@ -1204,12 +1410,23 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
             holder.musicName.setText(((MusicData) PVMWSMusicData.get(pos)).track_displayName);
 
             if (mSelectedChoice == pos){
-                holder.iv.setImageResource(R.drawable.music_press);
                 holder.musicName.setTextColor(getColor(R.color.music_selected));
+                holder.musicName.setTypeface(null, Typeface.BOLD);
+                holder.iv.setVisibility(View.VISIBLE);
             }else {
-                holder.iv.setImageResource(R.drawable.smusic_ic);
+                holder.musicName.setTypeface(null, Typeface.NORMAL);
                 holder.musicName.setTextColor(getColor(R.color.text_music));
+                holder.iv.setVisibility(View.GONE);
             }
+
+            double sec = (int) (PVMWSMusicData.get(pos).track_duration / 1000);
+
+            int minutes = (int)((sec % 3600) / 60);
+            int seconds = (int) (sec % 60);
+
+            String timeString = String.format("%02d:%02d", minutes, seconds);
+
+            holder.tv_time.setText(timeString);
 
             holder.musicName.setOnClickListener(new OnClickListener() {
                 public void onClick(View arg0) {
@@ -1241,7 +1458,5 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
     protected void onResume() {
         super.onResume();
     }
-
-
 
 }

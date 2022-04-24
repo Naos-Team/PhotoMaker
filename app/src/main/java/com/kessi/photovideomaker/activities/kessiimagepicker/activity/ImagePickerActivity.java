@@ -10,7 +10,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore.Images.Media;
@@ -261,14 +263,15 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
         this.albumAdapter = new AlbumAdapter(this, R.layout.piclist_row_album, this.dataAlbum);
         this.albumAdapter.setOnItem(this);
 
-        if (isPermissionGranted(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            new GetItemAlbum().execute(new Void[0]);
-        } else {
-            requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, READ_STORAGE_CODE);
-        }
+//        if (isPermissionGranted(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+//            new GetItemAlbum().execute(new Void[0]);
+//        } else {
+//            requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, READ_STORAGE_CODE);
+//        }
+
+        new GetItemAlbum().execute(new Void[0]);
 
         updateTxtTotalImage();
-
 
     }
 
