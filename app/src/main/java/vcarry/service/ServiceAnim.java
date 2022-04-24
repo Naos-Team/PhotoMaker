@@ -75,7 +75,7 @@ public class ServiceAnim extends IntentService {
         this.application = KessiApplication.getInstance();
         displayMetrics = getResources().getDisplayMetrics();
         bg = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.back2),
-                displayMetrics.widthPixels, displayMetrics.heightPixels, false);
+                KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, false);
     }
 
     @Deprecated
@@ -125,19 +125,19 @@ public class ServiceAnim extends IntentService {
         int i = 0;
         int img_size = 0;
 
-        ArrayList<Image_in_Background> list_imageinBackground;
-        list_imageinBackground = new ArrayList<>();
+        ArrayList<Image_in_Background> list_imageinBackground = new ArrayList<>();
+        //list_imageinBackground = background_template.getList_image();
         list_imageinBackground.add(
-                new Image_in_Background(39, 189, 356, 151, 350)
+                new Image_in_Background(419, 114, 504, 17, 54)
         );
         list_imageinBackground.add(
                 new Image_in_Background(226, 153, 427, 16, 44)
         );
         list_imageinBackground.add(
-                new Image_in_Background(419, 114, 504, 17, 54)
+                new Image_in_Background(614, 147, 436, 19, 52)
         );
         list_imageinBackground.add(
-                new Image_in_Background(614, 147, 436, 19, 52)
+                new Image_in_Background(39, 189, 356, 151, 350)
         );
         list_imageinBackground.add(
                 new Image_in_Background(809, 190, 354, 99, 230)
@@ -173,7 +173,7 @@ public class ServiceAnim extends IntentService {
                 newFirstBmp = newSecondBmp2;
             }
             int temp_index = (i == list_imageinBackground.size() - 1) ? i : i + 1;
-            Bitmap secondBitmap = ScalingUtilities.checkBitmap(arrayList.get(i + 1), application);
+            Bitmap secondBitmap = ScalingUtilities.checkBitmap(arrayList.get(i+1), application);
             Bitmap temp2 = ScalingUtilities.scaleCenterCrop(secondBitmap, KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT);
             newSecondBmp2 = ScalingUtilities.Paint_Image(secondBitmap, bg, list_imageinBackground.get(temp_index).getLeft_per(), list_imageinBackground.get(temp_index).getTop_per(),
                     list_imageinBackground.get(temp_index).getHeight_per(), list_imageinBackground.get(temp_index).getWidth_ratio(),
