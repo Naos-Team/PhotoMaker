@@ -263,11 +263,11 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
         this.albumAdapter = new AlbumAdapter(this, R.layout.piclist_row_album, this.dataAlbum);
         this.albumAdapter.setOnItem(this);
 
-//        if (isPermissionGranted(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-//            new GetItemAlbum().execute(new Void[0]);
-//        } else {
-//            requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, READ_STORAGE_CODE);
-//        }
+        if (isPermissionGranted(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            new GetItemAlbum().execute(new Void[0]);
+        } else {
+            requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, READ_STORAGE_CODE);
+        }
 
         new GetItemAlbum().execute(new Void[0]);
 

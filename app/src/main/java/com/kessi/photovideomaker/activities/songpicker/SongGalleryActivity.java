@@ -67,6 +67,7 @@ import com.kessi.photovideomaker.activities.songpicker.roomdb.SongDao;
 import com.kessi.photovideomaker.activities.videoeditor.VideoThemeActivity;
 import com.kessi.photovideomaker.util.AdManager;
 import com.kessi.photovideomaker.util.KSUtil;
+import com.xinlan.imageeditlibrary.editimage.utils.FileUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -268,8 +269,13 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         btn_download.setVisibility(View.GONE);
         btn_downloaded.setVisibility(View.GONE);
         String url = item.getUrl();
-        String dirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-        int downloadId = PRDownloader.download(url, dirPath, fileName(url))
+        String dirPath = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+
+        String dirPath1 =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                + "/" + getResources().getString(R.string.app_name)
+                + "/song" ;
+//        String dirPath = FileUtils.APP_DIRECTORY.getPath() + "/song";
+        int downloadId = PRDownloader.download(url, dirPath1, fileName(url))
                 .build()
                 .start(new OnDownloadListener() {
                     @Override
@@ -400,8 +406,19 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
     @RequiresApi(api = Build.VERSION_CODES.Q)
     ArrayList<MusicData> getMusicFiles() {
         //TODO: fix dont read mp3 file
+//        String dirPath0 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+        Uri audioCollection;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            audioCollection = MediaStore.Audio.Media
+                    .getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+        } else {
+            audioCollection = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        }
+
+        String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0 ";
+
         ArrayList<MusicData> mPVMWSMusicData = new ArrayList();
-        Cursor mCursor = getContentResolver().query(Media.EXTERNAL_CONTENT_URI, new String[]{"_id", "title", "_data", "_display_name", "duration"}, "is_music != 0", null, "title ASC");
+        Cursor mCursor = getContentResolver().query(audioCollection, new String[]{"_id", "title", "_data", "_display_name", "duration"}, selection, null, "title ASC");
         int trackId = mCursor.getColumnIndex("_id");
         int trackTitle = mCursor.getColumnIndex("title");
         int trackDisplayName = mCursor.getColumnIndex("_display_name");
