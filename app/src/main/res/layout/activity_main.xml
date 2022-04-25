@@ -107,7 +107,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <LinearLayout
-                                android:id="@+id/btn_start"
+                                android:id="@+id/btn_frame"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:layout_margin="5dp"

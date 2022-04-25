@@ -38,6 +38,7 @@ import com.kessi.photovideomaker.R;
 import com.kessi.photovideomaker.activities.kessiimagepicker.activity.ImagePickerActivity;
 import com.kessi.photovideomaker.activities.myalbum.MyAlbumActivity;
 import com.kessi.photovideomaker.activities.myalbum.MyVideoAdapter;
+import com.kessi.photovideomaker.activities.photoframe.BackgroundFrameActivity;
 import com.kessi.photovideomaker.util.AdManager;
 import com.kessi.photovideomaker.util.Animatee;
 import com.kessi.photovideomaker.util.KSUtil;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
 //    ImageView mainBg, icon, btnStart, btnAllVideo, rateIV, shareIV, privacyIV, moreIV;
-    LinearLayout btnLay, btnSlide, btnMore;
+    LinearLayout btnLay, btnSlide, btnMore, btn_frame;
     TextView tv_empty;
     DrawerLayout drawer;
     NavigationView navigationView;
@@ -177,6 +178,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 },100);
         }));
+
+        btn_frame = findViewById(R.id.btn_frame);
+        btn_frame.setOnClickListener(v ->{
+            KSUtil.Bounce(this, btn_frame);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+                openAccessFileDialog();
+            }else{
+                if (!checkPermissions(MainActivity.this, permissionsList)) {
+                    ActivityCompat.requestPermissions(MainActivity.this, permissionsList, 21);
+
+                } else {
+                    Intent mIntent = new Intent(MainActivity.this, BackgroundFrameActivity.class);
+                    startActivity(mIntent);
+                    Animatee.animateSlideUp(MainActivity.this);
+                }
+            }
+        });
 
         btnMore = findViewById(R.id.btn_more);
         btnMore.setOnClickListener((v) -> {

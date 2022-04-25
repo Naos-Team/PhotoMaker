@@ -26,9 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Gallery"
-            android:textStyle="bold"
             android:textColor="@color/toptextcolor"
-            android:textSize="@dimen/_14sdp" />
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/btnDone"
