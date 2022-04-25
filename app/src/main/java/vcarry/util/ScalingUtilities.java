@@ -105,6 +105,19 @@ public class ScalingUtilities {
         return cs;
     }
 
+    public static Bitmap Paint_Image(Bitmap bitmap, Bitmap bgBitmap, int left_per, int top_per, int height_per, int width_ratio, int height_ratio){// ratio width/height
+
+        Bitmap cs = bgBitmap.copy(bgBitmap.getConfig(), true);
+        int height = bgBitmap.getHeight()*height_per/1000;
+        Canvas canvas = new Canvas(cs);
+
+        bitmap = scaleCenterCrop(bitmap, height * width_ratio/height_ratio, height);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(bitmap, height * width_ratio/height_ratio, height, true),
+                bgBitmap.getHeight()*left_per/1000 , bgBitmap.getHeight()*top_per/1000, new Paint());
+
+        return cs;
+    }
+
     public static Bitmap ConvetrSameSizeTransBg(Bitmap originalImage, int mDisplayWidth, int mDisplayHeight) {
         Bitmap bitmap = originalImage;
         Bitmap cs = Bitmap.createBitmap(mDisplayWidth, mDisplayHeight, Config.ARGB_8888);

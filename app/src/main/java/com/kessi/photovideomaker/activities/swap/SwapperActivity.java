@@ -238,6 +238,7 @@ public class SwapperActivity extends AppCompatActivity implements View.OnClickLi
             application.isEditEnable = false;
 
             application.selectedImages.clear();
+            KSUtil.videoPathList.add(0, KSUtil.videoPathList.get(0));
             for (int i = 0; i < KSUtil.videoPathList.size(); i++) {
                 ImageData idata = new ImageData();
                 idata.setImagePath(KSUtil.videoPathList.get(i));

@@ -202,12 +202,73 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@color/bottom_bg_color" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMusicList"
-            android:background="#b5e3d4"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.0" />
+            android:layout_weight="1.0"
+            android:background="#b5e3d4"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:id="@+id/btn_your_music"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:background="@drawable/shape_selected_button"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="Your music"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/btn_online_music"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:background="@drawable/shape_open_gallery"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="Online music"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMusicList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#b5e3d4" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="gone"
+                    android:id="@+id/rv_online_music"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#b5e3d4" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
 
         <include layout="@layout/ad_banner_lay"/>
     </LinearLayout>

@@ -72,22 +72,28 @@ public class IntroActivity extends AppCompatActivity {
         adapter = new IntroViewPagerAdapter(this, arrayList, () ->{
             new Handler().postDelayed(() -> {
 
-                if (!checkPermissions(IntroActivity.this, permissionsList)) {
-                    ActivityCompat.requestPermissions(IntroActivity.this, permissionsList, 21);
-
-                } else {
-
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
-                        openAccessFileDialog();
-                    }else{
-                        KSUtil.fromAlbum = false;
-                        Intent mIntent = new Intent(IntroActivity.this, ImagePickerActivity.class);
-                        mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
-                        mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
-                        startActivity(mIntent);
-                    }
-                }
+                KSUtil.fromAlbum = false;
+                Intent mIntent = new Intent(IntroActivity.this, ImagePickerActivity.class);
+                mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
+                mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
+                startActivity(mIntent);
+//
+//                if (!checkPermissions(IntroActivity.this, permissionsList)) {
+//                    ActivityCompat.requestPermissions(IntroActivity.this, permissionsList, 21);
+//
+//                } else {
+//
+//
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+//                        openAccessFileDialog();
+//                    }else{
+//                        KSUtil.fromAlbum = false;
+//                        Intent mIntent = new Intent(IntroActivity.this, ImagePickerActivity.class);
+//                        mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MAX_IMAGE, 30);
+//                        mIntent.putExtra(ImagePickerActivity.KEY_LIMIT_MIN_IMAGE, 4);
+//                        startActivity(mIntent);
+//                    }
+//                }
 
             },100);
         });
