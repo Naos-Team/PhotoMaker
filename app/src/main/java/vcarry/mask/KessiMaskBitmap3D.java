@@ -58,6 +58,16 @@ public class KessiMaskBitmap3D {
                 paint.setAntiAlias(true);
                 paint.setStyle(Style.FILL_AND_STROKE);
                 Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+                Canvas canvas = new Canvas(mask);
+                Path path = new Path();
+                path.moveTo(0.0f, 0.0f);
+                path.lineTo(h, 0.0f);
+                path.lineTo(w, h);
+                path.lineTo(0.0f, h);
+                path.lineTo(0.0f, 0.0f);
+                path.close();
+                canvas.drawPath(path, paint);
+                drawText(canvas);
                 return mask;
             }
         },

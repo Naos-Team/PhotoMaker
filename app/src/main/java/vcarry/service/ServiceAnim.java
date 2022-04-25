@@ -51,7 +51,7 @@ public class ServiceAnim extends IntentService {
     int totalImages;
     DisplayMetrics displayMetrics;
     private static Background_Template background_template;
-    Bitmap bg;
+    Bitmap bg, bg_cushion, bg_cushion_black;
 
     public static Background_Template getBackground_template() {
         return background_template;
@@ -75,6 +75,10 @@ public class ServiceAnim extends IntentService {
         this.application = KessiApplication.getInstance();
         displayMetrics = getResources().getDisplayMetrics();
         bg = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.back2),
+                KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, false);
+        bg_cushion = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_cushion),
+                KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, false);
+        bg_cushion_black = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_cushion_black),
                 KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, false);
     }
 
@@ -151,8 +155,7 @@ public class ServiceAnim extends IntentService {
             if (i == 0) {
 //                Log.e("pathsssas",arrayList.get(i));
                 firstBitmap = ScalingUtilities.checkBitmap(arrayList.get(i), application);
-                temp = ScalingUtilities.scaleCenterCrop(firstBitmap, KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT);
-                newFirstBmp = ScalingUtilities.Paint_Image(firstBitmap, bg, list_imageinBackground.get(i).getLeft_per(), list_imageinBackground.get(i).getTop_per(),
+                newFirstBmp = ScalingUtilities.Paint_Image(bg_cushion, bg, list_imageinBackground.get(i).getLeft_per(), list_imageinBackground.get(i).getTop_per(),
                         list_imageinBackground.get(i).getHeight_per(), list_imageinBackground.get(i).getWidth_ratio(),
                         list_imageinBackground.get(i).getHeight_ratio());
                 bg = newFirstBmp;
@@ -172,12 +175,10 @@ public class ServiceAnim extends IntentService {
                 }
                 newFirstBmp = newSecondBmp2;
             }
-            int temp_index = (i == list_imageinBackground.size() - 1) ? i : i + 1;
             Bitmap secondBitmap = ScalingUtilities.checkBitmap(arrayList.get(i+1), application);
-            Bitmap temp2 = ScalingUtilities.scaleCenterCrop(secondBitmap, KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT);
-            newSecondBmp2 = ScalingUtilities.Paint_Image(secondBitmap, bg, list_imageinBackground.get(temp_index).getLeft_per(), list_imageinBackground.get(temp_index).getTop_per(),
-                    list_imageinBackground.get(temp_index).getHeight_per(), list_imageinBackground.get(temp_index).getWidth_ratio(),
-                    list_imageinBackground.get(temp_index).getHeight_ratio());
+            newSecondBmp2 = ScalingUtilities.Paint_Image(secondBitmap, bg, list_imageinBackground.get(i).getLeft_per(), list_imageinBackground.get(i).getTop_per(),
+                    list_imageinBackground.get(i).getHeight_per(), list_imageinBackground.get(i).getWidth_ratio(),
+                    list_imageinBackground.get(i).getHeight_ratio());
             bg = newSecondBmp2;
 //
 //            temp2.recycle();
@@ -298,7 +299,7 @@ public class ServiceAnim extends IntentService {
 //                Log.e("pathsssas",arrayList.get(i));
                 firstBitmap = ScalingUtilities.checkBitmap(arrayList.get(i), application);
                 temp = ScalingUtilities.scaleCenterCrop(firstBitmap, KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT);
-                newFirstBmp = ScalingUtilities.ConvetrSameSize(firstBitmap, temp, KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, Utils.DEFAULT_FONT_SCALE, 0.0f);
+                newFirstBmp = ScalingUtilities.ConvetrSameSize(bg_cushion_black, temp, KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, Utils.DEFAULT_FONT_SCALE, 0.0f);
                 //   temp.recycle();
                 firstBitmap.recycle();
                 System.gc();
