@@ -6,11 +6,15 @@ public class Image_Button {
     private ImageView img_Main;
     private ImageView img_Edit;
     private ImageView img_ReChoice;
+    private String dir;
+    private boolean first_time;
 
     public Image_Button(ImageView img_Main, ImageView img_Edit, ImageView img_ReChoice) {
         this.img_Main = img_Main;
         this.img_Edit = img_Edit;
         this.img_ReChoice = img_ReChoice;
+        this.first_time = true;
+        this.dir = "";
     }
 
     public ImageView getImg_Main() {
@@ -35,5 +39,21 @@ public class Image_Button {
 
     public void setImg_ReChoice(ImageView img_ReChoice) {
         this.img_ReChoice = img_ReChoice;
+    }
+
+    public boolean isFirst_time() {
+        return first_time;
+    }
+
+    public void setFirst_time(boolean first_time) {
+        this.first_time = first_time;
+    }
+
+    public String getDir() {
+        return dir;
+    }
+
+    public void setDir(String dir) {
+        this.dir = dir;
     }
 }
