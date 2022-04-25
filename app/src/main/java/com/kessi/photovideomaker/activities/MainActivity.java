@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     ImageView iv_hamburger;
     int FLAG_VIDEO = 21;
+    int RETURN_CODE = 14;
     ArrayList<String> videoPath;
     RecyclerView rv;
     MyVideoAdapter videoAdapter;
@@ -190,9 +191,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 KSUtil.fromAlbum = true;
                 AdManager.adCounter = AdManager.adDisplayCounter;
                 if (!AdManager.isloadFbMAXAd) {
-                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), 0);
+                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
                 } else {
-                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), 0);
+                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
                 }
             }
         });
@@ -361,6 +362,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Animatee.animateSlideUp(MainActivity.this);
                 startActivity(mIntent);
             }
+        }
+        else if(resultCode == RESULT_CANCELED && requestCode == RETURN_CODE){
+            videoLoader();
         }
     }
 }

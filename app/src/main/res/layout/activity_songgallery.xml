@@ -260,7 +260,7 @@
                     android:background="#b5e3d4" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/rv_online_music"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
