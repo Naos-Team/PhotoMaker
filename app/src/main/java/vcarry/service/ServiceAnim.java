@@ -130,22 +130,7 @@ public class ServiceAnim extends IntentService {
         int img_size = 0;
 
         ArrayList<Image_in_Background> list_imageinBackground = new ArrayList<>();
-        //list_imageinBackground = background_template.getList_image();
-        list_imageinBackground.add(
-                new Image_in_Background(419, 114, 504, 17, 54)
-        );
-        list_imageinBackground.add(
-                new Image_in_Background(226, 153, 427, 16, 44)
-        );
-        list_imageinBackground.add(
-                new Image_in_Background(614, 147, 436, 19, 52)
-        );
-        list_imageinBackground.add(
-                new Image_in_Background(39, 189, 356, 151, 350)
-        );
-        list_imageinBackground.add(
-                new Image_in_Background(809, 190, 354, 99, 230)
-        );
+        list_imageinBackground = background_template.getList_image();
 
         while (i < arrayList.size() - 1 && isSameTheme() && !KessiApplication.isBreak) {
             Bitmap newFirstBmp;
