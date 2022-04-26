@@ -68,6 +68,21 @@
             android:name=".activities.process.VideoMakerActivity"
             android:screenOrientation="nosensor" />
         <activity
+            android:name=".activities.SendEmailActivity"
+            android:screenOrientation="nosensor"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <data android:type="linear" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <data android:scheme="mailto" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activities.BgTemplateDetailsActivity"
             android:screenOrientation="nosensor"/>
         <activity

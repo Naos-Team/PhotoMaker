@@ -30,6 +30,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        exclude 'META-INF/NOTICE.md'
+        exclude 'META-INF/LICENSE.md'
+    }
+
+    configurations {
+        all*.exclude group: 'org.glassfish.hk2.external', module:'javax.inject'
+    }
 }
 
 dependencies {
@@ -67,4 +76,8 @@ dependencies {
     implementation 'com.sun.mail:android-mail:1.6.2'
     implementation 'com.sun.mail:android-activation:1.6.2'
     implementation 'com.basgeekball:awesome-validation:4.3'
+
+    implementation 'net.sargue:mailgun:1.10.0'
+
+
 }
