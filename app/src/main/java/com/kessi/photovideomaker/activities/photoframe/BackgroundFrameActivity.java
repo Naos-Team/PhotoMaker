@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.kessi.photovideomaker.R;
+import com.kessi.photovideomaker.activities.BgTemplateDetailsActivity;
+import com.kessi.photovideomaker.activities.videoeditor.VideoThemeActivity;
 import com.kessi.photovideomaker.util.KSUtil;
 
 import java.util.ArrayList;
@@ -32,13 +35,14 @@ public class BackgroundFrameActivity extends AppCompatActivity {
             onBackPressed();
         });
 
-        arrayList_bg = new ArrayList<>();
-        //TODO: add item here
+        arrayList_bg = new ArrayList<>(Background_Template.getTemplate_data(BackgroundFrameActivity.this));
+
 
         adapter = new AdapterBackgroundFrame(arrayList_bg, new BackgroundFrameClickListener() {
             @Override
             public void onClick(int pos) {
-
+                BgTemplateDetailsActivity.setBackground_template(arrayList_bg.get(pos));
+                startActivity(new Intent(BackgroundFrameActivity.this, BgTemplateDetailsActivity.class));
             }
         });
         rv = findViewById(R.id.rv);

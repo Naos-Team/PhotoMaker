@@ -83,8 +83,10 @@ public class ServiceAnim extends IntentService {
         super.onCreate();
         this.application = KessiApplication.getInstance();
         displayMetrics = getResources().getDisplayMetrics();
-        bg =  Bitmap.createScaledBitmap(background_template.getBitmap_background()
-                , KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, false);
+        if(background_template != null){
+            bg =  Bitmap.createScaledBitmap(background_template.getBitmap_background()
+                    , KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, false);
+        }
         bg_cushion = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_cushion),
                 KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, false);
         bg_cushion_black = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_cushion_black),

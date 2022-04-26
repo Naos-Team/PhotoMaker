@@ -23,10 +23,7 @@ import android.widget.Toast;
 
 import com.kessi.photovideomaker.KessiApplication;
 import com.kessi.photovideomaker.R;
-import com.kessi.photovideomaker.activities.kessiimagepicker.activity.ImagePickerActivity;
-import com.kessi.photovideomaker.activities.swap.SwapperActivity;
 import com.kessi.photovideomaker.activities.videoeditor.VideoThemeActivity;
-import com.kessi.photovideomaker.util.AdManager;
 import com.kessi.photovideomaker.util.KSUtil;
 
 import java.io.FileNotFoundException;
@@ -49,6 +46,13 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
     private int REQUEST_CODE_FOLDER = 456, id_now = -1;
     private KessiApplication application;
 
+    public static Background_Template getBackground_template() {
+        return background_template;
+    }
+
+    public static void setBackground_template(Background_Template background_template) {
+        BgTemplateDetailsActivity.background_template = background_template;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +125,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.btn_video_template:
-                new Done().execute();
+                new Done_Template().execute();
                 break;
             default:
                 break;
@@ -254,14 +258,6 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         return image_button;
     }
 
-    public static Background_Template getBackground_template() {
-        return background_template;
-    }
-
-    public static void setBackground_template(Background_Template background_template) {
-        BgTemplateDetailsActivity.background_template = background_template;
-    }
-
     private void unClick(){
         for(int i = 0; i < list_image_button.size(); ++i){
             if(list_image_button.get(i).getImg_Main().getId() == id_now){
@@ -325,7 +321,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         }
     }
 
-    class Done extends AsyncTask<Void, Void, Void> {
+    class Done_Template extends AsyncTask<Void, Void, Void> {
 
         ProgressDialog pd;
         @Override
@@ -352,8 +348,6 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                 idata.setImagePath(KSUtil.videoPathList.get(i));
                 application.selectedImages.add(i, idata);
             }
-
-
 
             return null;
         }

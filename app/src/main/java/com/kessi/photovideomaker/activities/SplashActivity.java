@@ -70,72 +70,32 @@ public class SplashActivity extends AppCompatActivity {
 
         int count = 0;
 
-//        if (file.isDirectory()) {
-//            File[] listFile = file.listFiles();
-//
-//            Arrays.sort(listFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
-//            for (int i = 0; i < listFile.length; i++) {
-//
-//                if (listFile[i].getAbsolutePath().contains(".mp4")) {
-//                    count++;
-//                }
-//
-//            }
-//
-//            if (count > 0) {
-//                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-//            } else {
-//                startActivity(new Intent(SplashActivity.this, IntroActivity.class));
-//            }
-//
-//
-//        } else {
-//            startActivity(new Intent(SplashActivity.this, IntroActivity.class));
-//        }
-//
-//        finish();
-        ArrayList<Frame_in_Background> list_frame = new ArrayList<>();
+        if (file.isDirectory()) {
+            File[] listFile = file.listFiles();
 
-        ArrayList<Image_in_Background> list_image = new ArrayList<>();
+            Arrays.sort(listFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+            for (int i = 0; i < listFile.length; i++) {
 
-        list_image = new ArrayList<>();
-        list_frame = new ArrayList<>();
-        list_frame.add(
-                new Frame_in_Background(0.205f, 0.215f, 0.24f, "w,21:32")
-        );
-        list_frame.add(
-                new Frame_in_Background(0.5305f, 0.195f, 0.155f, "w,7:4.7")
-        );
-        list_frame.add(
-                new Frame_in_Background(0.816f, 0.184f, 0.170f, "w,5:7")
-        );
-        list_frame.add(
-                new Frame_in_Background(0.462f, 0.468f, 0.165f, "w,5:7")
-        );
-        list_frame.add(
-                new Frame_in_Background(0.680f, 0.47f, 0.164f, "w,5:7")
-        );
+                if (listFile[i].getAbsolutePath().contains(".mp4")) {
+                    count++;
+                }
 
-        list_image = new ArrayList<>();
-        list_image.add(
-                new Image_in_Background(173, 161, 240, 21, 32)
-        );
-        list_image.add(
-                new Image_in_Background(407, 164, 157, 70, 47)
-        );
-        list_image.add(
-                new Image_in_Background(715, 153, 170, 50, 70)
-        );
-        list_image.add(
-                new Image_in_Background(408, 393, 164, 50, 70)
-        );
-        list_image.add(
-                new Image_in_Background(600, 393, 164, 50, 70)
-        );
-        BgTemplateDetailsActivity.setBackground_template(new Background_Template("New",
-                BitmapFactory.decodeResource(getResources(), R.drawable.back),
-                list_frame, list_image));
-        startActivity(new Intent(SplashActivity.this, BgTemplateDetailsActivity.class));
+            }
+
+            if (count > 0) {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            } else {
+                startActivity(new Intent(SplashActivity.this, IntroActivity.class));
+            }
+
+
+        } else {
+            startActivity(new Intent(SplashActivity.this, IntroActivity.class));
+        }
+
+        finish();
+
+//        startActivity(new Intent(SplashActivity.this, BgTemplateDetailsActivity.class));
     }
 
     private void openAccessFileDialog() {

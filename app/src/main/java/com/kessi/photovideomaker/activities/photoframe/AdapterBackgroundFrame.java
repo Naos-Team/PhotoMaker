@@ -43,10 +43,11 @@ public class AdapterBackgroundFrame extends RecyclerView.Adapter<AdapterBackgrou
 
         holder.iv.setImageBitmap(bg.getBitmap_background());
         holder.tv_name.setText("Title");
+        int index = position;
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClick(position);
+                listener.onClick(index);
             }
         });
     }
