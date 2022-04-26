@@ -66,6 +66,8 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
     }
 
     void bindView() {
+
+
         backimg_select_img_bg = (ImageView) findViewById(R.id.backimg_select_img_bg);
         img_bg_template_selected = (ImageView) findViewById(R.id.img_bg_template_selected);
         btn_photo_template = (Button) findViewById(R.id.btn_photo_template);
@@ -77,7 +79,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         backimg_select_img_bg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                onBackPressed();
             }
         });
 
@@ -125,7 +127,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.btn_video_template:
-                new Done_Template().execute();
+                new Done_Template_Video().execute();
                 break;
             default:
                 break;
@@ -168,9 +170,12 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 id_now = img_Temp.getId();
-                Intent intent = new Intent(Intent.ACTION_PICK);
+                Intent intent = new Intent();
                 intent.setType("image/*");
-                startActivityIfNeeded(intent, REQUEST_CODE_FOLDER);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityIfNeeded(Intent.createChooser(intent,
+                        "Choose picture"), REQUEST_CODE_FOLDER);
             }
         });
 
@@ -222,9 +227,12 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                     id_now = img_Temp.getId();
                 }
                 if(image_button.isFirst_time()){
-                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    Intent intent = new Intent();
                     intent.setType("image/*");
-                    startActivityIfNeeded(intent, REQUEST_CODE_FOLDER);
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                    startActivityIfNeeded(Intent.createChooser(intent,
+                            "Choose picture"), REQUEST_CODE_FOLDER);
                 } else {
                     if(image_button.getImg_Edit().getVisibility() == View.VISIBLE && image_button.getImg_ReChoice().getVisibility() == View.VISIBLE){
                         image_button.getImg_Edit().setVisibility(View.GONE);
@@ -321,7 +329,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         }
     }
 
-    class Done_Template extends AsyncTask<Void, Void, Void> {
+    class Done_Template_Video extends AsyncTask<Void, Void, Void> {
 
         ProgressDialog pd;
         @Override
@@ -358,7 +366,6 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             pd.dismiss();
             application.isEditEnable = false;
             startActivity(new Intent(BgTemplateDetailsActivity.this, VideoThemeActivity.class));
-
         }
     }
 }
