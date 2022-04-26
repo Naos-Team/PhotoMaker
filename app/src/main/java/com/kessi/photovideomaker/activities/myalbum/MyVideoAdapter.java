@@ -26,11 +26,13 @@ public class MyVideoAdapter extends RecyclerView.Adapter<MyVideoAdapter.FileHold
     ArrayList<String> videoFiles;
     Context context;
     CustomItemClickListener listener;
+    Boolean isGrid = false;
 
-    public MyVideoAdapter(ArrayList<String> fileList, Context context , CustomItemClickListener listener) {
+    public MyVideoAdapter(Boolean isGrid, ArrayList<String> fileList, Context context , CustomItemClickListener listener) {
         this.videoFiles = fileList;
         this.context = context;
         this.listener = listener;
+        this.isGrid = isGrid;
     }
 
     public class FileHolder extends RecyclerView.ViewHolder{
@@ -55,8 +57,9 @@ public class MyVideoAdapter extends RecyclerView.Adapter<MyVideoAdapter.FileHold
     @NonNull
     @Override
     public FileHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.myvideolay, parent, false);
+                .inflate(isGrid?R.layout.myvideolay:R.layout.myvideolay_h, parent, false);
 
         return new FileHolder(itemView);
     }

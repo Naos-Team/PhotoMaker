@@ -38,6 +38,7 @@ import com.xinlan.imageeditlibrary.editimage.EditImageActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -347,6 +348,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                     }
                 }
             } catch (FileNotFoundException e) {
+                Toast.makeText(application, "Something wrong! You can not use this photo!", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }else if (requestCode == ACTION_REQUEST_EDITIMAGE && resultCode == RESULT_OK){
@@ -405,7 +407,19 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             String formattedDate = df.format(c.getTime());
             path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                     + "/" + getResources().getString(R.string.app_name)
+                    + "/Image"
                     + "/" + "image_" + formattedDate + ".png";
+
+            String path1 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                    + "/" + getResources().getString(R.string.app_name)
+                    + "/Image";
+
+            File imageDirectory =  new File(path1);
+
+            if(!imageDirectory.exists()){
+                imageDirectory.mkdir();
+            }
+
             result = bitmaps[0];
             return  BitmapUtils.saveBitmap(bitmaps[0], path);
         }

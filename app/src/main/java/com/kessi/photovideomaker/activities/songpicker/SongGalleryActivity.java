@@ -278,7 +278,7 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
 //        String dirPath = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
         String dirPath1 =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                 + "/" + getResources().getString(R.string.app_name)
-                + "/song";
+                + "/Song";
 //        String dirPath = FileUtils.APP_DIRECTORY.getPath() + "/song";
         int downloadId = PRDownloader.download(url, dirPath1, fileName(url))
                 .build()

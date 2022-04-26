@@ -50,7 +50,7 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.arthenica:ffmpeg-kit-min-gpl:4.5.1'
     implementation 'com.mindorks.android:prdownloader:0.6.0'
-
+    implementation 'com.squareup.picasso:picasso:2.71828'
     // Admob
     implementation 'com.google.android.gms:play-services-ads:20.5.0'
     //    Applovin/MAX ads
