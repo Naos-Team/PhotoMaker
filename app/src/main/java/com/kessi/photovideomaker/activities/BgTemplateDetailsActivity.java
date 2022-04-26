@@ -136,7 +136,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.btn_video_template:
-                new Done_Template().execute();
+                new Done_Template_Video().execute();
                 break;
             default:
                 break;
@@ -362,7 +362,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
 
     }
 
-    class Done_Template extends AsyncTask<Void, Void, Void> {
+    class Done_Template_Video extends AsyncTask<Void, Void, Void> {
 
         ProgressDialog pd;
         @Override
