@@ -51,6 +51,7 @@ public class ServiceAnim extends IntentService {
     int totalImages;
     DisplayMetrics displayMetrics;
     private static Background_Template background_template;
+    private static boolean temp_back = false;
     Bitmap bg, bg_cushion, bg_cushion_black;
 
     public static Background_Template getBackground_template() {
@@ -65,6 +66,14 @@ public class ServiceAnim extends IntentService {
         this(ServiceAnim.class.getName());
     }
 
+    public static boolean isTemp_back() {
+        return temp_back;
+    }
+
+    public static void setTemp_back(boolean temp_back) {
+        ServiceAnim.temp_back = temp_back;
+    }
+
     public ServiceAnim(String name) {
         super(name);
         this.check = false;
@@ -74,8 +83,8 @@ public class ServiceAnim extends IntentService {
         super.onCreate();
         this.application = KessiApplication.getInstance();
         displayMetrics = getResources().getDisplayMetrics();
-        bg = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.back2),
-                KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, false);
+        bg =  Bitmap.createScaledBitmap(background_template.getBitmap_background()
+                , KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, false);
         bg_cushion = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_cushion),
                 KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, false);
         bg_cushion_black = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_cushion_black),
@@ -109,8 +118,11 @@ public class ServiceAnim extends IntentService {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            createImages_With_Background();
-            //createImages();
+            if(temp_back){
+                createImages_With_Background();
+            } else{
+                createImages();
+            }
             return null;
         }
 

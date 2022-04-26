@@ -5,16 +5,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.kessi.photovideomaker.KessiApplication;
 import com.kessi.photovideomaker.R;
+import com.kessi.photovideomaker.activities.kessiimagepicker.activity.ImagePickerActivity;
+import com.kessi.photovideomaker.activities.swap.SwapperActivity;
+import com.kessi.photovideomaker.activities.videoeditor.VideoThemeActivity;
+import com.kessi.photovideomaker.util.AdManager;
+import com.kessi.photovideomaker.util.KSUtil;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -22,7 +35,10 @@ import java.util.ArrayList;
 
 import vcarry.data.Background_Template;
 import vcarry.data.Frame_in_Background;
+import vcarry.data.ImageData;
 import vcarry.data.Image_Button;
+import vcarry.service.ServiceAnim;
+import vcarry.util.ScalingUtilities;
 
 public class BgTemplateDetailsActivity extends AppCompatActivity {
     private ImageView backimg_select_img_bg, img_bg_template_selected;
@@ -31,12 +47,14 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
     private static Background_Template background_template;
     private ArrayList<Image_Button> list_image_button;
     private int REQUEST_CODE_FOLDER = 456, id_now = -1;
+    private KessiApplication application;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bg_template_details);
+        application = KessiApplication.getInstance();
         list_image_button = new ArrayList<>();
 
         bindView();
@@ -52,6 +70,13 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
 
         img_bg_template_selected.setImageBitmap(background_template.getBitmap_background());
 
+        backimg_select_img_bg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         for (Frame_in_Background k : background_template.getList_frame()){
             list_image_button.add(Create_Image_View(k.getHor_bias(), k.getVerti_bias(), k.getHeight_per(), k.getRatio()));
         }
@@ -63,16 +88,54 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         btn_photo_template.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                onResult(btn_photo_template.getId());
             }
         });
 
         btn_video_template.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                onResult(btn_video_template.getId());
             }
         });
+    }
+
+    private void onResult(int id){
+        ArrayList<String> image_path = getImagePath();
+        if(image_path.size() < background_template.getList_frame().size()){
+            Toast.makeText(BgTemplateDetailsActivity.this,
+                    "Please choice enough image to edit", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        switch (id){
+            case R.id.btn_photo_template:
+                Bitmap result = Bitmap.createBitmap(background_template.getBitmap_background());
+                for(int i = 0; i < background_template.getList_frame().size(); ++i){
+                    Bitmap temp = ((BitmapDrawable) list_image_button.get(i).getImg_Main().getDrawable()).getBitmap();
+                    result = ScalingUtilities.Paint_Image(temp, result,
+                            background_template.getList_image().get(i).getLeft_per(),
+                            background_template.getList_image().get(i).getTop_per(),
+                            background_template.getList_image().get(i).getHeight_per(),
+                            background_template.getList_image().get(i).getWidth_ratio(),
+                            background_template.getList_image().get(i).getHeight_ratio());
+                }
+                break;
+            case R.id.btn_video_template:
+                new Done().execute();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private ArrayList<String> getImagePath(){
+        ArrayList<String> image_path = new ArrayList<>();
+        for(Image_Button image_button : list_image_button){
+            if(!image_button.getDir().equals("")){
+                image_path.add(image_button.getDir());
+            }
+        }
+        return image_path;
     }
 
     private void Create_Edit_ReChoice_Button(ImageView img_Temp, Image_Button image_button){
@@ -199,11 +262,6 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         BgTemplateDetailsActivity.background_template = background_template;
     }
 
-    private void onResult(int id){
-
-
-    }
-
     private void unClick(){
         for(int i = 0; i < list_image_button.size(); ++i){
             if(list_image_button.get(i).getImg_Main().getId() == id_now){
@@ -211,6 +269,37 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                 list_image_button.get(i).getImg_ReChoice().setVisibility(View.GONE);
                 break;
             }
+        }
+    }
+
+    public String getPathFromURI(Uri ContentUri) {
+        String res = null;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver()
+                .query(ContentUri, proj, null, null, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+
+            res = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
+            cursor.close();
+        }
+
+
+        return res;
+    }
+
+    private void done(ArrayList<String> listString) {
+        KSUtil.videoPathList.clear();
+        KSUtil.videoPathList = listString;
+        if (KSUtil.videoPathList != null && !KSUtil.videoPathList.isEmpty()) {
+            StringBuilder sb = new StringBuilder("");
+            for (int i = 0; i < KSUtil.videoPathList.size(); i++) {
+                sb.append("Image Path" + (i + 1) + ":" + KSUtil.videoPathList.get(i));
+                sb.append("\n");
+
+            }
+            Log.e("Image", sb.toString());
         }
     }
 
@@ -227,12 +316,55 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                     if(list_image_button.get(i).getImg_Main().getId() == id_now){
                         list_image_button.get(i).getImg_Main().setImageBitmap(bitmap);
                         list_image_button.get(i).setFirst_time(false);
-                        list_image_button.get(i).setDir(uri.toString());
+                        list_image_button.get(i).setDir(getPathFromURI(uri));
                     }
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    class Done extends AsyncTask<Void, Void, Void> {
+
+        ProgressDialog pd;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(BgTemplateDetailsActivity.this);
+            pd.setMessage("Loading....");
+            pd.setCancelable(false);
+            pd.show();
+            done(getImagePath());
+            ServiceAnim.setBackground_template(background_template);
+            ServiceAnim.setTemp_back(true);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            application.isEditEnable = false;
+
+            application.selectedImages.clear();
+            KSUtil.videoPathList.add(0, KSUtil.videoPathList.get(0));
+            for (int i = 0; i < KSUtil.videoPathList.size(); i++) {
+                ImageData idata = new ImageData();
+                idata.setImagePath(KSUtil.videoPathList.get(i));
+                application.selectedImages.add(i, idata);
+            }
+
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            pd.dismiss();
+            application.isEditEnable = false;
+            startActivity(new Intent(BgTemplateDetailsActivity.this, VideoThemeActivity.class));
+
         }
     }
 }

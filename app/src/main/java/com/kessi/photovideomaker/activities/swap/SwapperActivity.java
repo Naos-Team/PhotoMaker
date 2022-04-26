@@ -34,6 +34,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import vcarry.data.ImageData;
+import vcarry.service.ServiceAnim;
 import vcarry.util.FileUtils;
 
 public class SwapperActivity extends AppCompatActivity implements View.OnClickListener {
@@ -230,6 +231,7 @@ public class SwapperActivity extends AppCompatActivity implements View.OnClickLi
             pd.setMessage("Loading....");
             pd.setCancelable(false);
             pd.show();
+            ServiceAnim.setTemp_back(false);
         }
 
         @Override
