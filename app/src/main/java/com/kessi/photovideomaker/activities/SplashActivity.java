@@ -3,15 +3,21 @@ package com.kessi.photovideomaker.activities;
 import static android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +30,7 @@ import com.bumptech.glide.Glide;
 import com.kessi.photovideomaker.R;
 import com.kessi.photovideomaker.activities.intro.IntroActivity;
 import com.kessi.photovideomaker.activities.kessiimagepicker.activity.ImagePickerActivity;
+import com.kessi.photovideomaker.activities.songpicker.SongGalleryActivity;
 import com.kessi.photovideomaker.util.Animatee;
 import com.kessi.photovideomaker.util.KSUtil;
 import com.kessi.photovideomaker.util.Render;
@@ -33,6 +40,10 @@ import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import vcarry.data.Background_Template;
+import vcarry.data.Frame_in_Background;
+import vcarry.data.Image_in_Background;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -46,7 +57,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         new Handler().postDelayed(() -> {
-
 
             checkAccessPermission();
 //            Animatee.animateSplit(SplashActivity.this);
@@ -84,37 +94,65 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         finish();
-        //startActivity(new Intent(SplashActivity.this, MainActivity.class));
+
+//        startActivity(new Intent(SplashActivity.this, BgTemplateDetailsActivity.class));
     }
 
     private void openAccessFileDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//
+//        builder.setTitle("Message");
+//        builder.setMessage("Please give permission to this app to access all file!");
+//
+//        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+//
+//            public void onClick(DialogInterface dialog, int which) {
+//                Intent i = new Intent();
+//                i.setAction(ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+//                startActivityForResult(i, 11);
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//                quitSplash();
+//            }
+//        });
+//
+//        AlertDialog alert = builder.create();
+//        alert.show();
 
-        builder.setTitle("Message");
-        builder.setMessage("Please give permission to this app to access all file!");
+        final Dialog dialog = new Dialog(SplashActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
 
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        dialog.setContentView(R.layout.dialog_alert);
 
-            public void onClick(DialogInterface dialog, int which) {
-                Intent i = new Intent();
-                i.setAction(ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                startActivityForResult(i, 11);
-                dialog.dismiss();
-            }
+        TextView maintext = dialog.findViewById(R.id.maintext);
+        maintext.setText("Please give permission to this app to access all file!");
+
+        RelativeLayout img_btn_yes = dialog.findViewById(R.id.yes);
+        RelativeLayout img_btn_no = dialog.findViewById(R.id.no);
+
+        img_btn_no.setOnClickListener(v ->{
+            dialog.dismiss();
+            quitSplash();
         });
 
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                quitSplash();
-            }
+        img_btn_yes.setOnClickListener(v->{
+            Intent i = new Intent();
+            i.setAction(ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+            startActivityForResult(i, 11);
+            dialog.dismiss();
         });
 
-        AlertDialog alert = builder.create();
-        alert.show();
+        dialog.show();
     }
+
 
     private void checkAccessPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {

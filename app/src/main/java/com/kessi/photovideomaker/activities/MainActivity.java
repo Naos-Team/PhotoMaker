@@ -8,27 +8,23 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -36,18 +32,16 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.kessi.photovideomaker.KessiApplication;
 import com.kessi.photovideomaker.R;
 import com.kessi.photovideomaker.activities.kessiimagepicker.activity.ImagePickerActivity;
 import com.kessi.photovideomaker.activities.myalbum.MyAlbumActivity;
 import com.kessi.photovideomaker.activities.myalbum.MyVideoAdapter;
-import com.kessi.photovideomaker.activities.swap.SwapperActivity;
+import com.kessi.photovideomaker.activities.photoframe.BackgroundFrameActivity;
 import com.kessi.photovideomaker.util.AdManager;
 import com.kessi.photovideomaker.util.Animatee;
 import com.kessi.photovideomaker.util.KSUtil;
-import com.kessi.photovideomaker.util.Render;
 
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 
@@ -61,11 +55,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
 //    ImageView mainBg, icon, btnStart, btnAllVideo, rateIV, shareIV, privacyIV, moreIV;
-    LinearLayout btnLay, btnStart, btnMore;
+    LinearLayout btnLay, btnSlide, btnMore, btn_frame;
+    TextView tv_empty;
     DrawerLayout drawer;
     NavigationView navigationView;
     ImageView iv_hamburger;
     int FLAG_VIDEO = 21;
+    int RETURN_CODE = 14;
     ArrayList<String> videoPath;
     RecyclerView rv;
     MyVideoAdapter videoAdapter;
@@ -153,12 +149,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        rv = (RecyclerView) findViewById(R.id.rv);
+        tv_empty = findViewById(R.id.tv_empty);
         iv_hamburger = findViewById(R.id.iv_hamburger);
         iv_hamburger.setOnClickListener(view -> drawer.openDrawer(GravityCompat.START));
 
-        btnStart = findViewById(R.id.btn_start);
-        btnStart.setOnClickListener((view1 -> {
-            KSUtil.Bounce(this, btnStart);
+        btnSlide = findViewById(R.id.btn_slide);
+        btnSlide.setOnClickListener((view1 -> {
+            KSUtil.Bounce(this, btnSlide);
                 new Handler().postDelayed(() -> {
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
@@ -181,6 +179,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 },100);
         }));
 
+        btn_frame = findViewById(R.id.btn_frame);
+        btn_frame.setOnClickListener(v ->{
+            KSUtil.Bounce(this, btn_frame);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+                openAccessFileDialog();
+            }else{
+                if (!checkPermissions(MainActivity.this, permissionsList)) {
+                    ActivityCompat.requestPermissions(MainActivity.this, permissionsList, 21);
+
+                } else {
+                    Intent mIntent = new Intent(MainActivity.this, BackgroundFrameActivity.class);
+                    startActivity(mIntent);
+                    Animatee.animateSlideUp(MainActivity.this);
+                }
+            }
+        });
+
         btnMore = findViewById(R.id.btn_more);
         btnMore.setOnClickListener((v) -> {
 
@@ -190,9 +205,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 KSUtil.fromAlbum = true;
                 AdManager.adCounter = AdManager.adDisplayCounter;
                 if (!AdManager.isloadFbMAXAd) {
-                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), 0);
+                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
                 } else {
-                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), 0);
+                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
                 }
             }
         });
@@ -232,9 +247,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void videoLoader() {
         getFromStorage();
-        rv = (RecyclerView) findViewById(R.id.rv);
         videoAdapter = new MyVideoAdapter(videoPath, this, (v, position) -> {
-
             Intent intent = new Intent(this, VideoPlayerActivity.class);
             intent.putExtra("video_path", videoPath.get(position));
             startActivityes(intent, FLAG_VIDEO);
@@ -261,6 +274,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         videoPath.add(listFile[i].getAbsolutePath());
                     }
 
+                }
+
+                if(videoPath.isEmpty()){
+                    rv.setVisibility(View.GONE);
+                    tv_empty.setVisibility(View.VISIBLE);
+                }else{
+                    rv.setVisibility(View.VISIBLE);
+                    tv_empty.setVisibility(View.GONE);
                 }
             }
         }
@@ -361,6 +382,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Animatee.animateSlideUp(MainActivity.this);
                 startActivity(mIntent);
             }
+        }
+        else if(resultCode == RESULT_CANCELED && requestCode == RETURN_CODE){
+            videoLoader();
         }
     }
 }

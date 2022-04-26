@@ -1,5 +1,7 @@
 package com.kessi.photovideomaker.activities.songpicker;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
@@ -13,6 +15,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
@@ -239,8 +242,11 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
                     }else{
                         maintext.setText("The song will download to your phone. Are your sure?");
                     }
-                    Button img_btn_yes = dialog.findViewById(R.id.yes);
-                    Button img_btn_no = dialog.findViewById(R.id.no);
+//                    Button img_btn_yes = dialog.findViewById(R.id.yes);
+//                    Button img_btn_no = dialog.findViewById(R.id.no);
+
+                    RelativeLayout img_btn_yes = dialog.findViewById(R.id.yes);
+                    RelativeLayout img_btn_no = dialog.findViewById(R.id.no);
 
                     img_btn_no.setOnClickListener(v ->{
                         dialog.dismiss();
@@ -269,17 +275,43 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         btn_download.setVisibility(View.GONE);
         btn_downloaded.setVisibility(View.GONE);
         String url = item.getUrl();
-        String dirPath = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-
+//        String dirPath = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
         String dirPath1 =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                 + "/" + getResources().getString(R.string.app_name)
-                + "/song" ;
+                + "/song";
 //        String dirPath = FileUtils.APP_DIRECTORY.getPath() + "/song";
         int downloadId = PRDownloader.download(url, dirPath1, fileName(url))
                 .build()
                 .start(new OnDownloadListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onDownloadComplete() {
+
+                        String path = dirPath1 + "/" + fileName(url);
+                        File file = new File(path);
+                        int fileSize = Integer.parseInt(String.valueOf(file.length()/1024));
+                        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+                        mmr.setDataSource(SongGalleryActivity.this, Uri.parse(path));
+                        String durationStr = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+                        int millSecond = Integer.parseInt(durationStr);
+
+                        ContentValues cv = new ContentValues();
+                        cv.put(Media.DATA, path);
+                        cv.put(Media.DISPLAY_NAME, item.getTitle());
+                        cv.put(Media.TITLE, getResources().getString(R.string.app_name));
+                        cv.put(Media.DURATION, Integer.valueOf(millSecond));
+                        cv.put(Media.IS_MUSIC, Boolean.valueOf(true));
+
+                        Uri uri = Media.getContentUriForPath(path);
+//                        String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0 AND " +
+//                                MediaStore.Audio.Media.DATA + " LIKE '"+ dirPath1+"'";
+
+                        try{
+//                            Cursor c = getContentResolver().query(uri, null, null, null);
+                            getContentResolver().insert(uri, cv);
+                        }catch (Exception e){
+                            Log.e("Err", e.getMessage());
+                        }
 
                         progressBar.setVisibility(View.GONE);
                         btn_download.setVisibility(View.GONE);
@@ -307,7 +339,8 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
 
                         new LoadMusics().execute();
 
-                        Toast.makeText(SongGalleryActivity.this, "Download success!", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(SongGalleryActivity.this, "The song added to Your music!", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -325,6 +358,31 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
                     }
                 });
     }
+
+    private void openOnlineMusicAnimation() {
+
+        ObjectAnimator animation_move_online_in = ObjectAnimator.ofFloat(rv_online_music, "translationX", 0);
+        animation_move_online_in.setDuration(300);
+
+        ObjectAnimator animation_move_music_out = ObjectAnimator.ofFloat(mMusicList, "translationX", -KessiApplication.VIDEO_WIDTH);
+        animation_move_music_out.setDuration(300);
+
+        animation_move_online_in.start();
+        animation_move_music_out.start();
+    }
+
+    private void openMusicListAnimation() {
+        ObjectAnimator animation_move_online_out = ObjectAnimator.ofFloat(rv_online_music, "translationX", KessiApplication.VIDEO_WIDTH);
+        animation_move_online_out.setDuration(300);
+
+        ObjectAnimator animation_move_music_in = ObjectAnimator.ofFloat(mMusicList, "translationX", 0);
+        animation_move_music_in.setDuration(300);
+
+        animation_move_music_in.start();
+        animation_move_online_out.start();
+    }
+
+
 
     private String fileName(String url){
         return URLUtil.guessFileName(url, url, getContentResolver().getType(Uri.parse(url)));
@@ -378,25 +436,34 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
             KSUtil.Bounce(this, btn_your_music);
             btn_your_music.setBackgroundResource(R.drawable.shape_selected_button);
             btn_online_music.setBackgroundResource(R.drawable.shape_open_gallery);
-            rv_online_music.setVisibility(View.GONE);
-            mMusicList.setVisibility(View.VISIBLE);
+//            rv_online_music.setVisibility(View.GONE);
+//            mMusicList.setVisibility(View.VISIBLE);
+
+            openMusicListAnimation();
         });
         btn_online_music.setOnClickListener((v -> {
             KSUtil.Bounce(this, btn_online_music);
             btn_online_music.setBackgroundResource(R.drawable.shape_selected_button);
             btn_your_music.setBackgroundResource(R.drawable.shape_open_gallery);
-            rv_online_music.setVisibility(View.VISIBLE);
-            mMusicList.setVisibility(View.GONE);
+//            rv_online_music.setVisibility(View.VISIBLE);
+//            mMusicList.setVisibility(View.GONE);
+            openOnlineMusicAnimation();
 
         }));
 
     }
 
     void init() {
+
+        ObjectAnimator animation_move_online_out = ObjectAnimator.ofFloat(rv_online_music, "translationX", KessiApplication.VIDEO_WIDTH);
+        animation_move_online_out.setDuration(0);
+        animation_move_online_out.start();
+
         new LoadMusics().execute(new Void[0]);
     }
 
     void setUpRecyclerView() {
+
         mAdapter = new MusicAdapter(mPVMWSMusicData);
         mMusicList.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
         mMusicList.setItemAnimator(new DefaultItemAnimator());

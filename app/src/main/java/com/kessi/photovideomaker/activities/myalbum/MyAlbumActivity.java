@@ -77,6 +77,8 @@ public class MyAlbumActivity extends AppCompatActivity {
                 AdManager.showMaxInterstitial(MyAlbumActivity.this, null, 0);
             }
         } else {
+            Intent returnIntent = new Intent();
+            setResult(RESULT_CANCELED, returnIntent);
             super.onBackPressed();
         }
     }

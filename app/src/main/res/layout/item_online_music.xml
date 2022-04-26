@@ -23,9 +23,8 @@
             android:layout_weight="8"
             android:ellipsize="end"
             android:lines="1"
-            android:text="sdklfjsdklfjsdklf"
-            android:textStyle="bold"
-            android:textColor="@color/text_music"
+            android:text="sdfsdfsd"
+            android:textColor="#504747"
             android:textSize="18dp" />
     </LinearLayout>
 
@@ -48,6 +47,7 @@
             android:id="@+id/btn_download"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:tint="@color/install_song"
             android:layout_centerInParent="true"
             android:src="@drawable/ic_download"
             android:visibility="visible" />

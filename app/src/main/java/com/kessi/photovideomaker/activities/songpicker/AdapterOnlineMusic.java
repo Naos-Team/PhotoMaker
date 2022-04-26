@@ -1,5 +1,7 @@
 package com.kessi.photovideomaker.activities.songpicker;
 
+import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kessi.photovideomaker.R;
@@ -19,6 +22,7 @@ public class AdapterOnlineMusic extends RecyclerView.Adapter<AdapterOnlineMusic.
 
     ArrayList<OnlineSongItem> arrayList;
     OnDownloadSongListener listener;
+    Context mContext;
 
     public AdapterOnlineMusic(ArrayList<OnlineSongItem> arrayList, OnDownloadSongListener listener) {
         this.arrayList = arrayList;
@@ -28,6 +32,7 @@ public class AdapterOnlineMusic extends RecyclerView.Adapter<AdapterOnlineMusic.
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        mContext = parent.getContext();
         return new AdapterOnlineMusic.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_online_music, parent, false));
     }
 
@@ -38,9 +43,13 @@ public class AdapterOnlineMusic extends RecyclerView.Adapter<AdapterOnlineMusic.
         if(item.isDownload){
             holder.btn_redownload.setVisibility(View.VISIBLE);
             holder.btn_download.setVisibility(View.GONE);
+            holder.tv_name.setTextColor(ContextCompat.getColor(mContext, R.color.music_selected));
+            holder.tv_name.setTypeface(null, Typeface.BOLD);
         }else{
             holder.btn_redownload.setVisibility(View.GONE);
             holder.btn_download.setVisibility(View.VISIBLE);
+            holder.tv_name.setTextColor(ContextCompat.getColor(mContext, R.color.tv_default_color));
+            holder.tv_name.setTypeface(null, Typeface.NORMAL);
         }
 
         holder.tv_name.setText(item.getTitle());
