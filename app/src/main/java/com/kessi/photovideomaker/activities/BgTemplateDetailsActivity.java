@@ -6,6 +6,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.app.ProgressDialog;
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -13,8 +15,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Environment;
+import android.provider.DocumentsContract;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -24,10 +30,13 @@ import android.widget.Toast;
 
 import com.kessi.photovideomaker.KessiApplication;
 import com.kessi.photovideomaker.R;
+import com.kessi.photovideomaker.activities.swap.EditImageUtil;
 import com.kessi.photovideomaker.activities.videoeditor.VideoThemeActivity;
 import com.kessi.photovideomaker.util.KSUtil;
 import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
+import com.xinlan.imageeditlibrary.editimage.EditImageActivity;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -48,6 +57,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
     private static Background_Template background_template;
     private ArrayList<Image_Button> list_image_button;
     private int REQUEST_CODE_FOLDER = 456, id_now = -1;
+    private static final int ACTION_REQUEST_EDITIMAGE = 9;
     private KessiApplication application;
 
     public static Background_Template getBackground_template() {
@@ -163,7 +173,9 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         img_Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                id_now = img_Temp.getId();
+                String path =  image_button.getDir();
+                openImageEditor(path);
             }
         });
 
@@ -271,6 +283,12 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         return image_button;
     }
 
+    private void openImageEditor(String path){
+        KSUtil.imgEditorPath = path;
+        File outputFile = EditImageUtil.genEditFile();
+        EditImageActivity.start(this,KSUtil.imgEditorPath,outputFile.getAbsolutePath(),ACTION_REQUEST_EDITIMAGE);
+    }
+
     private void unClick(){
         for(int i = 0; i < list_image_button.size(); ++i){
             if(list_image_button.get(i).getImg_Main().getId() == id_now){
@@ -323,15 +341,31 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 for(int i = 0; i < list_image_button.size(); ++i){
                     if(list_image_button.get(i).getImg_Main().getId() == id_now){
+
                         list_image_button.get(i).getImg_Main().setImageBitmap(bitmap);
                         list_image_button.get(i).setFirst_time(false);
-                        list_image_button.get(i).setDir(getPathFromURI(uri));
+                        list_image_button.get(i).setDir(getPathsFromUri(uri));
                     }
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+        }else if (requestCode == ACTION_REQUEST_EDITIMAGE && resultCode == RESULT_OK){
+            handleEditorImage(data);
         }
+    }
+
+    private void handleEditorImage(Intent data) {
+        String newFilePath = data.getStringExtra("extra_output");
+        boolean isImageEdit = data.getBooleanExtra("image_is_edit", false);
+
+        if (isImageEdit) {
+//            Toast.makeText(this, getString(R.string.save_path, newFilePath), Toast.LENGTH_LONG).show();
+        } else {//Not edited or used the original image
+            newFilePath = data.getStringExtra(EditImageActivity.FILE_PATH);
+        }
+
+
     }
 
     class Done_Template_Image extends AsyncTask<Bitmap, Void, Boolean>{
@@ -415,5 +449,128 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             application.isEditEnable = false;
             startActivity(new Intent(BgTemplateDetailsActivity.this, VideoThemeActivity.class));
         }
+    }
+
+    public String getPathsFromUri(final Uri uri) {
+
+        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+
+        // DocumentProvider
+        if (isKitKat && DocumentsContract.isDocumentUri(getApplicationContext(), uri)) {
+            // ExternalStorageProvider
+            if (isExternalStorageDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                if ("primary".equalsIgnoreCase(type)) {
+                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                }
+
+                // TODO handle non-primary volumes
+            }
+            // DownloadsProvider
+            else if (isDownloadsDocument(uri)) {
+
+                final String id = DocumentsContract.getDocumentId(uri);
+                final Uri contentUri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+                return getDataColumn(getApplicationContext(), contentUri, null, null);
+            }
+            // MediaProvider
+            else if (isMediaDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                Uri contentUri = null;
+                if ("image".equals(type)) {
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
+
+                final String selection = "_id=?";
+                final String[] selectionArgs = new String[] {
+                        split[1]
+                };
+
+                return getDataColumn(getApplicationContext(), contentUri, selection, selectionArgs);
+            }
+        }
+        // MediaStore (and general)
+        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+
+            // Return the remote address
+            if (isGooglePhotosUri(uri))
+                return uri.getLastPathSegment();
+
+            return getDataColumn(getApplicationContext(), uri, null, null);
+        }
+        // File
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+
+        return null;
+    }
+
+    public static String getDataColumn(Context context, Uri uri, String selection,
+                                       String[] selectionArgs) {
+
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {
+                column
+        };
+
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is ExternalStorageProvider.
+     */
+    public static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    public static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is MediaProvider.
+     */
+    public static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is Google Photos.
+     */
+    public static boolean isGooglePhotosUri(Uri uri) {
+        return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 }
