@@ -280,6 +280,8 @@ public class SwapperActivity extends AppCompatActivity implements View.OnClickLi
         KSUtil.imgEditorPath = path;
 
         File outputFile = EditImageUtil.genEditFile();
+        String a = outputFile.getAbsolutePath();
+
         EditImageActivity.start(this,KSUtil.imgEditorPath,outputFile.getAbsolutePath(),ACTION_REQUEST_EDITIMAGE);
 
         Uri uri = getImageContentUri(SwapperActivity.this,new File(KSUtil.imgEditorPath));
