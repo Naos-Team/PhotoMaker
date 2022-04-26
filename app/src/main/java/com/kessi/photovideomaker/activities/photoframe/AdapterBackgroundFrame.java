@@ -42,7 +42,7 @@ public class AdapterBackgroundFrame extends RecyclerView.Adapter<AdapterBackgrou
         Background_Template bg =  arrayList.get(position);
 
         holder.iv.setImageBitmap(bg.getBitmap_background());
-        holder.tv_name.setText("Title");
+        holder.tv_name.setText(arrayList.get(position).getName());
         int index = position;
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
