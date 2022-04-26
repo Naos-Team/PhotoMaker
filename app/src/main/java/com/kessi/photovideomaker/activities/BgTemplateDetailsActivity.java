@@ -8,7 +8,6 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -58,7 +57,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         }
 
         for(Image_Button i : list_image_button){
-            Edit_ReChoice_Button(i.getImg_Main(), i);
+            Create_Edit_ReChoice_Button(i.getImg_Main(), i);
         }
 
         btn_photo_template.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +75,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void Edit_ReChoice_Button(ImageView img_Temp, Image_Button image_button){
+    private void Create_Edit_ReChoice_Button(ImageView img_Temp, Image_Button image_button){
 
         ImageView img_Edit = new ImageView(this);
         ImageView img_ReChoice = new ImageView(this);
