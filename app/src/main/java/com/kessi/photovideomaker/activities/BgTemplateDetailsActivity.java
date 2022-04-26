@@ -391,7 +391,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             String formattedDate = df.format(c.getTime());
             String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                     + "/" + getResources().getString(R.string.app_name)
-                    + "/" + "video_" + formattedDate + ".png";
+                    + "/" + "image_" + formattedDate + ".png";
             result = bitmaps[0];
             return  BitmapUtils.saveBitmap(bitmaps[0], path);
         }
