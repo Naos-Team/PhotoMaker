@@ -53,6 +53,8 @@
         <activity
             android:name=".activities.VideoPlayerActivity"
             android:screenOrientation="nosensor" />
+        <activity android:name=".activities.ImageSaverActivity"
+            android:screenOrientation="nosensor"/>
         <activity
             android:name=".activities.kessiimagepicker.activity.ImagePickerActivity"
             android:screenOrientation="nosensor" />
