@@ -228,25 +228,25 @@ public class Background_Template {
         ArrayList<Image_in_Background> list_image5 = new ArrayList<>();
         list_frame5 = new ArrayList<>();
         list_frame5.add(
-                new Frame_in_Background(0.194f, 0.336f, 0.096f, "w,19.5:28")
+                new Frame_in_Background(0.194f, 0.336f, 0.098f, "w,19.5:28")
         );
         list_frame5.add(
-                new Frame_in_Background(0.382f, 0.195f, 0.052f, "w,10.9:6")
+                new Frame_in_Background(0.3813f, 0.195f, 0.054f, "w,10.9:6")
         );
         list_frame5.add(
-                new Frame_in_Background(0.329f, 0.325f, 0.12f, "w,0.97:1")
+                new Frame_in_Background(0.329f, 0.325f, 0.122f, "w,0.97:1")
         );
         list_frame5.add(
-                new Frame_in_Background(0.5165f, 0.2245f, 0.066f, "w,18:13")
+                new Frame_in_Background(0.5161f, 0.224f, 0.068f, "w,18:13")
         );
         list_frame5.add(
-                new Frame_in_Background(0.587f, 0.418f, 0.1065f, "w,25.6:13")
+                new Frame_in_Background(0.587f, 0.4185f, 0.108f, "w,25.6:13")
         );
         list_frame5.add(
-                new Frame_in_Background(0.67f, 0.162f, 0.133f, "w,3.1:4")
+                new Frame_in_Background(0.672f, 0.16f, 0.1375f, "w,3.1:4")
         );
         list_frame5.add(
-                new Frame_in_Background(0.8f, 0.3425f, 0.067f, "w,7.1:5")
+                new Frame_in_Background(0.8025f, 0.3425f, 0.0693f, "w,7.1:5")
         );
 
         list_image5 = new ArrayList<>();
