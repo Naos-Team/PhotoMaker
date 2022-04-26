@@ -35,11 +35,24 @@ public class ImageSaverActivity extends AppCompatActivity {
     ImageView btnDelete;
     RelativeLayout main, top;
     String path;
+    private static Bitmap img_Result;
+
+    public static Bitmap getImg_Result() {
+        return img_Result;
+    }
+
+    public static void setImg_Result(Bitmap img_Result) {
+        ImageSaverActivity.img_Result = img_Result;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_saver);
+        BindView();
+    }
+
+    void BindView(){
 
         main = findViewById(R.id.main1);
         top = findViewById(R.id.header1);
@@ -47,6 +60,10 @@ public class ImageSaverActivity extends AppCompatActivity {
         frame = findViewById(R.id.frame11);
         imv_saved = findViewById(R.id.imv_saved);
         btnEmail = findViewById(R.id.btnEmail);
+
+        if(img_Result != null){
+            imv_saved.setImageBitmap(img_Result);
+        }
 
 
 //        Drawable dr = getResources().getDrawable(R.drawable.shipbar_round);
@@ -96,6 +113,7 @@ public class ImageSaverActivity extends AppCompatActivity {
         });
 
     }
+
     void share() {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

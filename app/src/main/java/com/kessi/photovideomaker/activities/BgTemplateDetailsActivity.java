@@ -14,6 +14,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -25,10 +26,13 @@ import com.kessi.photovideomaker.KessiApplication;
 import com.kessi.photovideomaker.R;
 import com.kessi.photovideomaker.activities.videoeditor.VideoThemeActivity;
 import com.kessi.photovideomaker.util.KSUtil;
+import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import vcarry.data.Background_Template;
 import vcarry.data.Frame_in_Background;
@@ -125,6 +129,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                             background_template.getList_image().get(i).getWidth_ratio(),
                             background_template.getList_image().get(i).getHeight_ratio());
                 }
+                new Done_Template_Image().execute(result);
                 break;
             case R.id.btn_video_template:
                 new Done_Template_Video().execute();
@@ -325,6 +330,49 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    class Done_Template_Image extends AsyncTask<Bitmap, Void, Boolean>{
+        ProgressDialog pd;
+        Bitmap result;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(BgTemplateDetailsActivity.this);
+            pd.setMessage("Loading....");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(Bitmap... bitmaps) {
+
+            application.isEditEnable = false;
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+            String formattedDate = df.format(c.getTime());
+            String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                    + "/" + getResources().getString(R.string.app_name)
+                    + "/" + "video_" + formattedDate + ".png";
+            result = bitmaps[0];
+            return  BitmapUtils.saveBitmap(bitmaps[0], path);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean b) {
+            super.onPostExecute(b);
+            pd.dismiss();
+            application.isEditEnable = false;
+            if(b){
+                ImageSaverActivity.setImg_Result(result);
+                startActivity(new Intent(BgTemplateDetailsActivity.this, ImageSaverActivity.class));
+            } else {
+                Toast.makeText(BgTemplateDetailsActivity.this, "Error",
+                        Toast.LENGTH_SHORT).show();
             }
         }
     }
