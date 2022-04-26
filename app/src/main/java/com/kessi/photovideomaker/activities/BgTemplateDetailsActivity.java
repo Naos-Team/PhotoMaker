@@ -335,7 +335,6 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 for(int i = 0; i < list_image_button.size(); ++i){
                     if(list_image_button.get(i).getImg_Main().getId() == id_now){
-
                         list_image_button.get(i).getImg_Main().setImageBitmap(bitmap);
                         list_image_button.get(i).setFirst_time(false);
                         list_image_button.get(i).setDir(getPathsFromUri(uri));
@@ -357,6 +356,21 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
 //            Toast.makeText(this, getString(R.string.save_path, newFilePath), Toast.LENGTH_LONG).show();
         } else {//Not edited or used the original image
             newFilePath = data.getStringExtra(EditImageActivity.FILE_PATH);
+        }
+
+        try {
+            File image = new File(newFilePath);
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
+            for(int i = 0; i < list_image_button.size(); ++i){
+                if(list_image_button.get(i).getImg_Main().getId() == id_now){
+                    list_image_button.get(i).getImg_Main().setImageBitmap(bitmap);
+                    list_image_button.get(i).setFirst_time(false);
+                    list_image_button.get(i).setDir(newFilePath);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
