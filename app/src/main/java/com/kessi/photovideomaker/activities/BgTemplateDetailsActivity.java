@@ -371,7 +371,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
     class Done_Template_Image extends AsyncTask<Bitmap, Void, Boolean>{
         ProgressDialog pd;
         Bitmap result;
-
+        String path;
 
         @Override
         protected void onPreExecute() {
@@ -389,7 +389,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             Calendar c = Calendar.getInstance();
             SimpleDateFormat df = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
             String formattedDate = df.format(c.getTime());
-            String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                     + "/" + getResources().getString(R.string.app_name)
                     + "/" + "image_" + formattedDate + ".png";
             result = bitmaps[0];
@@ -402,6 +402,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             pd.dismiss();
             application.isEditEnable = false;
             if(b){
+                ImageSaverActivity.setPath(path);
                 ImageSaverActivity.setImg_Result(result);
                 startActivity(new Intent(BgTemplateDetailsActivity.this, ImageSaverActivity.class));
             } else {

@@ -34,7 +34,7 @@ public class ImageSaverActivity extends AppCompatActivity {
     LinearLayout btnShare, btnRate;
     ImageView btnDelete;
     RelativeLayout main, top;
-    String path;
+    static String path;
     private static Bitmap img_Result;
 
     public static Bitmap getImg_Result() {
@@ -43,6 +43,14 @@ public class ImageSaverActivity extends AppCompatActivity {
 
     public static void setImg_Result(Bitmap img_Result) {
         ImageSaverActivity.img_Result = img_Result;
+    }
+
+    public static String getPath() {
+        return path;
+    }
+
+    public static void setPath(String path) {
+        ImageSaverActivity.path = path;
     }
 
     @Override
