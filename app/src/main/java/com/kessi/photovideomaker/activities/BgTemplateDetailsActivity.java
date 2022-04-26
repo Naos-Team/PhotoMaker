@@ -89,7 +89,10 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         btn_video_template = (Button) findViewById(R.id.btn_video_template);
         layout_bg_template_main = (ConstraintLayout) findViewById(R.id.layout_bg_template_main);
 
-        img_bg_template_selected.setImageBitmap(background_template.getBitmap_background());
+        if (background_template!=null){
+            img_bg_template_selected.setImageBitmap(background_template.getBitmap_background());
+        }
+
 
         backimg_select_img_bg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,9 +101,12 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             }
         });
 
-        for (Frame_in_Background k : background_template.getList_frame()){
-            list_image_button.add(Create_Image_View(k.getHor_bias(), k.getVerti_bias(), k.getHeight_per(), k.getRatio()));
+        if (background_template != null){
+            for (Frame_in_Background k : background_template.getList_frame()){
+                list_image_button.add(Create_Image_View(k.getHor_bias(), k.getVerti_bias(), k.getHeight_per(), k.getRatio()));
+            }
         }
+
 
         for(Image_Button i : list_image_button){
             Create_Edit_ReChoice_Button(i.getImg_Main(), i);
@@ -125,7 +131,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         ArrayList<String> image_path = getImagePath();
         if(image_path.size() < background_template.getList_frame().size()){
             Toast.makeText(BgTemplateDetailsActivity.this,
-                    "Please choice enough image to edit", Toast.LENGTH_SHORT).show();
+                    "Please choose enough image to edit!", Toast.LENGTH_SHORT).show();
             return;
         }
         switch (id){
@@ -167,7 +173,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         image_button.setImg_Edit(img_Edit);
         image_button.setImg_ReChoice(img_ReChoice);
 
-        img_Edit.setImageResource(R.drawable.reedit);
+        img_Edit.setImageResource(R.drawable.edit_chooser);
         img_Edit.setId(View.generateViewId());
         img_Edit.setScaleType(ImageView.ScaleType.CENTER_CROP);
         img_Edit.setVisibility(View.GONE);
@@ -180,7 +186,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             }
         });
 
-        img_ReChoice.setImageResource(R.drawable.sticker_rotate);
+        img_ReChoice.setImageResource(R.drawable.swap_chooser);
         img_ReChoice.setId(View.generateViewId());
         img_ReChoice.setScaleType(ImageView.ScaleType.CENTER_CROP);
         img_ReChoice.setVisibility(View.GONE);
@@ -206,7 +212,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         cs.constrainWidth(img_Edit.getId(), ConstraintSet.MATCH_CONSTRAINT);
         cs.constrainHeight(img_Edit.getId(), ConstraintSet.MATCH_CONSTRAINT);
 
-        cs.connect(img_Edit.getId(), ConstraintSet.BOTTOM, img_Temp.getId(), ConstraintSet.TOP, 12);
+        cs.connect(img_Edit.getId(), ConstraintSet.BOTTOM, img_Temp.getId(), ConstraintSet.TOP, 7);
         cs.connect(img_Edit.getId(), ConstraintSet.END, img_Temp.getId(), ConstraintSet.END);
         cs.connect(img_Edit.getId(), ConstraintSet.START, img_Temp.getId(), ConstraintSet.START);
 
@@ -216,7 +222,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         cs.constrainWidth(img_ReChoice.getId(), ConstraintSet.MATCH_CONSTRAINT);
         cs.constrainHeight(img_ReChoice.getId(), ConstraintSet.MATCH_CONSTRAINT);
 
-        cs.connect(img_ReChoice.getId(), ConstraintSet.TOP, img_Temp.getId(), ConstraintSet.BOTTOM, 12);
+        cs.connect(img_ReChoice.getId(), ConstraintSet.TOP, img_Temp.getId(), ConstraintSet.BOTTOM, 7);
         cs.connect(img_ReChoice.getId(), ConstraintSet.END, img_Temp.getId(), ConstraintSet.END);
         cs.connect(img_ReChoice.getId(), ConstraintSet.START, img_Temp.getId(), ConstraintSet.START);
 
@@ -231,11 +237,16 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
 
         Image_Button image_button = new Image_Button(img_Temp, null, null);
 
-        img_Temp.setImageResource(R.drawable.diamond);
+        img_Temp.setImageResource(R.drawable.add);
+
+
+        if (img_Temp.getWidth()>10 && img_Temp.getHeight()>10){
+            img_Temp.setPadding(30, 30, 30, 30);
+        }
 
         img_Temp.setId(View.generateViewId());
-        img_Temp.setBackgroundColor(getColor(R.color.black));
-        img_Temp.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        img_Temp.setBackgroundColor(getColor(R.color.white));
+        img_Temp.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         img_Temp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -343,6 +354,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                 for(int i = 0; i < list_image_button.size(); ++i){
                     if(list_image_button.get(i).getImg_Main().getId() == id_now){
                         list_image_button.get(i).getImg_Main().setImageBitmap(bitmap);
+                        list_image_button.get(i).getImg_Main().setScaleType(ImageView.ScaleType.CENTER_CROP);
                         list_image_button.get(i).setFirst_time(false);
                         list_image_button.get(i).setDir(getPathsFromUri(uri));
                     }

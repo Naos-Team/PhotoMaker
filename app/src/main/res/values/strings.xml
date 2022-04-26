@@ -44,4 +44,10 @@
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
 
+
+    <!--email-->
+    <string name="name_alert">Please input your name</string>
+    <string name="content_alert">Please input your request</string>
+    <string name="email_alert">Please input valid email</string>
+    <string name="email_admin">lnhu8288@gmail.com</string>
 </resources>

@@ -11,21 +11,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_marginTop="15dp"
-                android:id="@+id/btn_back12"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
-                android:src="@drawable/btnback" />
-
+        <ImageView
+            android:layout_marginTop="15dp"
+            android:id="@+id/btn_back12"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="left"
+            android:src="@drawable/btnback" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,9 +33,6 @@
                 android:textAlignment="gravity"
                 android:textColor="@color/music_selected"
                 android:textSize="22dp" />
-        </RelativeLayout>
-
-
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -68,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:hint="Your email"
+                    android:text="@string/email_admin"
                     android:textColor="@color/music_selected"
                     android:textSize="17dp"/>
 
@@ -120,7 +110,7 @@
                     android:layout_margin="15dp"
                     android:gravity="left"
                     android:layout_width="match_parent"
-                    android:layout_height="320dp"
+                    android:layout_height="300dp"
                     android:background="@null"
                     android:hint="Your name"
                     android:textSize="17dp"
@@ -128,14 +118,15 @@
 
         </androidx.cardview.widget.CardView>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_send_email"
             android:layout_width="100dp"
             android:layout_margin="5dp"
             android:layout_height="50dp"
             android:text="SEND"
+            android:textColor="@color/white"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="@color/waveform_selected"
+            android:background="@drawable/bg_yes_button_for_dialog"
             android:textSize="18dp"
             />
 
