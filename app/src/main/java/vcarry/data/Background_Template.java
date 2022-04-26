@@ -66,7 +66,7 @@ public class Background_Template {
                 new Frame_in_Background(0.205f, 0.215f, 0.24f, "w,21:32")
         );
         list_frame1.add(
-                new Frame_in_Background(0.5305f, 0.195f, 0.155f, "w,7:4.7")
+                new Frame_in_Background(0.5305f, 0.196f, 0.155f, "w,7:4.7")
         );
         list_frame1.add(
                 new Frame_in_Background(0.816f, 0.184f, 0.170f, "w,5:7")
@@ -107,33 +107,33 @@ public class Background_Template {
                 new Frame_in_Background(0.0456f, 0.2935f, 0.3584f, "w,15.1:35")
         );
         list_frame2.add(
-                new Frame_in_Background(0.2672f, 0.2665f, 0.4264f, "w,16:44")
+                new Frame_in_Background(0.267f, 0.2665f, 0.43f, "w,16.23:44")
         );
         list_frame2.add(
-                new Frame_in_Background(0.498f, 0.23f, 0.5f, "w,17:54")
+                new Frame_in_Background(0.498f, 0.227f, 0.51f, "w,17.5:54")
         );
         list_frame2.add(
-                new Frame_in_Background(0.7296f, 0.260f, 0.433f, "w,18.9:52")
+                new Frame_in_Background(0.731f, 0.260f, 0.44f, "w,19.2:52")
         );
         list_frame2.add(
-                new Frame_in_Background(0.955f, 0.293f, 0.354f, "w,9.9:23")
+                new Frame_in_Background(0.9548f, 0.293f, 0.36f, "w,9.82:23")
         );
 
         list_image2 = new ArrayList<>();
         list_image2.add(
-                new Image_in_Background(40, 190, 355, 150, 350)
+                new Image_in_Background(41, 190, 350, 150, 350)
         );
         list_image2.add(
-                new Image_in_Background(226, 153, 429, 160, 440)
+                new Image_in_Background(224, 153, 450, 160, 440)
         );
         list_image2.add(
-                new Image_in_Background(417, 113, 505, 173, 540)
+                new Image_in_Background(413, 113, 535, 173, 540)
         );
         list_image2.add(
-                new Image_in_Background(614, 147, 435, 19, 52)
+                new Image_in_Background(610, 147, 460, 19, 52)
         );
         list_image2.add(
-                new Image_in_Background(809, 190, 354, 99, 230)
+                new Image_in_Background(808, 190, 354,99, 230)
         );
         background_templates.add(new Background_Template("New",
                 BitmapFactory.decodeResource(activity.getResources(), R.drawable.back2),
@@ -144,19 +144,19 @@ public class Background_Template {
         ArrayList<Image_in_Background> list_image3 = new ArrayList<>();
         list_frame3 = new ArrayList<>();
         list_frame3.add(
-                new Frame_in_Background(0.141f, 0.131f, 0.255f, "w,5.17:7")
+                new Frame_in_Background(0.1394f, 0.13f, 0.258f, "w,5.22:7")
         );
         list_frame3.add(
-                new Frame_in_Background(0.141f, 0.450f, 0.1555f, "w,25.7:21")
+                new Frame_in_Background(0.1393f, 0.450f, 0.16f, "w,25.22:21")
         );
         list_frame3.add(
-                new Frame_in_Background(0.47f, 0.1735f, 0.437f, "w,8.9:13")
+                new Frame_in_Background(0.4705f, 0.17f, 0.444f, "w,8.85:13")
         );
         list_frame3.add(
-                new Frame_in_Background(0.809f, 0.115f, 0.160f, "w,25.1:21")
+                new Frame_in_Background(0.811f, 0.115f, 0.162f, "w,25.25:21")
         );
         list_frame3.add(
-                new Frame_in_Background(0.8095f, 0.373f, 0.260f, "w,20:27")
+                new Frame_in_Background(0.809f, 0.372f, 0.2626f, "w,20:27")
         );
 
         list_image3 = new ArrayList<>();
@@ -183,7 +183,7 @@ public class Background_Template {
         ArrayList<Image_in_Background> list_image4 = new ArrayList<>();
         list_frame4 = new ArrayList<>();
         list_frame4.add(
-                new Frame_in_Background(0.229f, 0.268f, 0.118f, "w,6.9:5")
+                new Frame_in_Background(0.229f, 0.268f, 0.117f, "w,6.9:5")
         );
         list_frame4.add(
                 new Frame_in_Background(0.2585f, 0.461f, 0.1625f, "w,25:33")

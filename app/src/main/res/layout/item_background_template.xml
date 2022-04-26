@@ -7,8 +7,8 @@
     android:foreground="?attr/selectableItemBackground"
     android:id="@+id/cv"
     app:cardCornerRadius="20dp"
-    android:layout_marginHorizontal="10dp"
-    android:layout_marginVertical="5dp"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="11dp"
     android:layout_height="200dp">
 
     <RelativeLayout
