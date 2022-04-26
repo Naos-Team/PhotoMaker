@@ -66,6 +66,9 @@
             android:name=".activities.process.VideoMakerActivity"
             android:screenOrientation="nosensor" />
         <activity
+            android:name=".activities.BgTemplateDetailsActivity"
+            android:screenOrientation="nosensor"/>
+        <activity
             android:name="com.xinlan.imageeditlibrary.editimage.EditImageActivity"
             android:screenOrientation="nosensor"
             android:windowSoftInputMode="adjustPan" />

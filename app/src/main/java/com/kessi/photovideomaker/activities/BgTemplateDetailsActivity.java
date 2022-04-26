@@ -57,6 +57,10 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             list_image_button.add(Create_Image_View(k.getHor_bias(), k.getVerti_bias(), k.getHeight_per(), k.getRatio()));
         }
 
+        for(Image_Button i : list_image_button){
+            Edit_ReChoice_Button(i.getImg_Main(), i);
+        }
+
         btn_photo_template.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,19 +76,13 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private Image_Button Create_Image_View(float hor_bias, float verti_bias, float height_per, String ratio){
+    private void Edit_ReChoice_Button(ImageView img_Temp, Image_Button image_button){
 
-        ImageView img_Temp = new ImageView(this);
         ImageView img_Edit = new ImageView(this);
         ImageView img_ReChoice = new ImageView(this);
+        image_button.setImg_Edit(img_Edit);
+        image_button.setImg_ReChoice(img_ReChoice);
 
-        Image_Button image_button = new Image_Button(img_Temp, img_Edit, img_ReChoice);
-
-        img_Temp.setImageResource(R.drawable.diamond);
-
-        img_Temp.setId(View.generateViewId());
-        img_Temp.setBackgroundColor(getColor(R.color.black));
-        img_Temp.setScaleType(ImageView.ScaleType.CENTER_CROP);
         img_Edit.setImageResource(R.drawable.reedit);
         img_Edit.setId(View.generateViewId());
         img_Edit.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -110,47 +108,11 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             }
         });
 
-        img_Temp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(id_now != img_Temp.getId()){
-                    unClick();
-                    id_now = img_Temp.getId();
-                }
-                if(image_button.isFirst_time()){
-                    Intent intent = new Intent(Intent.ACTION_PICK);
-                    intent.setType("image/*");
-                    startActivityIfNeeded(intent, REQUEST_CODE_FOLDER);
-                } else {
-                    if(img_Edit.getVisibility() == View.VISIBLE && img_ReChoice.getVisibility() == View.VISIBLE){
-                        img_Edit.setVisibility(View.GONE);
-                        img_ReChoice.setVisibility(View.GONE);
-                    } else {
-                        img_Edit.setVisibility(View.VISIBLE);
-                        img_ReChoice.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-        });
-        layout_bg_template_main.addView(img_Temp);
         layout_bg_template_main.addView(img_Edit);
         layout_bg_template_main.addView(img_ReChoice);
 
         ConstraintSet cs = new ConstraintSet();
         cs.clone(layout_bg_template_main);
-
-        //set ImageView chinh
-        cs.constrainWidth(img_Temp.getId(), ConstraintSet.MATCH_CONSTRAINT);
-        cs.constrainHeight(img_Temp.getId(), ConstraintSet.MATCH_CONSTRAINT);
-
-        cs.connect(img_Temp.getId(), ConstraintSet.BOTTOM, img_bg_template_selected.getId(), ConstraintSet.BOTTOM);
-        cs.connect(img_Temp.getId(), ConstraintSet.END, img_bg_template_selected.getId(), ConstraintSet.END);
-        cs.connect(img_Temp.getId(), ConstraintSet.START, img_bg_template_selected.getId(), ConstraintSet.START);
-        cs.connect(img_Temp.getId(), ConstraintSet.TOP, img_bg_template_selected.getId(), ConstraintSet.TOP);
-        cs.setHorizontalBias(img_Temp.getId(), hor_bias);
-        cs.setVerticalBias(img_Temp.getId(), verti_bias);
-        cs.constrainPercentHeight(img_Temp.getId(), height_per);
-        cs.setDimensionRatio(img_Temp.getId(), ratio);
 
         cs.constrainWidth(img_Edit.getId(), ConstraintSet.MATCH_CONSTRAINT);
         cs.constrainHeight(img_Edit.getId(), ConstraintSet.MATCH_CONSTRAINT);
@@ -171,6 +133,61 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
 
         cs.setDimensionRatio(img_ReChoice.getId(), "1:1");
         cs.constrainPercentHeight(img_ReChoice.getId(), 0.1f);
+        cs.applyTo(layout_bg_template_main);
+    }
+
+    private Image_Button Create_Image_View(float hor_bias, float verti_bias, float height_per, String ratio){
+
+        ImageView img_Temp = new ImageView(this);
+
+        Image_Button image_button = new Image_Button(img_Temp, null, null);
+
+        img_Temp.setImageResource(R.drawable.diamond);
+
+        img_Temp.setId(View.generateViewId());
+        img_Temp.setBackgroundColor(getColor(R.color.black));
+        img_Temp.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        img_Temp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(id_now != img_Temp.getId()){
+                    unClick();
+                    id_now = img_Temp.getId();
+                }
+                if(image_button.isFirst_time()){
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    startActivityIfNeeded(intent, REQUEST_CODE_FOLDER);
+                } else {
+                    if(image_button.getImg_Edit().getVisibility() == View.VISIBLE && image_button.getImg_ReChoice().getVisibility() == View.VISIBLE){
+                        image_button.getImg_Edit().setVisibility(View.GONE);
+                        image_button.getImg_ReChoice().setVisibility(View.GONE);
+                    } else {
+                        image_button.getImg_Edit().setVisibility(View.VISIBLE);
+                        image_button.getImg_ReChoice().setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+        layout_bg_template_main.addView(img_Temp);
+
+        ConstraintSet cs = new ConstraintSet();
+        cs.clone(layout_bg_template_main);
+
+        //set ImageView chinh
+        cs.constrainWidth(img_Temp.getId(), ConstraintSet.MATCH_CONSTRAINT);
+        cs.constrainHeight(img_Temp.getId(), ConstraintSet.MATCH_CONSTRAINT);
+
+        cs.connect(img_Temp.getId(), ConstraintSet.BOTTOM, img_bg_template_selected.getId(), ConstraintSet.BOTTOM);
+        cs.connect(img_Temp.getId(), ConstraintSet.END, img_bg_template_selected.getId(), ConstraintSet.END);
+        cs.connect(img_Temp.getId(), ConstraintSet.START, img_bg_template_selected.getId(), ConstraintSet.START);
+        cs.connect(img_Temp.getId(), ConstraintSet.TOP, img_bg_template_selected.getId(), ConstraintSet.TOP);
+        cs.setHorizontalBias(img_Temp.getId(), hor_bias);
+        cs.setVerticalBias(img_Temp.getId(), verti_bias);
+        cs.constrainPercentHeight(img_Temp.getId(), height_per);
+        cs.setDimensionRatio(img_Temp.getId(), ratio);
+
         cs.applyTo(layout_bg_template_main);
         return image_button;
     }
