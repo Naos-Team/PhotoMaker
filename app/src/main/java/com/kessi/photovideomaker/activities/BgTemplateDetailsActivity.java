@@ -431,7 +431,6 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             application.isEditEnable = false;
             if(b){
                 ImageSaverActivity.setPath(path);
-                ImageSaverActivity.setImg_Result(result);
                 startActivity(new Intent(BgTemplateDetailsActivity.this, ImageSaverActivity.class));
             } else {
                 Toast.makeText(BgTemplateDetailsActivity.this, "Error",

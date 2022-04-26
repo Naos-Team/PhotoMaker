@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.kessi.photovideomaker.R;
 import com.kessi.photovideomaker.util.KSUtil;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -35,15 +36,6 @@ public class ImageSaverActivity extends AppCompatActivity {
     ImageView btnDelete;
     RelativeLayout main, top;
     static String path;
-    private static Bitmap img_Result;
-
-    public static Bitmap getImg_Result() {
-        return img_Result;
-    }
-
-    public static void setImg_Result(Bitmap img_Result) {
-        ImageSaverActivity.img_Result = img_Result;
-    }
 
     public static String getPath() {
         return path;
@@ -69,10 +61,13 @@ public class ImageSaverActivity extends AppCompatActivity {
         imv_saved = findViewById(R.id.imv_saved);
         btnEmail = findViewById(R.id.btnEmail);
 
-        if(img_Result != null){
-            imv_saved.setImageBitmap(img_Result);
-        }
 
+
+        if(!path.isEmpty()){
+            Picasso.get()
+                    .load(Uri.parse("file://"+ path))
+                    .into(imv_saved);
+        }
 
 //        Drawable dr = getResources().getDrawable(R.drawable.shipbar_round);
 //        Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();

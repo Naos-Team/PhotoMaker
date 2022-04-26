@@ -8,7 +8,7 @@
     app:cardCornerRadius="@dimen/_7sdp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="@dimen/_150sdp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/_140sdp"
         >
 
