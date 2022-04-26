@@ -183,22 +183,22 @@ public class Background_Template {
         ArrayList<Image_in_Background> list_image4 = new ArrayList<>();
         list_frame4 = new ArrayList<>();
         list_frame4.add(
-                new Frame_in_Background(0.229f, 0.268f, 0.117f, "w,6.9:5")
+                new Frame_in_Background(0.228f, 0.2675f, 0.12f, "w,6.9:5")
         );
         list_frame4.add(
-                new Frame_in_Background(0.2585f, 0.461f, 0.1625f, "w,25:33")
+                new Frame_in_Background(0.259f, 0.461f, 0.165f, "w,25:33")
         );
         list_frame4.add(
-                new Frame_in_Background(0.4721f, 0.197f, 0.196f, "w,25.5:25")
+                new Frame_in_Background(0.471f, 0.195f, 0.199f, "w,25.5:25")
         );
         list_frame4.add(
-                new Frame_in_Background(0.4721f, 0.536f, 0.276f, "w,29:41")
+                new Frame_in_Background(0.4710f, 0.537f, 0.282f, "w,29:41")
         );
         list_frame4.add(
-                new Frame_in_Background(0.690f, 0.134f, 0.161f, "w,25.2:33")
+                new Frame_in_Background(0.692f, 0.132f, 0.165f, "w,25.2:33")
         );
         list_frame4.add(
-                new Frame_in_Background(0.845f, 0.3725f, 0.2f, "w,30:21")
+                new Frame_in_Background(0.847f, 0.372f, 0.2015f, "w,30:21")
         );
 
         list_image4 = new ArrayList<>();
@@ -228,25 +228,25 @@ public class Background_Template {
         ArrayList<Image_in_Background> list_image5 = new ArrayList<>();
         list_frame5 = new ArrayList<>();
         list_frame5.add(
-                new Frame_in_Background(0.194f, 0.336f, 0.096f, "w,19.5:28")
+                new Frame_in_Background(0.194f, 0.336f, 0.098f, "w,19.5:28")
         );
         list_frame5.add(
-                new Frame_in_Background(0.382f, 0.195f, 0.052f, "w,10.9:6")
+                new Frame_in_Background(0.3813f, 0.195f, 0.054f, "w,10.9:6")
         );
         list_frame5.add(
-                new Frame_in_Background(0.329f, 0.325f, 0.12f, "w,0.97:1")
+                new Frame_in_Background(0.329f, 0.325f, 0.122f, "w,0.97:1")
         );
         list_frame5.add(
-                new Frame_in_Background(0.5165f, 0.2245f, 0.066f, "w,18:13")
+                new Frame_in_Background(0.5161f, 0.224f, 0.068f, "w,18:13")
         );
         list_frame5.add(
-                new Frame_in_Background(0.587f, 0.418f, 0.1065f, "w,25.6:13")
+                new Frame_in_Background(0.587f, 0.4185f, 0.108f, "w,25.6:13")
         );
         list_frame5.add(
-                new Frame_in_Background(0.67f, 0.162f, 0.133f, "w,3.1:4")
+                new Frame_in_Background(0.672f, 0.16f, 0.1375f, "w,3.1:4")
         );
         list_frame5.add(
-                new Frame_in_Background(0.8f, 0.3425f, 0.067f, "w,7.1:5")
+                new Frame_in_Background(0.8025f, 0.3425f, 0.0693f, "w,7.1:5")
         );
 
         list_image5 = new ArrayList<>();
