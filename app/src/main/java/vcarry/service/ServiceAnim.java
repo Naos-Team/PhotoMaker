@@ -74,7 +74,7 @@ public class ServiceAnim extends IntentService {
         super.onCreate();
         this.application = KessiApplication.getInstance();
         displayMetrics = getResources().getDisplayMetrics();
-        bg = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.back2),
+        bg = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.back7),
                 KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, false);
         bg_cushion = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.bg_cushion),
                 KessiApplication.VIDEO_WIDTH, KessiApplication.VIDEO_HEIGHT, false);
@@ -132,20 +132,79 @@ public class ServiceAnim extends IntentService {
         ArrayList<Image_in_Background> list_imageinBackground = new ArrayList<>();
         //list_imageinBackground = background_template.getList_image();
         list_imageinBackground.add(
-                new Image_in_Background(419, 114, 504, 17, 54)
-        );
+                new Image_in_Background(113, 220, 70, 387, 530)
+        );//1
         list_imageinBackground.add(
-                new Image_in_Background(226, 153, 427, 16, 44)
-        );
+                new Image_in_Background(220, 184, 100, 27, 38)
+        );//2
         list_imageinBackground.add(
-                new Image_in_Background(614, 147, 436, 19, 52)
-        );
+                new Image_in_Background(352, 222, 75, 37, 53)
+        );//3
         list_imageinBackground.add(
-                new Image_in_Background(39, 189, 356, 151, 350)
-        );
+                new Image_in_Background(464, 257, 50, 27, 19)
+        );//4
         list_imageinBackground.add(
-                new Image_in_Background(809, 190, 354, 99, 230)
-        );
+                new Image_in_Background(596, 225, 70, 385, 530)
+        );//5
+
+        list_imageinBackground.add(
+                new Image_in_Background(709, 184, 100, 14, 19)
+        );//6
+        list_imageinBackground.add(
+                new Image_in_Background(838, 219, 70, 387, 530)
+        );//7
+        list_imageinBackground.add(
+                new Image_in_Background(46, 332, 100, 56, 77)
+        );//8
+        list_imageinBackground.add(
+                new Image_in_Background(175, 332, 100, 56, 77)
+        );//9
+        list_imageinBackground.add(
+                new Image_in_Background(302, 344, 98, 192, 110)
+        );//10
+        list_imageinBackground.add(
+                new Image_in_Background(529, 343,99, 19, 11)
+        );//11
+        list_imageinBackground.add(
+                new Image_in_Background(756, 331, 100, 37, 53)
+        );//12
+        list_imageinBackground.add(
+                new Image_in_Background(880, 331, 100, 37, 53)
+        );//13
+        list_imageinBackground.add(
+                new Image_in_Background(101, 485, 100, 37, 53)
+        );//14
+        list_imageinBackground.add(
+                new Image_in_Background(215, 485, 71, 78, 55)
+        );//15
+        list_imageinBackground.add(
+                new Image_in_Background(690, 485, 70, 78, 55)
+        );//16
+        list_imageinBackground.add(
+                new Image_in_Background(832, 486, 99, 56, 77)
+        );//17
+        list_imageinBackground.add(
+                new Image_in_Background(220, 597, 70, 78, 55)
+        );//18
+        list_imageinBackground.add(
+                new Image_in_Background(359, 596, 70, 13, 18)
+        );//19
+        list_imageinBackground.add(
+                new Image_in_Background(452, 590, 170, 41, 70)
+        );//20
+        list_imageinBackground.add(
+                new Image_in_Background(596, 595, 70, 130, 185)
+        );//21
+        list_imageinBackground.add(
+                new Image_in_Background(692, 597, 70, 78, 55)
+        );//22
+        list_imageinBackground.add(
+                new Image_in_Background(339, 705, 50, 27, 19)
+        );//23
+        list_imageinBackground.add(
+                new Image_in_Background(595,705, 50, 27, 19)
+        );//24
+
 
         while (i < arrayList.size() - 1 && isSameTheme() && !KessiApplication.isBreak) {
             Bitmap newFirstBmp;

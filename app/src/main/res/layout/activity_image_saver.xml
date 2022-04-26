@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/mainbgcolor"
+    android:keepScreenOn="true"
+    android:id="@+id/main1"
+    tools:context=".activities.ImageSaverActivity"
+    >
+
+    <RelativeLayout
+        android:id="@+id/header1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp">
+
+
+        <ImageView
+            android:id="@+id/btn_back11"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/btnback" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Your result"
+            android:textColor="#388A72"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/btnDelete1"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:padding="@dimen/_3sdp"
+            android:src="@drawable/vdelete" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/vLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header1"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="center"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <FrameLayout
+                android:id="@+id/frame11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/imv_saved"
+                    android:layout_width="@dimen/_205sdp"
+                    android:layout_height="@dimen/_205sdp"
+                    android:layout_gravity="center"
+                    android:background="@color/white" />
+            </FrameLayout>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/vLay"
+        android:layout_alignParentBottom="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="24dp"
+                android:textColor="#286F5A"
+                android:text="Wow, awesome picture!"/>
+
+        <LinearLayout
+            android:layout_marginTop="35dp"
+            android:layout_width="wrap_content"
+            android:id="@+id/btnEmail"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="15dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/email"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="#286F5A"
+                android:text="Email us to save your memory"/>
+
+        </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="#286F5A"
+                android:text="Are you satisfied? Let us know"/>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:id="@+id/btnRate1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/star"
+
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/star"
+                    android:layout_marginLeft="30dp"
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/star"
+                    android:layout_marginLeft="30dp"
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/star"
+                    android:layout_marginLeft="30dp"
+                    />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/star"
+                    android:layout_marginLeft="30dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true">
+
+                    <FrameLayout
+                        android:id="@+id/nativeContainerMAX"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/toptextcolor"
+                        android:paddingBottom="@dimen/_10sdp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                android:textColor="#286F5A"
+                android:text="Share"/>
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:id="@+id/btnShare1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/facebook"
+
+                    />
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/twitter"
+                    android:layout_marginLeft="35dp"
+                    />
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/instagram"
+                    android:layout_marginLeft="35dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:visibility="visible"
+            android:id="@+id/nativeContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

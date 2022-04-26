@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SendEmailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginTop="15dp"
+                android:id="@+id/btn_back12"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/btnback" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:text="Our service includes printing out, framing and delivering your work.
+            The staff will inform you the fee right after we receive your mail."
+                android:textAlignment="gravity"
+                android:textColor="@color/music_selected"
+                android:textSize="22dp" />
+        </RelativeLayout>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="20dp"
+            android:backgroundTint="@color/wavebgcolor">
+
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:src="@drawable/semail"/>
+
+                <EditText
+                    android:id="@+id/send_email"
+                    android:layout_marginLeft="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="Your email"
+                    android:textColor="@color/music_selected"
+                    android:textSize="17dp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="20dp"
+            android:backgroundTint="@color/wavebgcolor">
+
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/sname"/>
+
+                <EditText
+                    android:id="@+id/send_name"
+                    android:layout_marginLeft="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="Your name"
+                    android:textSize="17dp"
+                    android:textColor="@color/music_selected"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="20dp"
+            android:backgroundTint="@color/wavebgcolor">
+
+                <EditText
+                    android:id="@+id/send_content"
+                    android:layout_margin="15dp"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:background="@null"
+                    android:hint="Your name"
+                    android:textSize="17dp"
+                    android:textColor="@color/music_selected"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btn_send_email"
+            android:layout_width="100dp"
+            android:layout_margin="5dp"
+            android:layout_height="50dp"
+            android:text="SEND"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/waveform_selected"
+            android:textSize="18dp"
+            />
+
+
+
+
+    </LinearLayout>
+
+</ScrollView>
