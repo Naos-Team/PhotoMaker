@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -23,18 +24,18 @@ import android.widget.Toast;
 
 import com.kessi.photovideomaker.R;
 import com.kessi.photovideomaker.util.KSUtil;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
 public class ImageSaverActivity extends AppCompatActivity {
 
-    ImageView btnBack, imv_saved;
+    ImageView btnBack, btnDelete;
     LinearLayout btnEmail;
-    FrameLayout frame;
     LinearLayout btnShare, btnRate;
-    ImageView btnDelete;
-    RelativeLayout main, top;
+    RoundedImageView imv_saved;
+    RelativeLayout main;
     static String path;
 
     public static String getPath() {
@@ -55,19 +56,21 @@ public class ImageSaverActivity extends AppCompatActivity {
     void BindView(){
 
         main = findViewById(R.id.main1);
-        top = findViewById(R.id.header1);
         btnBack = findViewById(R.id.btn_back11);
-        frame = findViewById(R.id.frame11);
         imv_saved = findViewById(R.id.imv_saved);
         btnEmail = findViewById(R.id.btnEmail);
-
-
 
         if(!path.isEmpty()){
             Picasso.get()
                     .load(Uri.parse("file://"+ path))
                     .into(imv_saved);
         }
+        imv_saved.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                (getResources()
+                        .getDisplayMetrics().widthPixels));
+        imv_saved.setLayoutParams(params);
 
 //        Drawable dr = getResources().getDrawable(R.drawable.shipbar_round);
 //        Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
