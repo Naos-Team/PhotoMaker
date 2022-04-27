@@ -31,6 +31,7 @@ public enum KessiTheme {
 //            return R.raw.song_2;
 //        }
 //    },
+
     None("None"){
         public ArrayList<EFFECT> getTheme() {
             ArrayList<EFFECT> mEffects = new ArrayList();
@@ -44,6 +45,23 @@ public enum KessiTheme {
 
         public int getThemeDrawable() {
             return R.drawable.t_no;
+        }
+
+        public int getThemeMusic() {
+            return R.raw.song_2;
+        }
+    },
+    CUSTOM("Custom"){
+        public ArrayList<EFFECT> getTheme() {
+            return KessiMaskBitmap3D.getCustom_effect();
+        }
+
+        public ArrayList<EFFECT> getTheme(ArrayList<EFFECT> arrayList) {
+            return new ArrayList();
+        }
+
+        public int getThemeDrawable() {
+            return R.drawable.add;
         }
 
         public int getThemeMusic() {
