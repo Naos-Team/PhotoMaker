@@ -54,6 +54,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -184,15 +185,14 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
             }
         });
         bindView();
+        new LoadOnlineSongAsync().execute();
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         mDensity = metrics.density;
         loadGui();
         init();
-        new LoadOnlineSongAsync().execute();
 
         mHandler.postDelayed(mTimerRunnable, 100);
-
     }
 
     private class LoadOnlineSongAsync extends AsyncTask<Void, String, Boolean>{
@@ -258,10 +258,21 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
                     dialog.show();
                 }
 
+                @Override
+                public void onPlaySong(int position) {
+                    for(int i = 0; i < adapterOnlineMusic.getItemCount(); i++){
+                        if(i != position){
+                            adapterOnlineMusic.notifyItemChanged(i);
+                        }
+                    }
+                }
+
 
             });
-
-            rv_online_music.setLayoutManager(new LinearLayoutManager(SongGalleryActivity.this));
+            LinearLayoutManager llm = new LinearLayoutManager(SongGalleryActivity.this);
+            rv_online_music.setLayoutManager(llm);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rv_online_music.getContext(), llm.getOrientation());
+            rv_online_music.addItemDecoration(dividerItemDecoration);
             rv_online_music.setAdapter(adapterOnlineMusic);
             adapterOnlineMusic.notifyDataSetChanged();
 
@@ -295,17 +306,14 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
 
                         ContentValues cv = new ContentValues();
                         cv.put(Media.DATA, path);
-                        cv.put(Media.DISPLAY_NAME, item.getTitle());
                         cv.put(Media.TITLE, getResources().getString(R.string.app_name));
+                        cv.put(Media.DISPLAY_NAME, item.getTitle());
+                        cv.put(Media.ARTIST, item.getArtist());
                         cv.put(Media.DURATION, Integer.valueOf(millSecond));
                         cv.put(Media.IS_MUSIC, Boolean.valueOf(true));
 
                         Uri uri = Media.getContentUriForPath(path);
-//                        String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0 AND " +
-//                                MediaStore.Audio.Media.DATA + " LIKE '"+ dirPath1+"'";
-
                         try{
-//                            Cursor c = getContentResolver().query(uri, null, null, null);
                             getContentResolver().insert(uri, cv);
                         }catch (Exception e){
                             Log.e("Err", e.getMessage());
@@ -463,8 +471,12 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
     void setUpRecyclerView() {
 
         mAdapter = new MusicAdapter(mPVMWSMusicData);
-        mMusicList.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
+        mMusicList.setLayoutManager(llm);
         mMusicList.setItemAnimator(new DefaultItemAnimator());
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(),
+                llm.getOrientation());
+        mMusicList.addItemDecoration(dividerItemDecoration);
         mMusicList.setAdapter(mAdapter);
     }
 
@@ -483,9 +495,10 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0 ";
 
         ArrayList<MusicData> mPVMWSMusicData = new ArrayList();
-        Cursor mCursor = getContentResolver().query(audioCollection, new String[]{"_id", "title", "_data", "_display_name", "duration"}, selection, null, "title ASC");
+        Cursor mCursor = getContentResolver().query(audioCollection, new String[]{"_id", "title", "artist", "_data", "_display_name", "duration"}, selection, null, "title ASC");
         int trackId = mCursor.getColumnIndex("_id");
         int trackTitle = mCursor.getColumnIndex("title");
+        int trackArtist = mCursor.getColumnIndex("artist");
         int trackDisplayName = mCursor.getColumnIndex("_display_name");
         int trackData = mCursor.getColumnIndex("_data");
         int trackDuration = mCursor.getColumnIndex("duration");
@@ -496,6 +509,7 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
                     MusicData musicData = new MusicData();
                     musicData.track_Id = mCursor.getLong(trackId);
                     musicData.track_Title = mCursor.getString(trackTitle);
+                    musicData.track_artist = mCursor.getString(trackArtist);
                     musicData.track_data = path;
                     musicData.track_duration = mCursor.getLong(trackDuration);
                     musicData.track_displayName = mCursor.getString(trackDisplayName);
@@ -1303,6 +1317,7 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
                     final String str = outPath;
                     final int i = duration;
                     mHandler.post(new Runnable() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
                         public void run() {
                             afterSavingRingtone(charSequence, str, outFile, i);
                         }
@@ -1435,6 +1450,7 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
             loaderLay.setVisibility(View.VISIBLE);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.Q)
         protected Void doInBackground(Void... paramVarArgs) {
             mPVMWSMusicData = getMusicFiles();
             if (mPVMWSMusicData.size() > 0) {
@@ -1468,13 +1484,14 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         ArrayList<MusicData> PVMWSMusicData;
 
         public class Holder extends RecyclerView.ViewHolder {
-            public TextView musicName, tv_time;
-            ImageView iv;
+            public TextView musicName, tv_time, tv_artist;
+            public ImageView iv;
             public Holder(View v) {
                 super(v);
                 iv = v.findViewById(R.id.iv);
                 tv_time = v.findViewById(R.id.tv_time);
-                musicName = (TextView) v.findViewById(R.id.musicName);
+                tv_artist = v.findViewById(R.id.tv_artist);
+                musicName = (TextView) v.findViewById(R.id.tv_name);
             }
         }
 
@@ -1490,15 +1507,14 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         public void onBindViewHolder(Holder holder, @SuppressLint("RecyclerView") final int pos) {
 
             holder.musicName.setText(((MusicData) PVMWSMusicData.get(pos)).track_displayName);
+            holder.tv_artist.setText(((MusicData) PVMWSMusicData.get(pos)).track_artist);
 
             if (mSelectedChoice == pos){
-                holder.musicName.setTextColor(getColor(R.color.music_selected));
-                holder.musicName.setTypeface(null, Typeface.BOLD);
                 holder.iv.setVisibility(View.VISIBLE);
+                holder.musicName.setTextColor(getColor(R.color.music_selected));
             }else {
-                holder.musicName.setTypeface(null, Typeface.NORMAL);
-                holder.musicName.setTextColor(getColor(R.color.text_music));
                 holder.iv.setVisibility(View.GONE);
+                holder.musicName.setTextColor(getColor(R.color.text_music));
             }
 
             double sec = (int) (PVMWSMusicData.get(pos).track_duration / 1000);
