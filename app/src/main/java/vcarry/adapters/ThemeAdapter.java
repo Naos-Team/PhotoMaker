@@ -1,24 +1,33 @@
 package vcarry.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.kessi.photovideomaker.KessiApplication;
 import com.kessi.photovideomaker.R;
+import com.kessi.photovideomaker.activities.PickEffectFragment;
 import com.kessi.photovideomaker.activities.videoeditor.VideoThemeActivity;
 import com.kessi.photovideomaker.util.AdManager;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import vcarry.mask.KessiMaskBitmap3D;
 import vcarry.mask.KessiTheme;
 
 import vcarry.util.FileUtils;
@@ -83,7 +92,31 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
 
         holder.clickableView.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                if (list.get(pos) != application.selectedTheme) {
+                if(list.get(pos).toString().equalsIgnoreCase(KessiTheme.CUSTOM.toString())){
+                    PickEffectFragment fragment = new PickEffectFragment(new OnBackFragment() {
+                        @Override
+                        public void onEndChoose() {
+                            position = pos;
+                            //                    deleteThemeDir(application.selectedTheme.toString());
+                            application.videoImages.clear();
+                            application.selectedTheme = (KessiTheme) list.get(pos);
+                            application.setCurrentTheme(application.selectedTheme.toString());
+                            activity.reset();
+                            notifyDataSetChanged();
+                            activity.getSupportFragmentManager().popBackStack();
+                        }
+
+                        @Override
+                        public void onBackFragment(ArrayList<KessiMaskBitmap3D.EFFECT> arrayList) {
+                            openConfirmDialog();
+                        }
+                    });
+                    FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.layout_video_preview, fragment);
+                    transaction.addToBackStack("Food");
+                    transaction.commit();
+
+                } else if (list.get(pos) != application.selectedTheme) {
                     if (!AdManager.isloadFbMAXAd) {
                         AdManager.adCounter++;
                         AdManager.showInterAd(activity, null,0);
@@ -102,10 +135,33 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
 //                    intent.putExtra(ServiceAnim.EXTRA_SELECTED_THEME, application.getCurrentTheme());
 //                    application.startService(intent);
                     notifyDataSetChanged();
-
                 }
             }
         });
+    }
+
+    private void openConfirmDialog(){
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
+
+        dialog.setContentView(R.layout.dialog_alert);
+
+        TextView maintext = dialog.findViewById(R.id.maintext);
+        maintext.setText("You haven't choose any effect, Are you confirm to exit?");
+        RelativeLayout img_btn_yes = dialog.findViewById(R.id.yes);
+        RelativeLayout img_btn_no = dialog.findViewById(R.id.no);
+
+        img_btn_no.setOnClickListener(v ->{
+            dialog.dismiss();
+        });
+
+        img_btn_yes.setOnClickListener(v->{
+            activity.getSupportFragmentManager().popBackStack();
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 
     private void deleteThemeDir(final String dir) {

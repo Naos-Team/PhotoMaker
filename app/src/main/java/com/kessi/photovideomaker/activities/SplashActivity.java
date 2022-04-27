@@ -61,6 +61,8 @@ public class SplashActivity extends AppCompatActivity {
             checkAccessPermission();
 //            Animatee.animateSplit(SplashActivity.this);
         }, 1500);
+
+
     }
 
     public void openMainActivity() {

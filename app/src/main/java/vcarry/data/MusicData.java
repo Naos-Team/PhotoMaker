@@ -9,8 +9,17 @@ public class MusicData {
     public long track_Id;
     public String track_Title;
     public String track_data;
+    public String track_artist;
     public String track_displayName;
     public long track_duration;
+
+    public String getTrack_artist() {
+        return track_artist;
+    }
+
+    public void setTrack_artist(String track_artist) {
+        this.track_artist = track_artist;
+    }
 
     public long getTrack_Id() {
         return this.track_Id;
