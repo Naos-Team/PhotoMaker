@@ -54,6 +54,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -184,15 +185,14 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
             }
         });
         bindView();
+        new LoadOnlineSongAsync().execute();
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         mDensity = metrics.density;
         loadGui();
         init();
-        new LoadOnlineSongAsync().execute();
 
         mHandler.postDelayed(mTimerRunnable, 100);
-
     }
 
     private class LoadOnlineSongAsync extends AsyncTask<Void, String, Boolean>{
@@ -258,10 +258,21 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
                     dialog.show();
                 }
 
+                @Override
+                public void onPlaySong(int position) {
+                    for(int i = 0; i < adapterOnlineMusic.getItemCount(); i++){
+                        if(i != position){
+                            adapterOnlineMusic.notifyItemChanged(i);
+                        }
+                    }
+                }
+
 
             });
-
-            rv_online_music.setLayoutManager(new LinearLayoutManager(SongGalleryActivity.this));
+            LinearLayoutManager llm = new LinearLayoutManager(SongGalleryActivity.this);
+            rv_online_music.setLayoutManager(llm);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rv_online_music.getContext(), llm.getOrientation());
+            rv_online_music.addItemDecoration(dividerItemDecoration);
             rv_online_music.setAdapter(adapterOnlineMusic);
             adapterOnlineMusic.notifyDataSetChanged();
 
@@ -294,6 +305,7 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
                         int millSecond = Integer.parseInt(durationStr);
 
                         ContentValues cv = new ContentValues();
+//                        MediaStore.Audio.Albums.ALBUM_ART
                         cv.put(Media.DATA, path);
                         cv.put(Media.DISPLAY_NAME, item.getTitle());
                         cv.put(Media.TITLE, getResources().getString(R.string.app_name));
