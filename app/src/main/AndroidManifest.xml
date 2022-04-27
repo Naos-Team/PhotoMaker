@@ -22,6 +22,9 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.PhotoVideoMaker">
         <activity
+            android:name=".activities.ImageZoomActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.myalbum.PhotoAlbumActivity"
             android:exported="false" />
         <activity
@@ -73,16 +76,20 @@
             android:screenOrientation="nosensor" />
         <activity
             android:name=".activities.SendEmailActivity"
-            android:screenOrientation="nosensor"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+
                 <data android:type="linear" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SENDTO" />
+
                 <data android:scheme="mailto" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

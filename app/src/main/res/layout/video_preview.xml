@@ -49,9 +49,9 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:text="Editor"
-                android:textStyle="bold"
                 android:textColor="@color/toptextcolor"
-                android:textSize="@dimen/_14sdp" />
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
