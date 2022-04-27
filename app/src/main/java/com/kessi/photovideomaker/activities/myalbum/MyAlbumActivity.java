@@ -47,6 +47,8 @@ public class MyAlbumActivity extends AppCompatActivity {
         backIV = (ImageView) findViewById(R.id.back);
         backIV.setOnClickListener(v -> {
             KSUtil.Bounce(this, backIV);
+            Intent i = new Intent();
+            setResult(RESULT_CANCELED, i);
             onBackPressed();
         });
 
@@ -97,7 +99,7 @@ public class MyAlbumActivity extends AppCompatActivity {
     public void videoLoader() {
         getFromStorage();
         videoListView = (RecyclerView) findViewById(R.id.recyclerView);
-        videoAdapter = new MyVideoAdapter(videoPath, MyAlbumActivity.this, (v, position) -> {
+        videoAdapter = new MyVideoAdapter(true, videoPath, MyAlbumActivity.this, (v, position) -> {
 
             Intent intent = new Intent(MyAlbumActivity.this, VideoPlayerActivity.class);
             intent.putExtra("video_path", videoPath.get(position));

@@ -22,6 +22,9 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.PhotoVideoMaker">
         <activity
+            android:name=".activities.myalbum.PhotoAlbumActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.photoframe.BackgroundFrameActivity"
             android:exported="false" />
         <activity
@@ -53,8 +56,9 @@
         <activity
             android:name=".activities.VideoPlayerActivity"
             android:screenOrientation="nosensor" />
-        <activity android:name=".activities.ImageSaverActivity"
-            android:screenOrientation="nosensor"/>
+        <activity
+            android:name=".activities.ImageSaverActivity"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".activities.kessiimagepicker.activity.ImagePickerActivity"
             android:screenOrientation="nosensor" />
@@ -68,8 +72,23 @@
             android:name=".activities.process.VideoMakerActivity"
             android:screenOrientation="nosensor" />
         <activity
+            android:name=".activities.SendEmailActivity"
+            android:screenOrientation="nosensor"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <data android:type="linear" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <data android:scheme="mailto" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activities.BgTemplateDetailsActivity"
-            android:screenOrientation="nosensor"/>
+            android:screenOrientation="nosensor" />
         <activity
             android:name="com.xinlan.imageeditlibrary.editimage.EditImageActivity"
             android:screenOrientation="nosensor"

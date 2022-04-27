@@ -4,8 +4,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
+    android:layout_margin="@dimen/_6sdp"
     app:cardCornerRadius="@dimen/_7sdp">
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -22,32 +22,23 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop" />
 
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
+                android:layout_marginRight="8dp"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/_8sdp"
                 android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:layout_marginRight="8dp">
-
+                android:paddingBottom="8dp">
 
                 <ImageView
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/edit"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/reedit" />
-
-
-                <ImageView
-                    android:layout_gravity="center_vertical"
                     android:id="@+id/delete"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center_vertical"
                     android:src="@drawable/reclose" />
 
             </LinearLayout>

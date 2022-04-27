@@ -47,7 +47,6 @@ public class VideoMakerActivity extends AppCompatActivity {
         new ProcessVideo().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-
     public void setTV(){
         FrameLayout nativeContainer = findViewById(R.id.nativeContainer);
         FrameLayout nativeContainerMAX = findViewById(R.id.nativeContainerMAX);

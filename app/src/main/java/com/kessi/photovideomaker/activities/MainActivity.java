@@ -14,11 +14,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +31,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -38,6 +40,7 @@ import com.kessi.photovideomaker.R;
 import com.kessi.photovideomaker.activities.kessiimagepicker.activity.ImagePickerActivity;
 import com.kessi.photovideomaker.activities.myalbum.MyAlbumActivity;
 import com.kessi.photovideomaker.activities.myalbum.MyVideoAdapter;
+import com.kessi.photovideomaker.activities.myalbum.PhotoAlbumActivity;
 import com.kessi.photovideomaker.activities.photoframe.BackgroundFrameActivity;
 import com.kessi.photovideomaker.util.AdManager;
 import com.kessi.photovideomaker.util.Animatee;
@@ -55,16 +58,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
 //    ImageView mainBg, icon, btnStart, btnAllVideo, rateIV, shareIV, privacyIV, moreIV;
-    LinearLayout btnLay, btnSlide, btnMore, btn_frame;
-    TextView tv_empty;
+    LinearLayout btnLay, btnSlide, btnMoreSlide, btnMorePhoto, btn_frame;
+    TextView tv_empty, tv_empty_photo;
     DrawerLayout drawer;
     NavigationView navigationView;
     ImageView iv_hamburger;
     int FLAG_VIDEO = 21;
     int RETURN_CODE = 14;
-    ArrayList<String> videoPath;
-    RecyclerView rv;
+    ArrayList<String> videoPath, photoPath;
+    RecyclerView rv, rv_photo;
     MyVideoAdapter videoAdapter;
+    AdapterMainPhoto photoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         init();
 
         videoLoader();
-
     }
 
     private void checkAndroid11AccessPermission(){
@@ -149,8 +152,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        rv = (RecyclerView) findViewById(R.id.rv);
+        rv = findViewById(R.id.rv);
+        rv_photo = findViewById(R.id.rv_photo);
         tv_empty = findViewById(R.id.tv_empty);
+        tv_empty_photo = findViewById(R.id.tv_empty_photo);
         iv_hamburger = findViewById(R.id.iv_hamburger);
         iv_hamburger.setOnClickListener(view -> drawer.openDrawer(GravityCompat.START));
 
@@ -196,8 +201,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        btnMore = findViewById(R.id.btn_more);
-        btnMore.setOnClickListener((v) -> {
+        btnMoreSlide = findViewById(R.id.btn_more_slide);
+        btnMoreSlide.setOnClickListener((v) -> {
 
             if (!checkPermissions(this, permissionsList)) {
                 ActivityCompat.requestPermissions(this, permissionsList, 22);
@@ -212,24 +217,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-//        btnStart = findViewById(R.id.btnStart);
-//        btnStart.setOnClickListener(this);
-//
-//        btnAllVideo = findViewById(R.id.btnAllVideo);
-//        btnAllVideo.setOnClickListener(this);
-//
-//        rateIV = findViewById(R.id.rateIV);
-//        rateIV.setOnClickListener(this);
-//
-//        shareIV = findViewById(R.id.shareIV);
-//        shareIV.setOnClickListener(this);
-//
-//        privacyIV = findViewById(R.id.privacyIV);
-//        privacyIV.setOnClickListener(this);
-//
-//        moreIV = findViewById(R.id.moreIV);
-//        moreIV.setOnClickListener(this);
-
+        btnMorePhoto = findViewById(R.id.btn_more_photo);
+        btnMorePhoto.setOnClickListener(v->{
+            if (!checkPermissions(this, permissionsList)) {
+                ActivityCompat.requestPermissions(this, permissionsList, 22);
+            } else {
+                KSUtil.fromAlbum = true;
+                AdManager.adCounter = AdManager.adDisplayCounter;
+                if (!AdManager.isloadFbMAXAd) {
+                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, PhotoAlbumActivity.class), RETURN_CODE);
+                } else {
+                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, PhotoAlbumActivity.class), RETURN_CODE);
+                }
+            }
+        });
 //        FrameLayout nativeContainer = findViewById(R.id.nativeContainer);
 //        FrameLayout nativeContainerMAX = findViewById(R.id.nativeContainerMAX);
 //        if (!AdManager.isloadFbMAXAd) {
@@ -247,26 +248,74 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void videoLoader() {
         getFromStorage();
-        videoAdapter = new MyVideoAdapter(videoPath, this, (v, position) -> {
+        videoAdapter = new MyVideoAdapter(false, videoPath, this, (v, position) -> {
             Intent intent = new Intent(this, VideoPlayerActivity.class);
             intent.putExtra("video_path", videoPath.get(position));
             startActivityes(intent, FLAG_VIDEO);
         });
 
-        rv.setLayoutManager(new GridLayoutManager(this, 2));
+        photoAdapter = new AdapterMainPhoto(false, photoPath, new onClickPhotoListener() {
+            @Override
+            public void onDelete(int position) {
+                String path = photoPath.get(position);
+
+                File file1 = new File(path);
+                if(file1.exists()){
+                    file1.delete();
+                    try{
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                            getContentResolver().delete(Uri.parse(path), null);
+                        }
+                    }catch (Exception e){
+                        Log.e("Err", e.getMessage());
+                    }
+                    photoPath.remove(position);
+                    photoAdapter.notifyItemRemoved(position);
+                    photoAdapter.notifyItemRangeChanged(position, photoPath.size());
+                    Toast.makeText(MainActivity.this, "Delete successfully!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onClick(int position) {
+                String path = photoPath.get(position);
+                ImageSaverActivity.setPath(path);
+                startActivity(new Intent(MainActivity.this, ImageSaverActivity.class));
+            }
+        });
+
+        rv.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.setAdapter(videoAdapter);
+
+        rv_photo.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        rv_photo.setItemAnimator(new DefaultItemAnimator());
+        rv_photo.setAdapter(photoAdapter);
 
     }
 
     public void getFromStorage() {
-        String folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        String folder_slide = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                 + "/" + getResources().getString(R.string.app_name);
-        File file = new File(folder);
+        String folder_photo = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                + "/" + getResources().getString(R.string.app_name)
+                + "/Image";
+
+        File photo_file =  new File(folder_photo);
+
+        if(!photo_file.exists()){
+            photo_file.mkdir();
+        }
+
+        File file_slide = new File(folder_slide);
+        File file_photo = new File(folder_photo);
+
         videoPath = new ArrayList<String>();
-        if (file.isDirectory()) {
-            if (file.listFiles()!=null){
-                File[] listFile = file.listFiles();
+        photoPath = new ArrayList<String>();
+
+        if (file_slide.isDirectory()) {
+            if (file_slide.listFiles()!=null){
+                File[] listFile = file_slide.listFiles();
                 Arrays.sort(listFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
                 for (int i = 0; i < listFile.length; i++) {
 
@@ -285,7 +334,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         }
+
+        if (file_photo.isDirectory()) {
+            if (file_photo.listFiles()!=null){
+                File[] listFile = file_photo.listFiles();
+                Arrays.sort(listFile, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+                for (int i = 0; i < listFile.length; i++) {
+
+                    if (listFile[i].getAbsolutePath().contains(".png") && photoPath.size() < 6) {
+                        photoPath.add(listFile[i].getAbsolutePath());
+                    }
+
+                }
+
+                if(photoPath.isEmpty()){
+                    rv_photo.setVisibility(View.GONE);
+                    tv_empty_photo.setVisibility(View.VISIBLE);
+                }else{
+                    rv_photo.setVisibility(View.VISIBLE);
+                    tv_empty_photo.setVisibility(View.GONE);
+                }
+            }
+        }
     }
+
 
 
     void startActivityes(Intent intent, int reqCode) {
@@ -386,5 +458,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if(resultCode == RESULT_CANCELED && requestCode == RETURN_CODE){
             videoLoader();
         }
+    }
+
+    public interface onClickPhotoListener{
+        void onDelete(int position);
+        void onClick(int position);
     }
 }
