@@ -104,7 +104,7 @@ public class BitmapUtils {
 
     public static byte[] bitmapTobytes(Bitmap bitmap) {
         ByteArrayOutputStream a = new ByteArrayOutputStream();
-        bitmap.compress(CompressFormat.PNG, 30, a);
+        bitmap.compress(CompressFormat.PNG, 100, a);
         return a.toByteArray();
     }
 
@@ -412,7 +412,7 @@ public class BitmapUtils {
         }
         try {
             FileOutputStream out = new FileOutputStream(f);
-            bm.compress(Bitmap.CompressFormat.PNG, 90, out);
+            bm.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.flush();
             out.close();
             return true;

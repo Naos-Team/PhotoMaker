@@ -11,11 +11,50 @@
     tools:context=".activities.ImageSaverActivity"
     >
 
+    <LinearLayout
+
+        android:id="@+id/vLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:backgroundTint="@null"
+        android:background="@null">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:backgroundTint="@null"
+            android:background="@null">
+
+            <FrameLayout
+                android:id="@+id/frame11"
+                android:backgroundTint="@null"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imv_saved"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_205sdp"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    app:riv_corner_radius_bottom_right="30dp"
+                    app:riv_corner_radius_bottom_left="30dp"/>
+            </FrameLayout>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
     <RelativeLayout
         android:id="@+id/header1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp">
-
 
         <ImageView
             android:id="@+id/btn_back11"
@@ -24,18 +63,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/_10sdp"
             android:padding="@dimen/_5sdp"
-            android:src="@drawable/btnback" />
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Your result"
-            android:textColor="#388A72"
-            android:textSize="@dimen/_14sdp"
-            android:textStyle="bold" />
+            android:src="@drawable/ims_back" />
 
 
         <ImageView
@@ -44,42 +72,14 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="@dimen/_5sdp"
-            android:padding="@dimen/_3sdp"
-            android:src="@drawable/vdelete" />
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ims_delete" />
+
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/vLay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/header1"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:gravity="center"
-        >
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <FrameLayout
-                android:id="@+id/frame11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
-
-                <ImageView
-                    android:id="@+id/imv_saved"
-                    android:layout_width="@dimen/_205sdp"
-                    android:layout_height="@dimen/_205sdp"
-                    android:layout_gravity="center"
-                    android:background="@color/white" />
-            </FrameLayout>
 
 
-        </RelativeLayout>
 
-    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -99,14 +99,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:textStyle="bold"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp"
                 android:textSize="24dp"
                 android:textColor="#286F5A"
                 android:text="Wow, awesome picture!"/>
 
         <LinearLayout
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:id="@+id/btnEmail"
             android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="15dp"
                 android:textSize="20dp"
                 android:textColor="#286F5A"
@@ -198,7 +198,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="15dp"
                 android:textSize="20dp"
                 android:textColor="#286F5A"
