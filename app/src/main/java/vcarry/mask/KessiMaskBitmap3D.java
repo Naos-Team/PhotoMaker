@@ -175,7 +175,7 @@ public class KessiMaskBitmap3D {
                 Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
                 Canvas canvas = new Canvas(mask);
                 RectF oval = new RectF();
-                oval.set((((float) w) / 2.0f) - r,((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 3*(((float) h) / 2.0f));
+                oval.set((((float) w) / 2.0f) - r,((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 4*(((float) h) / 2.0f));
                 float angle = (((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor);
 
                 canvas.drawArc(oval, 270, -angle, false, paint);
@@ -202,7 +202,7 @@ public class KessiMaskBitmap3D {
                 Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
                 Canvas canvas = new Canvas(mask);
                 RectF oval = new RectF();
-                oval.set((((float) w) / 2.0f) - r,((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 3*(((float) h) / 2.0f));
+                oval.set((((float) w) / 2.0f) - r,((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 4*(((float) h) / 2.0f));
                 float angle = (((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor);
 
                 canvas.drawArc(oval, 270, angle, false, paint);
