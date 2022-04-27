@@ -1,12 +1,16 @@
 package com.kessi.photovideomaker.activities;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kessi.photovideomaker.R;
 import com.kessi.photovideomaker.activities.songpicker.AdapterOnlineMusic;
+import com.kessi.photovideomaker.activities.songpicker.SongGalleryActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -47,7 +52,7 @@ public class AdapterMainPhoto extends RecyclerView.Adapter<AdapterMainPhoto.MyVi
                 .into(holder.iv);
 
         holder.delete.setOnClickListener(v->{
-            listener.onDelete(position);
+            openConfirmDialog(position);
         });
 
         holder.iv.setOnClickListener(v->{
@@ -71,5 +76,29 @@ public class AdapterMainPhoto extends RecyclerView.Adapter<AdapterMainPhoto.MyVi
             delete = itemView.findViewById(R.id.delete);
             iv = itemView.findViewById(R.id.item_img);
         }
+    }
+
+    private void openConfirmDialog(int position){
+        final Dialog dialog = new Dialog(mContext);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
+
+        dialog.setContentView(R.layout.dialog_alert);
+
+        TextView maintext = dialog.findViewById(R.id.maintext);
+        maintext.setText("Do you want to delete this photo?");
+        RelativeLayout img_btn_yes = dialog.findViewById(R.id.yes);
+        RelativeLayout img_btn_no = dialog.findViewById(R.id.no);
+
+        img_btn_no.setOnClickListener(v ->{
+            dialog.dismiss();
+        });
+
+        img_btn_yes.setOnClickListener(v->{
+            listener.onDelete(position);
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 }

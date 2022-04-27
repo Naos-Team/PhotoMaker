@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -269,7 +270,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Log.e("Err", e.getMessage());
                     }
                     photoPath.remove(position);
-                    photoAdapter.notifyDataSetChanged();
+                    photoAdapter.notifyItemRemoved(position);
+                    photoAdapter.notifyItemRangeChanged(position, photoPath.size());
+                    Toast.makeText(MainActivity.this, "Delete successfully!", Toast.LENGTH_SHORT).show();
                 }
             }
 

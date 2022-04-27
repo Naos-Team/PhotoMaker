@@ -47,6 +47,8 @@ public class MyAlbumActivity extends AppCompatActivity {
         backIV = (ImageView) findViewById(R.id.back);
         backIV.setOnClickListener(v -> {
             KSUtil.Bounce(this, backIV);
+            Intent i = new Intent();
+            setResult(RESULT_CANCELED, i);
             onBackPressed();
         });
 

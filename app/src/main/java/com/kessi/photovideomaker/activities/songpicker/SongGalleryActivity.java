@@ -201,10 +201,10 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         protected Boolean doInBackground(Void... voids) {
             try{
                 ArrayList<OnlineSongItem> song_list = new ArrayList<>();
-                song_list.add(new OnlineSongItem(1, "Nothing-Like-You---Luke-Combs", "https://bestradiofree.com/country_music_radio/uploads/13516_Nothing-Like-You---Luke-Combs.mp3"));
-                song_list.add(new OnlineSongItem(2, "Blessings - Florida Georgia Line", "https://bestradiofree.com/country_music_radio/uploads/Blessings - Florida Georgia Line.mp3"));
-                song_list.add(new OnlineSongItem(3, "Finish Your Sentences - Carly Pearce. Michael Ray", "https://bestradiofree.com/country_music_radio/uploads/Finish Your Sentences - Carly Pearce. Michael Ray.mp3"));
-                song_list.add(new OnlineSongItem(4, "Anything She Says (feat_ Seaforth) - Mitchell Tenpenny. Seaforth", "https://bestradiofree.com/country_music_radio/uploads/Anything She Says (feat_ Seaforth) - Mitchell Tenpenny. Seaforth.mp3"));
+                song_list.add(new OnlineSongItem(1, "Nothing Like You", "Luke Combs","https://bestradiofree.com/country_music_radio/uploads/13516_Nothing-Like-You---Luke-Combs.mp3"));
+                song_list.add(new OnlineSongItem(2, "Blessings", "Florida Georgia Lin","https://bestradiofree.com/country_music_radio/uploads/Blessings - Florida Georgia Line.mp3"));
+                song_list.add(new OnlineSongItem(3, "Finish Your Sentences", "Carly Pearce. Michael Ray", "https://bestradiofree.com/country_music_radio/uploads/Finish Your Sentences - Carly Pearce. Michael Ray.mp3"));
+                song_list.add(new OnlineSongItem(4, "Anything She Says", "Mitchell Tenpenny", "https://bestradiofree.com/country_music_radio/uploads/Anything She Says (feat_ Seaforth) - Mitchell Tenpenny. Seaforth.mp3"));
 
                 song_list.forEach(item -> {
                     if(!songDao.isSongExist(item.getId())){
@@ -242,8 +242,6 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
                     }else{
                         maintext.setText("The song will download to your phone. Are your sure?");
                     }
-//                    Button img_btn_yes = dialog.findViewById(R.id.yes);
-//                    Button img_btn_no = dialog.findViewById(R.id.no);
 
                     RelativeLayout img_btn_yes = dialog.findViewById(R.id.yes);
                     RelativeLayout img_btn_no = dialog.findViewById(R.id.no);

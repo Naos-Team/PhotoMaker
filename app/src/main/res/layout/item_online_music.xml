@@ -3,33 +3,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_weight="8"
+        android:layout_weight="8.5"
         android:layout_width="0dp"
         android:orientation="horizontal"
         android:paddingVertical="10dp"
-        android:paddingHorizontal="20dp"
         android:gravity="center_vertical"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="8"
-            android:ellipsize="end"
-            android:lines="1"
-            android:text="sdfsdfsd"
-            android:textColor="#504747"
-            android:textSize="18dp" />
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/ic_launcher_round"
+            app:riv_corner_radius="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="name"
+                android:textStyle="bold"
+                android:textColor="#504747"
+                android:textSize="18dp" />
+            <TextView
+                android:id="@+id/tv_artist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="artist"
+                android:textColor="#504747"
+                android:textSize="15dp" />
+        </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_weight="2"
+        android:layout_weight="1.5"
         android:layout_width="0dp"
         android:layout_height="match_parent">
 
@@ -45,11 +67,12 @@
 
         <ImageView
             android:id="@+id/btn_download"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:tint="@color/install_song"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:layout_margin="15dp"
             android:src="@drawable/ic_download"
+            android:tint="@color/install_song"
             android:visibility="visible" />
 
         <ImageView

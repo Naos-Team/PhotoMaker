@@ -12,6 +12,8 @@ public class OnlineSongItem {
     @ColumnInfo
     public String title;
     @ColumnInfo
+    public String artist;
+    @ColumnInfo
     public String url;
     @ColumnInfo
     public boolean isDownload;
@@ -24,11 +26,20 @@ public class OnlineSongItem {
         isDownload = download;
     }
 
-    public OnlineSongItem(int id, String title, String url) {
+    public OnlineSongItem(int id, String title, String artist, String url) {
         this.id = id;
         this.title = title;
         this.url = url;
         this.isDownload = false;
+        this.artist = artist;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 
     public int getId() {

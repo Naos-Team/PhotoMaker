@@ -14,12 +14,14 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.kessi.photovideomaker.R;
 import com.kessi.photovideomaker.activities.AdapterMainPhoto;
 import com.kessi.photovideomaker.activities.ImageSaverActivity;
 import com.kessi.photovideomaker.activities.MainActivity;
 import com.kessi.photovideomaker.activities.VideoPlayerActivity;
+import com.kessi.photovideomaker.util.KSUtil;
 
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 
@@ -41,6 +43,15 @@ public class PhotoAlbumActivity extends AppCompatActivity {
 
         rv = findViewById(R.id.rv);
         back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                KSUtil.Bounce(PhotoAlbumActivity.this, back);
+                Intent i = new Intent();
+                setResult(RESULT_CANCELED, i);
+                onBackPressed();
+            }
+        });
 
         videoLoader();
     }
@@ -63,7 +74,9 @@ public class PhotoAlbumActivity extends AppCompatActivity {
                         Log.e("Err", e.getMessage());
                     }
                     photoPath.remove(position);
-                    photoAdapter.notifyDataSetChanged();
+                    photoAdapter.notifyItemRemoved(position);
+                    photoAdapter.notifyItemRangeChanged(position, photoPath.size());
+                    Toast.makeText(PhotoAlbumActivity.this, "Delete successfully!", Toast.LENGTH_SHORT).show();
                 }
             }
 
