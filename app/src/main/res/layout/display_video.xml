@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:padding="@dimen/_5sdp"
+            android:padding="@dimen/_6sdp"
             android:src="@drawable/ims_back" />
 
 
@@ -168,6 +168,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="10"
+        android:layout_above="@+id/ll_adView16"
         android:paddingHorizontal="20dp"
         android:layout_below="@+id/vLay"
         android:orientation="vertical">
@@ -285,6 +286,13 @@
 
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_adView16"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
 

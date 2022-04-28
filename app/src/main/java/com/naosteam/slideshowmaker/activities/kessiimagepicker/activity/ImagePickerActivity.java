@@ -39,6 +39,7 @@ import com.naosteam.slideshowmaker.activities.kessiimagepicker.Constants;
 import com.naosteam.slideshowmaker.activities.kessiimagepicker.adapter.AlbumAdapter;
 import com.naosteam.slideshowmaker.activities.kessiimagepicker.adapter.ListAlbumAdapter;
 import com.naosteam.slideshowmaker.activities.kessiimagepicker.model.ImageModel;
+import com.naosteam.slideshowmaker.activities.songpicker.SongGalleryActivity;
 import com.naosteam.slideshowmaker.activities.swap.SwapperActivity;
 import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
@@ -75,6 +76,7 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
     private int position = 0;
     private static final int READ_STORAGE_CODE = 1001;
     private static final int WRITE_STORAGE_CODE = 1002;
+    LinearLayout ll_adView;
 
 
     public static ArrayList<String> saveFiles;
@@ -187,7 +189,7 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
         setContentView(R.layout.activity_image_picker);
 
         progress = findViewById(R.id.loader);
-        setTV();
+        LoadAds();
         saveFiles = new ArrayList<String>();
 
         listItemSelect = new ArrayList<>();
@@ -270,20 +272,10 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
 
     }
 
-    public void setTV() {
-        LinearLayout adContainer = findViewById(R.id.banner_container);
-
-        if (!AdManager.isloadFbMAXAd) {
-            //admob
-            AdManager.initAd(ImagePickerActivity.this);
-            //AdManager.loadBannerAd(ImagePickerActivity.this, adContainer);
-            AdManager.loadInterAd(ImagePickerActivity.this);
-        } else {
-            //MAX + Fb banner Ads
-            AdManager.initMAX(ImagePickerActivity.this);
-            AdManager.maxBannerBg(ImagePickerActivity.this, adContainer, getColor(R.color.bottom_bg_color));
-            AdManager.maxInterstital(ImagePickerActivity.this);
-        }
+    private void LoadAds(){
+        AdManager.initAd(ImagePickerActivity.this);
+        ll_adView = findViewById(R.id.ll_adView10);
+        AdManager.loadAdmobBanner(this, ll_adView);
     }
 
     @Override

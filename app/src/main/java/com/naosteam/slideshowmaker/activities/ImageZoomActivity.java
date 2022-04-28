@@ -7,8 +7,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.activities.songpicker.SongGalleryActivity;
+import com.naosteam.slideshowmaker.util.AdManager;
 import com.squareup.picasso.Picasso;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouch;
 
@@ -16,6 +19,7 @@ public class ImageZoomActivity extends AppCompatActivity {
 
     ImageViewTouch imv_zoom;
     ImageView imv_back;
+    LinearLayout ll_adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,5 +40,11 @@ public class ImageZoomActivity extends AppCompatActivity {
                 .load(Uri.parse(intent.getStringExtra("img")))
                 .into(imv_zoom);
 
+    }
+
+    private void LoadAds(){
+        AdManager.initAd(ImageZoomActivity.this);
+        ll_adView = findViewById(R.id.ll_adView12);
+        AdManager.loadAdmobBanner(this, ll_adView);
     }
 }

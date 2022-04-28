@@ -51,6 +51,7 @@ import com.bumptech.glide.signature.MediaStoreSignature;
 import com.naosteam.slideshowmaker.KessiApplication;
 import com.naosteam.slideshowmaker.R;
 import com.naosteam.slideshowmaker.activities.MainActivity;
+import com.naosteam.slideshowmaker.activities.photoframe.BackgroundFrameActivity;
 import com.naosteam.slideshowmaker.activities.process.VideoMakerActivity;
 import com.naosteam.slideshowmaker.activities.songpicker.SongGalleryActivity;
 import com.naosteam.slideshowmaker.util.AdManager;
@@ -113,7 +114,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     public static float seconds = 3.0f;
     SeekBar seekBar;
     ThemeAdapter themeAdapter;
-    LinearLayout toolbar;
+    LinearLayout toolbar, ll_adView;
     TextView tvEndTime, txt_forone_video_preview;
     TextView tvTime;
 
@@ -169,17 +170,26 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         ibAddMusic.setLayoutParams(paramsbtn);
         ibAddDuration.setLayoutParams(paramsbtn);
 
+        LoadAds();
 
-        if (!AdManager.isloadFbMAXAd) {
-            //admob
-            AdManager.initAd(VideoThemeActivity.this);
-            AdManager.loadInterAd(VideoThemeActivity.this);
-        } else {
-            //MAX + Fb banner Ads
-            AdManager.initMAX(VideoThemeActivity.this);
-            AdManager.maxInterstital(VideoThemeActivity.this);
-        }
+
+//        if (!AdManager.isloadFbMAXAd) {
+//            //admob
+//            AdManager.initAd(VideoThemeActivity.this);
+//            AdManager.loadInterAd(VideoThemeActivity.this);
+//        } else {
+//            //MAX + Fb banner Ads
+//            AdManager.initMAX(VideoThemeActivity.this);
+//            AdManager.maxInterstital(VideoThemeActivity.this);
+//        }
     }
+    private void LoadAds(){
+        AdManager.initAd(VideoThemeActivity.this);
+        ll_adView = findViewById(R.id.ll_adView17);
+        AdManager.loadAdmobBanner(this, ll_adView);
+    }
+
+
 
 
     void startActivityes(Intent intent, int reqCode) {

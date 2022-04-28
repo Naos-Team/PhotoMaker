@@ -10,12 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
 
 public class SendEmailActivity extends AppCompatActivity {
@@ -24,12 +26,15 @@ public class SendEmailActivity extends AppCompatActivity {
     Button btn_send;
     ImageView btn_back;
     String content, name;
+    LinearLayout ll_adView;
     AwesomeValidation awesomeValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_email);
+
+        LoadAds();
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         awesomeValidation.addValidation(this, R.id.send_name, RegexTemplate.NOT_EMPTY, R.string.name_alert);
@@ -76,6 +81,12 @@ public class SendEmailActivity extends AppCompatActivity {
             KSUtil.Bounce(this, btn_back);
             onBackPressed();
         });
+    }
+
+    private void LoadAds(){
+        AdManager.initAd(SendEmailActivity.this);
+        ll_adView = findViewById(R.id.ll_adView3);
+        AdManager.loadAdmobBanner(this, ll_adView);
     }
 
 //    int FLAG_VIDEO = 21;

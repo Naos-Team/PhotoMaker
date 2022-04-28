@@ -31,6 +31,7 @@ public class MyAlbumActivity extends AppCompatActivity {
     MyVideoAdapter videoAdapter;
     int FLAG_VIDEO = 21;
     ImageView backIV;
+    LinearLayout ll_adView;
     RelativeLayout header;
 
 
@@ -39,7 +40,7 @@ public class MyAlbumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_videos);
 
-        setTV();
+        LoadAds();
 
         header = (RelativeLayout) findViewById(R.id.header);
         videoLoader();
@@ -54,19 +55,10 @@ public class MyAlbumActivity extends AppCompatActivity {
 
     }
 
-    public void setTV(){
-        LinearLayout adContainer = findViewById(R.id.banner_container);
-        if (!AdManager.isloadFbMAXAd) {
-            //admob
-            AdManager.initAd(MyAlbumActivity.this);
-            AdManager.loadBannerAd(MyAlbumActivity.this, adContainer);
-            AdManager.loadInterAd(MyAlbumActivity.this);
-        } else {
-//            MAX + Fb banner Ads
-            AdManager.initMAX(MyAlbumActivity.this);
-            AdManager.maxBanner(MyAlbumActivity.this, adContainer);
-            AdManager.maxInterstital(MyAlbumActivity.this);
-        }
+    private void LoadAds(){
+        AdManager.initAd(MyAlbumActivity.this);
+        ll_adView = findViewById(R.id.ll_adView15);
+        AdManager.loadAdmobBanner(this, ll_adView);
     }
 
     @Override

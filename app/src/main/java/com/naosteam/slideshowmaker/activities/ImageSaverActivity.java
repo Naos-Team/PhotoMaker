@@ -20,6 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.activities.songpicker.SongGalleryActivity;
+import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -29,7 +31,7 @@ import java.io.File;
 public class ImageSaverActivity extends AppCompatActivity {
 
     ImageView btnBack, btnDelete;
-    LinearLayout btnEmail;
+    LinearLayout btnEmail, ll_adView;
     LinearLayout btnShare, btnRate, linear11;
     RoundedImageView imv_saved;
     RelativeLayout main;
@@ -48,6 +50,13 @@ public class ImageSaverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_saver);
         BindView();
+        LoadAds();
+    }
+
+    private void LoadAds(){
+        AdManager.initAd(ImageSaverActivity.this);
+        ll_adView = findViewById(R.id.ll_adView11);
+        AdManager.loadAdmobBanner(this, ll_adView);
     }
 
     void BindView(){

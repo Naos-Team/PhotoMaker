@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.naosteam.slideshowmaker.KessiApplication;
 import com.naosteam.slideshowmaker.R;
 import com.naosteam.slideshowmaker.activities.MainActivity;
+import com.naosteam.slideshowmaker.activities.songpicker.SongGalleryActivity;
 import com.naosteam.slideshowmaker.activities.swap.gridsupport.AbsDynamicGridView;
 import com.naosteam.slideshowmaker.activities.videoeditor.VideoThemeActivity;
 import com.naosteam.slideshowmaker.util.AdManager;
@@ -42,7 +43,7 @@ public class SwapperActivity extends AppCompatActivity implements View.OnClickLi
     SwapperAdapter zapperAdapter;
     ImageView back, done;
     ArrayList<String> local, local2;
-
+    LinearLayout ll_adView;
     File myDir;
     KessiApplication application;
     RelativeLayout header;
@@ -51,7 +52,7 @@ public class SwapperActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zapper);
 
-        setTV();
+        LoadAds();
 
         application = KessiApplication.getInstance();
         application.isEditEnable = true;
@@ -71,19 +72,10 @@ public class SwapperActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    public void setTV(){
-        LinearLayout adContainer = findViewById(R.id.banner_container);
-        if (!AdManager.isloadFbMAXAd) {
-            //admob
-            AdManager.initAd(SwapperActivity.this);
-            AdManager.loadBannerAd(SwapperActivity.this, adContainer);
-            AdManager.loadInterAd(SwapperActivity.this);
-        } else {
-            //MAX + Fb banner Ads
-            AdManager.initMAX(SwapperActivity.this);
-            AdManager.maxBanner(SwapperActivity.this, adContainer);
-            AdManager.maxInterstital(SwapperActivity.this);
-        }
+    private void LoadAds(){
+        AdManager.initAd(SwapperActivity.this);
+        ll_adView = findViewById(R.id.ll_adView6);
+        AdManager.loadAdmobBanner(this, ll_adView);
     }
 
     @Override

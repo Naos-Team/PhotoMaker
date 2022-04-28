@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,9 +17,12 @@ import com.arthenica.ffmpegkit.FFmpegKit;
 import com.arthenica.ffmpegkit.FFmpegKitConfig;
 import com.arthenica.ffmpegkit.FFmpegSession;
 import com.arthenica.ffmpegkit.ReturnCode;
-import com.naosteam.slideshowmaker.KessiApplication;
+
 import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.KessiApplication;
+
 import com.naosteam.slideshowmaker.activities.VideoPlayerActivity;
+import com.naosteam.slideshowmaker.activities.songpicker.SongGalleryActivity;
 import com.naosteam.slideshowmaker.activities.videoeditor.VideoThemeActivity;
 import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
@@ -34,31 +38,21 @@ import vcarry.util.Utils;
 
 public class VideoMakerActivity extends AppCompatActivity {
     TextView perTV;
+    LinearLayout ll_adView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_maker);
-        setTV();
+        LoadAds();
 
         perTV = findViewById(R.id.perTV);
         new ProcessVideo().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-    public void setTV(){
-        FrameLayout nativeContainer = findViewById(R.id.nativeContainer);
-        FrameLayout nativeContainerMAX = findViewById(R.id.nativeContainerMAX);
-
-        if (!AdManager.isloadFbMAXAd) {
-            //admob
-            AdManager.initAd(VideoMakerActivity.this);
-            AdManager.loadInterAd(VideoMakerActivity.this);
-            AdManager.loadNativeAd(VideoMakerActivity.this, nativeContainer);
-        } else {
-            //MAX + Fb banner Ads
-            AdManager.initMAX(VideoMakerActivity.this);
-            AdManager.maxInterstital(VideoMakerActivity.this);
-            AdManager.loadNativeMAX(VideoMakerActivity.this, nativeContainerMAX);
-        }
+    private void LoadAds(){
+        AdManager.initAd(VideoMakerActivity.this);
+        ll_adView = findViewById(R.id.ll_adView5);
+        AdManager.loadAdmobBanner(this, ll_adView);
     }
 
     public class ProcessVideo extends AsyncTask<Integer, Integer, List<String>> {

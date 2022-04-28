@@ -58,12 +58,16 @@ public class VideoPlayerActivity extends AppCompatActivity implements
     ImageView btnDelete;
     RelativeLayout main, top;
 
+    LinearLayout ll_adView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_video);
 
-        setTV();
+        //setTV();
+
+        LoadAds();
 
         main = findViewById(R.id.main);
         top = findViewById(R.id.header);
@@ -183,10 +187,16 @@ public class VideoPlayerActivity extends AppCompatActivity implements
         btnPlayVideo.setOnClickListener(onclickplayvideo);
     }
 
+    private void LoadAds(){
+        AdManager.initAd(VideoPlayerActivity.this);
+        ll_adView = findViewById(R.id.ll_adView16);
+        AdManager.loadAdmobBanner(this, ll_adView);
+    }
+
 
     public void setTV() {
-        FrameLayout nativeContainer = findViewById(R.id.nativeContainer);
-        FrameLayout nativeContainerMAX = findViewById(R.id.nativeContainerMAX);
+        //FrameLayout nativeContainer = findViewById(R.id.nativeContainer);
+        //FrameLayout nativeContainerMAX = findViewById(R.id.nativeContainerMAX);
 
         if (!AdManager.isloadFbMAXAd) {
             //admob

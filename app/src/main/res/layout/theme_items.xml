@@ -8,7 +8,7 @@
         android:id="@+id/ivThumb"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="27dp"
+        android:padding="15dp"
         android:clickable="true"
         android:layout_centerInParent="true"
         android:scaleType="fitCenter"

@@ -53,7 +53,7 @@
         android:id="@+id/dynamicGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/banner_container"
+        android:layout_above="@+id/ll_adView6"
         android:layout_below="@+id/header"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
@@ -63,5 +63,10 @@
         android:numColumns="2"
         android:verticalSpacing="@dimen/_15sdp" />
 
-    <include layout="@layout/ad_banner_lay"/>
+    <LinearLayout
+        android:id="@+id/ll_adView6"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

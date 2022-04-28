@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_above="@+id/banner_container">
+        android:layout_above="@+id/ll_adView10">
 
         <LinearLayout
             android:id="@+id/footer"
@@ -137,5 +137,10 @@
             </HorizontalScrollView>
         </LinearLayout>
     </LinearLayout>
-    <include layout="@layout/ad_banner_lay"/>
+    <LinearLayout
+        android:id="@+id/ll_adView10"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

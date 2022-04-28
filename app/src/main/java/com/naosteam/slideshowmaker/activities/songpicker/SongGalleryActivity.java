@@ -61,6 +61,7 @@ import com.downloader.PRDownloader;
 import com.naosteam.slideshowmaker.AppDatabase;
 import com.naosteam.slideshowmaker.KessiApplication;
 import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.activities.MainActivity;
 import com.naosteam.slideshowmaker.activities.songpicker.roomdb.OnlineSongItem;
 import com.naosteam.slideshowmaker.activities.songpicker.roomdb.SongDao;
 import com.naosteam.slideshowmaker.util.AdManager;
@@ -149,6 +150,8 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
     private static final String PREFS_NAME = "preferenceName";
     public static boolean flagsong = false;
 
+    LinearLayout ll_adView;
+
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
@@ -184,6 +187,14 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
         init();
 
         mHandler.postDelayed(mTimerRunnable, 100);
+
+        LoadAds();
+    }
+
+    private void LoadAds(){
+        AdManager.initAd(SongGalleryActivity.this);
+        ll_adView = findViewById(R.id.ll_adView4);
+        AdManager.loadAdmobBanner(this, ll_adView);
     }
 
     private class LoadOnlineSongAsync extends AsyncTask<Void, String, Boolean>{
@@ -269,6 +280,8 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
 
         }
     }
+
+
 
     private void startDownload(OnlineSongItem item, ProgressBar progressBar, ImageView btn_download, ImageView btn_downloaded){
         progressBar.setVisibility(View.VISIBLE);

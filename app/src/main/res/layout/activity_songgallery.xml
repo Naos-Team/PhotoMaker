@@ -250,6 +250,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:layout_above="@+id/ll_adView4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -260,11 +261,11 @@
                     android:background="#b5e3d4" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="visible"
                     android:id="@+id/rv_online_music"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#b5e3d4" />
+                    android:background="#b5e3d4"
+                    android:visibility="visible" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -291,6 +292,13 @@
             app:lottie_fileName="gload.json"
             app:lottie_loop="true" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_adView4"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
 </RelativeLayout>

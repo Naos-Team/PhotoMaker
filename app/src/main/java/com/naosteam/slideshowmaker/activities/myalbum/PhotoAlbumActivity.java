@@ -13,12 +13,14 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.naosteam.slideshowmaker.R;
 import com.naosteam.slideshowmaker.activities.AdapterMainPhoto;
 import com.naosteam.slideshowmaker.activities.ImageSaverActivity;
 import com.naosteam.slideshowmaker.activities.MainActivity;
+import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
 
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
@@ -33,11 +35,12 @@ public class PhotoAlbumActivity extends AppCompatActivity {
     ImageView back;
     AdapterMainPhoto photoAdapter;
     ArrayList<String> photoPath;
-
+    LinearLayout ll_adView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_album);
+        LoadAds();
 
         rv = findViewById(R.id.rv);
         back = findViewById(R.id.back);
@@ -53,6 +56,13 @@ public class PhotoAlbumActivity extends AppCompatActivity {
 
         videoLoader();
     }
+
+    private void LoadAds(){
+        AdManager.initAd(PhotoAlbumActivity.this);
+        ll_adView = findViewById(R.id.ll_adView1);
+        AdManager.loadAdmobBanner(this, ll_adView);
+    }
+
     public void videoLoader() {
         getFromStorage();
 

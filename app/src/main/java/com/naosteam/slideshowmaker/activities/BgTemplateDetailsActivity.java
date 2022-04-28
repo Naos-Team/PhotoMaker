@@ -24,12 +24,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.naosteam.slideshowmaker.KessiApplication;
 import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.activities.songpicker.SongGalleryActivity;
 import com.naosteam.slideshowmaker.activities.swap.EditImageUtil;
 import com.naosteam.slideshowmaker.activities.videoeditor.VideoThemeActivity;
+import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
 import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
 import com.xinlan.imageeditlibrary.editimage.EditImageActivity;
@@ -57,6 +60,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
     private int REQUEST_CODE_FOLDER = 456, id_now = -1;
     private static final int ACTION_REQUEST_EDITIMAGE = 9;
     private KessiApplication application;
+    private LinearLayout ll_adView;
 
     public static Background_Template getBackground_template() {
         return background_template;
@@ -74,7 +78,14 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         list_image_button = new ArrayList<>();
 
         bindView();
+        LoadAds();
 
+    }
+
+    private void LoadAds(){
+        AdManager.initAd(BgTemplateDetailsActivity.this);
+        ll_adView = findViewById(R.id.ll_adView9);
+        AdManager.loadAdmobBanner(this, ll_adView);
     }
 
     void bindView() {
