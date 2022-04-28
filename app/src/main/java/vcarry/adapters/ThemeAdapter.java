@@ -90,28 +90,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
         holder.clickableView.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 if(list.get(pos).toString().equalsIgnoreCase(KessiTheme.CUSTOM.toString())){
-                    PickEffectFragment fragment = new PickEffectFragment(new OnBackFragment() {
-                        @Override
-                        public void onEndChoose() {
-                            position = pos;
-                            //                    deleteThemeDir(application.selectedTheme.toString());
-                            application.videoImages.clear();
-                            application.selectedTheme = (KessiTheme) list.get(pos);
-                            application.setCurrentTheme(application.selectedTheme.toString());
-                            activity.reset();
-                            notifyDataSetChanged();
-                            activity.getSupportFragmentManager().popBackStack();
-                        }
 
-                        @Override
-                        public void onBackFragment(ArrayList<KessiMaskBitmap3D.EFFECT> arrayList) {
-                            openConfirmDialog();
-                        }
-                    });
-                    FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.layout_video_preview, fragment);
-                    transaction.addToBackStack("Food");
-                    transaction.commit();
 
                 } else if (list.get(pos) != application.selectedTheme) {
                     if (!AdManager.isloadFbMAXAd) {
@@ -137,7 +116,31 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
         });
     }
 
-    private void openConfirmDialog(){
+    public void onCustomEffect(){
+        PickEffectFragment fragment = new PickEffectFragment(new OnBackFragment() {
+            @Override
+            public void onEndChoose() {
+                position = -1;
+                application.videoImages.clear();
+                application.selectedTheme = (KessiTheme) KessiTheme.CUSTOM;
+                application.setCurrentTheme(application.selectedTheme.toString());
+                activity.reset();
+                notifyDataSetChanged();
+                activity.getSupportFragmentManager().popBackStack();
+            }
+
+            @Override
+            public void onBackFragment(ArrayList<KessiMaskBitmap3D.EFFECT> arrayList) {
+                openConfirmDialog();
+            }
+        });
+        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.layout_video_preview, fragment);
+        transaction.addToBackStack("Custom");
+        transaction.commit();
+    }
+
+    public void openConfirmDialog(){
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
@@ -145,7 +148,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
         dialog.setContentView(R.layout.dialog_alert);
 
         TextView maintext = dialog.findViewById(R.id.maintext);
-        maintext.setText("You haven't choose any effect, Are you confirm to exit?");
+        maintext.setText("Your chosen themes will not be added. Do you confirm to exit?");
         RelativeLayout img_btn_yes = dialog.findViewById(R.id.yes);
         RelativeLayout img_btn_no = dialog.findViewById(R.id.no);
 
@@ -174,6 +177,6 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
     }
 
     public int getItemCount() {
-        return this.list.size();
+        return this.list.size() - 1;
     }
 }

@@ -102,7 +102,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     boolean isFromTouch = false;
     ImageView ivFrame;
     View ivPlayPause;
-    ImageView ivPlayPause1;
+    ImageView ivPlayPause1, img_custom_themes;
     ImageView ivPreview, backimg_preview, done_preview;
     ArrayList<ImageData> lastData = new ArrayList();
     ConstraintLayout llEdit;
@@ -114,7 +114,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     SeekBar seekBar;
     ThemeAdapter themeAdapter;
     LinearLayout toolbar;
-    TextView tvEndTime;
+    TextView tvEndTime, txt_forone_video_preview;
     TextView tvTime;
 
     public static String outputPath = "";
@@ -239,6 +239,15 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
                 getResources().getDisplayMetrics().widthPixels * 18 / 1080, true));
         seekBar.setThumb(d);
 
+        img_custom_themes = (ImageView) findViewById(R.id.img_custom_themes);
+        img_custom_themes.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                themeAdapter.onCustomEffect();
+            }
+        });
+
+        txt_forone_video_preview = (TextView) findViewById(R.id.txt_forone_video_preview);
 
         tvEndTime = findViewById(R.id.tvEndTime);
         tvTime = findViewById(R.id.tvTime);
@@ -526,6 +535,8 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
             cvthemview.setVisibility(View.VISIBLE);
             cvframeview.setVisibility(View.GONE);
             laySeconds.setVisibility(View.GONE);
+            img_custom_themes.setVisibility(View.VISIBLE);
+            txt_forone_video_preview.setVisibility(View.VISIBLE);
 
             startActivityes(null,0);
         });
@@ -537,6 +548,8 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
             cvframeview.setVisibility(View.VISIBLE);
             cvthemview.setVisibility(View.GONE);
             laySeconds.setVisibility(View.GONE);
+            img_custom_themes.setVisibility(View.GONE);
+            txt_forone_video_preview.setVisibility(View.GONE);
 
             startActivityes(null,0);
         });
@@ -606,6 +619,9 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
                 ibAddDuration.setImageResource(R.drawable.timer_unpresed);
                 cvframeview.setVisibility(View.GONE);
                 cvthemview.setVisibility(View.GONE);
+
+                img_custom_themes.setVisibility(View.GONE);
+                txt_forone_video_preview.setVisibility(View.GONE);
 //                if (laySeconds.getVisibility() == View.GONE) {
 //                    laySeconds.setVisibility(View.VISIBLE);
 //
@@ -767,8 +783,11 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
                 llEdit.setVisibility(View.VISIBLE);
                 application.isEditEnable = false;
             } else {
-
-                open();
+                if(getSupportFragmentManager().getBackStackEntryCount() == 0)
+                    open();
+                else{
+                    themeAdapter.openConfirmDialog();
+                }
             }
         }
     }

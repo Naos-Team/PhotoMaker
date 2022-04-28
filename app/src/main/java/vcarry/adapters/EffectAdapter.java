@@ -21,8 +21,18 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.EffcectHol
     private VideoThemeActivity activity;
     private ArrayList<KessiMaskBitmap3D.EFFECT> arrayList;
     private OnEffectItemClick onItemClick;
+    private int old_index = -1;
 
-    public EffectAdapter(ArrayList<KessiMaskBitmap3D.EFFECT> arrayList, OnEffectItemClick onItemClick) {
+    public int getOld_index() {
+        return old_index;
+    }
+
+    public void setOld_index(int old_index) {
+        this.old_index = old_index;
+    }
+
+    public EffectAdapter(VideoThemeActivity activity, ArrayList<KessiMaskBitmap3D.EFFECT> arrayList, OnEffectItemClick onItemClick) {
+        this.activity = activity;
         this.arrayList = arrayList;
         this.onItemClick = onItemClick;
     }
@@ -66,6 +76,15 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.EffcectHol
         }
 
         public void bindView(int postion){
+            if(postion == old_index && old_index >= 0){
+                img_add_effect_item.setColorFilter(activity.getColor(R.color.white));
+                layout_effect_item_list.setBackgroundResource(R.drawable.effect_list_bg_selected);
+                txtname_Effect_list.setTextColor(activity.getColor(R.color.white));
+            } else {
+                img_add_effect_item.setColorFilter(activity.getColor(R.color.music_selected));
+                layout_effect_item_list.setBackgroundResource(R.drawable.effect_list_bg);
+                txtname_Effect_list.setTextColor(activity.getColor(R.color.music_selected));
+            }
             img_effect_list.setImageResource(arrayList.get(postion).getImageResource());
             img_add_effect_item.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -80,8 +99,14 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.EffcectHol
                 @Override
                 public void onClick(View v) {
                     onItemClick.onItemClick(postion);
+                    if(postion != old_index){
+                        old_index = postion;
+                        notifyDataSetChanged();
+                    }
                 }
             });
         }
+
+
     }
 }

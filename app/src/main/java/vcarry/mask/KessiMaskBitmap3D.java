@@ -85,7 +85,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_no;
             }
         },
 //        TEST("TEST") {
@@ -129,7 +129,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.random1;
+                return R.drawable.circle_bottom_right;
             }
         },
         RANDOM_CIRCLE_IN("RANDOM_CIRCLE_IN"){
@@ -158,7 +158,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.skew;
+                return R.drawable.random_circle_in;
             }
         },
         FAN_TOP_RIGHT("FAN_TOP_RIGHT") {
@@ -185,7 +185,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_33;
             }
         },
         FAN_TOP_LEFT("FAN_TOP_LEFT") {
@@ -212,7 +212,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.fan_top_left;
             }
         },
         CIRCLE_LEFT_TOP("CIRCLE LEFT TOP") {
@@ -233,7 +233,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.circle_top_left;
             }
         },
         CIRCLE_RIGHT_TOP("Circle right top") {
@@ -254,7 +254,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.circle_top_right;
             }
         },
         CIRCLE_LEFT_BOTTOM("Circle left bottom") {
@@ -275,7 +275,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.circle_down_left;
             }
         },
         CIRCLE_RIGHT_BOTTOM("Circle right bottom") {
@@ -296,7 +296,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.circle_down_right;
             }
         },
         CIRCLE_IN("Circle in") {
@@ -321,7 +321,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_06;
             }
         },
         CIRCLE_OUT("Circle out") {
@@ -342,7 +342,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_07;
             }
         },
         CROSS_IN("Cross in") {
@@ -390,7 +390,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_36;
             }
         },
         CROSS_OUT("Cross out") {
@@ -427,7 +427,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_36;
             }
         },
         DIAMOND_IN("Diamond in") {
@@ -458,7 +458,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_10;
             }
         },
         DIAMOND_OUT("Diamond out") {
@@ -491,7 +491,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_10;
             }
         },
         ECLIPSE_IN("Eclipse in") {
@@ -517,7 +517,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_35;
             }
         },
 
@@ -545,7 +545,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_08;
             }
         },
         /*ms*/
@@ -588,7 +588,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_11;
             }
         },
         HORIZONTAL_RECT("Horizontal rect") {
@@ -613,7 +613,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_13;
             }
         },
 
@@ -646,7 +646,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_13;
             }
         },
         LEAF("LEAF") {
@@ -677,7 +677,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.leaf;
             }
         },
 
@@ -717,7 +717,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_20;
             }
         },
 
@@ -754,7 +754,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_05;
             }
         },
 
@@ -799,7 +799,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_04;
             }
         },
 
@@ -838,7 +838,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_14;
             }
         },
 
@@ -883,7 +883,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_15;
             }
         },
 
@@ -920,7 +920,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_02;
             }
         },
 
@@ -965,7 +965,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_03;
             }
         },
 
@@ -1022,7 +1022,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_love;
             }
         },
 
@@ -1062,7 +1062,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_26;
             }
         },
 
@@ -1114,7 +1114,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_25;
             }
         },
         /*ms*/
@@ -1165,7 +1165,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_24;
             }
         },
         SKEW_LEFT_MEARGE("SKEW_LEFT_MEARGE") {
@@ -1196,7 +1196,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_09;
             }
         },
         SKEW_LEFT_SPLIT("SKEW_LEFT_SPLIT") {
@@ -1227,7 +1227,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_09;
             }
         },
         SKEW_RIGHT_SPLIT("SKEW_RIGHT_SPLIT") {
@@ -1258,7 +1258,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_09;
             }
         },
         SKEW_RIGHT_MEARGE("SKEW_RIGHT_MEARGE") {
@@ -1289,7 +1289,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_09;
             }
         },
         SQUARE_IN("SQUARE_IN") {
@@ -1328,7 +1328,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_23;
             }
         },
         SQUARE_OUT("SQUARE_OUT") {
@@ -1349,7 +1349,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_22;
             }
         },
 
@@ -1374,7 +1374,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.square_r_out;
             }
         },
 
@@ -1400,7 +1400,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.band;
             }
         },
         /*ms*/
@@ -1429,7 +1429,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_12;
             }
         },
         /*ms*/
@@ -1458,7 +1458,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_13;
             }
         },
         /*ms*/
@@ -1486,7 +1486,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_18;
             }
         },
         /*ms*/
@@ -1520,7 +1520,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_19;
             }
         },
         /*ms*/
@@ -1548,7 +1548,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_17;
             }
         },
         /*ms*/
@@ -1582,7 +1582,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.t_16;
             }
         },
         /*ms*/
@@ -1612,7 +1612,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.none;
+                return R.drawable.random_all;
             }
         };
 
