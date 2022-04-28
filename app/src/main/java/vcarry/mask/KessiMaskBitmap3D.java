@@ -84,7 +84,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.none;
             }
 
             public int getImageResource(){
@@ -128,7 +128,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.random_circle_out;
             }
 
             public int getImageResource(){
@@ -157,7 +157,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.random_circle_in;
             }
 
             public int getImageResource(){
@@ -175,7 +175,7 @@ public class KessiMaskBitmap3D {
                 Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
                 Canvas canvas = new Canvas(mask);
                 RectF oval = new RectF();
-                oval.set((((float) w) / 2.0f) - r,((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 3*(((float) h) / 2.0f));
+                oval.set((((float) w) / 2.0f) - r,2*((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 4*(((float) h) / 2.0f));
                 float angle = (((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor);
 
                 canvas.drawArc(oval, 270, -angle, false, paint);
@@ -184,7 +184,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.fan_top_right;
             }
 
             public int getImageResource(){
@@ -202,7 +202,7 @@ public class KessiMaskBitmap3D {
                 Bitmap mask = Bitmap.createBitmap(w, h, Config.ARGB_8888);
                 Canvas canvas = new Canvas(mask);
                 RectF oval = new RectF();
-                oval.set((((float) w) / 2.0f) - r,((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 3*(((float) h) / 2.0f));
+                oval.set((((float) w) / 2.0f) - r,2*((((float) h) / 2.0f) - r), (((float) w) / 2.0f) + r, 4*(((float) h) / 2.0f));
                 float angle = (((float) KessiMaskBitmap3D.ANIMATED_FRAME_CAL)) * ((float) factor);
 
                 canvas.drawArc(oval, 270, angle, false, paint);
@@ -211,7 +211,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.fan_top_left;
             }
 
             public int getImageResource(){
@@ -232,7 +232,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.circle_left_top;
             }
 
             public int getImageResource(){
@@ -253,7 +253,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.circle_right_top;
             }
 
             public int getImageResource(){
@@ -274,7 +274,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.circle_left_bottom;
             }
 
             public int getImageResource(){
@@ -295,7 +295,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.circle_right_bottom;
             }
 
             public int getImageResource(){
@@ -320,7 +320,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.circle_in;
             }
 
             public int getImageResource(){
@@ -341,7 +341,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.circle_out;
             }
 
             public int getImageResource(){
@@ -389,7 +389,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.cross_in;
             }
 
             public int getImageResource(){
@@ -426,7 +426,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.cross_out;
             }
 
             public int getImageResource(){
@@ -457,7 +457,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.diamond_in;
             }
 
             public int getImageResource(){
@@ -490,7 +490,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.diamond_out;
             }
 
             public int getImageResource(){
@@ -516,7 +516,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.eclipse_in;
             }
 
             public int getImageResource(){
@@ -544,7 +544,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.circle_bomb;
             }
 
             public int getImageResource(){
@@ -587,7 +587,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.four_triangle;
             }
 
             public int getImageResource(){
@@ -612,7 +612,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.horizontal_rect;
             }
 
             public int getImageResource(){
@@ -645,7 +645,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.zip;
             }
 
             public int getImageResource(){
@@ -676,7 +676,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.leaf;
             }
 
             public int getImageResource(){
@@ -716,7 +716,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.open_door;
             }
 
             public int getImageResource(){
@@ -753,7 +753,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.rl_door;
             }
 
             public int getImageResource(){
@@ -798,7 +798,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.lr_door;
             }
 
             public int getImageResource(){
@@ -837,7 +837,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.wiper_left_corner;
             }
 
             public int getImageResource(){
@@ -882,7 +882,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.wiper_right_corner;
             }
 
             public int getImageResource(){
@@ -919,7 +919,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.bt_door;
             }
 
             public int getImageResource(){
@@ -964,7 +964,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.tb_door;
             }
 
             public int getImageResource(){
@@ -1021,7 +1021,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.love_door;
             }
 
             public int getImageResource(){
@@ -1061,7 +1061,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.pin_wheel;
             }
 
             public int getImageResource(){
@@ -1113,7 +1113,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.rect_random;
             }
 
             public int getImageResource(){
@@ -1164,7 +1164,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.bubble;
             }
 
             public int getImageResource(){
@@ -1195,7 +1195,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.skew_left_mearge;
             }
 
             public int getImageResource(){
@@ -1226,7 +1226,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.skew_left_split;
             }
 
             public int getImageResource(){
@@ -1257,7 +1257,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.skew_right_split;
             }
 
             public int getImageResource(){
@@ -1288,7 +1288,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.skew_right_mearge;
             }
 
             public int getImageResource(){
@@ -1327,7 +1327,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.square_in;
             }
 
             public int getImageResource(){
@@ -1348,7 +1348,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.square_out;
             }
 
             public int getImageResource(){
@@ -1373,7 +1373,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.square_r_out;
             }
 
             public int getImageResource(){
@@ -1399,7 +1399,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.band;
             }
 
             public int getImageResource(){
@@ -1428,7 +1428,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test1;
+                return R.raw.vertical_rect;
             }
 
             public int getImageResource(){
@@ -1457,7 +1457,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test2;
+                return R.raw.hori_rect;
             }
 
             public int getImageResource(){
@@ -1485,7 +1485,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test2;
+                return R.raw.tournado;
             }
 
             public int getImageResource(){
@@ -1519,7 +1519,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test2;
+                return R.raw.tournado_rev;
             }
 
             public int getImageResource(){
@@ -1547,7 +1547,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test2;
+                return R.raw.rub_rl;
             }
 
             public int getImageResource(){
@@ -1581,7 +1581,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test2;
+                return R.raw.rub_lr;
             }
 
             public int getImageResource(){
@@ -1611,7 +1611,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getVideoResoucre(){
-                return R.raw.video_test2;
+                return R.raw.wind_mill;
             }
 
             public int getImageResource(){
