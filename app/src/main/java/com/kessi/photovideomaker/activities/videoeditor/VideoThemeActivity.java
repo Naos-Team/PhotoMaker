@@ -768,8 +768,11 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
                 llEdit.setVisibility(View.VISIBLE);
                 application.isEditEnable = false;
             } else {
-
-                open();
+                if(getSupportFragmentManager().getBackStackEntryCount() == 0)
+                    open();
+                else{
+                    themeAdapter.openConfirmDialog();
+                }
             }
         }
     }

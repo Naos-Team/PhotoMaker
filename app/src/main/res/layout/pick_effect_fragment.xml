@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainbgcolor">
+    android:background="@drawable/bg_pick_effect">
 
     <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/toolbar_pickEffect"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,13 +18,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="0.7">
+        app:layout_constraintVertical_weight="0.8">
 
         <RelativeLayout
             android:id="@+id/btn_back_pick_Effect"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
             android:layout_weight="0.6"
             android:gravity="center">
 
@@ -36,14 +38,30 @@
                 app:tint="@color/toptextcolor" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3.6"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/_5sdp"
+                android:textStyle="bold"
+                android:text="Preview"
+                android:textColor="@color/toptextcolor"
+                android:textSize="20dp" />
+        </RelativeLayout>
 
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="@dimen/_12sdp"
-            android:layout_weight="8.3"
+            android:layout_weight="0.6"
             android:gravity="center">
 
             <ImageView
@@ -68,7 +86,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_pickEffect"
-            app:layout_constraintVertical_weight="6.6">
+            app:layout_constraintVertical_weight="7.5">
 
             <VideoView
                 android:id="@+id/video_Preview_Pick_Effect"
@@ -78,20 +96,38 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.13999999"
+                app:layout_constraintVertical_bias="0.08"
                 app:layout_constraintVertical_weight="11" />
 
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="Chosen theme"
+                android:textColor="@color/toptextcolor"
+                app:layout_constraintDimensionRatio="16:1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/video_Preview_Pick_Effect"
+                app:layout_constraintVertical_bias="0.12" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:padding="2dp"
                 android:id="@+id/rcl_Effect_picked"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="15dp"
-                app:layout_constraintDimensionRatio="4:1"
+                android:padding="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="4:1"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.2"
+                app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/video_Preview_Pick_Effect" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_result"
+                app:layout_constraintVertical_bias="0.3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

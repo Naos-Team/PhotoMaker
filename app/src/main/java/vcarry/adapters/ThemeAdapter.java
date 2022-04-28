@@ -113,7 +113,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
                     });
                     FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.layout_video_preview, fragment);
-                    transaction.addToBackStack("Food");
+                    transaction.addToBackStack("Custom");
                     transaction.commit();
 
                 } else if (list.get(pos) != application.selectedTheme) {
@@ -140,7 +140,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
         });
     }
 
-    private void openConfirmDialog(){
+    public void openConfirmDialog(){
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
@@ -148,7 +148,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
         dialog.setContentView(R.layout.dialog_alert);
 
         TextView maintext = dialog.findViewById(R.id.maintext);
-        maintext.setText("You haven't choose any effect, Are you confirm to exit?");
+        maintext.setText("Your chosen themes will not be added. Do you confirm to exit?");
         RelativeLayout img_btn_yes = dialog.findViewById(R.id.yes);
         RelativeLayout img_btn_no = dialog.findViewById(R.id.no);
 
