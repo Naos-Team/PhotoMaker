@@ -93,28 +93,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
         holder.clickableView.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 if(list.get(pos).toString().equalsIgnoreCase(KessiTheme.CUSTOM.toString())){
-                    PickEffectFragment fragment = new PickEffectFragment(new OnBackFragment() {
-                        @Override
-                        public void onEndChoose() {
-                            position = pos;
-                            //                    deleteThemeDir(application.selectedTheme.toString());
-                            application.videoImages.clear();
-                            application.selectedTheme = (KessiTheme) list.get(pos);
-                            application.setCurrentTheme(application.selectedTheme.toString());
-                            activity.reset();
-                            notifyDataSetChanged();
-                            activity.getSupportFragmentManager().popBackStack();
-                        }
 
-                        @Override
-                        public void onBackFragment(ArrayList<KessiMaskBitmap3D.EFFECT> arrayList) {
-                            openConfirmDialog();
-                        }
-                    });
-                    FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.layout_video_preview, fragment);
-                    transaction.addToBackStack("Custom");
-                    transaction.commit();
 
                 } else if (list.get(pos) != application.selectedTheme) {
                     if (!AdManager.isloadFbMAXAd) {
@@ -138,6 +117,30 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
                 }
             }
         });
+    }
+
+    public void onCustomEffect(){
+        PickEffectFragment fragment = new PickEffectFragment(new OnBackFragment() {
+            @Override
+            public void onEndChoose() {
+                position = -1;
+                application.videoImages.clear();
+                application.selectedTheme = (KessiTheme) KessiTheme.CUSTOM;
+                application.setCurrentTheme(application.selectedTheme.toString());
+                activity.reset();
+                notifyDataSetChanged();
+                activity.getSupportFragmentManager().popBackStack();
+            }
+
+            @Override
+            public void onBackFragment(ArrayList<KessiMaskBitmap3D.EFFECT> arrayList) {
+                openConfirmDialog();
+            }
+        });
+        FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.layout_video_preview, fragment);
+        transaction.addToBackStack("Custom");
+        transaction.commit();
     }
 
     public void openConfirmDialog(){
@@ -177,6 +180,6 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
     }
 
     public int getItemCount() {
-        return this.list.size();
+        return this.list.size() - 1;
     }
 }
