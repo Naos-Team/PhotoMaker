@@ -22,7 +22,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.naosteam.slideshowmaker.util.AdManager;
 import com.xinlan.imageeditlibrary.BaseActivity;
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.fragment.AddTextFragment;
@@ -128,12 +127,6 @@ public class EditImageActivity extends BaseActivity {
         getData();
     }
 
-    private void LoadAds(){
-        AdManager.initAd(EditImageActivity.this);
-        AdManager.loadInterAd(this);
-//        ll_adView = findViewById(R.id.ll_adView);
-//        AdManager.loadAdmobBanner(this, ll_adView);
-    }
 
     private void getData() {
         filePath = getIntent().getStringExtra(FILE_PATH);
@@ -307,12 +300,8 @@ public class EditImageActivity extends BaseActivity {
                 mBeautyFragment.backToMain();
                 return;
         }// end switch
-        AdManager.showAdmobInterAd(EditImageActivity.this, new AdManager.InterAdsListener() {
-            @Override
-            public void onClick() {
-                mContext.finish();
-            }
-        });
+
+        mContext.finish();
 
     }
 
@@ -429,19 +418,14 @@ public class EditImageActivity extends BaseActivity {
     }
 
     protected void onSaveTaskDone() {
-        AdManager.showAdmobInterAd(this, new AdManager.InterAdsListener() {
-            @Override
-            public void onClick() {
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra(FILE_PATH, filePath);
-                returnIntent.putExtra(EXTRA_OUTPUT, saveFilePath);
-                returnIntent.putExtra(IMAGE_IS_EDIT, mOpTimes > 0);
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra(FILE_PATH, filePath);
+        returnIntent.putExtra(EXTRA_OUTPUT, saveFilePath);
+        returnIntent.putExtra(IMAGE_IS_EDIT, mOpTimes > 0);
 
-                FileUtil.ablumUpdate(EditImageActivity.this, saveFilePath);
-                setResult(RESULT_OK, returnIntent);
-                finish();
-            }
-        });
+        FileUtil.ablumUpdate(EditImageActivity.this, saveFilePath);
+        setResult(RESULT_OK, returnIntent);
+        finish();
     }
 
     private final class SaveImageTask extends AsyncTask<Bitmap, Void, Boolean> {
