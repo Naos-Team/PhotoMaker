@@ -81,7 +81,7 @@ public class PickEffectFragment extends Fragment {
             }
         });
 
-        adapter_effect_list = new EffectAdapter(list_all, new OnEffectItemClick() {
+        adapter_effect_list = new EffectAdapter((VideoThemeActivity) getActivity(), list_all, new OnEffectItemClick() {
             @Override
             public void onItemClick(int position) {
                 String path = "android.resource://" + getActivity().getPackageName() + "/" + list_all.get(position).getVideoResoucre();
