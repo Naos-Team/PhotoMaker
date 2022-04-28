@@ -86,10 +86,23 @@ public class SendEmailActivity extends AppCompatActivity {
     private void LoadAds(){
         AdManager.initAd(SendEmailActivity.this);
         ll_adView = findViewById(R.id.ll_adView3);
+        AdManager.loadInterAd(this);
         AdManager.loadAdmobBanner(this, ll_adView);
     }
 
 //    int FLAG_VIDEO = 21;
+    @Override
+    public void onBackPressed() {
+        AdManager.showAdmobInterAd(SendEmailActivity.this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                SendEmailActivity.super.onBackPressed();
+            }
+        });
+
+    }
+
+    //    int FLAG_VIDEO = 21;
 //
 //    @Override
 //    public void onBackPressed() {

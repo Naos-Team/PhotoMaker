@@ -159,6 +159,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         seekBar_picktime.setThumb(d);
 
         init();
+        LoadAds();
         addListner();
         KessiApplication.isBreak = false;
 
@@ -200,6 +201,11 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
             AdManager.adCounter++;
             AdManager.showMaxInterstitial(VideoThemeActivity.this, intent,reqCode);
         }
+    }
+
+    private void LoadAds() {
+        AdManager.initAd(this);
+        AdManager.loadInterAd(this);
     }
 
     void bindView() {
@@ -314,7 +320,13 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
             lockRunnable.stop();
 
-            startActivityes(new Intent(VideoThemeActivity.this, VideoMakerActivity.class),0);
+            AdManager.showAdmobInterAd(VideoThemeActivity.this, new AdManager.InterAdsListener() {
+                @Override
+                public void onClick() {
+                    startActivityes(new Intent(VideoThemeActivity.this, VideoMakerActivity.class),0);
+                }
+            });
+
 
         });
 
@@ -842,9 +854,16 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
 
                 d_delete.dismiss();
-                Intent i_back = new Intent(VideoThemeActivity.this, MainActivity.class);
-                i_back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i_back);
+
+                AdManager.showAdmobInterAd(VideoThemeActivity.this, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        Intent i_back = new Intent(VideoThemeActivity.this, MainActivity.class);
+                        i_back.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i_back);
+                    }
+                });
+
 
             }
         });

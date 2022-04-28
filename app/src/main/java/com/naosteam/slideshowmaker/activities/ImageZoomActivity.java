@@ -45,6 +45,18 @@ public class ImageZoomActivity extends AppCompatActivity {
     private void LoadAds(){
         AdManager.initAd(ImageZoomActivity.this);
         ll_adView = findViewById(R.id.ll_adView12);
+        AdManager.loadInterAd(this);
         AdManager.loadAdmobBanner(this, ll_adView);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        AdManager.showAdmobInterAd(ImageZoomActivity.this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                ImageZoomActivity.super.onBackPressed();
+            }
+        });
     }
 }

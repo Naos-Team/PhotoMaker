@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         AdManager.initAd(MainActivity.this);
         ll_adView = findViewById(R.id.ll_adView);
         AdManager.loadAdmobBanner(this, ll_adView);
+        AdManager.loadInterAd(this);
     }
 
     private void checkAndroid11AccessPermission(){
@@ -208,11 +209,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }else{
                 if (!checkPermissions(MainActivity.this, permissionsList)) {
                     ActivityCompat.requestPermissions(MainActivity.this, permissionsList, 21);
-
                 } else {
-                    Intent mIntent = new Intent(MainActivity.this, BackgroundFrameActivity.class);
-                    startActivity(mIntent);
-                    Animatee.animateSlideUp(MainActivity.this);
+                    AdManager.showAdmobInterAd(this, new AdManager.InterAdsListener() {
+                        @Override
+                        public void onClick() {
+                            Intent mIntent = new Intent(MainActivity.this, BackgroundFrameActivity.class);
+                            startActivity(mIntent);
+                            Animatee.animateSlideUp(MainActivity.this);
+                        }
+                    });
                 }
             }
         });
@@ -224,13 +229,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ActivityCompat.requestPermissions(this, permissionsList, 22);
             } else {
                 KSUtil.fromAlbum = true;
-                AdManager.adCounter = AdManager.adDisplayCounter;
-                AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
+//                AdManager.adCounter = AdManager.adDisplayCounter;
+//                AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
 //                if (!AdManager.isloadFbMAXAd) {
 //                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
 //                } else {
 //                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
 //                }
+                AdManager.showAdmobInterAd(this, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        startActivityForResult(new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
+                    }
+                });
             }
         });
 
@@ -240,12 +251,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ActivityCompat.requestPermissions(this, permissionsList, 22);
             } else {
                 KSUtil.fromAlbum = true;
-                AdManager.adCounter = AdManager.adDisplayCounter;
-                if (!AdManager.isloadFbMAXAd) {
-                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, PhotoAlbumActivity.class), RETURN_CODE);
-                } else {
-                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, PhotoAlbumActivity.class), RETURN_CODE);
-                }
+//                AdManager.adCounter = AdManager.adDisplayCounter;
+//                if (!AdManager.isloadFbMAXAd) {
+//                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, PhotoAlbumActivity.class), RETURN_CODE);
+//                } else {
+//
+//                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, PhotoAlbumActivity.class), RETURN_CODE);
+//                }
+                AdManager.showAdmobInterAd(this, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        startActivityForResult(new Intent(MainActivity.this, PhotoAlbumActivity.class), RETURN_CODE);
+                    }
+                });
             }
         });
 //        FrameLayout nativeContainer = findViewById(R.id.nativeContainer);

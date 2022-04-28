@@ -85,7 +85,18 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
     private void LoadAds(){
         AdManager.initAd(BgTemplateDetailsActivity.this);
         ll_adView = findViewById(R.id.ll_adView9);
+        AdManager.loadInterAd(this);
         AdManager.loadAdmobBanner(this, ll_adView);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AdManager.showAdmobInterAd(BgTemplateDetailsActivity.this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                BgTemplateDetailsActivity.super.onBackPressed();
+            }
+        });
     }
 
     void bindView() {
@@ -451,7 +462,13 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             application.isEditEnable = false;
             if(b){
                 ImageSaverActivity.setPath(path);
-                startActivity(new Intent(BgTemplateDetailsActivity.this, ImageSaverActivity.class));
+                AdManager.showAdmobInterAd(BgTemplateDetailsActivity.this, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        startActivity(new Intent(BgTemplateDetailsActivity.this, ImageSaverActivity.class));
+                    }
+                });
+
             } else {
                 Toast.makeText(BgTemplateDetailsActivity.this, "Error",
                         Toast.LENGTH_SHORT).show();
@@ -495,7 +512,13 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             pd.dismiss();
             application.isEditEnable = false;
-            startActivity(new Intent(BgTemplateDetailsActivity.this, VideoThemeActivity.class));
+
+            AdManager.showAdmobInterAd(BgTemplateDetailsActivity.this, new AdManager.InterAdsListener() {
+                @Override
+                public void onClick() {
+                    startActivity(new Intent(BgTemplateDetailsActivity.this, VideoThemeActivity.class));
+                }
+            });
         }
     }
 

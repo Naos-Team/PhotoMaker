@@ -20,7 +20,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.naosteam.slideshowmaker.R;
-import com.naosteam.slideshowmaker.activities.songpicker.SongGalleryActivity;
 import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -86,9 +85,16 @@ public class ImageSaverActivity extends AppCompatActivity {
         imv_saved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ImageSaverActivity.this, ImageZoomActivity.class);
-                intent.putExtra("img", "file://"+ path);
-                startActivity(intent);
+
+                AdManager.showAdmobInterAd(ImageSaverActivity.this, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        Intent intent = new Intent(ImageSaverActivity.this, ImageZoomActivity.class);
+                        intent.putExtra("img", "file://"+ path);
+                        startActivity(intent);
+                    }
+                });
+
             }
         });
 
@@ -102,8 +108,14 @@ public class ImageSaverActivity extends AppCompatActivity {
         btnEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ImageSaverActivity.this, SendEmailActivity.class);
-                startActivity(intent);
+                AdManager.showAdmobInterAd(ImageSaverActivity.this, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        Intent intent = new Intent(ImageSaverActivity.this, SendEmailActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
             }
         });
 
@@ -218,13 +230,19 @@ public class ImageSaverActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if (KSUtil.fromAlbum) {
-            Intent intent = new Intent();
-            setResult(FLAG_VIDEO, intent);
-        } else {
-            gotoMain();
-        }
+        AdManager.showAdmobInterAd(ImageSaverActivity.this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                ImageSaverActivity.super.onBackPressed();
+                if (KSUtil.fromAlbum) {
+                    Intent intent = new Intent();
+                    setResult(FLAG_VIDEO, intent);
+                } else {
+                    gotoMain();
+                }
+            }
+        });
+
     }
 
 

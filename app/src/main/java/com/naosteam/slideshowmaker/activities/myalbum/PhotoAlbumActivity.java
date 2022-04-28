@@ -20,6 +20,7 @@ import com.naosteam.slideshowmaker.R;
 import com.naosteam.slideshowmaker.activities.AdapterMainPhoto;
 import com.naosteam.slideshowmaker.activities.ImageSaverActivity;
 import com.naosteam.slideshowmaker.activities.MainActivity;
+import com.naosteam.slideshowmaker.activities.kessiimagepicker.activity.ImagePickerActivity;
 import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
 
@@ -47,10 +48,12 @@ public class PhotoAlbumActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                KSUtil.Bounce(PhotoAlbumActivity.this, back);
-                Intent i = new Intent();
-                setResult(RESULT_CANCELED, i);
-                onBackPressed();
+                AdManager.showAdmobInterAd(PhotoAlbumActivity.this, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        onBackPressed();
+                    }
+                });
             }
         });
 
@@ -61,7 +64,10 @@ public class PhotoAlbumActivity extends AppCompatActivity {
         AdManager.initAd(PhotoAlbumActivity.this);
         ll_adView = findViewById(R.id.ll_adView1);
         AdManager.loadAdmobBanner(this, ll_adView);
+        AdManager.loadInterAd(this);
     }
+
+
 
     public void videoLoader() {
         getFromStorage();
@@ -131,6 +137,30 @@ public class PhotoAlbumActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+//        AdManager.adCounter++;
+//        if (AdManager.adCounter == AdManager.adDisplayCounter) {
+//            if (!AdManager.isloadFbMAXAd) {
+//                AdManager.showInterAd(MyAlbumActivity.this, null, 0);
+//            } else {
+//                AdManager.showMaxInterstitial(MyAlbumActivity.this, null, 0);
+//            }
+//        } else {
+//            Intent returnIntent = new Intent();
+//            setResult(RESULT_CANCELED, returnIntent);
+//            super.onBackPressed();
+//        }
+        AdManager.showAdmobInterAd(this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                Intent returnIntent = new Intent();
+                setResult(RESULT_CANCELED, returnIntent);
+                PhotoAlbumActivity.super.onBackPressed();
+            }
+        });
     }
 
 }

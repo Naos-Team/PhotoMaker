@@ -80,30 +80,36 @@ public class SwapperActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() {
-        AdManager.adCounter++;
-        if (AdManager.adCounter == AdManager.adDisplayCounter) {
-            if (!AdManager.isloadFbMAXAd) {
-                AdManager.showInterAd(SwapperActivity.this, null, 0);
-            } else {
-                AdManager.showMaxInterstitial(SwapperActivity.this, null, 0);
-            }
-        } else {
-            if (absDynamicGridView.isEditMode()) {
-                absDynamicGridView.stopEditMode();
-            } else {
-                File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/MS_SlideShow"+"/imagesfolder");
-                if (dir.isDirectory())
-                {
-                    String[] children = dir.list();
-                    for (int i = 0; i < children.length; i++)
-                    {
-                        new File(dir, children[i]).delete();
-                    }
-                }
-                super.onBackPressed();
+//        AdManager.adCounter++;
+//        if (AdManager.adCounter == AdManager.adDisplayCounter) {
+//            if (!AdManager.isloadFbMAXAd) {
+//                AdManager.showInterAd(SwapperActivity.this, null, 0);
+//            } else {
+//                AdManager.showMaxInterstitial(SwapperActivity.this, null, 0);
+//            }
+//        } else {
 
+//        }
+        AdManager.showAdmobInterAd(this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                if (absDynamicGridView.isEditMode()) {
+                    absDynamicGridView.stopEditMode();
+                } else {
+                    File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)+"/MS_SlideShow"+"/imagesfolder");
+                    if (dir.isDirectory())
+                    {
+                        String[] children = dir.list();
+                        for (int i = 0; i < children.length; i++)
+                        {
+                            new File(dir, children[i]).delete();
+                        }
+                    }
+                    SwapperActivity.super.onBackPressed();
+
+                }
             }
-        }
+        });
     }
 
     void init() {
@@ -249,8 +255,13 @@ public class SwapperActivity extends AppCompatActivity implements View.OnClickLi
             super.onPostExecute(aVoid);
             pd.dismiss();
             application.isEditEnable = false;
+            AdManager.showAdmobInterAd(SwapperActivity.this, new AdManager.InterAdsListener() {
+                @Override
+                public void onClick() {
 
-            startActivity(new Intent(SwapperActivity.this, VideoThemeActivity.class));
+                    startActivity(new Intent(SwapperActivity.this, VideoThemeActivity.class));
+                }
+            });
 
         }
     }

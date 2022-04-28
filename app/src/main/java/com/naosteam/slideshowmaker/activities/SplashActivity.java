@@ -20,11 +20,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.naosteam.slideshowmaker.R;
 import com.naosteam.slideshowmaker.activities.intro.IntroActivity;
+import com.naosteam.slideshowmaker.util.AppOpenAdsManager;
 
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 
@@ -36,17 +38,29 @@ public class SplashActivity extends AppCompatActivity {
     ImageView icon, bgIV;
     String[] permissionsList = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    AppOpenAdsManager appOpenAdsManager;
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        new Handler().postDelayed(() -> {
+        appOpenAdsManager = new AppOpenAdsManager(this, new AppOpenAdsManager.OpenAdsListener() {
+            @Override
+            public void onClick() {
+                checkAccessPermission();
+            }
+        });
 
-            checkAccessPermission();
-//            Animatee.animateSplit(SplashActivity.this);
-        }, 1500);
+        new Handler().postDelayed(() -> {
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+                appOpenAdsManager.showAdIfAvailable();
+            }else{
+                checkAccessPermission();
+            }
+        }, 2000);
+
 
 
     }
@@ -87,32 +101,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void openAccessFileDialog() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//
-//        builder.setTitle("Message");
-//        builder.setMessage("Please give permission to this app to access all file!");
-//
-//        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-//
-//            public void onClick(DialogInterface dialog, int which) {
-//                Intent i = new Intent();
-//                i.setAction(ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-//                startActivityForResult(i, 11);
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-//
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//                quitSplash();
-//            }
-//        });
-//
-//        AlertDialog alert = builder.create();
-//        alert.show();
 
         final Dialog dialog = new Dialog(SplashActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

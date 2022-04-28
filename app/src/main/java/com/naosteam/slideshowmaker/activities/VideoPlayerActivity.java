@@ -400,13 +400,19 @@ public class VideoPlayerActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if (KSUtil.fromAlbum) {
-            Intent intent = new Intent();
-            setResult(FLAG_VIDEO, intent);
-        } else {
-            gotoMain();
-        }
+        AdManager.showAdmobInterAd(VideoPlayerActivity.this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                VideoPlayerActivity.super.onBackPressed();
+                if (KSUtil.fromAlbum) {
+                    Intent intent = new Intent();
+                    setResult(FLAG_VIDEO, intent);
+                } else {
+                    gotoMain();
+                }
+            }
+        });
+
     }
 
 

@@ -9,9 +9,9 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.facebook.ads.Ad;
 import com.naosteam.slideshowmaker.R;
 import com.naosteam.slideshowmaker.activities.BgTemplateDetailsActivity;
-import com.naosteam.slideshowmaker.activities.myalbum.PhotoAlbumActivity;
 import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
 
@@ -46,8 +46,13 @@ public class BackgroundFrameActivity extends AppCompatActivity {
         adapter = new AdapterBackgroundFrame(arrayList_bg, new BackgroundFrameClickListener() {
             @Override
             public void onClick(int pos) {
-                BgTemplateDetailsActivity.setBackground_template(arrayList_bg.get(pos));
-                startActivity(new Intent(BackgroundFrameActivity.this, BgTemplateDetailsActivity.class));
+                AdManager.showAdmobInterAd(BackgroundFrameActivity.this, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        BgTemplateDetailsActivity.setBackground_template(arrayList_bg.get(pos));
+                        startActivity(new Intent(BackgroundFrameActivity.this, BgTemplateDetailsActivity.class));
+                    }
+                });
             }
         });
         rv = findViewById(R.id.rv);
@@ -57,8 +62,19 @@ public class BackgroundFrameActivity extends AppCompatActivity {
 
     private void LoadAds(){
         AdManager.initAd(BackgroundFrameActivity.this);
+        AdManager.loadInterAd(this);
         ll_adView = findViewById(R.id.ll_adView8);
         AdManager.loadAdmobBanner(this, ll_adView);
     }
 
+    @Override
+    public void onBackPressed() {
+        AdManager.showAdmobInterAd(this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                BackgroundFrameActivity.super.onBackPressed();
+            }
+        });
+
+    }
 }

@@ -127,6 +127,7 @@ public class EditImageActivity extends BaseActivity {
         getData();
     }
 
+
     private void getData() {
         filePath = getIntent().getStringExtra(FILE_PATH);
         saveFilePath = getIntent().getStringExtra(EXTRA_OUTPUT);//
@@ -422,7 +423,7 @@ public class EditImageActivity extends BaseActivity {
         returnIntent.putExtra(EXTRA_OUTPUT, saveFilePath);
         returnIntent.putExtra(IMAGE_IS_EDIT, mOpTimes > 0);
 
-        FileUtil.ablumUpdate(this, saveFilePath);
+        FileUtil.ablumUpdate(EditImageActivity.this, saveFilePath);
         setResult(RESULT_OK, returnIntent);
         finish();
     }

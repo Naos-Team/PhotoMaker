@@ -35,6 +35,7 @@ import androidx.core.content.ContextCompat;
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.activities.MainActivity;
 import com.naosteam.slideshowmaker.activities.kessiimagepicker.Constants;
 import com.naosteam.slideshowmaker.activities.kessiimagepicker.adapter.AlbumAdapter;
 import com.naosteam.slideshowmaker.activities.kessiimagepicker.adapter.ListAlbumAdapter;
@@ -275,6 +276,7 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
     private void LoadAds(){
         AdManager.initAd(ImagePickerActivity.this);
         ll_adView = findViewById(R.id.ll_adView10);
+        AdManager.loadInterAd(this);
         AdManager.loadAdmobBanner(this, ll_adView);
     }
 
@@ -548,13 +550,19 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
 
             }
             Log.e("Image", sb.toString());
+            AdManager.showAdmobInterAd(this, new AdManager.InterAdsListener() {
+                @Override
+                public void onClick() {
+                    startActivityForResult(new Intent(ImagePickerActivity.this, SwapperActivity.class), 0);
+                }
+            });
 
-            AdManager.adCounter = AdManager.adDisplayCounter;
-            if (!AdManager.isloadFbMAXAd) {
-                AdManager.showInterAd(ImagePickerActivity.this, new Intent(ImagePickerActivity.this, SwapperActivity.class), 0);
-            } else {
-                AdManager.showMaxInterstitial(ImagePickerActivity.this, new Intent(ImagePickerActivity.this, SwapperActivity.class), 0);
-            }
+//            AdManager.adCounter = AdManager.adDisplayCounter;
+//            if (!AdManager.isloadFbMAXAd) {
+//                AdManager.showInterAd(ImagePickerActivity.this, new Intent(ImagePickerActivity.this, SwapperActivity.class), 0);
+//            } else {
+//                AdManager.showMaxInterstitial(ImagePickerActivity.this, new Intent(ImagePickerActivity.this, SwapperActivity.class), 0);
+//            }
         }
     }
 
