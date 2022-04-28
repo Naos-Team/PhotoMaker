@@ -450,6 +450,7 @@
             app:riv_corner_radius_top_right="@dimen/_5sdp" />
 
         <TextView
+            android:id="@+id/txt_forone_video_preview"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fontFamily="@font/family"

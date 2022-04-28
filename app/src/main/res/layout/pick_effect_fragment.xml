@@ -100,16 +100,17 @@
                 app:layout_constraintVertical_weight="11" />
 
             <TextView
-                android:layout_marginLeft="10dp"
                 android:id="@+id/tv_result"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:textSize="20dp"
-                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:paddingStart="20dp"
                 android:text="Chosen theme"
                 android:textColor="@color/toptextcolor"
-                app:layout_constraintDimensionRatio="16:1"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="16:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.055"
                 app:layout_constraintStart_toStartOf="parent"
