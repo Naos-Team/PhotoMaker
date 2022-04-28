@@ -129,7 +129,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.random1;
+                return R.drawable.circle_bottom_right;
             }
         },
         RANDOM_CIRCLE_IN("RANDOM_CIRCLE_IN"){
@@ -158,7 +158,7 @@ public class KessiMaskBitmap3D {
             }
 
             public int getImageResource(){
-                return R.drawable.skew;
+                return R.drawable.random_circle_in;
             }
         },
         FAN_TOP_RIGHT("FAN_TOP_RIGHT") {
