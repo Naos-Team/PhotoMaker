@@ -12,11 +12,11 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:weightSum="5"
-        app:layout_constraintBottom_toTopOf="@+id/video_Preview_Pick_Effect"
+        app:layout_constraintBottom_toTopOf="@+id/v_holder_videoview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="0.8">
+        app:layout_constraintVertical_weight="0.7">
 
         <RelativeLayout
             android:id="@+id/btn_back_pick_Effect"
@@ -36,74 +36,76 @@
                 app:tint="@color/toptextcolor" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3.8"
-            android:gravity="center">
 
-
-            <TextView
-                android:id="@+id/toolbar_title_pick_Effect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:text="Editor"
-                android:textColor="@color/toptextcolor"
-                android:textSize="@dimen/_14sdp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginRight="@dimen/_12sdp"
-            android:layout_weight="0.6"
+            android:layout_weight="8.3"
             android:gravity="center">
 
             <ImageView
                 android:id="@+id/done_preview_pick_Effect"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
                 android:padding="@dimen/_5sdp"
                 android:src="@drawable/pdone"
                 app:tint="@color/toptextcolor" />
         </RelativeLayout>
     </LinearLayout>
 
-    <VideoView
-        android:id="@+id/video_Preview_Pick_Effect"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/rcl_Effect_picked"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_pickEffect"
-        app:layout_constraintVertical_weight="3.5" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_gravity="center"
+            android:id="@+id/v_holder_videoview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/effect_video_bg"
+            app:layout_constraintBottom_toTopOf="@+id/rcl_List_Effect"
+            app:layout_constraintDimensionRatio="350:400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_pickEffect"
+            app:layout_constraintVertical_weight="6.6">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcl_Effect_picked"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/bg_duration_item"
-        app:layout_constraintBottom_toTopOf="@+id/rcl_List_Effect"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/video_Preview_Pick_Effect"
-        app:layout_constraintVertical_weight="1.2" />
+            <VideoView
+                android:id="@+id/video_Preview_Pick_Effect"
+                android:layout_width="270dp"
+                android:layout_height="270dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.13999999"
+                app:layout_constraintVertical_weight="11" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:padding="2dp"
+                android:id="@+id/rcl_Effect_picked"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="15dp"
+                app:layout_constraintDimensionRatio="4:1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/video_Preview_Pick_Effect" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcl_List_Effect"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="20dp"
         android:padding="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rcl_Effect_picked"
+        app:layout_constraintTop_toBottomOf="@+id/v_holder_videoview"
         app:layout_constraintVertical_weight="4.3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,7 +33,7 @@ public class ImageSaverActivity extends AppCompatActivity {
 
     ImageView btnBack, btnDelete;
     LinearLayout btnEmail;
-    LinearLayout btnShare, btnRate;
+    LinearLayout btnShare, btnRate, linear11;
     RoundedImageView imv_saved;
     RelativeLayout main;
     static String path;
@@ -59,6 +59,12 @@ public class ImageSaverActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btn_back11);
         imv_saved = findViewById(R.id.imv_saved);
         btnEmail = findViewById(R.id.btnEmail);
+        linear11 = findViewById(R.id.linear11);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                (getResources()
+                        .getDisplayMetrics().heightPixels*540/1080));
+        linear11.setLayoutParams(params);
 
         if(!path.isEmpty()){
             Picasso.get()
@@ -66,11 +72,19 @@ public class ImageSaverActivity extends AppCompatActivity {
                     .into(imv_saved);
         }
         imv_saved.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 (getResources()
-                        .getDisplayMetrics().widthPixels));
-        imv_saved.setLayoutParams(params);
+                        .getDisplayMetrics().heightPixels*540/1080));
+        imv_saved.setLayoutParams(params1);
+
+        imv_saved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ImageSaverActivity.this, ImageZoomActivity.class);
+                intent.putExtra("img", "file://"+ path);
+                startActivity(intent);
+            }
+        });
 
 //        Drawable dr = getResources().getDrawable(R.drawable.shipbar_round);
 //        Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();

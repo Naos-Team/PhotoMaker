@@ -79,5 +79,7 @@ dependencies {
 
     implementation 'net.sargue:mailgun:1.10.0'
 
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
 
 }

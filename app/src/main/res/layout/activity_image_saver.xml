@@ -60,9 +60,8 @@
             android:id="@+id/btn_back11"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:padding="@dimen/_5sdp"
+            android:padding="@dimen/_6sdp"
             android:src="@drawable/ims_back" />
 
 
@@ -90,6 +89,7 @@
         >
 
         <LinearLayout
+            android:id="@+id/linear11"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
