@@ -429,19 +429,43 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img_custom_themes"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/mainbgcolor"
+            android:layout_height="0dp"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg1"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="w,1:1.4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_weight="2.5"
             app:layout_constraintStart_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/add" />
+            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintWidth_percent="0.3"
+            app:riv_corner_radius_bottom_left="@dimen/_5sdp"
+            app:riv_corner_radius_bottom_right="@dimen/_5sdp"
+            app:riv_corner_radius_top_left="@dimen/_5sdp"
+            app:riv_corner_radius_top_right="@dimen/_5sdp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/family"
+            android:gravity="center"
+            android:text="FOR ONE "
+            android:textColor="@color/music_selected"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="2.5"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintWidth_percent="0.25" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_pick_effect">
+    android:background="@color/mainbgcolor">
 
     <LinearLayout
         android:layout_marginTop="5dp"
@@ -100,6 +100,7 @@
                 app:layout_constraintVertical_weight="11" />
 
             <TextView
+                android:layout_marginLeft="10dp"
                 android:id="@+id/tv_result"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -110,7 +111,7 @@
                 app:layout_constraintDimensionRatio="16:1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.05"
+                app:layout_constraintHeight_percent="0.055"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/video_Preview_Pick_Effect"
                 app:layout_constraintVertical_bias="0.12" />
