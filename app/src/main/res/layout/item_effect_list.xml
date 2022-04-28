@@ -4,21 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="3dp"
+    android:padding="5dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/effect_list_bg"
     android:id="@+id/layout_effect_item_list">
 
-    <ImageView
-        android:id="@+id/img_effect_list"
+
+    <RelativeLayout
+        android:padding="5dp"
+        android:id="@+id/view_imv"
+        android:background="@drawable/result_effect_bg"
         android:layout_width="0dp"
+        android:layout_marginLeft="5dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintEnd_toStartOf="@+id/txtname_Effect_list"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/random_all" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/img_effect_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            app:srcCompat="@drawable/random_all" />
+
+    </RelativeLayout>
+
+
 
     <TextView
         android:id="@+id/txtname_Effect_list"
@@ -33,12 +49,14 @@
         app:layout_constraintEnd_toStartOf="@+id/img_add_effect_item"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="6"
-        app:layout_constraintStart_toEndOf="@+id/img_effect_list"
+        app:layout_constraintStart_toEndOf="@+id/view_imv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/img_add_effect_item"
         android:layout_width="0dp"
+        android:padding="7dp"
+        app:tint="@color/music_selected"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"

@@ -92,7 +92,7 @@ public class PickEffectFragment extends Fragment {
             @Override
             public void onAddClick(int position) {
                 if(list_result.size() >= KSUtil.videoPathList.size() - 1){
-                    Toast.makeText(getActivity(), "Your list Effect is enough for you list image!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "You have chosen enough effects!", Toast.LENGTH_SHORT).show();
                 } else {
                     list_result.add(list_all.get(position));
                     adapter_result_list.notifyDataSetChanged();
