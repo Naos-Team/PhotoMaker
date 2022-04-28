@@ -28,6 +28,7 @@ public class SendEmailActivity extends AppCompatActivity {
     String content, name;
     LinearLayout ll_adView;
     AwesomeValidation awesomeValidation;
+    String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,9 @@ public class SendEmailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send_email);
 
         LoadAds();
+
+        Intent intent = getIntent();
+        String path = intent.getStringExtra("path");
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         awesomeValidation.addValidation(this, R.id.send_name, RegexTemplate.NOT_EMPTY, R.string.name_alert);
@@ -63,6 +67,8 @@ public class SendEmailActivity extends AppCompatActivity {
                         intent.putExtra(Intent.EXTRA_EMAIL, emails);
                         intent.putExtra(Intent.EXTRA_SUBJECT,m);
                         intent.putExtra(Intent.EXTRA_TEXT,content);
+                        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(path));
+                        intent.setType("image/png");
 
                         if(intent.resolveActivity(getPackageManager())!=null){
                             startActivity(intent);

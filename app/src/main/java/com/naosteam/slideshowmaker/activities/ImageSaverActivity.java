@@ -76,6 +76,7 @@ public class ImageSaverActivity extends AppCompatActivity {
                     .load(Uri.parse("file://"+ path))
                     .into(imv_saved);
         }
+
         imv_saved.setScaleType(ImageView.ScaleType.CENTER_CROP);
         FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 (getResources()
@@ -112,6 +113,7 @@ public class ImageSaverActivity extends AppCompatActivity {
                     @Override
                     public void onClick() {
                         Intent intent = new Intent(ImageSaverActivity.this, SendEmailActivity.class);
+                        intent.putExtra("path", "file://"+ path);
                         startActivity(intent);
                     }
                 });
