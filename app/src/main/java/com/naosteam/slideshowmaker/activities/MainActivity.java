@@ -229,8 +229,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ActivityCompat.requestPermissions(this, permissionsList, 22);
             } else {
                 KSUtil.fromAlbum = true;
-                AdManager.adCounter = AdManager.adDisplayCounter;
-                AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
+//                AdManager.adCounter = AdManager.adDisplayCounter;
+//                AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
+//                if (!AdManager.isloadFbMAXAd) {
+//                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
+//                } else {
+//                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
+//                }
+                AdManager.showAdmobInterAd(this, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        startActivityForResult(new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
+                    }
+                });
             }
         });
 
@@ -240,12 +251,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ActivityCompat.requestPermissions(this, permissionsList, 22);
             } else {
                 KSUtil.fromAlbum = true;
-                AdManager.adCounter = AdManager.adDisplayCounter;
-                if (!AdManager.isloadFbMAXAd) {
-                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, PhotoAlbumActivity.class), RETURN_CODE);
-                } else {
-                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, PhotoAlbumActivity.class), RETURN_CODE);
-                }
+//                AdManager.adCounter = AdManager.adDisplayCounter;
+//                if (!AdManager.isloadFbMAXAd) {
+//                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, PhotoAlbumActivity.class), RETURN_CODE);
+//                } else {
+//
+//                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, PhotoAlbumActivity.class), RETURN_CODE);
+//                }
+                AdManager.showAdmobInterAd(this, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        startActivityForResult(new Intent(MainActivity.this, PhotoAlbumActivity.class), RETURN_CODE);
+                    }
+                });
             }
         });
 //        FrameLayout nativeContainer = findViewById(R.id.nativeContainer);

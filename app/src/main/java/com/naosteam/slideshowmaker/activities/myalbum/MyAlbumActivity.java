@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.naosteam.slideshowmaker.R;
 import com.naosteam.slideshowmaker.activities.VideoPlayerActivity;
+import com.naosteam.slideshowmaker.activities.kessiimagepicker.activity.ImagePickerActivity;
 import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
 
@@ -52,6 +53,15 @@ public class MyAlbumActivity extends AppCompatActivity {
             onBackPressed();
         });
 
+        LoadAds();
+
+    }
+
+    private void LoadAds(){
+        AdManager.initAd(MyAlbumActivity.this);
+        AdManager.loadInterAd(this);
+//        ll_adView = findViewById(R.id.ll_adView);
+//        AdManager.loadAdmobBanner(this, ll_adView);
     }
 
     public void setTV(){
@@ -68,22 +78,30 @@ public class MyAlbumActivity extends AppCompatActivity {
             AdManager.maxInterstital(MyAlbumActivity.this);
         }
     }
-
     @Override
     public void onBackPressed() {
-        AdManager.adCounter++;
-        if (AdManager.adCounter == AdManager.adDisplayCounter) {
-            if (!AdManager.isloadFbMAXAd) {
-                AdManager.showInterAd(MyAlbumActivity.this, null, 0);
-            } else {
-                AdManager.showMaxInterstitial(MyAlbumActivity.this, null, 0);
+//        AdManager.adCounter++;
+//        if (AdManager.adCounter == AdManager.adDisplayCounter) {
+//            if (!AdManager.isloadFbMAXAd) {
+//                AdManager.showInterAd(MyAlbumActivity.this, null, 0);
+//            } else {
+//                AdManager.showMaxInterstitial(MyAlbumActivity.this, null, 0);
+//            }
+//        } else {
+//            Intent returnIntent = new Intent();
+//            setResult(RESULT_CANCELED, returnIntent);
+//            super.onBackPressed();
+//        }
+        AdManager.showAdmobInterAd(this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                Intent returnIntent = new Intent();
+                setResult(RESULT_CANCELED, returnIntent);
+                MyAlbumActivity.super.onBackPressed();
             }
-        } else {
-            Intent returnIntent = new Intent();
-            setResult(RESULT_CANCELED, returnIntent);
-            super.onBackPressed();
-        }
+        });
     }
+
 
     void startActivityes(Intent intent, int reqCode) {
         if (!AdManager.isloadFbMAXAd) {
