@@ -11,8 +11,8 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.kessi.photovideomaker.R;
-import com.kessi.photovideomaker.activities.songpicker.SoundFile;
+import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.activities.songpicker.SoundFile;
 
 
 @SuppressLint({"ClickableViewAccessibility"})

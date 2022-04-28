@@ -23,7 +23,7 @@ import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 
-import com.kessi.photovideomaker.KessiApplication;
+import com.naosteam.slideshowmaker.KessiApplication;
 
 import java.io.IOException;
 

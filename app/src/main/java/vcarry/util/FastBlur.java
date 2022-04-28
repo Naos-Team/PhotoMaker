@@ -12,7 +12,7 @@ import android.renderscript.ScriptIntrinsicBlur;
 import androidx.core.view.MotionEventCompat;
 
 
-import com.kessi.photovideomaker.KessiApplication;
+import com.naosteam.slideshowmaker.KessiApplication;
 
 import java.lang.reflect.Array;
 

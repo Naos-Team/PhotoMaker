@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.kessi.photovideomaker.KessiApplication;
-import com.kessi.photovideomaker.R;
-import com.kessi.photovideomaker.activities.videoeditor.VideoThemeActivity;
-import com.kessi.photovideomaker.util.AdManager;
+import com.naosteam.slideshowmaker.KessiApplication;
+import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.activities.videoeditor.VideoThemeActivity;
+import com.naosteam.slideshowmaker.util.AdManager;
 
 import java.io.FileOutputStream;
 

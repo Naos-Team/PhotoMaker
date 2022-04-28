@@ -1,7 +1,7 @@
 package vcarry.mask;
 
 
-import com.kessi.photovideomaker.R;
+import com.naosteam.slideshowmaker.R;
 
 import java.util.ArrayList;
 

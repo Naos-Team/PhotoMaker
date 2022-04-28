@@ -4,15 +4,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kessi.photovideomaker.R;
-import com.kessi.photovideomaker.activities.videoeditor.VideoThemeActivity;
+import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.activities.videoeditor.VideoThemeActivity;
 
 import java.util.ArrayList;
 

@@ -17,9 +17,9 @@ import android.os.IBinder;
 import android.util.DisplayMetrics;
 
 
-import com.kessi.photovideomaker.KessiApplication;
-import com.kessi.photovideomaker.R;
-import com.kessi.photovideomaker.util.KSUtil;
+import com.naosteam.slideshowmaker.KessiApplication;
+import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.util.KSUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;

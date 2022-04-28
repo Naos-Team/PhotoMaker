@@ -6,11 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kessi.photovideomaker.R;
-import com.kessi.photovideomaker.activities.videoeditor.VideoThemeActivity;
+import com.naosteam.slideshowmaker.R;
 
 import java.util.ArrayList;
 

@@ -49,7 +49,7 @@
     </RelativeLayout>
 
 
-    <com.kessi.photovideomaker.activities.swap.gridsupport.AbsDynamicGridView
+    <com.naosteam.slideshowmaker.activities.swap.gridsupport.AbsDynamicGridView
         android:id="@+id/dynamicGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

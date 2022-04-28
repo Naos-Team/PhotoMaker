@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.kessi.photovideomaker.R;
-import com.kessi.photovideomaker.activities.BgTemplateDetailsActivity;
+import com.naosteam.slideshowmaker.R;
 
 import java.util.ArrayList;
 

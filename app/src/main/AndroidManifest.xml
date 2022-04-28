@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kessi.photovideomaker">
+    package="com.naosteam.slideshowmaker">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".KessiApplication"
+        android:name="com.naosteam.slideshowmaker.KessiApplication"
         android:allowBackup="true"
         android:extractNativeLibs="true"
         android:hardwareAccelerated="true"
@@ -22,19 +22,19 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.PhotoVideoMaker">
         <activity
-            android:name=".activities.ImageZoomActivity"
+            android:name="com.naosteam.slideshowmaker.activities.ImageZoomActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.myalbum.PhotoAlbumActivity"
+            android:name="com.naosteam.slideshowmaker.activities.myalbum.PhotoAlbumActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.photoframe.BackgroundFrameActivity"
+            android:name="com.naosteam.slideshowmaker.activities.photoframe.BackgroundFrameActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.intro.IntroActivity"
+            android:name="com.naosteam.slideshowmaker.activities.intro.IntroActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name="com.naosteam.slideshowmaker.activities.SplashActivity"
             android:exported="true"
             android:screenOrientation="nosensor">
             <intent-filter>
@@ -44,38 +44,38 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.naosteam.slideshowmaker.activities.MainActivity"
             android:exported="true"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".activities.PrivacyActivity"
+            android:name="com.naosteam.slideshowmaker.activities.PrivacyActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".activities.myalbum.MyAlbumActivity"
+            android:name="com.naosteam.slideshowmaker.activities.myalbum.MyAlbumActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".activities.videoeditor.VideoThemeActivity"
+            android:name="com.naosteam.slideshowmaker.activities.videoeditor.VideoThemeActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".activities.VideoPlayerActivity"
+            android:name="com.naosteam.slideshowmaker.activities.VideoPlayerActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".activities.ImageSaverActivity"
+            android:name="com.naosteam.slideshowmaker.activities.ImageSaverActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".activities.kessiimagepicker.activity.ImagePickerActivity"
+            android:name="com.naosteam.slideshowmaker.activities.kessiimagepicker.activity.ImagePickerActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".activities.songpicker.SongGalleryActivity"
+            android:name="com.naosteam.slideshowmaker.activities.songpicker.SongGalleryActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".activities.swap.SwapperActivity"
+            android:name="com.naosteam.slideshowmaker.activities.swap.SwapperActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".activities.process.VideoMakerActivity"
+            android:name="com.naosteam.slideshowmaker.activities.process.VideoMakerActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".activities.SendEmailActivity"
+            android:name="com.naosteam.slideshowmaker.activities.SendEmailActivity"
             android:exported="false"
             android:screenOrientation="nosensor">
             <intent-filter>
@@ -94,7 +94,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.BgTemplateDetailsActivity"
+            android:name="com.naosteam.slideshowmaker.activities.BgTemplateDetailsActivity"
             android:screenOrientation="nosensor" />
         <activity
             android:name="com.xinlan.imageeditlibrary.editimage.EditImageActivity"
