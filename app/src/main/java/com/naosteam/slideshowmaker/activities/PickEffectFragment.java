@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.activities.videoeditor.VideoThemeActivity;
 import com.naosteam.slideshowmaker.util.KSUtil;
 
 import java.util.ArrayList;

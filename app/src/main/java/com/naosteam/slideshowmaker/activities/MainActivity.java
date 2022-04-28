@@ -86,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void LoadAds(){
         AdManager.initAd(MainActivity.this);
-        ll_adView = findViewById(R.id.ll_adView);
-        AdManager.loadAdmobBanner(this, ll_adView);
+//        ll_adView = findViewById(R.id.ll_adView);
+//        AdManager.loadAdmobBanner(this, ll_adView);
     }
 
     private void checkAndroid11AccessPermission(){

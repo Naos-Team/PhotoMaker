@@ -276,7 +276,7 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
         if (!AdManager.isloadFbMAXAd) {
             //admob
             AdManager.initAd(ImagePickerActivity.this);
-            AdManager.loadBannerAd(ImagePickerActivity.this, adContainer);
+            //AdManager.loadBannerAd(ImagePickerActivity.this, adContainer);
             AdManager.loadInterAd(ImagePickerActivity.this);
         } else {
             //MAX + Fb banner Ads

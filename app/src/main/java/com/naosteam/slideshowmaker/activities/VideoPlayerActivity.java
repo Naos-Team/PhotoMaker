@@ -191,12 +191,12 @@ public class VideoPlayerActivity extends AppCompatActivity implements
         if (!AdManager.isloadFbMAXAd) {
             //admob
             AdManager.initAd(VideoPlayerActivity.this);
-            AdManager.loadNativeAd(VideoPlayerActivity.this, nativeContainer);
+           // AdManager.loadNativeAd(VideoPlayerActivity.this, nativeContainer);
             AdManager.loadInterAd(VideoPlayerActivity.this);
         } else {
             //MAX + Fb banner Ads
             AdManager.initMAX(VideoPlayerActivity.this);
-            AdManager.loadNativeMAX(VideoPlayerActivity.this, nativeContainerMAX);
+            //AdManager.loadNativeMAX(VideoPlayerActivity.this, nativeContainerMAX);
             AdManager.maxInterstital(VideoPlayerActivity.this);
         }
     }

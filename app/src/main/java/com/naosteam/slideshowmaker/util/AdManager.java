@@ -54,7 +54,7 @@ import java.util.List;
 
 public class AdManager {
     public static int adCounter = 1;
-    public static int adDisplayCounter = 4;
+    public static int adDisplayCounter = 10;
 
     public static boolean isloadFbMAXAd = false;
 
@@ -115,7 +115,6 @@ public class AdManager {
     public static void loadBannerAd(Context context, LinearLayout adContainer) {
         gadView = new AdView(context);
         gadView.setAdUnitId(context.getString(R.string.admob_banner_id));
-        gadView.setAdSize(AdSize.SMART_BANNER);
         adContainer.addView(gadView);
         loadBanner(context);
     }
