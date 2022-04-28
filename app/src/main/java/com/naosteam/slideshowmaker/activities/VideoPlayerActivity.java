@@ -183,7 +183,6 @@ public class VideoPlayerActivity extends AppCompatActivity implements
         btnPlayVideo.setOnClickListener(onclickplayvideo);
     }
 
-
     public void setTV() {
         FrameLayout nativeContainer = findViewById(R.id.nativeContainer);
         FrameLayout nativeContainerMAX = findViewById(R.id.nativeContainerMAX);
@@ -390,13 +389,19 @@ public class VideoPlayerActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if (KSUtil.fromAlbum) {
-            Intent intent = new Intent();
-            setResult(FLAG_VIDEO, intent);
-        } else {
-            gotoMain();
-        }
+        AdManager.showAdmobInterAd(VideoPlayerActivity.this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                VideoPlayerActivity.super.onBackPressed();
+                if (KSUtil.fromAlbum) {
+                    Intent intent = new Intent();
+                    setResult(FLAG_VIDEO, intent);
+                } else {
+                    gotoMain();
+                }
+            }
+        });
+
     }
 
 

@@ -30,6 +30,7 @@ import com.naosteam.slideshowmaker.KessiApplication;
 import com.naosteam.slideshowmaker.R;
 import com.naosteam.slideshowmaker.activities.swap.EditImageUtil;
 import com.naosteam.slideshowmaker.activities.videoeditor.VideoThemeActivity;
+import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
 import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
 import com.xinlan.imageeditlibrary.editimage.EditImageActivity;
@@ -74,7 +75,23 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         list_image_button = new ArrayList<>();
 
         bindView();
+        LoadAds();
 
+    }
+
+    private void LoadAds() {
+        AdManager.initAd(this);
+        AdManager.loadInterAd(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AdManager.showAdmobInterAd(BgTemplateDetailsActivity.this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                BgTemplateDetailsActivity.super.onBackPressed();
+            }
+        });
     }
 
     void bindView() {
@@ -440,7 +457,13 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             application.isEditEnable = false;
             if(b){
                 ImageSaverActivity.setPath(path);
-                startActivity(new Intent(BgTemplateDetailsActivity.this, ImageSaverActivity.class));
+                AdManager.showAdmobInterAd(BgTemplateDetailsActivity.this, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        startActivity(new Intent(BgTemplateDetailsActivity.this, ImageSaverActivity.class));
+                    }
+                });
+
             } else {
                 Toast.makeText(BgTemplateDetailsActivity.this, "Error",
                         Toast.LENGTH_SHORT).show();
@@ -484,7 +507,13 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             pd.dismiss();
             application.isEditEnable = false;
-            startActivity(new Intent(BgTemplateDetailsActivity.this, VideoThemeActivity.class));
+
+            AdManager.showAdmobInterAd(BgTemplateDetailsActivity.this, new AdManager.InterAdsListener() {
+                @Override
+                public void onClick() {
+                    startActivity(new Intent(BgTemplateDetailsActivity.this, VideoThemeActivity.class));
+                }
+            });
         }
     }
 

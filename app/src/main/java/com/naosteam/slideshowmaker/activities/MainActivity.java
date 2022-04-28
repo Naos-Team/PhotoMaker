@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void LoadAds(){
         AdManager.initAd(MainActivity.this);
+        AdManager.loadInterAd(this);
 //        ll_adView = findViewById(R.id.ll_adView);
 //        AdManager.loadAdmobBanner(this, ll_adView);
     }
@@ -208,11 +209,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }else{
                 if (!checkPermissions(MainActivity.this, permissionsList)) {
                     ActivityCompat.requestPermissions(MainActivity.this, permissionsList, 21);
-
                 } else {
-                    Intent mIntent = new Intent(MainActivity.this, BackgroundFrameActivity.class);
-                    startActivity(mIntent);
-                    Animatee.animateSlideUp(MainActivity.this);
+                    AdManager.showAdmobInterAd(this, new AdManager.InterAdsListener() {
+                        @Override
+                        public void onClick() {
+                            Intent mIntent = new Intent(MainActivity.this, BackgroundFrameActivity.class);
+                            startActivity(mIntent);
+                            Animatee.animateSlideUp(MainActivity.this);
+                        }
+                    });
                 }
             }
         });
@@ -226,11 +231,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 KSUtil.fromAlbum = true;
                 AdManager.adCounter = AdManager.adDisplayCounter;
                 AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
-//                if (!AdManager.isloadFbMAXAd) {
-//                    AdManager.showInterAd(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
-//                } else {
-//                    AdManager.showMaxInterstitial(MainActivity.this,new Intent(MainActivity.this, MyAlbumActivity.class), RETURN_CODE);
-//                }
             }
         });
 

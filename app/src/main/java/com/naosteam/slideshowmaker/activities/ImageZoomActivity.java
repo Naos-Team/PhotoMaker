@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.util.AdManager;
 import com.squareup.picasso.Picasso;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouch;
 
@@ -36,5 +37,16 @@ public class ImageZoomActivity extends AppCompatActivity {
                 .load(Uri.parse(intent.getStringExtra("img")))
                 .into(imv_zoom);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        AdManager.showAdmobInterAd(ImageZoomActivity.this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                ImageZoomActivity.super.onBackPressed();
+            }
+        });
     }
 }

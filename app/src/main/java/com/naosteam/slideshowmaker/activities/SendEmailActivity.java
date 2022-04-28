@@ -16,6 +16,7 @@ import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.naosteam.slideshowmaker.R;
+import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
 
 public class SendEmailActivity extends AppCompatActivity {
@@ -78,7 +79,18 @@ public class SendEmailActivity extends AppCompatActivity {
         });
     }
 
-//    int FLAG_VIDEO = 21;
+    @Override
+    public void onBackPressed() {
+        AdManager.showAdmobInterAd(SendEmailActivity.this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                SendEmailActivity.super.onBackPressed();
+            }
+        });
+
+    }
+
+    //    int FLAG_VIDEO = 21;
 //
 //    @Override
 //    public void onBackPressed() {
