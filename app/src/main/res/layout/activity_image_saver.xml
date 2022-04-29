@@ -85,7 +85,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/vLay"
-        android:layout_above="@+id/ll_adView11"
+
         android:layout_alignParentBottom="true"
         >
 
@@ -212,7 +212,8 @@
                 android:id="@+id/btnShare1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="15dp">
+                android:layout_marginLeft="15dp"
+                android:layout_above="@+id/ll_adView11">
 
                 <ImageView
                     android:layout_width="45dp"
