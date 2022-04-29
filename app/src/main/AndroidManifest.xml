@@ -64,7 +64,9 @@
             android:screenOrientation="nosensor" />
         <activity
             android:name="com.naosteam.slideshowmaker.activities.kessiimagepicker.activity.ImagePickerActivity"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="nosensor"
+            android:largeHeap="true"
+            android:hardwareAccelerated="false"/>
         <activity
             android:name="com.naosteam.slideshowmaker.activities.songpicker.SongGalleryActivity"
             android:screenOrientation="nosensor" />
@@ -95,7 +97,9 @@
         </activity>
         <activity
             android:name="com.naosteam.slideshowmaker.activities.BgTemplateDetailsActivity"
-            android:screenOrientation="nosensor" />
+            android:screenOrientation="nosensor"
+            android:largeHeap="true"
+            android:hardwareAccelerated="false"/>
         <activity
             android:name="com.xinlan.imageeditlibrary.editimage.EditImageActivity"
             android:screenOrientation="nosensor"

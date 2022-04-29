@@ -266,17 +266,7 @@ public class SwapperActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    void startActivityes(Intent intent, int reqCode) {
-        if (!AdManager.isloadFbMAXAd) {
-            AdManager.adCounter++;
-            AdManager.showInterAd(SwapperActivity.this, intent, reqCode);
-        } else {
-            AdManager.adCounter++;
-            AdManager.showMaxInterstitial(SwapperActivity.this, intent, reqCode);
-        }
-    }
-
-            public static final int ACTION_REQUEST_EDITIMAGE = 9;
+    public static final int ACTION_REQUEST_EDITIMAGE = 9;
     public void editorIntent(int position, String path) {
         Log.e("calll","calll");
         KSUtil.imbEditorPos = position;
@@ -319,15 +309,14 @@ public class SwapperActivity extends AppCompatActivity implements View.OnClickLi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == ACTION_REQUEST_EDITIMAGE && resultCode == RESULT_OK){
-            handleEditorImage(data);
-        }
-        AdManager.adCounter = AdManager.adDisplayCounter;
-        if (!AdManager.isloadFbMAXAd) {
-            AdManager.showInterAd(SwapperActivity.this, null, 0);
-        } else {
-            AdManager.showMaxInterstitial(SwapperActivity.this, null, 0);
-        }
+        AdManager.showAdmobInterAd(SwapperActivity.this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                if (requestCode == ACTION_REQUEST_EDITIMAGE && resultCode == RESULT_OK){
+                    handleEditorImage(data);
+                }
+            }
+        });
     }
 
     private void handleEditorImage(Intent data) {

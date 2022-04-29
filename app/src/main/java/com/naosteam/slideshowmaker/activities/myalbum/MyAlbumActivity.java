@@ -88,18 +88,6 @@ public class MyAlbumActivity extends AppCompatActivity {
         });
     }
 
-
-    void startActivityes(Intent intent, int reqCode) {
-        if (!AdManager.isloadFbMAXAd) {
-            AdManager.adCounter++;
-            AdManager.showInterAd(MyAlbumActivity.this, intent,reqCode);
-        } else {
-            AdManager.adCounter++;
-            AdManager.showMaxInterstitial(MyAlbumActivity.this, intent,reqCode);
-        }
-    }
-
-
     public void videoLoader() {
         getFromStorage();
         videoListView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -107,7 +95,12 @@ public class MyAlbumActivity extends AppCompatActivity {
 
             Intent intent = new Intent(MyAlbumActivity.this, VideoPlayerActivity.class);
             intent.putExtra("video_path", videoPath.get(position));
-            startActivityes(intent, FLAG_VIDEO);
+            AdManager.showAdmobInterAd(MyAlbumActivity.this, new AdManager.InterAdsListener() {
+                @Override
+                public void onClick() {
+                    startActivityForResult(intent, FLAG_VIDEO);
+                }
+            });
         });
 
         videoListView.setLayoutManager(new GridLayoutManager(this, 2));

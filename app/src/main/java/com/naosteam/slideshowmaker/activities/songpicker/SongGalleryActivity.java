@@ -415,26 +415,21 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
 
     @Override
     public void onBackPressed() {
-        AdManager.adCounter++;
-        if (AdManager.adCounter == AdManager.adDisplayCounter) {
-            if (!AdManager.isloadFbMAXAd) {
-                AdManager.showInterAd(SongGalleryActivity.this, null, 0);
-            } else {
-                AdManager.showMaxInterstitial(SongGalleryActivity.this, null, 0);
-            }
-        } else {
+        AdManager.showAdmobInterAd(SongGalleryActivity.this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                if (flagsong) {
+                    setResult(0);
 
-            if (flagsong) {
-                setResult(0);
-
-                if (isPlaying) {
-                    mPlayer.release();
+                    if (isPlaying) {
+                        mPlayer.release();
+                    }
+                    flagsong = false;
                 }
-                flagsong = false;
-            }
 
-            super.onBackPressed();
-        }
+                SongGalleryActivity.super.onBackPressed();
+            }
+        });
     }
 
     void bindView() {

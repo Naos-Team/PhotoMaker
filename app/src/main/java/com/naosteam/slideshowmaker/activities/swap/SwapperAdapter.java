@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.naosteam.slideshowmaker.R;
 import com.naosteam.slideshowmaker.activities.swap.gridsupport.AbsBaseGridAdapter;
+import com.naosteam.slideshowmaker.util.AdManager;
 import com.naosteam.slideshowmaker.util.KSUtil;
 
 import java.io.File;
@@ -81,8 +82,12 @@ public class SwapperAdapter extends AbsBaseGridAdapter {
             @Override
             public void onClick(View v) {
 
-                ((SwapperActivity)context).editorIntent(position,getItem(position));
-
+                AdManager.showAdmobInterAd((SwapperActivity) context, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        ((SwapperActivity)context).editorIntent(position,getItem(position));
+                    }
+                });
             }
         });
 

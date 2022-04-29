@@ -136,7 +136,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 moreApp();
                 break;
             case R.id.nav_privacy:
-                startActivityes(new Intent(MainActivity.this, PrivacyActivity.class), 0);
+                AdManager.showAdmobInterAd(MainActivity.this, new AdManager.InterAdsListener() {
+                    @Override
+                    public void onClick() {
+                        startActivityForResult(new Intent(MainActivity.this, PrivacyActivity.class), 0);
+                    }
+                });
                 break;
             case R.id.nav_rate:
                 rateUs();
@@ -286,7 +291,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         videoAdapter = new MyVideoAdapter(false, videoPath, this, (v, position) -> {
             Intent intent = new Intent(this, VideoPlayerActivity.class);
             intent.putExtra("video_path", videoPath.get(position));
-            startActivityes(intent, FLAG_VIDEO);
+            AdManager.showAdmobInterAd(MainActivity.this, new AdManager.InterAdsListener() {
+                @Override
+                public void onClick() {
+                    startActivityForResult(intent, FLAG_VIDEO);
+                }
+            });
         });
 
         photoAdapter = new AdapterMainPhoto(false, photoPath, new onClickPhotoListener() {
@@ -393,18 +403,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
-
-    void startActivityes(Intent intent, int reqCode) {
-        if (!AdManager.isloadFbMAXAd) {
-            AdManager.adCounter++;
-            AdManager.showInterAd(MainActivity.this, intent, reqCode);
-        } else {
-            AdManager.adCounter++;
-            AdManager.showMaxInterstitial(MainActivity.this, intent, reqCode);
-        }
-    }
-
     public void moreApp() {
         startActivity(new Intent(
                 Intent.ACTION_VIEW,
@@ -471,7 +469,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if(requestCode == 22){
             KSUtil.fromAlbum = true;
-            startActivityes(new Intent(MainActivity.this, MyAlbumActivity.class), 0);
+            AdManager.showAdmobInterAd(MainActivity.this, new AdManager.InterAdsListener() {
+                @Override
+                public void onClick() {
+                    startActivityForResult(new Intent(MainActivity.this, MyAlbumActivity.class), 0);
+                }
+            });
             Animatee.animateSlideUp(MainActivity.this);
         }
     }

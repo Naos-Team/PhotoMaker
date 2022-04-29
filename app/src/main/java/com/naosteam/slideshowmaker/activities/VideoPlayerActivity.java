@@ -93,7 +93,6 @@ public class VideoPlayerActivity extends AppCompatActivity implements
             KSUtil.Bounce(this, btnShare);
             videoView.pause();
             share();
-            startActivityes(null, 0);
         });
 
         btnRate = findViewById(R.id.btnRate);
@@ -101,7 +100,6 @@ public class VideoPlayerActivity extends AppCompatActivity implements
             KSUtil.Bounce(this, btnRate);
             videoView.pause();
             rateUs();
-            startActivityes(null, 0);
         });
 
         btnDelete = findViewById(R.id.btnDelete);
@@ -109,7 +107,6 @@ public class VideoPlayerActivity extends AppCompatActivity implements
             KSUtil.Bounce(this, btnDelete);
             videoView.pause();
             delete();
-            startActivityes(null, 0);
         });
 
 
@@ -210,17 +207,6 @@ public class VideoPlayerActivity extends AppCompatActivity implements
             AdManager.maxInterstital(VideoPlayerActivity.this);
         }
     }
-
-    void startActivityes(Intent intent, int reqCode) {
-        if (!AdManager.isloadFbMAXAd) {
-            AdManager.adCounter++;
-            AdManager.showInterAd(VideoPlayerActivity.this, intent, reqCode);
-        } else {
-            AdManager.adCounter++;
-            AdManager.showMaxInterstitial(VideoPlayerActivity.this, intent, reqCode);
-        }
-    }
-
 
     @Override
     protected void onResume() {

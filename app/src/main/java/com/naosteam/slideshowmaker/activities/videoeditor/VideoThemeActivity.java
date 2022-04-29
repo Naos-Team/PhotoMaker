@@ -171,8 +171,6 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         ibAddMusic.setLayoutParams(paramsbtn);
         ibAddDuration.setLayoutParams(paramsbtn);
 
-        LoadAds();
-
 
 //        if (!AdManager.isloadFbMAXAd) {
 //            //admob
@@ -191,18 +189,6 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         AdManager.loadAdmobBanner(this, ll_adView);
     }
 
-
-
-
-    void startActivityes(Intent intent, int reqCode) {
-        if (!AdManager.isloadFbMAXAd) {
-            AdManager.adCounter++;
-            AdManager.showInterAd(VideoThemeActivity.this, intent,reqCode);
-        } else {
-            AdManager.adCounter++;
-            AdManager.showMaxInterstitial(VideoThemeActivity.this, intent,reqCode);
-        }
-    }
 
     void bindView() {
         flLoader = findViewById(R.id.flLoader);
@@ -319,7 +305,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
             AdManager.showAdmobInterAd(VideoThemeActivity.this, new AdManager.InterAdsListener() {
                 @Override
                 public void onClick() {
-                    startActivityes(new Intent(VideoThemeActivity.this, VideoMakerActivity.class),0);
+                    startActivityForResult(new Intent(VideoThemeActivity.this, VideoMakerActivity.class),0);
                 }
             });
 
@@ -556,7 +542,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
             img_custom_themes.setVisibility(View.VISIBLE);
             txt_forone_video_preview.setVisibility(View.VISIBLE);
 
-            startActivityes(null,0);
+            //startActivityes(null,0);
         });
 
         idviewFrame.setOnClickListener(v -> {
@@ -569,7 +555,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
             img_custom_themes.setVisibility(View.GONE);
             txt_forone_video_preview.setVisibility(View.GONE);
 
-            startActivityes(null,0);
+            //startActivityes(null,0);
         });
     }
 
@@ -648,7 +634,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 //                }
                 laySeconds.setVisibility(View.VISIBLE);
 
-                startActivityes(null,0);
+//               startActivityes(null,0);
                 return;
 
             case R.id.ibAddMusic:
@@ -789,23 +775,14 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     }
 
     public void onBackPressed() {
-        AdManager.adCounter++;
-        if (AdManager.adCounter == AdManager.adDisplayCounter) {
-            if (!AdManager.isloadFbMAXAd) {
-                AdManager.showInterAd(VideoThemeActivity.this, null, 0);
-            } else {
-                AdManager.showMaxInterstitial(VideoThemeActivity.this, null, 0);
-            }
+        if (llEdit.getVisibility() != View.VISIBLE) {
+            llEdit.setVisibility(View.VISIBLE);
+            application.isEditEnable = false;
         } else {
-            if (llEdit.getVisibility() != View.VISIBLE) {
-                llEdit.setVisibility(View.VISIBLE);
-                application.isEditEnable = false;
-            } else {
-                if(getSupportFragmentManager().getBackStackEntryCount() == 0)
-                    open();
-                else{
-                    themeAdapter.openConfirmDialog();
-                }
+            if(getSupportFragmentManager().getBackStackEntryCount() == 0)
+                open();
+            else{
+                themeAdapter.openConfirmDialog();
             }
         }
     }
@@ -830,7 +807,6 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
         img_btn_yes.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-
                 application.videoImages.clear();
                 application.getSelectedImages().clear();
                 removeFrameImage(folderPath);
@@ -901,7 +877,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
     void loadSongSelection() {
 
-        startActivityes(new Intent(this, SongGalleryActivity.class), 101);
+        startActivityForResult(new Intent(this, SongGalleryActivity.class), 101);
     }
 
 
@@ -1147,13 +1123,13 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
 
     void setDuration() {
 
-        if (!AdManager.isloadFbMAXAd) {
-            AdManager.adCounter++;
-            AdManager.showInterAd(VideoThemeActivity.this, null,0);
-        } else {
-            AdManager.adCounter++;
-            AdManager.showMaxInterstitial(VideoThemeActivity.this, null,0);
-        }
+//        if (!AdManager.isloadFbMAXAd) {
+//            AdManager.adCounter++;
+//            AdManager.showInterAd(VideoThemeActivity.this, null,0);
+//        } else {
+//            AdManager.adCounter++;
+//            AdManager.showMaxInterstitial(VideoThemeActivity.this, null,0);
+//        }
 
         application.setSecond(seconds);
 

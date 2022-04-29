@@ -97,15 +97,6 @@ public class FrameAdapter extends RecyclerView.Adapter<FrameAdapter.Holder> {
         holder.clickableView.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 if (themes != activity.getFrame()) {
-                    if (!AdManager.isloadFbMAXAd) {
-                        AdManager.adCounter++;
-                        AdManager.showInterAd(activity, null,0);
-                    } else {
-                        AdManager.adCounter++;
-                        AdManager.showMaxInterstitial(activity, null,0);
-                    }
-
-
                     position = pos;
                     activity.setFrame(themes);
                     if(themes==-1)
@@ -146,7 +137,7 @@ public class FrameAdapter extends RecyclerView.Adapter<FrameAdapter.Holder> {
 
     public Holder onCreateViewHolder(ViewGroup parent, int pos) {
         View item = this.inflater.inflate(R.layout.frame_items, parent, false);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((activity.getResources()
+        RelativeLayout.LayoutParams params =     new RelativeLayout.LayoutParams((activity.getResources()
                 .getDisplayMetrics().widthPixels* 225 / 1080 ),
                 //ViewGroup.LayoutParams.MATCH_PARENT);//,
                 (activity.getResources()

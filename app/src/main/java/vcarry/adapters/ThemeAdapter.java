@@ -67,7 +67,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
                 //ViewGroup.LayoutParams.MATCH_PARENT);//,
                 (activity.getResources()
                         .getDisplayMetrics().widthPixels * 150/ 1080));
-        params.setMargins(20,54,20,70);
+        params.setMargins(20,50,20,70);
         view.setLayoutParams(params);
         return new Holder(view);
     }
@@ -93,13 +93,6 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.Holder> {
 
 
                 } else if (list.get(pos) != application.selectedTheme) {
-                    if (!AdManager.isloadFbMAXAd) {
-                        AdManager.adCounter++;
-                        AdManager.showInterAd(activity, null,0);
-                    } else {
-                        AdManager.adCounter++;
-                        AdManager.showMaxInterstitial(activity, null,0);
-                    }
 
                     position = pos;
 //                    deleteThemeDir(application.selectedTheme.toString());

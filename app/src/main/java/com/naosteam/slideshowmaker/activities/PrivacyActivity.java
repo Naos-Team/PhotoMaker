@@ -34,4 +34,14 @@ public class PrivacyActivity extends Activity {
         ll_adView = findViewById(R.id.ll_adView2);
         AdManager.loadAdmobBanner(this, ll_adView);
     }
+
+    @Override
+    public void onBackPressed() {
+        AdManager.showAdmobInterAd(PrivacyActivity.this, new AdManager.InterAdsListener() {
+            @Override
+            public void onClick() {
+                PrivacyActivity.super.onBackPressed();
+            }
+        });
+    }
 }

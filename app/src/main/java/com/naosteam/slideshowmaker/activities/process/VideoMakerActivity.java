@@ -215,12 +215,12 @@ public class VideoMakerActivity extends AppCompatActivity {
             in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                     | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //            startActivity(in);
-            AdManager.adCounter = AdManager.adDisplayCounter;
-            if (!AdManager.isloadFbMAXAd) {
-                AdManager.showInterAd(VideoMakerActivity.this,in, 0);
-            } else {
-                AdManager.showMaxInterstitial(VideoMakerActivity.this,in, 0);
-            }
+            AdManager.showAdmobInterAd(VideoMakerActivity.this, new AdManager.InterAdsListener() {
+                @Override
+                public void onClick() {
+                    startActivityForResult(in, 0);
+                }
+            });
         }
     };
 
