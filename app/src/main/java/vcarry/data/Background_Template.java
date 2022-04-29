@@ -782,13 +782,13 @@ public class Background_Template {
         list_image15 = new ArrayList<>();
         list_image15.add(
 
-                new Image_in_Background(211, 91, 209, 97, 107)
+                new Image_in_Background(212, 91, 210, 97, 107)
         );
         list_image15.add(
                 new Image_in_Background(428, 210, 207, 105, 107)
         );
         list_image15.add(
-                new Image_in_Background(653, 316, 209, 93, 107)
+                new Image_in_Background(653, 317, 209, 93, 107)
         );
 
 
@@ -1055,24 +1055,24 @@ public class Background_Template {
         ArrayList<Image_in_Background> list_image20 = new ArrayList<>();
         list_frame20 = new ArrayList<>();
         list_frame20.add(
-                new Frame_in_Background(0.08f, 0.25f, 0.35f, "w,218:305")
+                new Frame_in_Background(0.08f, 0.25f, 0.345f, "w,218:305")
         );
         list_frame20.add(
-                new Frame_in_Background(0.496f, 0.129f, 0.345f, "w,220:310")
+                new Frame_in_Background(0.496f, 0.1285f, 0.345f, "w,220:310")
         );
         list_frame20.add(
-                new Frame_in_Background(0.918f, 0.03f, 0.341f, "w,216:305")
+                new Frame_in_Background(0.916f, 0.0295f, 0.343f, "w,216:305")
         );
 
         list_image20 = new ArrayList<>();
         list_image20.add(
-                new Image_in_Background(60, 165, 342, 220, 305)
+                new Image_in_Background(60, 164, 342, 220, 305)
         );
         list_image20.add(
-                new Image_in_Background(694, 22, 340, 220, 305)
+                new Image_in_Background(374, 85, 344, 220, 305)
         );
         list_image20.add(
-                new Image_in_Background(373, 84, 345, 220, 305)
+                new Image_in_Background(693, 20, 344, 220, 305)
         );
 
 
