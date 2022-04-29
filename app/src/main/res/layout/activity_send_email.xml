@@ -118,7 +118,7 @@
                     android:layout_margin="15dp"
                     android:background="@null"
                     android:gravity="left"
-                    android:hint="Your name"
+                    android:hint="Write your request"
                     android:textColor="@color/music_selected"
                     android:textSize="17dp" />
 

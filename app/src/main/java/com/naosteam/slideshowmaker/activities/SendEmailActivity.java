@@ -68,7 +68,6 @@ public class SendEmailActivity extends AppCompatActivity {
                         intent.putExtra(Intent.EXTRA_SUBJECT,m);
                         intent.putExtra(Intent.EXTRA_TEXT,content);
                         intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(path));
-                        intent.setType("image/png");
 
                         if(intent.resolveActivity(getPackageManager())!=null){
                             startActivity(intent);

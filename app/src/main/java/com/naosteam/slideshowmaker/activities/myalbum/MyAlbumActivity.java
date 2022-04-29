@@ -61,12 +61,6 @@ public class MyAlbumActivity extends AppCompatActivity {
     private void LoadAds(){
         AdManager.initAd(MyAlbumActivity.this);
         AdManager.loadInterAd(this);
-//        ll_adView = findViewById(R.id.ll_adView);
-//        AdManager.loadAdmobBanner(this, ll_adView);
-    }
-
-    private void LoadAds(){
-        AdManager.initAd(MyAlbumActivity.this);
         ll_adView = findViewById(R.id.ll_adView15);
         AdManager.loadAdmobBanner(this, ll_adView);
     }

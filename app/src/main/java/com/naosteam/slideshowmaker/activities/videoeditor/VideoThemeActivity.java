@@ -187,6 +187,7 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
     private void LoadAds(){
         AdManager.initAd(VideoThemeActivity.this);
         ll_adView = findViewById(R.id.ll_adView17);
+        AdManager.loadInterAd(this);
         AdManager.loadAdmobBanner(this, ll_adView);
     }
 
@@ -201,11 +202,6 @@ public class VideoThemeActivity extends AppCompatActivity implements OnClickList
             AdManager.adCounter++;
             AdManager.showMaxInterstitial(VideoThemeActivity.this, intent,reqCode);
         }
-    }
-
-    private void LoadAds() {
-        AdManager.initAd(this);
-        AdManager.loadInterAd(this);
     }
 
     void bindView() {
