@@ -442,19 +442,21 @@
                 android:id="@+id/img_custom_themes"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginBottom="10dp"
+
+                android:background="@drawable/bg_btn_open_effect"
                 android:padding="10dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/bg1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.4"
+                app:layout_constraintHeight_percent="0.25"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                app:layout_constraintWidth_percent="0.7"
-                app:riv_corner_radius_bottom_left="@dimen/_15sdp"
-                app:riv_corner_radius_bottom_right="@dimen/_15sdp"
-                app:riv_corner_radius_top_left="@dimen/_15sdp"
-                app:riv_corner_radius_top_right="@dimen/_15sdp" />
+                app:layout_constraintWidth_percent="0.75"
+                app:riv_corner_radius_bottom_left="@dimen/_20sdp"
+                app:riv_corner_radius_bottom_right="@dimen/_20sdp"
+                app:riv_corner_radius_top_left="@dimen/_20sdp"
+                app:riv_corner_radius_top_right="@dimen/_20sdp" />
 
             <TextView
                 android:id="@+id/txt_forone_video_preview"
@@ -464,11 +466,14 @@
                 android:gravity="center"
                 android:text="FOR ONE PHOTO"
                 android:textColor="@color/music_selected"
-                android:textSize="18dp"
+                android:textSize="13dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/img_custom_themes"
                 app:layout_constraintEnd_toEndOf="@+id/img_custom_themes"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/img_custom_themes"
-                app:layout_constraintTop_toTopOf="@+id/img_custom_themes" />
+                app:layout_constraintTop_toTopOf="@+id/img_custom_themes"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
