@@ -54,9 +54,11 @@ import java.util.List;
 
 public class AdManager {
     public static int adCounter = 1;
-    public static int adDisplayCounter = 999999;
+    public static int adDisplayCounter = 5;
 
     public static boolean isloadFbMAXAd = false;
+    public static boolean isEnableBanner = false;
+    public static boolean isEnableInterstitial = false;
 
 
     public static void initAd(Context context) {
@@ -72,22 +74,24 @@ public class AdManager {
 
     //TODO: adbanner
     public static void loadAdmobBanner(Context context, LinearLayout linearLayout){
-        AdView adView = new AdView(context);
-        Bundle extras = new Bundle();
-        extras.putString("npa", "1");
-        AdRequest adRequest = new AdRequest.Builder()
-                .addNetworkExtrasBundle(AdMobAdapter.class, extras)
-                .build();
-        //adView.setAdUnitId(Constants.ad_banner_id);
-        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
-        adView.setAdSize(AdSize.SMART_BANNER);
-        linearLayout.addView(adView);
-        adView.loadAd(adRequest);
+        if(isEnableInterstitial){
+            AdView adView = new AdView(context);
+            Bundle extras = new Bundle();
+            extras.putString("npa", "1");
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                    .build();
+            //adView.setAdUnitId(Constants.ad_banner_id);
+            adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+            adView.setAdSize(AdSize.SMART_BANNER);
+            linearLayout.addView(adView);
+            adView.loadAd(adRequest);
+        }
     }
 
     //TODO: interAds
     public static void showAdmobInterAd(final Activity context, InterAdsListener listener) {
-        if (adCounter == adDisplayCounter && mInterstitialAd != null) {
+        if (adCounter == adDisplayCounter && mInterstitialAd != null && isEnableInterstitial) {
             adCounter = 1;
             mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                 @Override

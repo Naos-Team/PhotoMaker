@@ -67,10 +67,6 @@ public class SwapperAdapter extends AbsBaseGridAdapter {
             @Override
             public void onClick(View v) {
 
-                File file = new File(KSUtil.videoPathList.get(position));
-                if (file.exists()){
-                    file.delete();
-                }
                 KSUtil.videoPathList.remove(position);
                 notifyDataSetChanged();
             }
