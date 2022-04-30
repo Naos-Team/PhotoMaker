@@ -35,256 +35,276 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/vLay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header1"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/effect_video_bg"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="25dp"
-        android:paddingTop="25dp"
-        android:paddingBottom="20dp">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <FrameLayout
-                android:id="@+id/frame1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
-
-                <VideoView
-                    android:id="@+id/video111"
-                    android:layout_width="@dimen/_205sdp"
-                    android:layout_height="@dimen/_205sdp"
-                    android:layout_gravity="center" />
-            </FrameLayout>
-
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/footer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/vLay"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="25dp"
-            android:gravity="center">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/btnPlayVideo"
-                    android:layout_width="@dimen/_23sdp"
-                    android:layout_height="@dimen/_23sdp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/play" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tvStartVideo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autoSizeMaxTextSize="100dp"
-                        android:autoSizeMinTextSize="4dp"
-                        android:autoSizeStepGranularity="2dp"
-                        android:autoSizeTextType="uniform"
-                        android:gravity="center"
-                        android:text="00:00"
-                        android:textColor="#388A72"
-                        android:textSize="@dimen/_10sdp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="6"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <SeekBar
-                        android:id="@+id/videoSeek"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:maxHeight="2dp"
-                        android:minHeight="2dp"
-                        android:progressDrawable="@drawable/custseek" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tvEndVideo"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:autoSizeMaxTextSize="100dp"
-                        android:autoSizeMinTextSize="4dp"
-                        android:autoSizeStepGranularity="2dp"
-                        android:autoSizeTextType="uniform"
-                        android:gravity="center"
-                        android:text="00:15"
-                        android:textColor="#388A72"
-                        android:textSize="@dimen/_10sdp" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="10"
-        android:layout_above="@+id/ll_adView16"
-        android:paddingHorizontal="20dp"
-        android:layout_below="@+id/vLay"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        android:layout_above="@id/ll_adView16"
+        android:layout_below="@id/header1">
         <LinearLayout
+            android:id="@+id/vLay"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:autoSizeMaxTextSize="100dp"
-                android:autoSizeMinTextSize="10dp"
-                android:paddingVertical="10dp"
-                android:paddingRight="25dp"
-                android:gravity="center_vertical"
-                android:autoSizeStepGranularity="2dp"
-                android:autoSizeTextType="uniform"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:textSize="25dp"
-                android:textColor="#286F5A"
-                android:text="Wow, awesome slideshow!"/>
-        </LinearLayout>
+            android:weightSum="10"
+            android:layout_weight="6"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/effect_video_bg"
+            android:orientation="vertical"
+            android:paddingHorizontal="25dp"
+            android:paddingTop="25dp"
+            android:paddingBottom="20dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_weight="2.5"
+            <RelativeLayout
+                android:layout_weight="8"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:autoSizeTextType="uniform"
-                android:autoSizeStepGranularity="2dp"
-                android:autoSizeMinTextSize="5dp"
-                android:autoSizeMaxTextSize="100dp"
-                android:text="Are you satisfied? Let us know"
-                android:textColor="#286F5A"/>
+                android:layout_margin="10dp"
+                android:gravity="center">
 
-            <LinearLayout
-                android:layout_weight="4.5"
-                android:id="@+id/btnRate"
-                android:paddingTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="horizontal">
-
-                <RatingBar
+                <FrameLayout
+                    android:id="@+id/frame1"
+                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="?android:attr/ratingBarStyleIndicator"/>
-            </LinearLayout>
-            <LinearLayout
+                    android:layout_centerInParent="true">
+
+                    <VideoView
+                        android:id="@+id/video111"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center" />
+                </FrameLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3"/>
+                android:layout_weight="2">
+                <LinearLayout
+                    android:id="@+id/footer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/btnPlayVideo"
+                            android:layout_width="@dimen/_23sdp"
+                            android:layout_height="@dimen/_23sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/play" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvStartVideo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:autoSizeMaxTextSize="100dp"
+                                android:autoSizeMinTextSize="4dp"
+                                android:autoSizeStepGranularity="2dp"
+                                android:autoSizeTextType="uniform"
+                                android:gravity="center"
+                                android:text="00:00"
+                                android:textColor="#388A72"
+                                android:textSize="@dimen/_10sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="6"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <SeekBar
+                                android:id="@+id/videoSeek"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxHeight="2dp"
+                                android:minHeight="2dp"
+                                android:progressDrawable="@drawable/custseek" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvEndVideo"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:autoSizeMaxTextSize="100dp"
+                                android:autoSizeMinTextSize="4dp"
+                                android:autoSizeStepGranularity="2dp"
+                                android:autoSizeTextType="uniform"
+                                android:gravity="center"
+                                android:text="00:15"
+                                android:textColor="#388A72"
+                                android:textSize="@dimen/_10sdp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4"
+            android:weightSum="10"
+            android:layout_above="@+id/ll_adView16"
+            android:paddingHorizontal="20dp"
+            android:layout_below="@+id/vLay"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_weight="2.5"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="left"
-                android:text="Share"
-                android:textColor="#286F5A"
-                android:autoSizeTextType="uniform"
-                android:autoSizeStepGranularity="2dp"
-                android:autoSizeMinTextSize="5dp"
-                android:autoSizeMaxTextSize="100dp" />
-
             <LinearLayout
-                android:layout_weight="4.5"
-                android:id="@+id/btnShare"
-                android:paddingTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:orientation="horizontal">
+                android:layout_weight="3">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:adjustViewBounds="true"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/facebook"
-
-                    />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="35dp"
-                    android:src="@drawable/twitter" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="35dp"
-                    android:src="@drawable/instagram" />
+                    android:layout_gravity="center"
+                    android:autoSizeMaxTextSize="100dp"
+                    android:autoSizeMinTextSize="10dp"
+                    android:autoSizeStepGranularity="2dp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center_vertical"
+                    android:paddingVertical="10dp"
+                    android:paddingRight="25dp"
+                    android:text="Wow, awesome slideshow!"
+                    android:textColor="#286F5A"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3"/>
+                android:layout_weight="3.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_weight="3.5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeStepGranularity="2dp"
+                    android:autoSizeMinTextSize="5dp"
+                    android:autoSizeMaxTextSize="100dp"
+                    android:text="Are you satisfied? Let us know"
+                    android:textColor="#286F5A"/>
+
+                <LinearLayout
+                    android:layout_weight="4.5"
+                    android:id="@+id/btnRate"
+                    android:paddingTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal">
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:attr/ratingBarStyleIndicator"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_weight="3.5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="left"
+                    android:text="Share"
+                    android:textColor="#286F5A"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeStepGranularity="2dp"
+                    android:autoSizeMinTextSize="5dp"
+                    android:autoSizeMaxTextSize="100dp" />
+
+                <LinearLayout
+                    android:layout_weight="4.5"
+                    android:id="@+id/btnShare"
+                    android:paddingTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/facebook"
+
+                        />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="35dp"
+                        android:src="@drawable/twitter" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="35dp"
+                        android:src="@drawable/instagram" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"/>
+            </LinearLayout>
+
+
         </LinearLayout>
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -293,8 +313,6 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-
 
 </RelativeLayout>
 

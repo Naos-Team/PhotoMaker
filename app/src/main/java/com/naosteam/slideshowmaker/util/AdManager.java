@@ -54,7 +54,7 @@ import java.util.List;
 
 public class AdManager {
     public static int adCounter = 1;
-    public static int adDisplayCounter = 4;
+    public static int adDisplayCounter = 999999;
 
     public static boolean isloadFbMAXAd = false;
 
