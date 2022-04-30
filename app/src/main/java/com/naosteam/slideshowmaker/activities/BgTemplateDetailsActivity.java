@@ -231,7 +231,8 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         cs.constrainWidth(img_Edit.getId(), ConstraintSet.MATCH_CONSTRAINT);
         cs.constrainHeight(img_Edit.getId(), ConstraintSet.MATCH_CONSTRAINT);
 
-        cs.connect(img_Edit.getId(), ConstraintSet.BOTTOM, img_Temp.getId(), ConstraintSet.TOP, 7);
+        cs.connect(img_Edit.getId(), ConstraintSet.TOP, img_Temp.getId(), ConstraintSet.TOP);
+        cs.connect(img_Edit.getId(), ConstraintSet.BOTTOM, img_Temp.getId(), ConstraintSet.TOP);
         cs.connect(img_Edit.getId(), ConstraintSet.END, img_Temp.getId(), ConstraintSet.END);
         cs.connect(img_Edit.getId(), ConstraintSet.START, img_Temp.getId(), ConstraintSet.START);
 
@@ -241,7 +242,8 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         cs.constrainWidth(img_ReChoice.getId(), ConstraintSet.MATCH_CONSTRAINT);
         cs.constrainHeight(img_ReChoice.getId(), ConstraintSet.MATCH_CONSTRAINT);
 
-        cs.connect(img_ReChoice.getId(), ConstraintSet.TOP, img_Temp.getId(), ConstraintSet.BOTTOM, 7);
+        cs.connect(img_ReChoice.getId(), ConstraintSet.BOTTOM, img_Temp.getId(), ConstraintSet.BOTTOM);
+        cs.connect(img_ReChoice.getId(), ConstraintSet.TOP, img_Temp.getId(), ConstraintSet.BOTTOM);
         cs.connect(img_ReChoice.getId(), ConstraintSet.END, img_Temp.getId(), ConstraintSet.END);
         cs.connect(img_ReChoice.getId(), ConstraintSet.START, img_Temp.getId(), ConstraintSet.START);
 
