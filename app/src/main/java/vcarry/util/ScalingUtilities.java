@@ -110,10 +110,14 @@ public class ScalingUtilities {
         Bitmap cs = bgBitmap.copy(bgBitmap.getConfig(), true);
         int height = bgBitmap.getHeight()*height_per/1000;
         Canvas canvas = new Canvas(cs);
+        //bgBitmap.getHeight()*left_per/1000
+        float left = (float) Math.round(bgBitmap.getHeight()*left_per)/1000;
+        //bgBitmap.getHeight()*top_per/1000
+        float top = (float) Math.round(bgBitmap.getHeight()*top_per)/1000;
 
         bitmap = scaleCenterCrop(bitmap, height * width_ratio/height_ratio, height);
         canvas.drawBitmap(Bitmap.createScaledBitmap(bitmap, height * width_ratio/height_ratio, height, true),
-                bgBitmap.getHeight()*left_per/1000 , bgBitmap.getHeight()*top_per/1000, new Paint());
+                left , top, new Paint());
 
         return cs;
     }
