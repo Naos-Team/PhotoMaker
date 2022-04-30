@@ -573,42 +573,42 @@ public class Background_Template {
         ArrayList<Image_in_Background> list_image11 = new ArrayList<>();
         list_frame11 = new ArrayList<>();
         list_frame11.add(
-                new Frame_in_Background(0.1244f, 0.3912f, 0.1804f, "w,125:166")
+                new Frame_in_Background(0.166f, 0.517f, 0.19f, "w,8:13")
         );
         list_frame11.add(
-                new Frame_in_Background(0.407f, 0.1065f, 0.1707f, "w,122:163")
+                new Frame_in_Background(0.359f, 0.291f, 0.11f, "w,13:8")
         );
         list_frame11.add(
-                new Frame_in_Background(0.384f, 0.4588f, 0.2913f, "w,190:281")
+                new Frame_in_Background(0.3788f, 0.564f, 0.23f, "w,5:8")
         );
         list_frame11.add(
-                new Frame_in_Background(0.6838f, 0.1986f, 0.2929f, "w,187:282")
+                new Frame_in_Background(0.603f, 0.412f, 0.19f, "w,8:13")
         );
         list_frame11.add(
-                new Frame_in_Background(0.6415f, 0.5867f, 0.1694f, "w,122:161")
+                new Frame_in_Background(0.654f, 0.652f, 0.11f, "w,13:8")
         );
         list_frame11.add(
-                new Frame_in_Background(0.9163f, 0.3071f, 0.1715f, "w,122:161")
+                new Frame_in_Background(0.856f, 0.461f, 0.11f, "w,13:8")
         );
 
         list_image11 = new ArrayList<>();
         list_image11.add(
-                new Image_in_Background(109, 325, 171, 129, 166)
+                new Image_in_Background(149, 421, 185, 81, 130)
         );
         list_image11.add(
-                new Image_in_Background(353, 82, 179, 122, 163)
+                new Image_in_Background(296, 258, 111, 13, 8)
         );
         list_image11.add(
-                new Image_in_Background(305, 320, 299, 190, 181)
+                new Image_in_Background(321 ,428, 245, 5, 8)
         );
         list_image11.add(
-                new Image_in_Background(547, 138, 299, 190, 281)
+                new Image_in_Background(536, 335, 187, 79, 130)
         );
         list_image11.add(
-                new Image_in_Background(556, 483, 179, 122, 163)
+                new Image_in_Background(538, 580, 110, 13, 8)
         );
         list_image11.add(
-                new Image_in_Background(796, 251, 179, 122, 163)
+                new Image_in_Background(704, 410, 110, 13, 8)
         );
 
         background_templates.add(new Background_Template("6 frs",
