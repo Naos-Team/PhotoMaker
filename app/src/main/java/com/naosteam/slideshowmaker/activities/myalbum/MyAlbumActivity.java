@@ -54,13 +54,10 @@ public class MyAlbumActivity extends AppCompatActivity {
             onBackPressed();
         });
 
-        LoadAds();
-
     }
 
     private void LoadAds(){
         AdManager.initAd(MyAlbumActivity.this);
-        AdManager.loadInterAd(this);
         ll_adView = findViewById(R.id.ll_adView15);
         AdManager.loadInterAd(this);
         AdManager.loadAdmobBanner(this, ll_adView);
