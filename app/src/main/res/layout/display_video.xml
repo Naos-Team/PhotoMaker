@@ -204,9 +204,8 @@
                     android:autoSizeMinTextSize="10dp"
                     android:autoSizeStepGranularity="2dp"
                     android:autoSizeTextType="uniform"
-                    android:gravity="center_vertical"
-                    android:paddingVertical="10dp"
-                    android:paddingRight="25dp"
+                    android:gravity="center"
+                    android:padding="20dp"
                     android:text="Wow, awesome slideshow!"
                     android:textColor="#286F5A"
                     android:textSize="25dp"
@@ -223,6 +222,7 @@
                     android:layout_weight="3.5"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:gravity="center"
                     android:autoSizeTextType="uniform"
                     android:autoSizeStepGranularity="2dp"
                     android:autoSizeMinTextSize="5dp"
@@ -234,6 +234,7 @@
                     android:layout_weight="4.5"
                     android:id="@+id/btnRate"
                     android:paddingTop="10dp"
+                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:orientation="horizontal">
@@ -258,6 +259,7 @@
                 <TextView
                     android:layout_weight="3.5"
                     android:layout_width="match_parent"
+                    android:gravity="center"
                     android:layout_height="0dp"
                     android:layout_gravity="left"
                     android:text="Share"
@@ -271,6 +273,7 @@
                     android:layout_weight="4.5"
                     android:id="@+id/btnShare"
                     android:paddingTop="10dp"
+                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:orientation="horizontal">
