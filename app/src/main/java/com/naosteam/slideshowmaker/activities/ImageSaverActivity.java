@@ -1,6 +1,7 @@
 package com.naosteam.slideshowmaker.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 
 import android.content.ActivityNotFoundException;
@@ -31,9 +32,10 @@ public class ImageSaverActivity extends AppCompatActivity {
 
     ImageView btnBack, btnDelete;
     LinearLayout btnEmail, ll_adView;
-    LinearLayout btnShare, btnRate, linear11;
+    LinearLayout btnShare, btnRate;
     RoundedImageView imv_saved;
     RelativeLayout main;
+    ConstraintLayout linear11;
     static String path;
 
     public static String getPath() {
