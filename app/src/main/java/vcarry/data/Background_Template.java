@@ -79,7 +79,7 @@ public class Background_Template {
 
         list_image1 = new ArrayList<>();
         list_image1.add(
-                new Image_in_Background(173, 161, 240, 21, 32)
+                new Image_in_Background(173, 161, 240, 211, 320)
         );
         list_image1.add(
                 new Image_in_Background(407, 164, 157, 70, 47)
@@ -111,7 +111,7 @@ public class Background_Template {
                 new Frame_in_Background(0.497f, 0.225f, 0.51f, "w,17.51:54")
         );
         list_frame2.add(
-                new Frame_in_Background(0.73f, 0.26f, 0.44f, "w,19.31:52")
+                new Frame_in_Background(0.731f, 0.26f, 0.44f, "w,19.32:52")
         );
         list_frame2.add(
                 new Frame_in_Background(0.955f, 0.293f, 0.357f, "w,10:23")
@@ -122,16 +122,16 @@ public class Background_Template {
                 new Image_in_Background(38, 188, 359, 152, 350)
         );
         list_image2.add(
-                new Image_in_Background(224, 151, 431, 164, 440)
+                new Image_in_Background(225, 151, 431, 164, 440)
         );
         list_image2.add(
-                new Image_in_Background(416, 111, 509, 176, 540)
+                new Image_in_Background(416, 111, 509, 175, 540)
         );
         list_image2.add(
                 new Image_in_Background(612, 146, 440, 194, 520)
         );
         list_image2.add(
-                new Image_in_Background(807, 187, 360, 100, 230)
+                new Image_in_Background(807, 187, 359, 100, 230)
         );
         background_templates.add(new Background_Template("5 frs",
                 BitmapFactory.decodeResource(activity.getResources(), R.drawable.back2),
