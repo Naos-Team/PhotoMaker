@@ -1003,16 +1003,13 @@ public class Background_Template {
         ArrayList<Image_in_Background> list_image19 = new ArrayList<>();
         list_frame19 = new ArrayList<>();
         list_frame19.add(
+                new Frame_in_Background(0.516f, 0.475f, 0.188f, "w,133:169")
+        );
+        list_frame19.add(
                 new Frame_in_Background(0.043f, 0.219f, 0.148f, "w,168:132")
         );
         list_frame19.add(
                 new Frame_in_Background(0.959f, 0.218f, 0.15f, "w,168:132")
-        );
-        list_frame19.add(
-                new Frame_in_Background(0.338f, 0.074f, 0.28f, "w,186:251")
-        );
-        list_frame19.add(
-                new Frame_in_Background(0.657f, 0.075f, 0.28f, "w,186:251")
         );
         list_frame19.add(
                 new Frame_in_Background(0.251f, 0.453f, 0.15f, "w,172:135")
@@ -1021,10 +1018,22 @@ public class Background_Template {
                 new Frame_in_Background(0.786f, 0.453f, 0.15f, "w,172:135")
         );
         list_frame19.add(
-                new Frame_in_Background(0.516f, 0.475f, 0.188f, "w,133:169")
+                new Frame_in_Background(0.338f, 0.076f, 0.28f, "w,186:251")
+        );
+        list_frame19.add(
+                new Frame_in_Background(0.657f, 0.076f, 0.28f, "w,186:251")
         );
 
         list_image19 = new ArrayList<>();
+        list_image19.add(
+                new Image_in_Background(439, 385, 192, 133, 169)
+        );
+        list_image19.add(
+                new Image_in_Background(35, 187, 148, 170, 132)
+        );
+        list_image19.add(
+                new Image_in_Background(775, 185, 152, 168, 132)
+        );
         list_image19.add(
                 new Image_in_Background(203, 385, 152, 172,135)
         );
@@ -1032,20 +1041,12 @@ public class Background_Template {
                 new Image_in_Background(635, 385, 152, 172, 135)
         );
         list_image19.add(
-                new Image_in_Background(35, 187, 148, 168, 132)
+                new Image_in_Background(268, 53, 280, 187, 251)
         );
         list_image19.add(
-                new Image_in_Background(775, 185, 152, 168, 132)
+                new Image_in_Background(522, 53, 280, 187, 251)
         );
-        list_image19.add(
-                new Image_in_Background(522, 53, 280, 186, 251)
-        );
-        list_image19.add(
-                new Image_in_Background(268, 53, 280, 186, 251)
-        );
-        list_image19.add(
-                new Image_in_Background(439, 385, 192, 133, 169)
-        );
+
 
        background_templates.add(new Background_Template("3frs",
                 BitmapFactory.decodeResource(activity.getResources(), R.drawable.back19),
