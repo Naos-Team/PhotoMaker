@@ -7,7 +7,7 @@ public class Frame_in_Background {
     int color;
     String ratio;
 
-    public Frame_in_Background(float hor_bias, float verti_bias, float height_per, int color, String ratio) {
+    public Frame_in_Background(float hor_bias, float verti_bias, float height_per, String ratio, int color) {
         this.hor_bias = hor_bias;
         this.verti_bias = verti_bias;
         this.height_per = height_per;
