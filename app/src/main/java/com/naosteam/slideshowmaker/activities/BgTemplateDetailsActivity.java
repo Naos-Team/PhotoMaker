@@ -194,8 +194,6 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         image_button.setImg_ReChoice(img_ReChoice);
 
         img_Edit.setImageResource(R.drawable.edit_chooser);
-        img_Edit.setColorFilter(ContextCompat.getColor(BgTemplateDetailsActivity.this, image_button.getColor()),
-                android.graphics.PorterDuff.Mode.MULTIPLY);
         img_Edit.setId(View.generateViewId());
         img_Edit.setScaleType(ImageView.ScaleType.CENTER_CROP);
         img_Edit.setVisibility(View.GONE);
@@ -209,8 +207,6 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         });
 
         img_ReChoice.setImageResource(R.drawable.swap_chooser);
-        img_ReChoice.setColorFilter(ContextCompat.getColor(BgTemplateDetailsActivity.this, image_button.getColor()),
-                android.graphics.PorterDuff.Mode.MULTIPLY);
         img_ReChoice.setId(View.generateViewId());
         img_ReChoice.setScaleType(ImageView.ScaleType.CENTER_CROP);
         img_ReChoice.setVisibility(View.GONE);
