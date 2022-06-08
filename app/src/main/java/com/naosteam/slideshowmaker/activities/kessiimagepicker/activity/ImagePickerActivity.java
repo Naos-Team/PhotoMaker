@@ -97,6 +97,7 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
         }
 
         protected String doInBackground(Void... params) {
+            int count = 0;
             Cursor cursor = ImagePickerActivity.this.getContentResolver().query(Media.EXTERNAL_CONTENT_URI, new String[]{"_data", "bucket_display_name"}, null, null, null);
             if (cursor != null) {
                 int column_index_data = cursor.getColumnIndexOrThrow("_data");
@@ -107,7 +108,12 @@ public class ImagePickerActivity extends AppCompatActivity implements OnClickLis
                         boolean check = ImagePickerActivity.this.checkFile(file);
                         if (!ImagePickerActivity.this.Check(file.getParent(), ImagePickerActivity.this.pathList) && check) {
                             ImagePickerActivity.this.pathList.add(file.getParent());
-                            ImagePickerActivity.this.dataAlbum.add(new ImageModel(file.getParentFile().getName(), pathFile, file.getParent(), Arrays.stream(file.getParentFile().listFiles()).count()));
+                            for(File f : file.getParentFile().listFiles()){
+                                if (f.getAbsolutePath().contains(".png")|| f.getAbsolutePath().contains(".jpg") || f.getAbsolutePath().contains(".jpeg")){
+                                    count++;
+                                }
+                            }
+                            ImagePickerActivity.this.dataAlbum.add(new ImageModel(file.getParentFile().getName(), pathFile, file.getParent(),count));
                         }
                     }
                 }
