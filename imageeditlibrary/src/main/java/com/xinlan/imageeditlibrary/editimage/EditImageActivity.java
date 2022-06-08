@@ -11,9 +11,6 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -32,6 +29,7 @@ import com.xinlan.imageeditlibrary.editimage.fragment.MainMenuFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.PaintFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.RotateFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.StickerFragment;
+import com.xinlan.imageeditlibrary.editimage.fragment.TextImageFragment;
 import com.xinlan.imageeditlibrary.editimage.utils.FileUtil;
 import com.xinlan.imageeditlibrary.editimage.view.CropImageView;
 import com.xinlan.imageeditlibrary.editimage.view.CustomPaintView;
@@ -96,6 +94,7 @@ public class EditImageActivity extends BaseActivity {
     public AddTextFragment mAddTextFragment;
     public PaintFragment mPaintFragment;
     public BeautyFragment mBeautyFragment;
+    private TextImageFragment mTextImageFragment;
     private SaveImageTask mSaveImageTask;
 
     private RedoUndoController mRedoUndoController;//
@@ -177,6 +176,7 @@ public class EditImageActivity extends BaseActivity {
         mAddTextFragment = AddTextFragment.newInstance();
         mPaintFragment = PaintFragment.newInstance();
         mBeautyFragment = BeautyFragment.newInstance();
+        mTextImageFragment = TextImageFragment.newInstance();
 
         bottomGallery.setAdapter(mBottomGalleryAdapter);
 
@@ -238,6 +238,8 @@ public class EditImageActivity extends BaseActivity {
                     return mPaintFragment;
                 case BeautyFragment.INDEX:
                     return mBeautyFragment;
+                case TextImageFragment.INDEX:
+                    return mTextImageFragment;
             }//end switch
             return MainMenuFragment.newInstance();
         }
