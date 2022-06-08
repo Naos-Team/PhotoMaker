@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.content.ContextCompat;
 
 import android.app.ProgressDialog;
 import android.content.ContentUris;
@@ -122,7 +123,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
 
         if (background_template != null){
             for (Frame_in_Background k : background_template.getList_frame()){
-                list_image_button.add(Create_Image_View(k.getHor_bias(), k.getVerti_bias(), k.getHeight_per(), k.getRatio()));
+                list_image_button.add(Create_Image_View(k.getHor_bias(), k.getVerti_bias(), k.getHeight_per(), k.getRatio(), k.getColor()));
             }
         }
 
@@ -193,6 +194,8 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         image_button.setImg_ReChoice(img_ReChoice);
 
         img_Edit.setImageResource(R.drawable.edit_chooser);
+        img_Edit.setColorFilter(ContextCompat.getColor(BgTemplateDetailsActivity.this, image_button.getColor()),
+                android.graphics.PorterDuff.Mode.MULTIPLY);
         img_Edit.setId(View.generateViewId());
         img_Edit.setScaleType(ImageView.ScaleType.CENTER_CROP);
         img_Edit.setVisibility(View.GONE);
@@ -206,6 +209,8 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         });
 
         img_ReChoice.setImageResource(R.drawable.swap_chooser);
+        img_ReChoice.setColorFilter(ContextCompat.getColor(BgTemplateDetailsActivity.this, image_button.getColor()),
+                android.graphics.PorterDuff.Mode.MULTIPLY);
         img_ReChoice.setId(View.generateViewId());
         img_ReChoice.setScaleType(ImageView.ScaleType.CENTER_CROP);
         img_ReChoice.setVisibility(View.GONE);
@@ -252,14 +257,15 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         cs.applyTo(layout_bg_template_main);
     }
 
-    private Image_Button Create_Image_View(float hor_bias, float verti_bias, float height_per, String ratio){
+    private Image_Button Create_Image_View(float hor_bias, float verti_bias, float height_per, String ratio, int color_f){
 
         ImageView img_Temp = new ImageView(this);
 
-        Image_Button image_button = new Image_Button(img_Temp, null, null);
+        Image_Button image_button = new Image_Button(img_Temp, null, null, color_f);
 
         img_Temp.setImageResource(R.drawable.add);
-
+        img_Temp.setColorFilter(ContextCompat.getColor(BgTemplateDetailsActivity.this, color_f),
+                android.graphics.PorterDuff.Mode.MULTIPLY);
 
         if (img_Temp.getWidth()>10 && img_Temp.getHeight()>10){
             img_Temp.setPadding(30, 30, 30, 30);
