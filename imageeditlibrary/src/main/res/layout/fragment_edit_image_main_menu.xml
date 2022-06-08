@@ -13,16 +13,16 @@
 
         <ImageView
             android:id="@+id/btn_paint"
-            android:layout_width="40dp"
-            android:padding="16.5dp"
+            android:layout_width="42dp"
             android:layout_height="40dp"
-            android:src="@drawable/draw"/>
+            android:padding="18dp"
+            android:src="@drawable/draw" />
 
         <ImageView
             android:id="@+id/btn_stickers"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="17dp"
+            android:padding="16dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:src="@drawable/lsticker"
@@ -59,19 +59,28 @@
             android:id="@+id/btn_text"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="16.5dp"
+            android:padding="17.5dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:src="@drawable/text"/>
+            android:src="@drawable/text_input"/>
 
         <ImageView
             android:id="@+id/btn_beauty"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="18dp"
+            android:padding="16dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:src="@drawable/beauty"/>
+
+        <ImageView
+            android:id="@+id/btn_text_sticker"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="8.5dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:src="@drawable/text_sticker"/>
 
     </LinearLayout>
 </HorizontalScrollView>
