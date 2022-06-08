@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -118,7 +119,9 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
     int mPlayEndMsec;
     int mPlayStartMsec;
     int mPlayStartOffset;
-    MediaPlayer mPlayer;
+    MediaPlayer mPlayer, mOnlinePlayer;
+    ImageView mOnlinePlayBtn, mOnlinePauseBtn;
+    CountDownTimer mCountDown;
     LinearLayout loaderLay;
     String mRecordingFilename;
     Uri mRecordingUri;
@@ -261,7 +264,19 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
                 }
 
                 @Override
-                public void onPlaySong(int position) {
+                public void onPlaySong(int position, MediaPlayer mp_online, ImageView btn_play, ImageView btn_pause, CountDownTimer countdown) {
+
+                    //TODO: stop song here
+
+                    mOnlinePlayer = mp_online;
+                    mOnlinePlayBtn = btn_play;
+                    mOnlinePauseBtn = btn_pause;
+                    mCountDown = countdown;
+
+                    if(mIsPlaying){
+                        handlePause();
+                    }
+
                     for(int i = 0; i < adapterOnlineMusic.getItemCount(); i++){
                         if(i != position){
                             adapterOnlineMusic.notifyItemChanged(i);
@@ -441,8 +456,6 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
             KSUtil.Bounce(this, btn_your_music);
             btn_your_music.setBackgroundResource(R.drawable.shape_selected_button);
             btn_online_music.setBackgroundResource(R.drawable.shape_open_gallery);
-//            rv_online_music.setVisibility(View.GONE);
-//            mMusicList.setVisibility(View.VISIBLE);
 
             openMusicListAnimation();
         });
@@ -450,8 +463,7 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
             KSUtil.Bounce(this, btn_online_music);
             btn_online_music.setBackgroundResource(R.drawable.shape_selected_button);
             btn_your_music.setBackgroundResource(R.drawable.shape_open_gallery);
-//            rv_online_music.setVisibility(View.VISIBLE);
-//            mMusicList.setVisibility(View.GONE);
+
             openOnlineMusicAnimation();
 
         }));
@@ -992,9 +1004,15 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
                     }
                 } catch (final Exception e) {
 //                    mProgressDialog.dismiss();
-                    loaderLay.setVisibility(View.GONE);
-                    flagsong = true;
-                    e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            loaderLay.setVisibility(View.GONE);
+                            flagsong = true;
+                            e.printStackTrace();
+                        }
+                    });
+
                     mHandler.post(new Runnable() {
                         public void run() {
                             handleFatalError("ReadError", getResources().getText(R.string.read_error), e);
@@ -1205,6 +1223,14 @@ public class SongGalleryActivity extends AppCompatActivity implements MarkerView
             handlePause();
         } else if (!(mPlayer == null || startPosition == -1)) {
             try {
+
+                if(mOnlinePlayer != null && mOnlinePlayer.isPlaying()){
+                    mOnlinePlayer.stop();
+                    mCountDown.cancel();
+                    mOnlinePauseBtn.setVisibility(View.GONE);
+                    mOnlinePlayBtn.setVisibility(View.VISIBLE);
+                }
+
                 mPlayStartMsec = mPVMWSWaveformView.pixelsToMillisecs(startPosition);
                 if (startPosition < mStartPos) {
                     mPlayEndMsec = mPVMWSWaveformView.pixelsToMillisecs(mStartPos);

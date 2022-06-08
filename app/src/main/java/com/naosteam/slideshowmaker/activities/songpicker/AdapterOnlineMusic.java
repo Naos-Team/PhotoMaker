@@ -94,7 +94,7 @@ public class AdapterOnlineMusic extends RecyclerView.Adapter<AdapterOnlineMusic.
                         holder.btn_play.setVisibility(View.GONE);
                         mp.start();
                         countdown.start();
-//                        listener.onPlaySong(holder.getAbsoluteAdapterPosition());
+                        listener.onPlaySong(holder.getAbsoluteAdapterPosition(), mp, holder.btn_play, holder.btn_pause, countdown);
                     }
                 }
             });

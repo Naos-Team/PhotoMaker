@@ -26,9 +26,9 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="150dp"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:layout_height="wrap_content"
             app:tabBackground="@drawable/indicator_selector" />
 
         <TextView
