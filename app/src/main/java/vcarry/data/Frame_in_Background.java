@@ -4,12 +4,14 @@ public class Frame_in_Background {
     float hor_bias;
     float verti_bias;
     float height_per;
+    int color;
     String ratio;
 
-    public Frame_in_Background(float hor_bias, float verti_bias, float height_per, String ratio) {
+    public Frame_in_Background(float hor_bias, float verti_bias, float height_per, int color, String ratio) {
         this.hor_bias = hor_bias;
         this.verti_bias = verti_bias;
         this.height_per = height_per;
+        this.color = color;
         this.ratio = ratio;
     }
 
@@ -35,6 +37,14 @@ public class Frame_in_Background {
 
     public void setHeight_per(float height_per) {
         this.height_per = height_per;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     public String getRatio() {
