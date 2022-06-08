@@ -259,7 +259,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
 
         Image_Button image_button = new Image_Button(img_Temp, null, null, color_f);
 
-        img_Temp.setImageResource(R.drawable.add);
+        img_Temp.setImageResource(R.drawable.add_new);
         img_Temp.setColorFilter(ContextCompat.getColor(BgTemplateDetailsActivity.this, color_f),
                 android.graphics.PorterDuff.Mode.MULTIPLY);
 
