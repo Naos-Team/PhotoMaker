@@ -7,14 +7,16 @@ public class Image_Button {
     private ImageView img_Edit;
     private ImageView img_ReChoice;
     private String dir;
+    private int color;
     private boolean first_time;
 
-    public Image_Button(ImageView img_Main, ImageView img_Edit, ImageView img_ReChoice) {
+    public Image_Button(ImageView img_Main, ImageView img_Edit, ImageView img_ReChoice, int color) {
         this.img_Main = img_Main;
         this.img_Edit = img_Edit;
         this.img_ReChoice = img_ReChoice;
         this.first_time = true;
         this.dir = "";
+        this.color = color;
     }
 
     public ImageView getImg_Main() {
@@ -55,5 +57,13 @@ public class Image_Button {
 
     public void setDir(String dir) {
         this.dir = dir;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.content.ContextCompat;
 
 import android.app.ProgressDialog;
 import android.content.ContentUris;
@@ -122,7 +123,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
 
         if (background_template != null){
             for (Frame_in_Background k : background_template.getList_frame()){
-                list_image_button.add(Create_Image_View(k.getHor_bias(), k.getVerti_bias(), k.getHeight_per(), k.getRatio()));
+                list_image_button.add(Create_Image_View(k.getHor_bias(), k.getVerti_bias(), k.getHeight_per(), k.getRatio(), k.getColor()));
             }
         }
 
@@ -252,21 +253,22 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         cs.applyTo(layout_bg_template_main);
     }
 
-    private Image_Button Create_Image_View(float hor_bias, float verti_bias, float height_per, String ratio){
+    private Image_Button Create_Image_View(float hor_bias, float verti_bias, float height_per, String ratio, int color_f){
 
         ImageView img_Temp = new ImageView(this);
 
-        Image_Button image_button = new Image_Button(img_Temp, null, null);
+        Image_Button image_button = new Image_Button(img_Temp, null, null, color_f);
 
-        img_Temp.setImageResource(R.drawable.add);
-
+        img_Temp.setImageResource(R.drawable.add_new);
+        img_Temp.setColorFilter(ContextCompat.getColor(BgTemplateDetailsActivity.this, color_f),
+                android.graphics.PorterDuff.Mode.MULTIPLY);
 
         if (img_Temp.getWidth()>10 && img_Temp.getHeight()>10){
             img_Temp.setPadding(30, 30, 30, 30);
         }
 
         img_Temp.setId(View.generateViewId());
-        img_Temp.setBackgroundColor(getColor(R.color.white));
+        //img_Temp.setBackgroundColor(getColor(R.color.white));
         img_Temp.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         img_Temp.setOnClickListener(new View.OnClickListener() {
@@ -374,6 +376,8 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 for(int i = 0; i < list_image_button.size(); ++i){
                     if(list_image_button.get(i).getImg_Main().getId() == id_now){
+                        list_image_button.get(i).getImg_Main().setColorFilter(ContextCompat.getColor(BgTemplateDetailsActivity.this, R.color.white),
+                                android.graphics.PorterDuff.Mode.MULTIPLY);
                         list_image_button.get(i).getImg_Main().setImageBitmap(bitmap);
                         list_image_button.get(i).getImg_Main().setScaleType(ImageView.ScaleType.CENTER_CROP);
                         list_image_button.get(i).setFirst_time(false);
