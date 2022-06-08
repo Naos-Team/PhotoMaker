@@ -268,7 +268,7 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
         }
 
         img_Temp.setId(View.generateViewId());
-        img_Temp.setBackgroundColor(getColor(R.color.white));
+        //img_Temp.setBackgroundColor(getColor(R.color.white));
         img_Temp.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         img_Temp.setOnClickListener(new View.OnClickListener() {
@@ -376,6 +376,8 @@ public class BgTemplateDetailsActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 for(int i = 0; i < list_image_button.size(); ++i){
                     if(list_image_button.get(i).getImg_Main().getId() == id_now){
+                        list_image_button.get(i).getImg_Main().setColorFilter(ContextCompat.getColor(BgTemplateDetailsActivity.this, R.color.white),
+                                android.graphics.PorterDuff.Mode.MULTIPLY);
                         list_image_button.get(i).getImg_Main().setImageBitmap(bitmap);
                         list_image_button.get(i).getImg_Main().setScaleType(ImageView.ScaleType.CENTER_CROP);
                         list_image_button.get(i).setFirst_time(false);

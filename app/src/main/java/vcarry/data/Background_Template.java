@@ -68,10 +68,10 @@ public class Background_Template {
                 new Frame_in_Background(0.5305f, 0.196f, 0.155f, "w,7.1:4.7", R.color.white)
         );
         list_frame1.add(
-                new Frame_in_Background(0.816f, 0.184f, 0.170f, "w,5:7", R.color.black)
+                new Frame_in_Background(0.816f, 0.184f, 0.170f, "w,5:7", R.color.toptextcolor)
         );
         list_frame1.add(
-                new Frame_in_Background(0.462f, 0.468f, 0.165f, "w,5:7", R.color.black)
+                new Frame_in_Background(0.462f, 0.468f, 0.165f, "w,5:7", R.color.toptextcolor)
         );
         list_frame1.add(
                 new Frame_in_Background(0.680f, 0.47f, 0.164f, "w,5.3:7", R.color.white)
@@ -573,22 +573,22 @@ public class Background_Template {
         ArrayList<Image_in_Background> list_image11 = new ArrayList<>();
         list_frame11 = new ArrayList<>();
         list_frame11.add(
-                new Frame_in_Background(0.166f, 0.517f, 0.19f, "w,8:13", R.color.black)
+                new Frame_in_Background(0.166f, 0.517f, 0.19f, "w,8:13", R.color.toptextcolor)
         );
         list_frame11.add(
-                new Frame_in_Background(0.359f, 0.291f, 0.11f, "w,13:8", R.color.black)
+                new Frame_in_Background(0.359f, 0.291f, 0.11f, "w,13:8", R.color.toptextcolor)
         );
         list_frame11.add(
-                new Frame_in_Background(0.3788f, 0.564f, 0.23f, "w,5:8", R.color.black)
+                new Frame_in_Background(0.3788f, 0.564f, 0.23f, "w,5:8", R.color.toptextcolor)
         );
         list_frame11.add(
-                new Frame_in_Background(0.603f, 0.412f, 0.19f, "w,8:13", R.color.black)
+                new Frame_in_Background(0.603f, 0.412f, 0.19f, "w,8:13", R.color.toptextcolor)
         );
         list_frame11.add(
-                new Frame_in_Background(0.654f, 0.652f, 0.11f, "w,13:8", R.color.black)
+                new Frame_in_Background(0.654f, 0.652f, 0.11f, "w,13:8", R.color.toptextcolor)
         );
         list_frame11.add(
-                new Frame_in_Background(0.856f, 0.461f, 0.11f, "w,13:8", R.color.black)
+                new Frame_in_Background(0.856f, 0.461f, 0.11f, "w,13:8", R.color.toptextcolor)
         );
 
         list_image11 = new ArrayList<>();
