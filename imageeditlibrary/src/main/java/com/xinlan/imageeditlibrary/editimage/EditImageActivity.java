@@ -170,6 +170,7 @@ public class EditImageActivity extends BaseActivity {
         mMainMenuFragment = MainMenuFragment.newInstance();
         mBottomGalleryAdapter = new BottomGalleryAdapter(
                 this.getSupportFragmentManager());
+        mTextImageFragment = TextImageFragment.newInstance();
         mStickerFragment = StickerFragment.newInstance();
         mFilterListFragment = FilterListFragment.newInstance();
         mCropFragment = CropFragment.newInstance();
@@ -177,7 +178,7 @@ public class EditImageActivity extends BaseActivity {
         mAddTextFragment = AddTextFragment.newInstance();
         mPaintFragment = PaintFragment.newInstance();
         mBeautyFragment = BeautyFragment.newInstance();
-        mTextImageFragment = TextImageFragment.newInstance();
+
 
         bottomGallery.setAdapter(mBottomGalleryAdapter);
 
@@ -247,7 +248,7 @@ public class EditImageActivity extends BaseActivity {
 
         @Override
         public int getCount() {
-            return 8;
+            return 9;
         }
     }// end inner class
 

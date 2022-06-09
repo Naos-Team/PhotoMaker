@@ -15,9 +15,9 @@
         tools:context=".activities.MainActivity">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestscroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/ll_adView">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -284,12 +284,10 @@
         <LinearLayout
             android:id="@+id/ll_adView"
             android:orientation="vertical"
+            android:layout_below="@id/nestscroll"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
-
-
 
     </RelativeLayout>
     <com.google.android.material.navigation.NavigationView

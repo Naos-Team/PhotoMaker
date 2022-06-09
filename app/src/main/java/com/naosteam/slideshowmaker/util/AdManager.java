@@ -57,8 +57,8 @@ public class AdManager {
     public static int adDisplayCounter = 5;
 
     public static boolean isloadFbMAXAd = false;
-    public static boolean isEnableBanner = false;
-    public static boolean isEnableInterstitial = false;
+    public static boolean isEnableBanner = true;
+    public static boolean isEnableInterstitial = true;
 
 
     public static void initAd(Context context) {

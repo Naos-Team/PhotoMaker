@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class TextImageFragment  extends BaseEditFragment {
+public class TextImageFragment extends BaseEditFragment {
     public static final int INDEX = ModuleConfig.INDEX_IMAGETEXT;
 
     public static final String TAG = StickerFragment.class.getName();
@@ -50,8 +50,7 @@ public class TextImageFragment  extends BaseEditFragment {
     private SaveStickersTask mSaveTask;
 
     public static TextImageFragment newInstance() {
-        TextImageFragment fragment = new TextImageFragment();
-        return fragment;
+        return new TextImageFragment();
     }
 
     @Override
@@ -63,7 +62,6 @@ public class TextImageFragment  extends BaseEditFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);
-        activity = (EditImageActivity) getActivity();
         mainView = inflater.inflate(R.layout.fragment_edit_image_text,
                 null);
         //loadStickersData();
