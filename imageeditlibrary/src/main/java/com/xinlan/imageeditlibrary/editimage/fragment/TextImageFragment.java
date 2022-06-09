@@ -42,8 +42,6 @@ public class TextImageFragment  extends BaseEditFragment {
     private ViewFlipper flipper;
     private View backToMenu;//
     private RecyclerView typeList;//
-    private RecyclerView stickerList;//
-    private View backToType;//
     private StickerView mStickerView;//
     private ImageTextAdapter mTextImageAdapter;//
 
@@ -65,7 +63,8 @@ public class TextImageFragment  extends BaseEditFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);
-        mainView = inflater.inflate(R.layout.fragment_edit_image_sticker_type,
+        activity = (EditImageActivity) getActivity();
+        mainView = inflater.inflate(R.layout.fragment_edit_image_text,
                 null);
         //loadStickersData();
 
@@ -81,24 +80,15 @@ public class TextImageFragment  extends BaseEditFragment {
         flipper.setOutAnimation(activity, R.anim.out_bottom_to_top);
 
         //
-        backToMenu = mainView.findViewById(R.id.back_to_main);
+        backToMenu = mainView.findViewById(R.id.back_to_main_1);
         typeList = (RecyclerView) mainView
-                .findViewById(R.id.stickers_type_list);
+                .findViewById(R.id.imgtext_list);
         typeList.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(activity);
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         typeList.setLayoutManager(mLayoutManager);
         typeList.setAdapter(new ImageTextAdapter(this));
-        backToType = mainView.findViewById(R.id.back_to_type);// back
 
-        stickerList = (RecyclerView) mainView.findViewById(R.id.stickers_list);
-        stickerList.setHasFixedSize(true);
-        LinearLayoutManager stickerListLayoutManager = new LinearLayoutManager(
-                activity);
-        stickerListLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        stickerList.setLayoutManager(stickerListLayoutManager);
-        mTextImageAdapter = new ImageTextAdapter(this);
-        stickerList.setAdapter(mTextImageAdapter);
 
         LinearLayout.LayoutParams paramsBtn = new LinearLayout.LayoutParams(
                 getActivity().getResources().getDisplayMetrics().widthPixels * 120 / 1080,
@@ -107,19 +97,12 @@ public class TextImageFragment  extends BaseEditFragment {
         backToMenu.setLayoutParams(paramsBtn);
 
         backToMenu.setOnClickListener(new BackToMenuClick());//
-        backToType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {//
-                flipper.showPrevious();
-            }
-        });
-        backToType.setLayoutParams(paramsBtn);
     }
 
     @Override
     public void onShow() {
-        activity.mode = EditImageActivity.MODE_STICKERS;
-        activity.mStickerFragment.getmStickerView().setVisibility(
+        activity.mode = EditImageActivity.MODE_IMATEXT;
+        activity.mTextImageFragment.getmStickerView().setVisibility(
                 View.VISIBLE);
         activity.bannerFlipper.showNext();
     }

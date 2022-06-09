@@ -24,6 +24,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     private ImageView mTextBtn;//
     private ImageView mPaintBtn;//
     private ImageView mBeautyBtn;//
+    private ImageView mImageText;//
 
     public static MainMenuFragment newInstance() {
         MainMenuFragment fragment = new MainMenuFragment();
@@ -54,6 +55,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         mTextBtn = mainView.findViewById(R.id.btn_text);
         mPaintBtn = mainView.findViewById(R.id.btn_paint);
         mBeautyBtn = mainView.findViewById(R.id.btn_beauty);
+        mImageText = mainView.findViewById(R.id.btn_text_sticker);
 
         stickerBtn.setOnClickListener(this);
         fliterBtn.setOnClickListener(this);
@@ -62,6 +64,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         mTextBtn.setOnClickListener(this);
         mPaintBtn.setOnClickListener(this);
         mBeautyBtn.setOnClickListener(this);
+        mImageText.setOnClickListener(this);
         setLay();
     }
 
@@ -106,6 +109,8 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
             onPaintClick();
         }else if(v == mBeautyBtn){
             onBeautyClick();
+        } else if(v == mImageText){
+            onImageTextClick();
         }
     }
 
@@ -115,6 +120,10 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         activity.mStickerFragment.onShow();
     }
 
+    private void onImageTextClick() {
+        activity.bottomGallery.setCurrentItem(TextImageFragment.INDEX);
+        activity.mTextImageFragment.onShow();
+    }
 
     private void onFilterClick() {
         activity.bottomGallery.setCurrentItem(FilterListFragment.INDEX);

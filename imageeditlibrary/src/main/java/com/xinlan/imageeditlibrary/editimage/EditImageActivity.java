@@ -58,6 +58,7 @@ public class EditImageActivity extends BaseActivity {
     public static final int MODE_TEXT = 5;// Text mode
     public static final int MODE_PAINT = 6;//Drawing mode
     public static final int MODE_BEAUTY = 7;//Beauty mode
+    public static final int MODE_IMATEXT = 8;//Beauty mode
 
     public String filePath;// Need to edit the image path
     public String saveFilePath;// Generated new image path
@@ -94,7 +95,7 @@ public class EditImageActivity extends BaseActivity {
     public AddTextFragment mAddTextFragment;
     public PaintFragment mPaintFragment;
     public BeautyFragment mBeautyFragment;
-    private TextImageFragment mTextImageFragment;
+    public TextImageFragment mTextImageFragment;
     private SaveImageTask mSaveImageTask;
 
     private RedoUndoController mRedoUndoController;//
@@ -300,6 +301,9 @@ public class EditImageActivity extends BaseActivity {
                 return;
             case MODE_BEAUTY:
                 mBeautyFragment.backToMain();
+                break;
+            case MODE_IMATEXT:
+                mTextImageFragment.backToMain();
                 return;
         }// end switch
 
@@ -337,6 +341,9 @@ public class EditImageActivity extends BaseActivity {
                 case MODE_BEAUTY:
                     mBeautyFragment.applyBeauty();
                     break;
+                case MODE_IMATEXT:
+                    mTextImageFragment.applyStickers();
+                    return;
                 default:
                     break;
             }// end switch
