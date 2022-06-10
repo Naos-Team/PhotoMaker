@@ -57,13 +57,13 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         View v = null;
         v = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.view_sticker_item, parent, false);
-       TextImageHolder holer = new TextImageHolder(v);
+        TextImageHolder holer = new TextImageHolder(v);
         return holer;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        StickerAdapter.ImageHolder imageHoler = (StickerAdapter.ImageHolder) holder;
+        TextImageHolder imageHoler = (TextImageHolder) holder;
         String path = pathList.get(position);
         ImageLoader.getInstance().displayImage("assets://" + path,
                 imageHoler.image, imageOption);
@@ -97,7 +97,7 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public void onClick(View v) {
             String data = (String) v.getTag();
             //System.out.println("data---->" + data);
-            mTextImageFragment.selectedStickerItem(data);
+            mTextImageFragment.selectedStickerItem(null);
         }
     }// end inner class
 

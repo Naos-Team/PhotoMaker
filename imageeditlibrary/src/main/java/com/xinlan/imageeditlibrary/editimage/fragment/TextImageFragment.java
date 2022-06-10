@@ -111,12 +111,6 @@ public class TextImageFragment extends BaseEditFragment {
     }
 
 
-    public void swipToStickerDetails(String path) {
-        mTextImageAdapter.addStickerImages(path);
-        flipper.showNext();
-    }
-
-
     private Bitmap getImageFromAssetsFile(String fileName) {
         Bitmap image = null;
         AssetManager am = getResources().getAssets();
@@ -131,8 +125,8 @@ public class TextImageFragment extends BaseEditFragment {
     }
 
 
-    public void selectedStickerItem(String path) {
-        mStickerView.addBitImage(getImageFromAssetsFile(path));
+    public void selectedStickerItem(Bitmap bitmap) {
+        mStickerView.addBitImage(bitmap);
     }
 
     public StickerView getmStickerView() {
