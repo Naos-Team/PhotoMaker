@@ -1,5 +1,9 @@
 package com.xinlan.imageeditlibrary.editimage.adapter;
 
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,11 +29,12 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             .build();//
 
     private TextImageFragment mTextImageFragment;
-    private ImageClick mImageClick = new ImageClick();
+    private ArrayList<Bitmap> listBitmap = new ArrayList<>();
     private List<String> pathList = new ArrayList<String>();//
 
-    public ImageTextAdapter(TextImageFragment fragment) {
+    public ImageTextAdapter(TextImageFragment fragment, ArrayList<Bitmap> listBitmap) {
         super();
+        this.listBitmap = listBitmap;
         this.mTextImageFragment = fragment;
     }
 
@@ -44,7 +49,7 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        return pathList.size();
+        return listBitmap.size();
     }
 
     @Override
@@ -62,14 +67,20 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         TextImageHolder imageHoler = (TextImageHolder) holder;
-        String path = pathList.get(position);
-        ImageLoader.getInstance().displayImage("assets://" + path,
-                imageHoler.image, imageOption);
-        imageHoler.image.setTag(path);
-        imageHoler.image.setOnClickListener(mImageClick);
-
+//        String path = pathList.get(position);
+//        ImageLoader.getInstance().displayImage("assets://" + path,
+//                imageHoler.image, imageOption);
+//        imageHoler.image.setTag(path);
+        imageHoler.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AutomaticPixelClearingTask automaticPixelClearingTask = new AutomaticPixelClearingTask(listBitmap.get(position));
+                automaticPixelClearingTask.execute(100);
+            }
+        });
+        imageHoler.image.setImageBitmap(listBitmap.get(position));
         LinearLayout.LayoutParams paramsBtn = new LinearLayout.LayoutParams(
                 mTextImageFragment.getActivity().getResources().getDisplayMetrics().widthPixels * 164 / 1080,
                 mTextImageFragment.getActivity().getResources().getDisplayMetrics().heightPixels * 164 / 1920);
@@ -92,13 +103,67 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.notifyDataSetChanged();
     }
 
-    private final class ImageClick implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            String data = (String) v.getTag();
-            //System.out.println("data---->" + data);
-            mTextImageFragment.selectedStickerItem(null);
+    class AutomaticPixelClearingTask extends AsyncTask<Integer, Void, Bitmap> {
+
+        private Bitmap bitmap;
+
+        public AutomaticPixelClearingTask(Bitmap bitmap) {
+            this.bitmap = bitmap;
         }
-    }// end inner class
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Bitmap doInBackground(Integer... ints) {
+            Bitmap oldBitmap = bitmap;
+
+            int colorToReplace = oldBitmap.getPixel(0, 0);
+
+            int width = oldBitmap.getWidth();
+            int height = oldBitmap.getHeight();
+            int[] pixels = new int[width * height];
+            oldBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+
+            int rA = Color.alpha(colorToReplace);
+            int rR = Color.red(colorToReplace);
+            int rG = Color.green(colorToReplace);
+            int rB = Color.blue(colorToReplace);
+
+            int pixel, a = ints[0];
+
+            // iteration through pixels
+            for (int y = 0; y < height; ++y) {
+                for (int x = 0; x < width; ++x) {
+                    // get current index in 2D-matrix
+                    int index = y * width + x;
+                    pixel = pixels[index];
+                    int rrA = Color.alpha(pixel);
+                    int rrR = Color.red(pixel);
+                    int rrG = Color.green(pixel);
+                    int rrB = Color.blue(pixel);
+
+                    if (  rrA <= rA + a && rrA >= rA - a
+                            && rrR <= rR + a && rrR >= rR - a
+                            && rrG <= rG + a && rrG >= rG - a
+                            && rrB <= rB + a && rrB >= rB - a ) {
+                        pixels[index] = Color.TRANSPARENT;
+                    }
+                }
+            }
+
+            Bitmap newBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            newBitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+
+            return newBitmap;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            super.onPostExecute(result);
+            mTextImageFragment.selectedStickerItem(result);
+        }
+    }
 
 }// end class

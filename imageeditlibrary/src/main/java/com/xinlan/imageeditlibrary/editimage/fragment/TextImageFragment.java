@@ -10,6 +10,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ViewFlipper;
 
@@ -44,6 +46,8 @@ public class TextImageFragment extends BaseEditFragment {
     private RecyclerView typeList;//
     private StickerView mStickerView;//
     private ImageTextAdapter mTextImageAdapter;//
+    private ArrayList<Bitmap> list_Bitmap = new ArrayList<>();
+    private Button btn_choice;
 
     private List<StickerBean> stickerBeanList = new ArrayList<StickerBean>();
 
@@ -76,16 +80,22 @@ public class TextImageFragment extends BaseEditFragment {
         flipper = (ViewFlipper) mainView.findViewById(R.id.flipper);
         flipper.setInAnimation(activity, R.anim.in_bottom_to_top);
         flipper.setOutAnimation(activity, R.anim.out_bottom_to_top);
-
+        btn_choice = (Button) mainView.findViewById(R.id.btn_choice);
         //
         backToMenu = mainView.findViewById(R.id.back_to_main_1);
         typeList = (RecyclerView) mainView
                 .findViewById(R.id.imgtext_list);
         typeList.setHasFixedSize(true);
+        list_Bitmap.clear();
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image2));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image3));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image4));
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(activity);
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         typeList.setLayoutManager(mLayoutManager);
-        typeList.setAdapter(new ImageTextAdapter(this));
+
+        typeList.setAdapter(new ImageTextAdapter(this, list_Bitmap));
 
 
         LinearLayout.LayoutParams paramsBtn = new LinearLayout.LayoutParams(
