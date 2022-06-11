@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -134,6 +135,27 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             int pixel, a = ints[0];
 
+            int firstX=999999, firstY=999999, lastX=0, lastY=0;
+            boolean check = false;
+            for(int y = 0; y < height; ++y){
+                for (int x = 0; x < width; ++x) {
+                    int index = y * width + x;
+                    pixel = pixels[index];
+                    int rrA = Color.alpha(pixel);
+                    int rrR = Color.red(pixel);
+                    int rrG = Color.green(pixel);
+                    int rrB = Color.blue(pixel);
+                    if ( (rrR >= rR + a || rrR <= rR - a)
+                            ||( rrG >= rG + a || rrG <= rG - a)
+                            || (rrB >= rB + a || rrB <= rB - a)){
+                        firstX= (x < firstX) ? x : firstX;
+                        firstY= (y < firstY) ? y : firstY;
+                        lastX= (x > lastX) ? x : lastX;
+                        lastY= (y > lastY) ? y : lastY;
+                    }
+                }
+            }
+
             // iteration through pixels
             for (int y = 0; y < height; ++y) {
                 for (int x = 0; x < width; ++x) {
@@ -156,8 +178,8 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             Bitmap newBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
             newBitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-
-            return newBitmap;
+            Bitmap resizedBmp = Bitmap.createBitmap(newBitmap, firstX, firstY, lastX-firstX, lastY-firstY);
+            return resizedBmp;
         }
 
         protected void onPostExecute(Bitmap result) {
