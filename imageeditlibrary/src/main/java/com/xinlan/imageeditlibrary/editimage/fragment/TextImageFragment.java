@@ -1,10 +1,14 @@
 package com.xinlan.imageeditlibrary.editimage.fragment;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,8 +17,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +35,7 @@ import com.xinlan.imageeditlibrary.editimage.task.StickerTask;
 import com.xinlan.imageeditlibrary.editimage.view.StickerItem;
 import com.xinlan.imageeditlibrary.editimage.view.StickerView;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -39,6 +47,8 @@ public class TextImageFragment extends BaseEditFragment {
 
     public static final String TAG = StickerFragment.class.getName();
     public static final String STICKER_FOLDER = "stickers";
+    private int REQUEST_CODE_FOLDER = 456;
+    private static final int ACTION_REQUEST_EDITIMAGE = 9;
 
     private View mainView;
     private ViewFlipper flipper;
@@ -81,6 +91,18 @@ public class TextImageFragment extends BaseEditFragment {
         flipper.setInAnimation(activity, R.anim.in_bottom_to_top);
         flipper.setOutAnimation(activity, R.anim.out_bottom_to_top);
         btn_choice = (Button) mainView.findViewById(R.id.btn_choice);
+
+        btn_choice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                getActivity().startActivityFromFragment(TextImageFragment.this, Intent.createChooser(intent,
+                        "Choose picture"), REQUEST_CODE_FOLDER);
+            }
+        });
         //
         backToMenu = mainView.findViewById(R.id.back_to_main_1);
         typeList = (RecyclerView) mainView
@@ -94,8 +116,8 @@ public class TextImageFragment extends BaseEditFragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(activity);
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         typeList.setLayoutManager(mLayoutManager);
-
-        typeList.setAdapter(new ImageTextAdapter(this, list_Bitmap));
+        mTextImageAdapter = new ImageTextAdapter(this, list_Bitmap);
+        typeList.setAdapter(mTextImageAdapter);
 
 
         LinearLayout.LayoutParams paramsBtn = new LinearLayout.LayoutParams(
@@ -195,6 +217,26 @@ public class TextImageFragment extends BaseEditFragment {
         }
         mSaveTask = new SaveStickersTask((EditImageActivity) getActivity());
         mSaveTask.execute(activity.getMainBit());
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //chọn hình trong file;
+        if(requestCode == REQUEST_CODE_FOLDER && resultCode == RESULT_OK && data != null){
+            Uri uri = data.getData();
+            try {
+                InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                mTextImageAdapter.addBitmap(bitmap);
+
+            } catch (FileNotFoundException e) {
+                Toast.makeText(getActivity(), "Something wrong! You can not use this photo!", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        }else if (requestCode == ACTION_REQUEST_EDITIMAGE && resultCode == RESULT_OK){
+        }
     }
 }// end class
 

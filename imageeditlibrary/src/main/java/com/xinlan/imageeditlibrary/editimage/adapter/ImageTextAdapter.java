@@ -39,6 +39,11 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.mTextImageFragment = fragment;
     }
 
+    public void addBitmap(Bitmap bitmap){
+        AutomaticPixelClearingTask automaticPixelClearingTask = new AutomaticPixelClearingTask(bitmap);
+        automaticPixelClearingTask.execute(100);
+    }
+
     public class TextImageHolder extends RecyclerView.ViewHolder {
         public ImageView image;
 
