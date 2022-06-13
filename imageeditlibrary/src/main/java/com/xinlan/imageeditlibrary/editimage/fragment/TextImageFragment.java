@@ -227,10 +227,35 @@ public class TextImageFragment extends BaseEditFragment {
         pro_Accu.setMax(100);
         pro_Accu.setMin(1);
 
+
+        pro_Opacity.setMax(100);
+        pro_Opacity.setMin(1);
+
         if(mStickerView.getCurrentItem() != null) {
-            pro_Accu.setProgress(mStickerView.getCurrentItem().getOpacity());
-            txtvalue_Accuracy.setText(mStickerView.getCurrentItem().getOpacity()+"");
+            pro_Accu.setProgress(mStickerView.getCurrentItem().getAccuracy());
+            pro_Opacity.setProgress(mStickerView.getCurrentItem().getOpacity());
+            txtvalue_Accuracy.setText(mStickerView.getCurrentItem().getAccuracy()+"");
+            txtOpacity_Value.setText(mStickerView.getCurrentItem().getOpacity()+"");
         }
+
+        pro_Opacity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                txtOpacity_Value.setText(progress+"");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                if(mStickerView.getCurrentItem() != null) {
+                    mTextImageAdapter.updateOpacity(seekBar.getProgress(), mStickerView.getCurrentItem());
+                }
+            }
+        });
 
         pro_Accu.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -256,12 +281,16 @@ public class TextImageFragment extends BaseEditFragment {
         bg_Opacity.setVisibility(View.GONE);
     }
 
-    public void selectedStickerItem(Bitmap bitmap, int opacity, Bitmap bitmap_root) {
-        mStickerView.addBitImageWithOpacity(bitmap, opacity, bitmap_root);
+    public void selectedStickerItem(Bitmap bitmap, int accuracy, Bitmap bitmap_root) {
+        mStickerView.addBitImageWithAccuracy(bitmap, accuracy, bitmap_root);
     }
 
-    public void updateStickerItem(Bitmap bitmap, int opacity) {
-        mStickerView.updateItem(bitmap, opacity);
+    public void updateStickerItem(Bitmap bitmap, int accuracy) {
+        mStickerView.updateItem(bitmap, accuracy);
+    }
+
+    public void updateOpacityStickerItem(Bitmap bitmap, int opacity){
+        mStickerView.updateOpacityItem(bitmap, opacity);
     }
 
     public StickerView getmStickerView() {

@@ -82,10 +82,11 @@ public class StickerView extends View {
         this.invalidate();//
     }
 
-    public void addBitImageWithOpacity(final Bitmap addBit, int opacity, Bitmap bitmap_root) {
+    public void addBitImageWithAccuracy(final Bitmap addBit, int accuracy, Bitmap bitmap_root) {
         StickerItem item = new StickerItem(this.getContext());
         item.init(addBit, this);
-        item.setOpacity(opacity);
+        item.setImg_Opacity_root(addBit);
+        item.setAccuracy(accuracy);
         item.setImg_Root(bitmap_root);
         if (currentItem != null) {
             currentItem.isDrawHelpTool = false;
@@ -94,7 +95,17 @@ public class StickerView extends View {
         this.invalidate();//
     }
 
-    public void updateItem(final Bitmap editBit, int opacity){
+    public void updateItem(final Bitmap editBit, int accuracy){
+        if (ID_Selected != -1) {
+            StickerItem item = bank.get(ID_Selected);
+            item.setBitmap(editBit);
+            item.setImg_Opacity_root(editBit);
+            item.setAccuracy(accuracy);
+            this.invalidate();
+        }
+    }
+
+    public void updateOpacityItem(final Bitmap editBit, int opacity){
         if (ID_Selected != -1) {
             StickerItem item = bank.get(ID_Selected);
             item.setBitmap(editBit);

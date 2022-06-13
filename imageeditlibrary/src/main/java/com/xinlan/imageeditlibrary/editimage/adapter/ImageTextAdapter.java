@@ -2,23 +2,22 @@ package com.xinlan.imageeditlibrary.editimage.adapter;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.fragment.TextImageFragment;
 import com.xinlan.imageeditlibrary.editimage.view.StickerItem;
@@ -61,10 +60,19 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }// end inner class
 
-    public void update(int opacity, StickerItem item){
-
+    public void update(int accuracy, StickerItem item){
         UpdateAutomaticPixelClearingTask task = new UpdateAutomaticPixelClearingTask(item.getImg_Root());
-        task.execute(opacity);
+        task.execute(accuracy);
+    }
+
+    public void updateOpacity(int opacity, StickerItem item){
+        Bitmap result = item.getImg_Opacity_root();
+        Bitmap newBitmap = Bitmap.createBitmap(result.getWidth(), result.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(newBitmap);
+        Paint alphaPaint = new Paint();
+        alphaPaint.setAlpha(opacity*255/100);
+        canvas.drawBitmap(result, 0, 0, alphaPaint);
+        mTextImageFragment.updateOpacityStickerItem(newBitmap, opacity);
     }
 
     @Override
@@ -214,7 +222,7 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     class UpdateAutomaticPixelClearingTask extends AsyncTask<Integer, Void, Bitmap> {
 
         private Bitmap bitmap;
-        private int opacity = 0;
+        private int accuracy = 0;
 
         public UpdateAutomaticPixelClearingTask(Bitmap bitmap) {
             this.bitmap = bitmap;
@@ -233,7 +241,7 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Bitmap oldBitmap = bitmap;
 
             int colorToReplace = oldBitmap.getPixel(0, 0);
-            opacity = ints[0];
+            accuracy = ints[0];
             int width = oldBitmap.getWidth();
             int height = oldBitmap.getHeight();
             int[] pixels = new int[width * height];
@@ -295,7 +303,7 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         protected void onPostExecute(Bitmap result) {
             super.onPostExecute(result);
-            mTextImageFragment.updateStickerItem(result, opacity);
+            mTextImageFragment.updateStickerItem(result, accuracy);
         }
     }
 
