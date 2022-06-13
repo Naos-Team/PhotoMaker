@@ -150,7 +150,16 @@ public class TextImageFragment extends BaseEditFragment {
         list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_38));
         list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_39));
         list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_40));
-
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_41));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_42));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_43));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_44));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_45));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_46));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_47));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_48));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_49));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_50));
 
 
 
