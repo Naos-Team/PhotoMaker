@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -57,7 +58,7 @@ public class TextImageFragment extends BaseEditFragment {
     private StickerView mStickerView;//
     private ImageTextAdapter mTextImageAdapter;//
     private ArrayList<Bitmap> list_Bitmap = new ArrayList<>();
-    private Button btn_choice;
+    private ImageView btn_choice;
 
     private List<StickerBean> stickerBeanList = new ArrayList<StickerBean>();
 
@@ -90,7 +91,7 @@ public class TextImageFragment extends BaseEditFragment {
         flipper = (ViewFlipper) mainView.findViewById(R.id.flipper);
         flipper.setInAnimation(activity, R.anim.in_bottom_to_top);
         flipper.setOutAnimation(activity, R.anim.out_bottom_to_top);
-        btn_choice = (Button) mainView.findViewById(R.id.btn_choice);
+        btn_choice = (ImageView) mainView.findViewById(R.id.btn_choice);
 
         btn_choice.setOnClickListener(new View.OnClickListener() {
             @Override
