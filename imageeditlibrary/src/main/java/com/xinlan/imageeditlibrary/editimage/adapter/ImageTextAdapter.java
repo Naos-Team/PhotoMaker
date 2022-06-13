@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,8 +37,7 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private ArrayList<Bitmap> listBitmap = new ArrayList<>();
     private List<String> pathList = new ArrayList<String>();//
 
-    public ImageView im_back;
-    public ProgressBar progressBar;
+
 
     public ImageTextAdapter(TextImageFragment fragment, ArrayList<Bitmap> listBitmap) {
         super();
@@ -50,22 +50,21 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         automaticPixelClearingTask.execute(50);
     }
 
-    public void update(int opacity, StickerItem item){
-        UpdateAutomaticPixelClearingTask task = new UpdateAutomaticPixelClearingTask(item.getImg_Root());
-        task.execute(opacity);
-    }
 
-    public class TextImageHolder extends RecyclerView.ViewHolder {
+
+    public static class TextImageHolder extends RecyclerView.ViewHolder {
         public ImageView image;
-
 
         public TextImageHolder(View itemView) {
             super(itemView);
             this.image = (ImageView) itemView.findViewById(R.id.img);
-            im_back = (ImageView) itemView.findViewById(R.id.back);
-            progressBar = (ProgressBar) itemView.findViewById(R.id.progress_circular);
         }
     }// end inner class
+
+    public void update(int opacity, StickerItem item){
+        UpdateAutomaticPixelClearingTask task = new UpdateAutomaticPixelClearingTask(item.getImg_Root());
+        task.execute(opacity);
+    }
 
     @Override
     public int getItemCount() {
@@ -224,9 +223,8 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         protected void onPreExecute() {
 
             super.onPreExecute();
-            im_back.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.VISIBLE);
-            mTextImageFragment.updateStickerItem(bitmap, opacity);
+            Toast.makeText(mTextImageFragment.getContext(), "Please wait a few seconds", Toast.LENGTH_LONG);
+            mTextImageFragment.updateStickerItem(bitmap, 100);
         }
 
         @Override
@@ -296,8 +294,6 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         protected void onPostExecute(Bitmap result) {
             super.onPostExecute(result);
-            im_back.setVisibility(View.GONE);
-            progressBar.setVisibility(View.GONE);
             mTextImageFragment.updateStickerItem(result, opacity);
         }
     }

@@ -12,6 +12,7 @@ import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -217,12 +219,14 @@ public class TextImageFragment extends BaseEditFragment {
         return image;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void setOpacity() {
         if (popView.getMeasuredHeight() == 0) {
             popView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         }
 
         mStokenWidthSeekBar.setMax(100);
+        mStokenWidthSeekBar.setMin(1);
 
         if(mStickerView.getCurrentItem() != null) {
             mStokenWidthSeekBar.setProgress(mStickerView.getCurrentItem().getOpacity());
