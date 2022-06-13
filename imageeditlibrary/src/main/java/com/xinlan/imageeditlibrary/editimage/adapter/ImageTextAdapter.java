@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +36,9 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private ArrayList<Bitmap> listBitmap = new ArrayList<>();
     private List<String> pathList = new ArrayList<String>();//
 
+    public ImageView im_back;
+    public ProgressBar progressBar;
+
     public ImageTextAdapter(TextImageFragment fragment, ArrayList<Bitmap> listBitmap) {
         super();
         this.listBitmap = listBitmap;
@@ -54,9 +58,12 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public class TextImageHolder extends RecyclerView.ViewHolder {
         public ImageView image;
 
+
         public TextImageHolder(View itemView) {
             super(itemView);
             this.image = (ImageView) itemView.findViewById(R.id.img);
+            im_back = (ImageView) itemView.findViewById(R.id.back);
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progress_circular);
         }
     }// end inner class
 
@@ -101,6 +108,8 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         paramsBtn.gravity = Gravity.CENTER;
         paramsBtn.leftMargin = 15;
         imageHoler.image.setLayoutParams(paramsBtn);
+
+
     }
 
     public void addStickerImages(String folderPath) {
@@ -213,7 +222,10 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         protected void onPreExecute() {
+
             super.onPreExecute();
+            im_back.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
             mTextImageFragment.updateStickerItem(bitmap, opacity);
         }
 
@@ -284,6 +296,8 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         protected void onPostExecute(Bitmap result) {
             super.onPostExecute(result);
+            im_back.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
             mTextImageFragment.updateStickerItem(result, opacity);
         }
     }
