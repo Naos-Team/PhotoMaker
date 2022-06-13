@@ -8,16 +8,16 @@
 
 
     <TextView
-        android:id="@+id/txtOpacity"
+        android:id="@+id/txtAccuracy"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.5"
         android:gravity="center"
-        android:text="Opacity:"
+        android:text="Accuracy:"
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/txtvalue_Opa"
+        android:id="@+id/txtvalue_Accuracy"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

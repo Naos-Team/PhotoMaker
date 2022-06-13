@@ -223,9 +223,9 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
 
         mStokenWidthSeekBar = (SeekBar) popView.findViewById(R.id.stoke_width_seekbar);
 
-        txtOpacity = (TextView) popView.findViewById(R.id.txtOpacity);
+        txtOpacity = (TextView) popView.findViewById(R.id.txtAccuracy);
         txtMaxValue = (TextView) popView.findViewById(R.id.txtMaxValue);
-        txtvalue_Opa = (TextView) popView.findViewById(R.id.txtvalue_Opa);
+        txtvalue_Opa = (TextView) popView.findViewById(R.id.txtvalue_Accuracy);
         txtOpacity.setVisibility(View.GONE);
         txtMaxValue.setVisibility(View.GONE);
         txtvalue_Opa.setVisibility(View.GONE);

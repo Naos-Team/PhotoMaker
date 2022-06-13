@@ -7,10 +7,7 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,10 +15,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +24,7 @@ import android.widget.ViewFlipper;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,7 +32,6 @@ import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.EditImageActivity;
 import com.xinlan.imageeditlibrary.editimage.ModuleConfig;
 import com.xinlan.imageeditlibrary.editimage.adapter.ImageTextAdapter;
-import com.xinlan.imageeditlibrary.editimage.adapter.StickerAdapter;
 import com.xinlan.imageeditlibrary.editimage.model.StickerBean;
 import com.xinlan.imageeditlibrary.editimage.task.StickerTask;
 import com.xinlan.imageeditlibrary.editimage.view.StickerItem;
@@ -67,14 +61,14 @@ public class TextImageFragment extends BaseEditFragment {
     private ArrayList<Bitmap> list_Bitmap = new ArrayList<>();
     private ImageView btn_choice;
 
-    private View popView;
-    private PopupWindow setStokenWidthWindow;
-    private SeekBar mStokenWidthSeekBar;
-    private TextView txtOpacity, txtvalue_Opa, txtMaxValue;
+    private SeekBar pro_Accu, pro_Opacity;
+    private TextView txtOpacity_Value, txtvalue_Accuracy;
 
     private List<StickerBean> stickerBeanList = new ArrayList<StickerBean>();
 
     private SaveStickersTask mSaveTask;
+
+    private ConstraintLayout bg_Opacity;
 
     public static TextImageFragment newInstance() {
         return new TextImageFragment();
@@ -105,6 +99,11 @@ public class TextImageFragment extends BaseEditFragment {
         flipper.setInAnimation(activity, R.anim.in_bottom_to_top);
         flipper.setOutAnimation(activity, R.anim.out_bottom_to_top);
         btn_choice = (ImageView) mainView.findViewById(R.id.btn_choice);
+        bg_Opacity = (ConstraintLayout) mainView.findViewById(R.id.bg_Opacity);
+        pro_Opacity = (SeekBar) mainView.findViewById(R.id.pro_Opacity);
+        pro_Accu = (SeekBar) mainView.findViewById(R.id.pro_accuracy);
+        txtOpacity_Value = (TextView) mainView.findViewById(R.id.txtOpacity_Value);
+        txtvalue_Accuracy = (TextView) mainView.findViewById(R.id.txtvalue_Accuracy);
 
         btn_choice.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,14 +173,11 @@ public class TextImageFragment extends BaseEditFragment {
         list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_49));
         list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_50));
 
-        initStokeWidthPopWindow();
-
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(activity);
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         typeList.setLayoutManager(mLayoutManager);
         mTextImageAdapter = new ImageTextAdapter(this, list_Bitmap);
         typeList.setAdapter(mTextImageAdapter);
-
 
         LinearLayout.LayoutParams paramsBtn = new LinearLayout.LayoutParams(
                 getActivity().getResources().getDisplayMetrics().widthPixels * 120 / 1080,
@@ -220,23 +216,26 @@ public class TextImageFragment extends BaseEditFragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void setOpacity() {
-        if (popView.getMeasuredHeight() == 0) {
-            popView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        }
+    public void openOpacity(){
+        bg_Opacity.setVisibility(View.VISIBLE);
+        bg_Opacity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        mStokenWidthSeekBar.setMax(100);
-        mStokenWidthSeekBar.setMin(1);
+            }
+        });
+        pro_Accu.setMax(100);
+        pro_Accu.setMin(1);
 
         if(mStickerView.getCurrentItem() != null) {
-            mStokenWidthSeekBar.setProgress(mStickerView.getCurrentItem().getOpacity());
-            txtvalue_Opa.setText(mStickerView.getCurrentItem().getOpacity()+"");
+            pro_Accu.setProgress(mStickerView.getCurrentItem().getOpacity());
+            txtvalue_Accuracy.setText(mStickerView.getCurrentItem().getOpacity()+"");
         }
 
-        mStokenWidthSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        pro_Accu.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                txtvalue_Opa.setText(progress+"");
+                txtvalue_Accuracy.setText(progress+"");
             }
 
             @Override
@@ -251,31 +250,10 @@ public class TextImageFragment extends BaseEditFragment {
                 }
             }
         });
-
-        int[] locations = new int[2];
-        activity.bottomGallery.getLocationOnScreen(locations);
-        setStokenWidthWindow.showAtLocation(activity.bottomGallery,
-                Gravity.NO_GRAVITY, 0, locations[1] - popView.getMeasuredHeight());
     }
 
-    private void initStokeWidthPopWindow() {
-        popView = LayoutInflater.from(activity).
-                inflate(R.layout.view_set_stoke_width, null);
-        setStokenWidthWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT
-                , ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        mStokenWidthSeekBar = (SeekBar) popView.findViewById(R.id.stoke_width_seekbar);
-        txtOpacity = (TextView) popView.findViewById(R.id.txtOpacity);
-        txtMaxValue = (TextView) popView.findViewById(R.id.txtMaxValue);
-        txtvalue_Opa = (TextView) popView.findViewById(R.id.txtvalue_Opa);
-        txtOpacity.setVisibility(View.VISIBLE);
-        txtMaxValue.setVisibility(View.VISIBLE);
-        txtvalue_Opa.setVisibility(View.VISIBLE);
-        setStokenWidthWindow.setFocusable(true);
-        setStokenWidthWindow.setOutsideTouchable(true);
-        setStokenWidthWindow.setBackgroundDrawable(new BitmapDrawable());
-        setStokenWidthWindow.setAnimationStyle(R.style.popwin_anim_style);
-
+    public void closeOpacity(){
+        bg_Opacity.setVisibility(View.GONE);
     }
 
     public void selectedStickerItem(Bitmap bitmap, int opacity, Bitmap bitmap_root) {

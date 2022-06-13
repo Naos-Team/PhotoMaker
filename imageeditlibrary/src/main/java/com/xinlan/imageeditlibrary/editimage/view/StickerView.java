@@ -9,10 +9,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.annotation.RequiresApi;
 
 import com.xinlan.imageeditlibrary.editimage.fragment.TextImageFragment;
 import com.xinlan.imageeditlibrary.editimage.utils.RectUtil;
@@ -124,6 +126,7 @@ public class StickerView extends View {
         // System.out.println(w + "   " + h + "    " + oldw + "   " + oldh);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         boolean ret = super.onTouchEvent(event);//
@@ -156,7 +159,7 @@ public class StickerView extends View {
                         ret = true;
                         ID_Selected = id;
                         if(textImageFragment != null){
-                            textImageFragment.setOpacity();
+                            textImageFragment.openOpacity();
                         }
                         if (currentItem != null) {
                             currentItem.isDrawHelpTool = false;
@@ -173,6 +176,7 @@ public class StickerView extends View {
                     currentItem.isDrawHelpTool = false;
                     currentItem = null;
                     ID_Selected = -1;
+                    textImageFragment.closeOpacity();
                     invalidate();
                 }
 
