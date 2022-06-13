@@ -62,6 +62,7 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }// end inner class
 
     public void update(int opacity, StickerItem item){
+
         UpdateAutomaticPixelClearingTask task = new UpdateAutomaticPixelClearingTask(item.getImg_Root());
         task.execute(opacity);
     }
@@ -223,8 +224,8 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         protected void onPreExecute() {
 
             super.onPreExecute();
-            Toast.makeText(mTextImageFragment.getContext(), "Please wait a few seconds", Toast.LENGTH_LONG);
-            mTextImageFragment.updateStickerItem(bitmap, 100);
+//            //Toast.makeText(mTextImageFragment.getContext(), "Please wait a few seconds", Toast.LENGTH_LONG);
+//            mTextImageFragment.updateStickerItem(bitmap, 100);
         }
 
         @Override

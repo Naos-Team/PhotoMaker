@@ -97,6 +97,7 @@ public class StickerView extends View {
             StickerItem item = bank.get(ID_Selected);
             item.setBitmap(editBit);
             item.setOpacity(opacity);
+            this.invalidate();
         }
     }
 
