@@ -83,9 +83,10 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             @Override
             public void onClick(View v) {
                 AutomaticPixelClearingTask automaticPixelClearingTask = new AutomaticPixelClearingTask(listBitmap.get(position));
-                automaticPixelClearingTask.execute(100);
+                automaticPixelClearingTask.execute(50);
             }
         });
+        imageHoler.image.setScaleType(ImageView.ScaleType.FIT_XY);
         imageHoler.image.setImageBitmap(listBitmap.get(position));
         LinearLayout.LayoutParams paramsBtn = new LinearLayout.LayoutParams(
                 mTextImageFragment.getActivity().getResources().getDisplayMetrics().widthPixels * 164 / 1080,

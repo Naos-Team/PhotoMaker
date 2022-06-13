@@ -78,11 +78,11 @@
             android:id="@+id/btn_text_sticker"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="7.7dp"
+            android:padding="12dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:src="@drawable/text_sticker"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="11dp"/>
 
     </LinearLayout>
 </HorizontalScrollView>

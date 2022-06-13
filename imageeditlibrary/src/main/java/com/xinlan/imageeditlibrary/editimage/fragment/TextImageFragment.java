@@ -114,6 +114,47 @@ public class TextImageFragment extends BaseEditFragment {
         list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image2));
         list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image3));
         list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image4));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_5));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_6));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_7));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_8));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_9));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_10));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_11));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_12));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_13));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_14));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_15));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_16));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_17));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_18));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_19));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_20));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_21));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_22));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_23));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_24));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_25));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_26));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_27));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_28));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_29));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_30));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_31));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_32));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_33));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_34));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_35));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_36));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_37));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_38));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_39));
+        list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_40));
+
+
+
+
+
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(activity);
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         typeList.setLayoutManager(mLayoutManager);
@@ -158,8 +199,8 @@ public class TextImageFragment extends BaseEditFragment {
     }
 
 
-    public void selectedStickerItem(Bitmap bitmap) {
-        mStickerView.addBitImage(bitmap);
+    public void selectedStickerItem(Bitmap bitmap, int opacity) {
+        mStickerView.addBitImageWithOpacity(bitmap, opacity);
     }
 
     public StickerView getmStickerView() {
