@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,7 +41,7 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
     private RecyclerView mColorListView;//
     private ColorListAdapter mColorAdapter;
     private View popView;
-
+    private TextView txtOpacity, txtMaxValue, txtvalue_Opa;
     private CustomPaintView mPaintView;
 
     private ColorPicker mColorPicker;//
@@ -222,6 +223,12 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
 
         mStokenWidthSeekBar = (SeekBar) popView.findViewById(R.id.stoke_width_seekbar);
 
+        txtOpacity = (TextView) popView.findViewById(R.id.txtOpacity);
+        txtMaxValue = (TextView) popView.findViewById(R.id.txtMaxValue);
+        txtvalue_Opa = (TextView) popView.findViewById(R.id.txtvalue_Opa);
+        txtOpacity.setVisibility(View.GONE);
+        txtMaxValue.setVisibility(View.GONE);
+        txtvalue_Opa.setVisibility(View.GONE);
         setStokenWidthWindow.setFocusable(true);
         setStokenWidthWindow.setOutsideTouchable(true);
         setStokenWidthWindow.setBackgroundDrawable(new BitmapDrawable());

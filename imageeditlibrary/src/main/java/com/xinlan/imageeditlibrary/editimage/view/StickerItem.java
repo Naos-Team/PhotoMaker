@@ -23,7 +23,7 @@ public class StickerItem {
 
     private static final int BUTTON_WIDTH = Constants.STICKER_BTN_HALF_SIZE;
 
-    public Bitmap bitmap;
+    public Bitmap bitmap, img_Root;
     public Rect srcRect;//
     public RectF dstRect;//
     private Rect helpToolsRect;
@@ -47,6 +47,32 @@ public class StickerItem {
     public RectF detectRotateRect;
 
     public RectF detectDeleteRect;
+
+    private int opacity = 0;
+
+    public int getOpacity() {
+        return opacity;
+    }
+
+    public void setOpacity(int opacity) {
+        this.opacity = opacity;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
+    public Bitmap getImg_Root() {
+        return img_Root;
+    }
+
+    public void setImg_Root(Bitmap img_Root) {
+        this.img_Root = img_Root;
+    }
 
     public StickerItem(Context context) {
 

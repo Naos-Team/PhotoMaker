@@ -10,9 +10,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.xinlan.imageeditlibrary.editimage.fragment.TextImageFragment;
 import com.xinlan.imageeditlibrary.editimage.utils.RectUtil;
 
 
@@ -22,18 +24,27 @@ public class StickerView extends View {
     private static int STATUS_DELETE = 2;//
     private static int STATUS_ROTATE = 3;//
 
+    private TextImageFragment textImageFragment;
     private int imageCount;//
     private Context mContext;
     private int currentStatus;//
     private StickerItem currentItem;//
     private float oldx, oldy;
-
+    private int ID_Selected = -1;
     private Paint rectPaint = new Paint();
     private Paint boxPaint = new Paint();
 
     private LinkedHashMap<Integer, StickerItem> bank = new LinkedHashMap<Integer, StickerItem>();//
 
     private Point mPoint = new Point(0 , 0);
+
+    public TextImageFragment getTextImageFragment() {
+        return textImageFragment;
+    }
+
+    public void setTextImageFragment(TextImageFragment textImageFragment) {
+        this.textImageFragment = textImageFragment;
+    }
 
     public StickerView(Context context) {
         super(context);
@@ -69,6 +80,32 @@ public class StickerView extends View {
         this.invalidate();//
     }
 
+    public void addBitImageWithOpacity(final Bitmap addBit, int opacity, Bitmap bitmap_root) {
+        StickerItem item = new StickerItem(this.getContext());
+        item.init(addBit, this);
+        item.setOpacity(opacity);
+        item.setImg_Root(bitmap_root);
+        if (currentItem != null) {
+            currentItem.isDrawHelpTool = false;
+        }
+        bank.put(++imageCount, item);
+        this.invalidate();//
+    }
+
+    public void updateItem(final Bitmap editBit, int opacity){
+        if (ID_Selected != -1) {
+            StickerItem item = bank.get(ID_Selected);
+            item.setBitmap(editBit);
+            item.setOpacity(opacity);
+        }
+    }
+
+    public StickerItem getCurrentItem(){
+        if (ID_Selected != -1) {
+            return bank.get(ID_Selected);
+        } else
+            return null;
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -116,6 +153,10 @@ public class StickerView extends View {
                     } else if (detectInItemContent(item , x , y)) {//
                         // 被选中一张贴图
                         ret = true;
+                        ID_Selected = id;
+                        if(textImageFragment != null){
+                            textImageFragment.setOpacity();
+                        }
                         if (currentItem != null) {
                             currentItem.isDrawHelpTool = false;
                         }
@@ -130,6 +171,7 @@ public class StickerView extends View {
                 if (!ret && currentItem != null && currentStatus == STATUS_IDLE) {//
                     currentItem.isDrawHelpTool = false;
                     currentItem = null;
+                    ID_Selected = -1;
                     invalidate();
                 }
 

@@ -7,7 +7,9 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +20,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -60,6 +65,11 @@ public class TextImageFragment extends BaseEditFragment {
     private ArrayList<Bitmap> list_Bitmap = new ArrayList<>();
     private ImageView btn_choice;
 
+    private View popView;
+    private PopupWindow setStokenWidthWindow;
+    private SeekBar mStokenWidthSeekBar;
+    private TextView txtOpacity, txtvalue_Opa, txtMaxValue;
+
     private List<StickerBean> stickerBeanList = new ArrayList<StickerBean>();
 
     private SaveStickersTask mSaveTask;
@@ -88,6 +98,7 @@ public class TextImageFragment extends BaseEditFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.mStickerView = activity.mStickerView;
+        mStickerView.setTextImageFragment(TextImageFragment.this);
         flipper = (ViewFlipper) mainView.findViewById(R.id.flipper);
         flipper.setInAnimation(activity, R.anim.in_bottom_to_top);
         flipper.setOutAnimation(activity, R.anim.out_bottom_to_top);
@@ -161,8 +172,7 @@ public class TextImageFragment extends BaseEditFragment {
         list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_49));
         list_Bitmap.add(BitmapFactory.decodeResource(getResources(),  R.drawable.text_image_50));
 
-
-
+        initStokeWidthPopWindow();
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(activity);
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -207,9 +217,69 @@ public class TextImageFragment extends BaseEditFragment {
         return image;
     }
 
+    public void setOpacity() {
+        if (popView.getMeasuredHeight() == 0) {
+            popView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        }
 
-    public void selectedStickerItem(Bitmap bitmap, int opacity) {
-        mStickerView.addBitImageWithOpacity(bitmap, opacity);
+        mStokenWidthSeekBar.setMax(100);
+
+        if(mStickerView.getCurrentItem() != null) {
+            mStokenWidthSeekBar.setProgress(mStickerView.getCurrentItem().getOpacity());
+            txtvalue_Opa.setText(mStickerView.getCurrentItem().getOpacity()+"");
+        }
+
+        mStokenWidthSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                txtvalue_Opa.setText(progress+"");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                if(mStickerView.getCurrentItem() != null) {
+                    mTextImageAdapter.update(seekBar.getProgress(), mStickerView.getCurrentItem());
+                }
+            }
+        });
+
+        int[] locations = new int[2];
+        activity.bottomGallery.getLocationOnScreen(locations);
+        setStokenWidthWindow.showAtLocation(activity.bottomGallery,
+                Gravity.NO_GRAVITY, 0, locations[1] - popView.getMeasuredHeight());
+    }
+
+    private void initStokeWidthPopWindow() {
+        popView = LayoutInflater.from(activity).
+                inflate(R.layout.view_set_stoke_width, null);
+        setStokenWidthWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT
+                , ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        mStokenWidthSeekBar = (SeekBar) popView.findViewById(R.id.stoke_width_seekbar);
+        txtOpacity = (TextView) popView.findViewById(R.id.txtOpacity);
+        txtMaxValue = (TextView) popView.findViewById(R.id.txtMaxValue);
+        txtvalue_Opa = (TextView) popView.findViewById(R.id.txtvalue_Opa);
+        txtOpacity.setVisibility(View.VISIBLE);
+        txtMaxValue.setVisibility(View.VISIBLE);
+        txtvalue_Opa.setVisibility(View.VISIBLE);
+        setStokenWidthWindow.setFocusable(true);
+        setStokenWidthWindow.setOutsideTouchable(true);
+        setStokenWidthWindow.setBackgroundDrawable(new BitmapDrawable());
+        setStokenWidthWindow.setAnimationStyle(R.style.popwin_anim_style);
+
+    }
+
+    public void selectedStickerItem(Bitmap bitmap, int opacity, Bitmap bitmap_root) {
+        mStickerView.addBitImageWithOpacity(bitmap, opacity, bitmap_root);
+    }
+
+    public void updateStickerItem(Bitmap bitmap, int opacity) {
+        mStickerView.updateItem(bitmap, opacity);
     }
 
     public StickerView getmStickerView() {

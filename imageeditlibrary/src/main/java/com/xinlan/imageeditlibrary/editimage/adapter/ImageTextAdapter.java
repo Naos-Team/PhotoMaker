@@ -2,6 +2,7 @@ package com.xinlan.imageeditlibrary.editimage.adapter;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.fragment.TextImageFragment;
+import com.xinlan.imageeditlibrary.editimage.view.StickerItem;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +43,12 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public void addBitmap(Bitmap bitmap){
         AutomaticPixelClearingTask automaticPixelClearingTask = new AutomaticPixelClearingTask(bitmap);
-        automaticPixelClearingTask.execute(100);
+        automaticPixelClearingTask.execute(50);
+    }
+
+    public void update(int opacity, StickerItem item){
+        UpdateAutomaticPixelClearingTask task = new UpdateAutomaticPixelClearingTask(item.getImg_Root());
+        task.execute(opacity);
     }
 
     public class TextImageHolder extends RecyclerView.ViewHolder {
@@ -113,6 +120,7 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     class AutomaticPixelClearingTask extends AsyncTask<Integer, Void, Bitmap> {
 
         private Bitmap bitmap;
+        private int opacity = 0;
 
         public AutomaticPixelClearingTask(Bitmap bitmap) {
             this.bitmap = bitmap;
@@ -128,7 +136,7 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Bitmap oldBitmap = bitmap;
 
             int colorToReplace = oldBitmap.getPixel(0, 0);
-
+            opacity = ints[0];
             int width = oldBitmap.getWidth();
             int height = oldBitmap.getHeight();
             int[] pixels = new int[width * height];
@@ -190,7 +198,93 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         protected void onPostExecute(Bitmap result) {
             super.onPostExecute(result);
-            mTextImageFragment.selectedStickerItem(result);
+            mTextImageFragment.selectedStickerItem(result, opacity, bitmap);
+        }
+    }
+
+    class UpdateAutomaticPixelClearingTask extends AsyncTask<Integer, Void, Bitmap> {
+
+        private Bitmap bitmap;
+        private int opacity = 0;
+
+        public UpdateAutomaticPixelClearingTask(Bitmap bitmap) {
+            this.bitmap = bitmap;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mTextImageFragment.updateStickerItem(bitmap, opacity);
+        }
+
+        @Override
+        protected Bitmap doInBackground(Integer... ints) {
+            Bitmap oldBitmap = bitmap;
+
+            int colorToReplace = oldBitmap.getPixel(0, 0);
+            opacity = ints[0];
+            int width = oldBitmap.getWidth();
+            int height = oldBitmap.getHeight();
+            int[] pixels = new int[width * height];
+            oldBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+
+            int rA = Color.alpha(colorToReplace);
+            int rR = Color.red(colorToReplace);
+            int rG = Color.green(colorToReplace);
+            int rB = Color.blue(colorToReplace);
+
+            int pixel, a = ints[0];
+
+            int firstX = 999999, firstY = 999999, lastX = 0, lastY = 0;
+            boolean check = false;
+            for (int y = 0; y < height; ++y) {
+                for (int x = 0; x < width; ++x) {
+                    int index = y * width + x;
+                    pixel = pixels[index];
+                    int rrA = Color.alpha(pixel);
+                    int rrR = Color.red(pixel);
+                    int rrG = Color.green(pixel);
+                    int rrB = Color.blue(pixel);
+                    if ((rrR >= rR + a || rrR <= rR - a)
+                            || (rrG >= rG + a || rrG <= rG - a)
+                            || (rrB >= rB + a || rrB <= rB - a)) {
+                        firstX = (x < firstX) ? x : firstX;
+                        firstY = (y < firstY) ? y : firstY;
+                        lastX = (x > lastX) ? x : lastX;
+                        lastY = (y > lastY) ? y : lastY;
+                    }
+                }
+            }
+
+            // iteration through pixels
+            for (int y = 0; y < height; ++y) {
+                for (int x = 0; x < width; ++x) {
+                    // get current index in 2D-matrix
+                    int index = y * width + x;
+                    pixel = pixels[index];
+                    int rrA = Color.alpha(pixel);
+                    int rrR = Color.red(pixel);
+                    int rrG = Color.green(pixel);
+                    int rrB = Color.blue(pixel);
+
+                    if (rrA <= rA + a && rrA >= rA - a
+                            && rrR <= rR + a && rrR >= rR - a
+                            && rrG <= rG + a && rrG >= rG - a
+                            && rrB <= rB + a && rrB >= rB - a) {
+                        pixels[index] = Color.TRANSPARENT;
+                    }
+                }
+            }
+
+            Bitmap newBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            newBitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+            Bitmap resizedBmp = Bitmap.createBitmap(newBitmap, firstX, firstY, lastX - firstX, lastY - firstY);
+            return resizedBmp;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            super.onPostExecute(result);
+            mTextImageFragment.updateStickerItem(result, opacity);
         }
     }
 
