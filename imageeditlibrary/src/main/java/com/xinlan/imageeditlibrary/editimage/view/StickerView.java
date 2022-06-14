@@ -98,8 +98,13 @@ public class StickerView extends View {
     public void updateItem(final Bitmap editBit, int accuracy){
         if (ID_Selected != -1) {
             StickerItem item = bank.get(ID_Selected);
-            item.setBitmap(editBit);
             item.setImg_Opacity_root(editBit);
+            Bitmap newBitmap = Bitmap.createBitmap(editBit.getWidth(), editBit.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(newBitmap);
+            Paint alphaPaint = new Paint();
+            alphaPaint.setAlpha(item.getOpacity()*255/100);
+            canvas.drawBitmap(editBit, 0, 0, alphaPaint);
+            item.setBitmap(newBitmap);
             item.setAccuracy(accuracy);
             this.invalidate();
         }

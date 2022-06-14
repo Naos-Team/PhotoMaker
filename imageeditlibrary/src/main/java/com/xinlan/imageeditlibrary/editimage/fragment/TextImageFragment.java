@@ -242,6 +242,9 @@ public class TextImageFragment extends BaseEditFragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 txtOpacity_Value.setText(progress+"");
+                if(mStickerView.getCurrentItem() != null) {
+                    mTextImageAdapter.updateOpacity(progress, mStickerView.getCurrentItem());
+                }
             }
 
             @Override
@@ -251,9 +254,6 @@ public class TextImageFragment extends BaseEditFragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if(mStickerView.getCurrentItem() != null) {
-                    mTextImageAdapter.updateOpacity(seekBar.getProgress(), mStickerView.getCurrentItem());
-                }
             }
         });
 
@@ -287,6 +287,7 @@ public class TextImageFragment extends BaseEditFragment {
 
     public void updateStickerItem(Bitmap bitmap, int accuracy) {
         mStickerView.updateItem(bitmap, accuracy);
+
     }
 
     public void updateOpacityStickerItem(Bitmap bitmap, int opacity){
