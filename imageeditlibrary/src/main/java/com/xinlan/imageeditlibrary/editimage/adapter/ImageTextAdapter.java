@@ -255,26 +255,7 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             int pixel, a = ints[0];
 
             int firstX = 999999, firstY = 999999, lastX = 0, lastY = 0;
-            boolean check = false;
-            for (int y = 0; y < height; ++y) {
-                for (int x = 0; x < width; ++x) {
-                    int index = y * width + x;
-                    pixel = pixels[index];
-                    int rrA = Color.alpha(pixel);
-                    int rrR = Color.red(pixel);
-                    int rrG = Color.green(pixel);
-                    int rrB = Color.blue(pixel);
-                    if ((rrR >= rR + a || rrR <= rR - a)
-                            || (rrG >= rG + a || rrG <= rG - a)
-                            || (rrB >= rB + a || rrB <= rB - a)) {
-                        firstX = (x < firstX) ? x : firstX;
-                        firstY = (y < firstY) ? y : firstY;
-                        lastX = (x > lastX) ? x : lastX;
-                        lastY = (y > lastY) ? y : lastY;
-                    }
-                }
-            }
-
+//
             // iteration through pixels
             for (int y = 0; y < height; ++y) {
                 for (int x = 0; x < width; ++x) {
@@ -285,6 +266,15 @@ public class ImageTextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     int rrR = Color.red(pixel);
                     int rrG = Color.green(pixel);
                     int rrB = Color.blue(pixel);
+
+                    if ((rrR >= rR + a || rrR <= rR - a)
+                            || (rrG >= rG + a || rrG <= rG - a)
+                            || (rrB >= rB + a || rrB <= rB - a)) {
+                        firstX = (x < firstX) ? x : firstX;
+                        firstY = (y < firstY) ? y : firstY;
+                        lastX = (x > lastX) ? x : lastX;
+                        lastY = (y > lastY) ? y : lastY;
+                    }
 
                     if (rrA <= rA + a && rrA >= rA - a
                             && rrR <= rR + a && rrR >= rR - a

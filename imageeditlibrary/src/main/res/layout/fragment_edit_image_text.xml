@@ -79,7 +79,7 @@
                     android:id="@+id/txtAccuracy"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1.75"
                     android:gravity="center"
                     android:text="Accuracy:"
                     android:visibility="visible" />
@@ -133,7 +133,7 @@
                     android:id="@+id/txtOpacity"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1.75"
                     android:gravity="center"
                     android:text="Opacity:" />
 
